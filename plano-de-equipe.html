@@ -1,0 +1,803 @@
+<title>Plano de Voo da Equipe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;500;700&display=swap">
+
+<style>
+  :root{
+    --ground:#F2F4F7;
+    --surface:#FFFFFF;
+    --surface-2:#E9EDF2;
+    --ink:#0E1A2B;
+    --mute:#5B6B7F;
+    --rule:#D6DEE7;
+    --azul:#14539A;
+    --azul-soft:#E4EDF7;
+    --ciano:#0B7285;
+    --ciano-soft:#DDF0F3;
+    --ambar:#A25B06;
+    --ambar-soft:#FAEDD9;
+    --shadow:0 1px 2px rgba(14,26,43,.06), 0 8px 24px -16px rgba(14,26,43,.35);
+
+    --display:"Archivo","Helvetica Neue",Arial,sans-serif;
+    --body:"Source Serif 4",Georgia,"Times New Roman",serif;
+    --mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Consolas,monospace;
+  }
+
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ground:#0C131C;
+      --surface:#131D28;
+      --surface-2:#1A2734;
+      --ink:#E6ECF3;
+      --mute:#94A4B6;
+      --rule:#25333F;
+      --azul:#7DB0E8;
+      --azul-soft:#152738;
+      --ciano:#54C3D2;
+      --ciano-soft:#0F2A2F;
+      --ambar:#E2A44F;
+      --ambar-soft:#2C2114;
+      --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.8);
+    }
+  }
+
+  :root[data-theme="dark"]{
+    --ground:#0C131C;
+    --surface:#131D28;
+    --surface-2:#1A2734;
+    --ink:#E6ECF3;
+    --mute:#94A4B6;
+    --rule:#25333F;
+    --azul:#7DB0E8;
+    --azul-soft:#152738;
+    --ciano:#54C3D2;
+    --ciano-soft:#0F2A2F;
+    --ambar:#E2A44F;
+    --ambar-soft:#2C2114;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.8);
+  }
+
+  *{box-sizing:border-box;}
+
+  body{
+    background:var(--ground);
+    color:var(--ink);
+    font-family:var(--body);
+    font-size:17px;
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .folha{
+    max-width:980px;
+    margin:0 auto;
+    padding-inline:20px;
+    padding-block:0 72px;
+  }
+
+  /* ---------- cabeçalho ---------- */
+
+  .cabecalho{
+    border-bottom:2px solid var(--ink);
+    padding-block:48px 20px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:28px;
+    align-items:flex-end;
+    justify-content:space-between;
+  }
+
+  .marca{
+    font-family:var(--mono);
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--ciano);
+    margin:0 0 10px;
+  }
+
+  h1{
+    font-family:var(--display);
+    font-weight:800;
+    font-size:clamp(34px,6vw,54px);
+    line-height:1.02;
+    letter-spacing:-.025em;
+    margin:0;
+    text-wrap:balance;
+  }
+
+  .subtitulo{
+    color:var(--mute);
+    margin:12px 0 0;
+    max-width:46ch;
+    font-size:18px;
+  }
+
+  .carimbo{
+    font-family:var(--mono);
+    font-size:12px;
+    line-height:1.9;
+    color:var(--mute);
+    text-align:right;
+    white-space:nowrap;
+  }
+  .carimbo b{color:var(--ink);font-weight:500;}
+
+  /* ---------- seções ---------- */
+
+  section{padding-block:44px 0;}
+
+  h2{
+    font-family:var(--display);
+    font-weight:700;
+    font-size:26px;
+    letter-spacing:-.015em;
+    margin:0 0 4px;
+    text-wrap:balance;
+  }
+
+  .h2-nota{
+    color:var(--mute);
+    font-size:16px;
+    margin:0 0 24px;
+    max-width:66ch;
+  }
+
+  p{margin:0 0 16px;max-width:68ch;}
+
+  .olho{
+    font-family:var(--mono);
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--mute);
+    display:block;
+    margin-bottom:14px;
+  }
+
+  /* ---------- situação ---------- */
+
+  .situacao{
+    background:var(--surface);
+    border:1px solid var(--rule);
+    border-left:4px solid var(--ambar);
+    padding:24px 26px;
+    box-shadow:var(--shadow);
+  }
+  .situacao p:last-child{margin-bottom:0;}
+
+  .fontes{
+    list-style:none;
+    margin:16px 0 0;
+    padding:0;
+    display:grid;
+    gap:8px;
+    font-family:var(--mono);
+    font-size:13px;
+  }
+  .fontes li{
+    display:flex;
+    flex-wrap:wrap;
+    gap:4px 10px;
+    padding-bottom:8px;
+    border-bottom:1px dashed var(--rule);
+  }
+  .fontes li:last-child{border-bottom:0;padding-bottom:0;}
+  .fontes span{color:var(--mute);min-width:104px;}
+  .fontes code{word-break:break-all;color:var(--ink);background:none;padding:0;font-size:13px;}
+
+  /* ---------- diagrama ---------- */
+
+  .diagrama{
+    background:var(--surface);
+    border:1px solid var(--rule);
+    padding:20px;
+    overflow-x:auto;
+    box-shadow:var(--shadow);
+  }
+  .diagrama svg{display:block;min-width:560px;width:100%;height:auto;}
+
+  /* ---------- postos ---------- */
+
+  .postos{display:grid;gap:26px;}
+
+  .posto{
+    background:var(--surface);
+    border:1px solid var(--rule);
+    box-shadow:var(--shadow);
+  }
+
+  .posto-topo{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:baseline;
+    gap:6px 16px;
+    padding:16px 24px;
+    border-bottom:1px solid var(--rule);
+    background:var(--azul-soft);
+  }
+  .posto[data-eu] .posto-topo{background:var(--ciano-soft);}
+
+  .codigo{
+    font-family:var(--mono);
+    font-weight:700;
+    font-size:13px;
+    letter-spacing:.1em;
+    color:var(--azul);
+  }
+  .posto[data-eu] .codigo{color:var(--ciano);}
+
+  .posto-nome{
+    font-family:var(--display);
+    font-weight:700;
+    font-size:21px;
+    letter-spacing:-.01em;
+    margin:0;
+    flex:1 1 auto;
+  }
+
+  .etiqueta{
+    font-family:var(--mono);
+    font-size:10px;
+    font-weight:700;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    padding:4px 9px;
+    border:1px solid currentColor;
+    border-radius:2px;
+  }
+  .etiqueta.voce{color:var(--ciano);}
+  .etiqueta.gargalo{color:var(--ambar);}
+
+  .posto-corpo{padding:22px 24px 26px;}
+  .posto-corpo > p:first-child{margin-top:0;}
+
+  .resumo{
+    font-size:17px;
+    color:var(--mute);
+    border-left:2px solid var(--rule);
+    padding-left:16px;
+    margin:0 0 22px;
+  }
+
+  h3{
+    font-family:var(--display);
+    font-weight:600;
+    font-size:14px;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    color:var(--mute);
+    margin:26px 0 12px;
+  }
+  .posto-corpo h3:first-of-type{margin-top:0;}
+
+  ol.tarefas{
+    margin:0;
+    padding:0;
+    list-style:none;
+    counter-reset:t;
+    display:grid;
+    gap:14px;
+  }
+  ol.tarefas > li{
+    counter-increment:t;
+    display:grid;
+    grid-template-columns:28px 1fr;
+    gap:12px;
+    align-items:start;
+  }
+  ol.tarefas > li::before{
+    content:counter(t,decimal-leading-zero);
+    font-family:var(--mono);
+    font-size:12px;
+    font-weight:700;
+    color:var(--mute);
+    padding-top:5px;
+  }
+  ol.tarefas strong{
+    font-family:var(--display);
+    font-weight:600;
+    font-size:16px;
+  }
+  ol.tarefas p{margin:2px 0 0;font-size:16px;color:var(--mute);}
+
+  ul.simples{margin:0;padding-left:20px;display:grid;gap:7px;}
+  ul.simples li{max-width:64ch;}
+
+  .regra{
+    background:var(--ambar-soft);
+    border-left:3px solid var(--ambar);
+    padding:14px 18px;
+    margin:20px 0 0;
+    font-size:16px;
+  }
+  .regra p{margin:0;max-width:62ch;}
+  .regra p + p{margin-top:10px;}
+  .regra b{font-family:var(--display);font-weight:600;}
+
+  .entrega{
+    margin-top:24px;
+    padding-top:16px;
+    border-top:1px solid var(--rule);
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px 12px;
+    align-items:baseline;
+    font-family:var(--mono);
+    font-size:13px;
+  }
+  .entrega > span{
+    color:var(--mute);
+    font-size:10px;
+    font-weight:700;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+  }
+  .entrega code{background:var(--surface-2);}
+
+  code{
+    font-family:var(--mono);
+    font-size:.86em;
+    background:var(--surface-2);
+    padding:2px 5px;
+    border-radius:2px;
+  }
+
+  pre{
+    font-family:var(--mono);
+    font-size:13px;
+    line-height:1.65;
+    background:var(--surface);
+    color:var(--ink);
+    border:1px solid var(--rule);
+    border-left:3px solid var(--ciano);
+    padding:18px 20px;
+    overflow-x:auto;
+    margin:0 0 20px;
+  }
+  pre code{background:none;padding:0;font-size:13px;}
+  .cmt{color:var(--mute);}
+
+  /* ---------- tabela ---------- */
+
+  .rolagem{overflow-x:auto;border:1px solid var(--rule);background:var(--surface);box-shadow:var(--shadow);}
+  table{border-collapse:collapse;width:100%;min-width:520px;font-size:15px;}
+  th,td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--rule);vertical-align:top;}
+  thead th{
+    font-family:var(--display);
+    font-weight:600;
+    font-size:11px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--mute);
+    background:var(--surface-2);
+  }
+  tbody tr:last-child td{border-bottom:0;}
+  td.sem{font-family:var(--mono);font-size:13px;font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--azul);font-weight:500;}
+
+  /* ---------- bloqueios ---------- */
+
+  .bloqueios{display:grid;gap:16px;}
+  .bloqueio{
+    background:var(--surface);
+    border:1px solid var(--rule);
+    border-top:3px solid var(--ambar);
+    padding:20px 22px;
+    box-shadow:var(--shadow);
+  }
+  .bloqueio h3{margin:0 0 8px;color:var(--ambar);}
+  .bloqueio p:last-child{margin-bottom:0;}
+
+  /* ---------- rodapé ---------- */
+
+  footer{
+    margin-top:56px;
+    padding-top:20px;
+    border-top:2px solid var(--ink);
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--mute);
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px 24px;
+    justify-content:space-between;
+  }
+
+  @media (max-width:560px){
+    body{font-size:16px;}
+    .carimbo{text-align:left;}
+    .posto-topo,.posto-corpo{padding-inline:18px;}
+  }
+</style>
+
+<div class="folha">
+
+  <header class="cabecalho">
+    <div>
+      <p class="marca">IFMS Nova Andradina · TADS · Estatística</p>
+      <h1>Plano de Voo da Equipe</h1>
+      <p class="subtitulo">Quatro postos, um entregável: o site comparativo <b>Linhas Estatísticas</b>, rotas SBCG&nbsp;→&nbsp;SBRJ e SBCG&nbsp;→&nbsp;SBSP.</p>
+    </div>
+    <div class="carimbo">
+      Projeto <b>Linhas Estatísticas</b><br>
+      Equipe <b>4 integrantes</b><br>
+      Base <b>protótipo Figma, 7 telas</b><br>
+      Revisão <b>14 set 2026</b>
+    </div>
+  </header>
+
+  <section>
+    <span class="olho">Situação</span>
+    <h2>O que o protótipo realmente pede</h2>
+    <p class="h2-nota">Antes de dividir tarefa, alinhe o escopo — metade dos atrasos de trabalho em grupo vem de duas pessoas construindo coisas diferentes.</p>
+
+    <div class="situacao">
+      <p>O Figma <b>não é um metabuscador</b>. É um site comparativo com dados coletados à mão, duas rotas fixas, e uma landing page animada na frente. Não há API ao vivo, não há banco de dados, não há backend.</p>
+      <p>Isso é bom: corta o trabalho em cerca de 80% e devolve o foco para o que a banca vai avaliar — a <b>camada estatística</b>, que mora no radar da tela Visão Geral.</p>
+      <ul class="fontes">
+        <li><span>Preços</span> <code>app.powerbi.com — painel ANAC</code></li>
+        <li><span>Clima</span> <code>climatempo.com.br/climatologia/321/riodejaneiro-br</code></li>
+        <li><span>Hotéis</span> <code>all.accor.com</code></li>
+        <li><span>Alimentação</span> <code>quantocustaviajar.com · foodtosave · terra.com.br</code></li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <span class="olho">Dependências</span>
+    <h2>Quem espera quem</h2>
+    <p class="h2-nota">P1 é o gargalo real. Se a planilha atrasar, P3 e P4 param. Por isso o contrato do <code>dados.json</code> é fechado no primeiro dia, antes de qualquer coleta — assim P3 já programa contra dados falsos e só troca o arquivo depois.</p>
+
+    <div class="diagrama">
+      <svg viewBox="0 0 700 250" role="img" aria-label="P1 Dados alimenta P3 Gráficos e P4 Páginas. P2 Base alimenta P3 e P4. Todos convergem para a Integração final feita por P3.">
+        <defs>
+          <marker id="seta" markerWidth="9" markerHeight="9" refX="8" refY="3.2" orient="auto">
+            <path d="M0,0 L8,3.2 L0,6.4 z" fill="currentColor"/>
+          </marker>
+        </defs>
+        <g style="color:var(--rule)" fill="none" stroke="currentColor" stroke-width="1.6" marker-end="url(#seta)">
+          <path d="M156,58 C230,58 226,104 296,104"/>
+          <path d="M156,58 C230,58 226,176 296,176"/>
+          <path d="M156,196 C230,196 226,182 296,182"/>
+          <path d="M156,196 C230,196 226,110 296,110"/>
+          <path d="M452,104 C520,104 518,126 560,126"/>
+          <path d="M452,176 C520,176 518,134 560,134"/>
+        </g>
+
+        <g>
+          <rect x="16" y="32" width="140" height="52" rx="3" fill="var(--azul-soft)" stroke="var(--azul)" stroke-width="1.5"/>
+          <text x="30" y="55" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="var(--azul)">P1</text>
+          <text x="56" y="55" font-family="Archivo, sans-serif" font-size="13" font-weight="600" fill="var(--ink)">Dados</text>
+          <text x="30" y="72" font-family="JetBrains Mono, monospace" font-size="10" fill="var(--mute)">dados.json</text>
+        </g>
+
+        <g>
+          <rect x="16" y="170" width="140" height="52" rx="3" fill="var(--azul-soft)" stroke="var(--azul)" stroke-width="1.5"/>
+          <text x="30" y="193" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="var(--azul)">P2</text>
+          <text x="56" y="193" font-family="Archivo, sans-serif" font-size="13" font-weight="600" fill="var(--ink)">Base + landing</text>
+          <text x="30" y="210" font-family="JetBrains Mono, monospace" font-size="10" fill="var(--mute)">reveal.js</text>
+        </g>
+
+        <g>
+          <rect x="300" y="82" width="152" height="52" rx="3" fill="var(--ciano-soft)" stroke="var(--ciano)" stroke-width="1.5"/>
+          <text x="314" y="105" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="var(--ciano)">P3</text>
+          <text x="340" y="105" font-family="Archivo, sans-serif" font-size="13" font-weight="600" fill="var(--ink)">Gráficos</text>
+          <text x="314" y="122" font-family="JetBrains Mono, monospace" font-size="10" fill="var(--mute)">você</text>
+        </g>
+
+        <g>
+          <rect x="300" y="154" width="152" height="52" rx="3" fill="var(--azul-soft)" stroke="var(--azul)" stroke-width="1.5"/>
+          <text x="314" y="177" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="var(--azul)">P4</text>
+          <text x="340" y="177" font-family="Archivo, sans-serif" font-size="13" font-weight="600" fill="var(--ink)">Páginas + doc</text>
+          <text x="314" y="194" font-family="JetBrains Mono, monospace" font-size="10" fill="var(--mute)">relatório</text>
+        </g>
+
+        <g>
+          <rect x="564" y="104" width="120" height="52" rx="3" fill="var(--surface-2)" stroke="var(--ink)" stroke-width="1.5"/>
+          <text x="578" y="127" font-family="Archivo, sans-serif" font-size="13" font-weight="700" fill="var(--ink)">Integração</text>
+          <text x="578" y="144" font-family="JetBrains Mono, monospace" font-size="10" fill="var(--mute)">P3 conduz</text>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <section>
+    <span class="olho">Os quatro postos</span>
+    <h2>O que cada um faz, em detalhe</h2>
+    <p class="h2-nota">Cada posto tem tarefas numeradas, regras que não podem ser quebradas e um entregável único. Se o entregável não existir, o posto não terminou — independentemente de quanto trabalho foi feito.</p>
+
+    <div class="postos">
+
+      <!-- ============ P1 ============ -->
+      <article class="posto">
+        <div class="posto-topo">
+          <span class="codigo">P1</span>
+          <h3 class="posto-nome" style="font-size:21px;text-transform:none;letter-spacing:-.01em;color:var(--ink);margin:0;">Dados e Estatística</h3>
+          <span class="etiqueta gargalo">Caminho crítico</span>
+        </div>
+        <div class="posto-corpo">
+          <p class="resumo">Dono da planilha e dos números. Não escreve uma linha de HTML. Tudo que as outras três pessoas desenham sai daqui.</p>
+
+          <h3>Tarefas</h3>
+          <ol class="tarefas">
+            <li><div><strong>Extrair preços de passagem</strong><p>Painel ANAC no PowerBI. Para cada rota (SBCG→SBRJ, SBCG→SBSP): 12 meses do ano de referência, separado por companhia (GOL, LATAM, Azul) e por classe tarifária. Se uma companhia não opera a rota em certo mês, registre <code>null</code> — não zero. Zero é um preço; <code>null</code> é ausência.</p></div></li>
+            <li><div><strong>Extrair climatologia</strong><p>ClimaTempo, página de climatologia de cada cidade. Por mês: temperatura máxima média, mínima média, precipitação acumulada e número de dias com chuva.</p></div></li>
+            <li><div><strong>Levantar diárias de hotel</strong><p>Accor. No mínimo 5 hotéis por cidade. <b>Mesma data de check-in, mesma diária, mesmo tipo de quarto nas duas cidades.</b> Um quarto duplo no Rio contra um single em São Paulo não compara cidades, compara quartos.</p></div></li>
+            <li><div><strong>Levantar custo de alimentação</strong><p>Custo médio de café, almoço e jantar por cidade, mais a lista de comidas típicas que P4 vai usar no texto.</p></div></li>
+            <li><div><strong>Calcular as estatísticas</strong><p>Por rota e por companhia: média, mediana, desvio padrão, coeficiente de variação, mínimo, máximo e amplitude. O coeficiente de variação é o número que responde "qual companhia tem preço mais imprevisível" — é ele que justifica o trabalho ser de Estatística.</p></div></li>
+            <li><div><strong>Preencher o <code>dados.json</code></strong><p>No formato fechado da seção Contratos, abaixo. Sem inventar campo, sem renomear chave. Se faltar campo, avise P3 antes de improvisar.</p></div></li>
+          </ol>
+
+          <div class="regra">
+            <p><b>Regra 1 — Coleta em janela única.</b> Tudo coletado dentro de no máximo 3 dias. Preço de passagem muda diariamente; se você coletar o Rio numa segunda e São Paulo duas semanas depois, o gráfico mostra a diferença entre as datas, não entre as cidades. Anote a data em <code>coletado_em</code>.</p>
+            <p><b>Regra 2 — Mediana para hotel, média para clima.</b> Um resort de luxo puxa a média da diária para cima e destrói a comparação. Temperatura não tem esse problema. Reporte os dois valores quando houver dúvida.</p>
+            <p><b>Regra 3 — Registre o <code>n</code>.</b> Toda média vem acompanhada de quantas observações a geraram. Média de 3 hotéis e média de 30 hotéis não têm o mesmo peso, e a banca vai perguntar.</p>
+          </div>
+
+          <div class="entrega"><span>Entrega</span> <code>dados.json</code> <code>planilha-fonte.xlsx</code> <code>fontes.md</code></div>
+        </div>
+      </article>
+
+      <!-- ============ P2 ============ -->
+      <article class="posto">
+        <div class="posto-topo">
+          <span class="codigo">P2</span>
+          <h3 class="posto-nome" style="font-size:21px;text-transform:none;letter-spacing:-.01em;color:var(--ink);margin:0;">Base do site e landing animada</h3>
+        </div>
+        <div class="posto-corpo">
+          <p class="resumo">Dono do visual e do movimento. Constrói a casca que as outras três páginas vão habitar, e a única página que precisa impressionar em 5 segundos.</p>
+
+          <h3>Tarefas</h3>
+          <ol class="tarefas">
+            <li><div><strong>Extrair os tokens do Figma</strong><p>Cores, famílias e pesos de fonte, escala de espaçamento, raio de borda. Vira <code>tokens.css</code> com variáveis CSS. Ninguém no time escreve um hexadecimal solto depois disso — todo mundo usa <code>var(--azul)</code>.</p></div></li>
+            <li><div><strong>Montar header, navegação e footer</strong><p>Um só, reaproveitado nas 7 páginas. Nav com estado ativo na página atual. Footer com as categorias que aparecem no protótipo.</p></div></li>
+            <li><div><strong>Construir a Pág. Principal</strong><p>Hero, texto de chamada, formulário de origem/destino (origem fixa em Campo Grande, destino entre Rio e São Paulo), botão que leva à Pág. Dados da Busca. O formulário não precisa processar nada — é navegação disfarçada de busca.</p></div></li>
+            <li><div><strong>Escrever <code>animacoes.css</code> e <code>reveal.js</code></strong><p>Scroll reveal com <code>IntersectionObserver</code>, transições só em <code>transform</code> e <code>opacity</code>, e a API de callback que P3 vai consumir. Contrato completo na seção abaixo.</p></div></li>
+            <li><div><strong>Garantir responsividade e acessibilidade</strong><p>Funciona a 400px de largura. Foco de teclado visível. <code>prefers-reduced-motion</code> respeitado — sem isso o trabalho tem uma falha de acessibilidade que qualquer avaliador encontra em 10 segundos.</p></div></li>
+          </ol>
+
+          <div class="regra">
+            <p><b>Regra — Nunca anime propriedade de layout.</b> <code>top</code>, <code>left</code>, <code>width</code> e <code>height</code> forçam o navegador a recalcular a página a cada quadro e travam em máquina de laboratório. <code>transform</code> e <code>opacity</code> rodam na GPU e não tocam o layout. Só essas duas.</p>
+            <p><b>Sem GSAP.</b> 70&nbsp;KB e uma curva de aprendizado que três pessoas do time não têm tempo de subir. CSS + <code>IntersectionObserver</code> entrega o mesmo efeito com zero dependência e é mais fácil de defender na apresentação.</p>
+          </div>
+
+          <div class="entrega"><span>Entrega</span> <code>tokens.css</code> <code>base.css</code> <code>animacoes.css</code> <code>reveal.js</code> <code>index.html</code></div>
+        </div>
+      </article>
+
+      <!-- ============ P3 ============ -->
+      <article class="posto" data-eu>
+        <div class="posto-topo">
+          <span class="codigo">P3</span>
+          <h3 class="posto-nome" style="font-size:21px;text-transform:none;letter-spacing:-.01em;color:var(--ink);margin:0;">Gráficos e integração</h3>
+          <span class="etiqueta voce">Você</span>
+        </div>
+        <div class="posto-corpo">
+          <p class="resumo">A parte mais difícil e a que a banca mais olha. Também o papel de integrador: é quem junta o trabalho dos outros três e responde pelo repositório.</p>
+
+          <h3>Tarefas</h3>
+          <ol class="tarefas">
+            <li><div><strong>Definir e publicar o <code>dados.json</code></strong><p>Primeira coisa do projeto, antes de qualquer coleta. Escreva o schema, gere uma versão falsa com números inventados, e entregue para P1 preencher. Você programa contra o falso enquanto ele coleta.</p></div></li>
+            <li><div><strong>Gráfico de linha — preço mensal</strong><p>12 meses no eixo X, preço no Y, uma linha por companhia, um gráfico por rota. Marcar visualmente o maior e o menor preço do período, como o protótipo mostra.</p></div></li>
+            <li><div><strong>Gráfico combinado — clima</strong><p>Barras de precipitação e linha de temperatura no mesmo gráfico, dois eixos Y. Um por cidade. Chart.js faz isso com <code>type:'bar'</code> no dataset base e <code>type:'line'</code> no dataset sobreposto.</p></div></li>
+            <li><div><strong>Radar da Visão Geral</strong><p>Cinco eixos, duas séries (Rio e São Paulo). É a peça estatística do trabalho: transforma cinco grandezas incomparáveis num único desenho. Normalização obrigatória — detalhes na regra abaixo.</p></div></li>
+            <li><div><strong>Montar a Pág. Dados da Busca</strong><p>Tabela por companhia e classe, duas rotas lado a lado, com <code>font-variant-numeric: tabular-nums</code> para os números alinharem em coluna.</p></div></li>
+            <li><div><strong>Integrar tudo</strong><p>Encaixar os gráficos no ciclo de revelação de P2, receber as páginas de P4, resolver conflitos, publicar a versão final.</p></div></li>
+          </ol>
+
+          <div class="regra">
+            <p><b>Regra — Inverta os eixos onde menor é melhor.</b> Depois de normalizar preço, custo de hotel e custo de alimentação para a faixa 0–1, aplique <code>1 - valor</code> nesses três. Sem isso o radar desenha a cidade <em>mais cara</em> como a melhor opção, e o gráfico inteiro mente. É o erro mais provável do projeto.</p>
+            <p><b>Regra — Instancie o gráfico depois da animação, não durante.</b> Chart.js já anima a própria entrada. Se o card estiver em transição ao mesmo tempo, os dois disputam repaint e o gráfico sai serrilhado.</p>
+          </div>
+
+          <h3>Normalização do radar</h3>
+<pre><code><span class="cmt">// Traz qualquer grandeza para 0–1. Mesma função do score composto.</span>
+function normalizar(valor, minimo, maximo) {
+  if (maximo === minimo) return 0.5;        <span class="cmt">// evita divisão por zero</span>
+  return (valor - minimo) / (maximo - minimo);
+}
+
+<span class="cmt">// Eixos onde MENOR é melhor precisam ser invertidos depois de normalizar.</span>
+const MENOR_E_MELHOR = ['preco_passagem', 'custo_hotel', 'custo_alimentacao'];
+
+function pontuarEixo(eixo, valor, minimo, maximo) {
+  const z = normalizar(valor, minimo, maximo);
+  return MENOR_E_MELHOR.includes(eixo) ? 1 - z : z;
+}</code></pre>
+
+          <h3>Integração com a animação de P2</h3>
+<pre><code><span class="cmt">// P2 expõe esta função. Você só registra o que fazer quando o card aparecer.</span>
+LE.aoRevelar('#grafico-precos-rio', (card) =&gt; {
+  montarGraficoPrecos(card.querySelector('canvas'), dados.rotas.SBRJ);
+});</code></pre>
+
+          <div class="entrega"><span>Entrega</span> <code>graficos.js</code> <code>normalizar.js</code> <code>dados-falsos.json</code> <code>dados-busca.html</code> <code>visao-geral.html</code></div>
+        </div>
+      </article>
+
+      <!-- ============ P4 ============ -->
+      <article class="posto">
+        <div class="posto-topo">
+          <span class="codigo">P4</span>
+          <h3 class="posto-nome" style="font-size:21px;text-transform:none;letter-spacing:-.01em;color:var(--ink);margin:0;">Páginas de destino e documentação</h3>
+        </div>
+        <div class="posto-corpo">
+          <p class="resumo">Constrói as três páginas de conteúdo e escreve tudo que a banca vai ler. O relatório vale tanto quanto o site — e é a parte que costuma ser feita na véspera.</p>
+
+          <h3>Tarefas</h3>
+          <ol class="tarefas">
+            <li><div><strong>Pág. Detalhes da Viagem</strong><p>Três cards de entrada — hotéis, clima, restaurantes — cada um levando à sua página. Imagens e chamadas conforme o protótipo.</p></div></li>
+            <li><div><strong>Pág. Hotel</strong><p>Lista de hotéis por cidade com a diária, custo médio por rota e o custo total estimado da hospedagem. Números vindos do <code>dados.json</code>, nunca digitados no HTML.</p></div></li>
+            <li><div><strong>Pág. Alimentação</strong><p>Custo médio de refeição por cidade e a lista de comidas típicas, com as fontes creditadas.</p></div></li>
+            <li><div><strong>Tabela de referências</strong><p>Todas as URLs de origem com data de acesso. Já existe no Figma como camada de texto — transforme em tabela de verdade, no site e no relatório.</p></div></li>
+            <li><div><strong>Relatório escrito</strong><p>Metodologia (como os dados foram coletados), resultados (o que os gráficos mostram), <b>limitações</b> e conclusão.</p></div></li>
+            <li><div><strong>Slides da apresentação</strong><p>Um slide por tela do site, mais um slide só para as limitações. Ensaie a resposta para "por que essa média e não a mediana".</p></div></li>
+          </ol>
+
+          <div class="regra">
+            <p><b>Regra — A seção de limitações é obrigatória e é onde você ganha nota.</b> Declare, no mínimo: amostra de conveniência e não aleatória; preços de um único recorte temporal; hotéis restritos a uma só rede, o que enviesa o custo de hospedagem; e que climatologia é média histórica, <em>não previsão do tempo</em>.</p>
+            <p>Reconhecer o limite do próprio método é o que separa trabalho de estatística de tabela colorida. Omitir isso é o convite para a pergunta que derruba a apresentação.</p>
+          </div>
+
+          <div class="entrega"><span>Entrega</span> <code>detalhes.html</code> <code>hotel.html</code> <code>alimentacao.html</code> <code>relatorio.pdf</code> <code>slides.pdf</code></div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section>
+    <span class="olho">Contratos</span>
+    <h2>As duas interfaces entre as pessoas</h2>
+    <p class="h2-nota">Tudo que atravessa a fronteira entre dois postos passa por aqui. Fechem os dois no primeiro dia e ninguém precisa esperar ninguém para começar.</p>
+
+    <h3 style="margin-top:0;">Contrato 1 — <code>dados.json</code>, de P1 para P3 e P4</h3>
+<pre><code>{
+  "coletado_em": "2026-09-20",
+  "origem": { "icao": "SBCG", "cidade": "Campo Grande" },
+
+  "rotas": {
+    "SBRJ": {
+      "cidade": "Rio de Janeiro",
+      "passagens": {
+        "meses": ["jan","fev","mar","abr","mai","jun",
+                  "jul","ago","set","out","nov","dez"],
+        "companhias": [
+          { "nome": "GOL",   "classe": "economica",
+            "precos": [742.10, 698.00, null, 815.40, 779.90, 690.00,
+                       905.30, 880.00, 712.50, 733.20, 851.00, 1120.40] }
+        ],
+        "estatisticas": {
+          "n": 34, "media": 812.45, "mediana": 779.90,
+          "desvio_padrao": 118.72, "coef_variacao": 0.146,
+          "minimo": 690.00, "maximo": 1120.40
+        }
+      },
+      "clima": {
+        "temp_max": [30.1, 30.4, 29.7, 28.2, 26.8, 25.6,
+                     25.3, 25.9, 26.1, 27.0, 28.1, 29.3],
+        "temp_min": [23.2, 23.4, 23.0, 21.8, 20.4, 19.1,
+                     18.6, 19.0, 19.7, 20.8, 21.7, 22.6],
+        "precipitacao": [137, 130, 135, 95, 70, 55,
+                         41, 44, 53, 86, 98, 134],
+        "fonte": "ClimaTempo — climatologia"
+      },
+      "hotel": {
+        "n": 6, "diaria_media": 620.66, "diaria_mediana": 574.00,
+        "noites": 5, "custo_total": 3103.30
+      },
+      "alimentacao": {
+        "cafe": 24.00, "almoco": 48.00, "jantar": 62.00,
+        "media_diaria": 134.00,
+        "tipicas": ["Feijoada", "Pão de queijo", "Açaí"]
+      }
+    },
+
+    "SBSP": { "<span class="cmt">... mesma estrutura, São Paulo ...</span>": null }
+  }
+}</code></pre>
+
+    <div class="regra" style="margin-bottom:28px;">
+      <p><b>Mês ausente é <code>null</code>, nunca <code>0</code>.</b> Se a companhia não operou a rota naquele mês, zero seria lido como "passagem de graça" e arrastaria a média para baixo. P3 deve filtrar <code>null</code> antes de qualquer cálculo — e Chart.js já desenha buraco na linha automaticamente.</p>
+    </div>
+
+    <h3>Contrato 2 — a API de revelação, de P2 para P3 e P4</h3>
+<pre><code><span class="cmt">// reveal.js — escrito por P2, consumido por P3 e P4</span>
+window.LE = {
+  aoRevelar(seletor, callback) {
+    const el = document.querySelector(seletor);
+    if (!el) return;
+
+    <span class="cmt">// Sem animação? Executa na hora e sai.</span>
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      el.classList.add('visivel');
+      callback(el);
+      return;
+    }
+
+    const io = new IntersectionObserver((entradas) =&gt; {
+      entradas.forEach((e) =&gt; {
+        if (!e.isIntersecting) return;
+        e.target.classList.add('visivel');
+        io.unobserve(e.target);              <span class="cmt">// anima uma vez só</span>
+        setTimeout(() =&gt; callback(e.target), 500);  <span class="cmt">// = duração do reveal</span>
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+
+    io.observe(el);
+  }
+};</code></pre>
+  </section>
+
+  <section>
+    <span class="olho">Ordem</span>
+    <h2>Semana a semana</h2>
+    <p class="h2-nota">Quatro semanas. A primeira é curta de propósito: define contrato e destrava os outros três postos no mesmo dia.</p>
+
+    <div class="rolagem">
+      <table>
+        <thead>
+          <tr><th>Semana</th><th>P1 · Dados</th><th>P2 · Base</th><th>P3 · Gráficos</th><th>P4 · Páginas</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="sem">1</td>
+            <td>Mapear fontes, testar extração do PowerBI</td>
+            <td>Tokens do Figma, header, nav, footer</td>
+            <td><b>Fechar o schema</b> e gerar dados falsos</td>
+            <td>Levantar textos e imagens do protótipo</td>
+          </tr>
+          <tr>
+            <td class="sem">2</td>
+            <td>Coleta completa, janela única de 3 dias</td>
+            <td>Pág. Principal com hero e formulário</td>
+            <td>Linha de preços e combo de clima</td>
+            <td>Detalhes da Viagem, Hotel, Alimentação</td>
+          </tr>
+          <tr>
+            <td class="sem">3</td>
+            <td>Cálculos e entrega do <code>dados.json</code> real</td>
+            <td><code>animacoes.css</code>, <code>reveal.js</code>, responsivo</td>
+            <td>Radar normalizado, Dados da Busca</td>
+            <td>Relatório: metodologia e limitações</td>
+          </tr>
+          <tr>
+            <td class="sem">4</td>
+            <td>Conferir números contra a planilha</td>
+            <td>Ajuste fino de movimento e foco</td>
+            <td><b>Integração</b> e publicação</td>
+            <td>Slides e ensaio da apresentação</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <span class="olho">Pendente</span>
+    <h2>Duas decisões travando o início</h2>
+    <p class="h2-nota">Nenhuma das duas é técnica. As duas precisam de uma conversa de dez minutos entre os quatro, hoje.</p>
+
+    <div class="bloqueios">
+      <div class="bloqueio">
+        <h3>Identidade visual: Figma ou landing anterior</h3>
+        <p>O protótipo no Figma é azul institucional, com o nome <b>Linhas Estatísticas</b>. A landing feita antes é verde, com o nome <b>Bússola</b>. São dois produtos diferentes na mesma pasta.</p>
+        <p>Escolham um. P2 não consegue escrever <code>tokens.css</code> antes disso, e sem <code>tokens.css</code> P3 e P4 constroem páginas que não vão combinar.</p>
+      </div>
+      <div class="bloqueio">
+        <h3>Ano de referência dos preços</h3>
+        <p>O painel da ANAC cobre vários anos. Doze meses de 2025 fechado e doze meses móveis até hoje produzem gráficos diferentes — e a conclusão do trabalho muda junto.</p>
+        <p>Definam o ano antes de P1 abrir o PowerBI, e escrevam essa escolha na metodologia do relatório.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Linhas Estatísticas · SBCG → SBRJ / SBSP</span>
+    <span>IFMS Nova Andradina · Projeto Final de Estatística</span>
+  </footer>
+
+</div>
