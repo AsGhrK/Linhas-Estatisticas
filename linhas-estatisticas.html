@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Linhas Estatísticas — Compare, planeje, voe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0B3654; --navy-deep:#082840; --sky:#4A90D9; --coral:#E8734A;
+  --paper:#F6F8FA; --line:#DCE3E9; --ink:#16232E; --ink-soft:#5B6B77;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-padding-top:70px;}
+body{font-family:'Inter',sans-serif; color:var(--ink); background:var(--paper); line-height:1.6;}
+h1,h2,h3,.brand{font-family:'Space Grotesk',sans-serif;}
+img,svg{max-width:100%;}
+.wrap{max-width:1120px; margin:0 auto; padding:0 24px;}
+a{color:inherit; text-decoration:none;}
+
+/* Header */
+header{position:sticky; top:0; z-index:50; background:var(--navy); color:#fff; padding-top:env(safe-area-inset-top,0px);}
+.nav{display:flex; align-items:center; justify-content:space-between; padding:16px 24px; max-width:1120px; margin:0 auto;}
+.brand{font-size:19px; font-weight:700; display:flex; align-items:center; gap:8px; letter-spacing:.2px;}
+.brand svg{flex:0 0 auto;}
+.navlinks{display:flex; gap:32px; font-size:14px; font-weight:500;}
+.navlinks a{opacity:.85; transition:opacity .15s;}
+.navlinks a:hover{opacity:1;}
+.navicons{display:flex; gap:16px; align-items:center;}
+.navicons svg{width:19px; height:19px; opacity:.9;}
+.navtoggle{display:none;}
+@media(max-width:760px){
+  .navlinks{display:none;}
+}
+
+/* Hero */
+.hero{background:linear-gradient(160deg,var(--navy) 0%, var(--navy-deep) 65%); color:#fff; padding:64px 0 88px; position:relative; overflow:hidden;}
+.hero::after{content:"";position:absolute; right:-60px; top:20px; width:420px; height:420px; border:1px solid rgba(255,255,255,.08); border-radius:50%;}
+.hero-grid{display:grid; grid-template-columns:1.1fr .9fr; gap:56px; align-items:center; position:relative;}
+.eyebrow{color:var(--sky); font-size:13px; font-weight:600; margin-bottom:14px;}
+.hero h1{font-size:44px; line-height:1.12; font-weight:700; max-width:520px;}
+.hero p{margin-top:18px; max-width:460px; color:#C7D4DD; font-size:16px;}
+.route-line{margin-top:36px; display:flex; align-items:center; gap:10px; color:#9FB4C4; font-size:13px;}
+.route-line .dot{width:6px; height:6px; border-radius:50%; background:var(--coral);}
+.route-line .rule{flex:1; height:1px; background:rgba(255,255,255,.18); position:relative;}
+.hero-art{width:100%; aspect-ratio:4/3; border-radius:4px; overflow:hidden; position:relative;}
+.hero-art svg{width:100%; height:100%; display:block;}
+
+/* Search card */
+.search-card{background:#fff; border:1px solid var(--line); border-radius:6px; padding:26px; margin-top:-52px; position:relative; z-index:5; box-shadow:0 18px 40px -22px rgba(8,40,64,.35);}
+.search-title{font-size:13px; font-weight:600; color:var(--ink-soft); margin-bottom:16px;}
+.search-row{display:grid; grid-template-columns:repeat(4,1fr) auto; gap:12px;}
+.field{border:1px solid var(--line); border-radius:4px; padding:11px 12px;}
+.field label{display:block; font-size:11px; color:var(--ink-soft); margin-bottom:3px;}
+.field input{border:none; font-size:14px; width:100%; font-family:inherit; color:var(--ink); background:none;}
+.field input:focus{outline:none;}
+.btn-primary{background:var(--coral); color:#fff; border:none; border-radius:4px; padding:0 26px; font-weight:600; font-size:14px; cursor:pointer; white-space:nowrap;}
+.btn-primary:hover{background:#d6663c;}
+@media(max-width:760px){.search-row{grid-template-columns:1fr 1fr;} .btn-primary{grid-column:1/-1; padding:13px;}}
+
+/* Sections */
+section{padding:76px 0;}
+.section-head{max-width:620px; margin-bottom:44px;}
+.section-head .tag{color:var(--coral); font-size:13px; font-weight:600; margin-bottom:10px;}
+.section-head h2{font-size:30px; font-weight:700; color:var(--ink); line-height:1.2;}
+.section-head p{margin-top:12px; color:var(--ink-soft); font-size:15.5px;}
+.alt{background:#fff; border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+
+/* Route compare (section 1) */
+.route-tabs{display:flex; gap:10px; margin-bottom:28px;}
+.route-tabs span{font-size:13px; font-weight:600; padding:7px 14px; border-radius:20px; border:1px solid var(--line); color:var(--ink-soft);}
+.route-tabs span.on{background:var(--navy); color:#fff; border-color:var(--navy);}
+.flight-grid{display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line); border:1px solid var(--line); border-radius:6px; overflow:hidden;}
+.flight-col{background:#fff; padding:22px 24px;}
+.flight-col h3{font-size:15px; font-weight:600; margin-bottom:2px;}
+.flight-col .route{font-size:12.5px; color:var(--ink-soft); margin-bottom:16px;}
+.flight-row{display:flex; justify-content:space-between; align-items:center; padding:12px 0; border-top:1px solid var(--line); font-size:14px;}
+.flight-row:first-of-type{border-top:none;}
+.flight-row .carrier{font-weight:600;}
+.flight-row .dur{color:var(--ink-soft); font-size:12.5px;}
+.flight-row .price{font-weight:700; color:var(--navy);}
+
+/* Stats strip */
+.stats{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:6px; overflow:hidden; margin-top:32px;}
+.stat{background:#fff; padding:22px 20px;}
+.stat .num{font-size:26px; font-weight:700; color:var(--navy); font-family:'Space Grotesk',sans-serif;}
+.stat .lbl{font-size:12.5px; color:var(--ink-soft); margin-top:4px;}
+
+/* Weather section 2 */
+.weather-grid{display:grid; grid-template-columns:1fr 1fr; gap:28px;}
+.weather-card{background:#fff; border:1px solid var(--line); border-radius:6px; padding:24px;}
+.weather-card h3{font-size:15px; font-weight:600; margin-bottom:14px;}
+.weather-card .note{display:flex; gap:18px; margin-top:14px; font-size:12.5px; color:var(--ink-soft); flex-wrap:wrap;}
+.weather-card .note b{color:var(--ink); display:block; font-size:13px;}
+
+/* Hotels & food section 3 */
+.hf-grid{display:grid; grid-template-columns:1.1fr .9fr; gap:40px;}
+.hotel-row{display:flex; justify-content:space-between; align-items:center; padding:16px 0; border-top:1px solid var(--line); font-size:14px;}
+.hotel-row:first-of-type{border-top:none;}
+.hotel-row .name{font-weight:600;}
+.hotel-row .city{font-size:12px; color:var(--ink-soft);}
+.hotel-row .price{font-weight:700; color:var(--navy); font-family:'Space Grotesk',sans-serif;}
+.tag-list{display:flex; flex-wrap:wrap; gap:8px; margin-top:14px;}
+.tag-list span{font-size:12.5px; border:1px solid var(--line); border-radius:20px; padding:5px 12px; color:var(--ink-soft);}
+.cost-box{background:var(--navy); color:#fff; border-radius:6px; padding:22px 24px; margin-top:20px;}
+.cost-box .amt{font-size:24px; font-weight:700; font-family:'Space Grotesk',sans-serif; color:#fff;}
+.cost-box .lbl{font-size:12.5px; color:#B9CBD8; margin-top:2px;}
+
+/* Overview radar section 4 */
+.overview-grid{display:grid; grid-template-columns:.85fr 1.15fr; gap:48px; align-items:center;}
+.legend{display:flex; gap:22px; margin-top:20px; font-size:13px;}
+.legend span{display:flex; align-items:center; gap:7px; color:var(--ink-soft);}
+.legend .sw{width:10px; height:10px; border-radius:50%;}
+.checklist{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:26px;}
+.checklist div{border:1px solid var(--line); border-radius:4px; padding:13px 16px; font-size:13.5px; font-weight:500; background:#fff;}
+
+/* CTA */
+.cta{background:linear-gradient(135deg,var(--navy-deep),var(--navy)); color:#fff; text-align:left; border-radius:8px; padding:52px; display:flex; justify-content:space-between; align-items:center; gap:32px;}
+.cta h2{font-size:26px; font-weight:700; max-width:420px;}
+.cta p{color:#C7D4DD; margin-top:10px; max-width:420px; font-size:14.5px;}
+@media(max-width:760px){.cta{flex-direction:column; align-items:flex-start; padding:32px;}}
+
+/* Footer */
+footer{background:var(--navy-deep); color:#B9CBD8; padding:56px 0 28px; margin-top:0;}
+.foot-grid{display:grid; grid-template-columns:1.4fr repeat(4,1fr); gap:32px;}
+.foot-grid h4{color:#fff; font-size:13px; margin-bottom:14px; font-weight:600;}
+.foot-grid ul{list-style:none;}
+.foot-grid li{margin-bottom:9px; font-size:13.5px;}
+.foot-grid li a:hover{color:#fff;}
+.foot-brand p{margin-top:12px; font-size:13.5px; max-width:260px; color:#8FA5B5;}
+.foot-bottom{border-top:1px solid rgba(255,255,255,.1); margin-top:44px; padding-top:22px; font-size:12.5px; color:#7C93A2; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;}
+@media(max-width:760px){.foot-grid{grid-template-columns:1fr 1fr;}}
+
+@media(max-width:760px){
+  .hero-grid{grid-template-columns:1fr;} .hero h1{font-size:32px;}
+  .flight-grid,.weather-grid,.overview-grid,.hf-grid{grid-template-columns:1fr;}
+  .stats{grid-template-columns:1fr 1fr;}
+  .search-card{margin-top:24px;}
+  .hero{padding-bottom:40px;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="brand">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2.5 1.8V22L12 21l4.5 1v-1.2L14 19v-5.5L21 16z" fill="#fff"/></svg>
+      Linhas Estatísticas
+    </div>
+    <nav class="navlinks">
+      <a href="#voos">Voos</a>
+      <a href="#clima">Clima</a>
+      <a href="#hospedagem">Hospedagem</a>
+      <a href="#visao-geral">Visão geral</a>
+    </nav>
+    <div class="navicons">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 3.8 5.8 3.8 9s-1.3 6.5-3.8 9c-2.5-2.5-3.8-5.8-3.8-9s1.3-6.5 3.8-9z"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="3.5"/><path d="M4.5 20c1.6-3.6 4.4-5.5 7.5-5.5s5.9 1.9 7.5 5.5"/></svg>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Planejamento de viagens orientado a dados</div>
+      <h1>Compare voos, clima e custos antes de decidir para onde ir</h1>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Reunimos tarifas aéreas, previsão do tempo, hospedagem e alimentação em um único painel para cada rota que você pesquisar.</p>
+      <div class="route-line">
+        <span>SBCG</span><div class="rule"></div><span class="dot"></span><div class="rule"></div><span>Destino</span>
+      </div>
+    </div>
+    <div class="hero-art">
+      <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+        <rect width="400" height="300" fill="#0F4568"/>
+        <path d="M20 240 C120 200 180 260 260 190 S 380 120 390 90" stroke="#4A90D9" stroke-width="1.5" fill="none" stroke-dasharray="4 5" opacity=".7"/>
+        <circle cx="20" cy="240" r="4" fill="#E8734A"/>
+        <circle cx="390" cy="90" r="4" fill="#E8734A"/>
+        <path d="M250 150l30-10 8 4-22 14 6 16-9 3-11-13-14 9-2-8 11-8-9-11 8-3z" fill="#fff"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="search-card">
+    <div class="search-title">BUSCAR PASSAGENS · Origem, destino e datas de ida e volta</div>
+    <div class="search-row">
+      <div class="field"><label>Origem</label><input placeholder="Campo Grande, SBCG"></div>
+      <div class="field"><label>Destino</label><input placeholder="Rio de Janeiro, SBRJ"></div>
+      <div class="field"><label>Datas</label><input placeholder="30/10 — 20/11"></div>
+      <div class="field"><label>Passageiros</label><input placeholder="1 Adulto"></div>
+      <button class="btn-primary">Buscar</button>
+    </div>
+  </div>
+</div>
+
+<section id="voos">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="tag">Seção 01 — Voos</div>
+      <h2>Duas rotas, lado a lado, sem abas escondidas</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique, duis cursus mi quis viverra ornare.</p>
+    </div>
+    <div class="route-tabs"><span class="on">SBCG → SBRJ</span><span>SBCG → SBSP</span></div>
+    <div class="flight-grid">
+      <div class="flight-col">
+        <h3>1º voo</h3>
+        <div class="route">SBCG — SBRJ · 30/10/2025</div>
+        <div class="flight-row"><div><div class="carrier">Gol Linhas Aéreas</div><div class="dur">4h 40min · direto</div></div><div class="price">R$ 730</div></div>
+        <div class="flight-row"><div><div class="carrier">Latam Linhas Aéreas</div><div class="dur">4h 40min · direto</div></div><div class="price">R$ 730</div></div>
+        <div class="flight-row"><div><div class="carrier">Azul Linhas Aéreas</div><div class="dur">4h 40min · direto</div></div><div class="price">R$ 730</div></div>
+      </div>
+      <div class="flight-col">
+        <h3>2º voo</h3>
+        <div class="route">SBCG — SBSP · 10/12/2025</div>
+        <div class="flight-row"><div><div class="carrier">Gol Linhas Aéreas</div><div class="dur">4h 40min · direto</div></div><div class="price">R$ 730</div></div>
+        <div class="flight-row"><div><div class="carrier">Latam Linhas Aéreas</div><div class="dur">4h 40min · direto</div></div><div class="price">R$ 730</div></div>
+        <div class="flight-row"><div><div class="carrier">Azul Linhas Aéreas</div><div class="dur">4h 40min · direto</div></div><div class="price">R$ 730</div></div>
+      </div>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="num">R$ 571</div><div class="lbl">Tarifa média trimestral — SP</div></div>
+      <div class="stat"><div class="num">R$ 663</div><div class="lbl">Tarifa média trimestral — RJ</div></div>
+      <div class="stat"><div class="num">R$ 440</div><div class="lbl">Menor preço registrado (jan)</div></div>
+      <div class="stat"><div class="num">R$ 767</div><div class="lbl">Maior preço registrado (mar)</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="clima" class="alt">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="tag">Seção 02 — Clima</div>
+      <h2>Previsão baseada em 30 anos de histórico meteorológico</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipiscing elit. Praesent euismod, nibh non luctus dictum, arcu erat facilisis nulla, at gravida elit purus id ante.</p>
+    </div>
+    <div class="weather-grid">
+      <div class="weather-card">
+        <h3>Rio de Janeiro</h3>
+        <svg viewBox="0 0 300 110" width="100%" height="110">
+          <polyline points="0,70 40,60 80,66 120,50 160,40 200,55 240,62 280,45" fill="none" stroke="#4A90D9" stroke-width="2"/>
+          <polyline points="0,90 40,85 80,88 120,80 160,70 200,82 240,86 280,75" fill="none" stroke="#E8734A" stroke-width="2"/>
+        </svg>
+        <div class="note">
+          <div><b>Jun/Jul/Ago</b>20°C · 36mm de chuva</div>
+          <div><b>Out/Nov/Dez</b>24°C · 158mm de chuva</div>
+        </div>
+      </div>
+      <div class="weather-card">
+        <h3>São Paulo</h3>
+        <svg viewBox="0 0 300 110" width="100%" height="110">
+          <polyline points="0,60 40,55 80,58 120,45 160,38 200,50 240,55 280,42" fill="none" stroke="#4A90D9" stroke-width="2"/>
+          <polyline points="0,95 40,90 80,92 120,85 160,78 200,86 240,90 280,80" fill="none" stroke="#E8734A" stroke-width="2"/>
+        </svg>
+        <div class="note">
+          <div><b>Jun/Jul/Ago</b>17°C · 49mm de chuva</div>
+          <div><b>Out/Nov/Dez</b>21°C · 155mm de chuva</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="hospedagem">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="tag">Seção 03 — Hospedagem e alimentação</div>
+      <h2>Hotéis, restaurantes e pratos típicos de cada destino</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipiscing elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet, cras justo odio.</p>
+    </div>
+    <div class="hf-grid">
+      <div>
+        <div class="hotel-row"><div><div class="name">Mercure Hotels</div><div class="city">Rio de Janeiro</div></div><div class="price">R$ 3.744</div></div>
+        <div class="hotel-row"><div><div class="name">Ibis</div><div class="city">Rio de Janeiro</div></div><div class="price">R$ 2.227</div></div>
+        <div class="hotel-row"><div><div class="name">Novotel</div><div class="city">São Paulo</div></div><div class="price">R$ 3.518</div></div>
+        <div class="hotel-row"><div><div class="name">Ibis</div><div class="city">São Paulo</div></div><div class="price">R$ 2.122</div></div>
+        <div class="cost-box"><div class="amt">R$ 2.672 / R$ 3.163</div><div class="lbl">Custo médio de hospedagem — São Paulo / Rio de Janeiro, 7 dias</div></div>
+      </div>
+      <div>
+        <h3 style="font-size:15px; font-weight:600; margin-bottom:6px;">Comidas típicas</h3>
+        <p style="color:var(--ink-soft); font-size:14px;">Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor.</p>
+        <div class="tag-list">
+          <span>Feijoada</span><span>Cachorro-quente</span><span>Filé mignon grelhado</span>
+          <span>Cuscuz Paulista</span><span>Pastel de feira</span><span>Virado à Paulista</span>
+        </div>
+        <div class="stats" style="grid-template-columns:1fr 1fr 1fr; margin-top:26px;">
+          <div class="stat"><div class="num">R$ 24</div><div class="lbl">Café da manhã</div></div>
+          <div class="stat"><div class="num">R$ 50</div><div class="lbl">Almoço</div></div>
+          <div class="stat"><div class="num">R$ 60</div><div class="lbl">Jantar</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="visao-geral" class="alt">
+  <div class="wrap overview-grid">
+    <div>
+      <div class="tag">Seção 04 — Visão geral</div>
+      <h2>Todos os critérios, um só painel comparativo</h2>
+      <p style="color:var(--ink-soft); margin-top:12px; font-size:15.5px;">Lorem ipsum dolor sit amet consectetur adipiscing elit. Nulla facilisi, vestibulum ante ipsum primis in faucibus orci luctus et ultrices.</p>
+      <div class="legend">
+        <span><i class="sw" style="background:#4A90D9"></i>São Paulo</span>
+        <span><i class="sw" style="background:#E8734A"></i>Rio de Janeiro</span>
+      </div>
+      <div class="checklist">
+        <div>Preço da passagem</div><div>Clima / temperatura</div>
+        <div>Chuva / precipitação</div><div>Hotéis / hospedagem</div>
+        <div>Alimentação</div><div>Distância</div>
+      </div>
+    </div>
+    <svg viewBox="0 0 360 320" width="100%">
+      <g stroke="#DCE3E9" fill="none">
+        <polygon points="180,20 320,110 275,270 85,270 40,110"/>
+        <polygon points="180,80 260,140 232,235 128,235 100,140"/>
+        <polygon points="180,140 200,170 190,200 170,200 160,170"/>
+      </g>
+      <polygon points="180,50 290,120 240,255 130,240 90,130" fill="#4A90D9" fill-opacity=".28" stroke="#4A90D9" stroke-width="1.6"/>
+      <polygon points="180,90 250,150 220,245 145,220 110,160" fill="#E8734A" fill-opacity=".28" stroke="#E8734A" stroke-width="1.6"/>
+    </svg>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="cta">
+      <div>
+        <h2>Pronto para comparar seu próximo destino?</h2>
+        <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore.</p>
+      </div>
+      <button class="btn-primary" style="padding:14px 30px;">Buscar passagens</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-grid">
+    <div class="foot-brand">
+      <div class="brand" style="font-size:17px;">Linhas Estatísticas</div>
+      <p>Lorem ipsum dolor sit amet consectetur adipiscing elit, plataforma de comparação de viagens orientada a dados.</p>
+    </div>
+    <div><h4>Categories</h4><ul><li><a href="#">Voos nacionais</a></li><li><a href="#">Voos internacionais</a></li><li><a href="#">Pacotes</a></li></ul></div>
+    <div><h4>Shopping</h4><ul><li><a href="#">Passagens</a></li><li><a href="#">Hotéis</a></li><li><a href="#">Seguro viagem</a></li></ul></div>
+    <div><h4>Customer care</h4><ul><li><a href="#">Central de ajuda</a></li><li><a href="#">Fale conosco</a></li><li><a href="#">Cancelamentos</a></li></ul></div>
+    <div><h4>Pages</h4><ul><li><a href="#voos">Voos</a></li><li><a href="#clima">Clima</a></li><li><a href="#visao-geral">Visão geral</a></li></ul></div>
+  </div>
+  <div class="wrap foot-bottom">
+    <span>© 2023 Estrella Inc. All rights reserved</span>
+    <span>Privacidade · Termos de uso</span>
+  </div>
+</footer>
+
+</body>
+</html>
