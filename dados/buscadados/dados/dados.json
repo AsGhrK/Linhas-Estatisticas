@@ -1,0 +1,72 @@
+{
+  "versao": 1,
+  "pesquisas": [],
+  "viagens": [
+    {
+      "nome": "Exemplo CGR-GRU-GIG-CGR",
+      "trechos": [
+        {
+          "origem": "CGR",
+          "destino": "GRU",
+          "preco": 650.0
+        },
+        {
+          "origem": "GRU",
+          "destino": "GIG",
+          "preco": 280.0
+        },
+        {
+          "origem": "GIG",
+          "destino": "CGR",
+          "preco": 720.0
+        }
+      ],
+      "despesas": {
+        "passagens": 1650.0,
+        "hospedagem": 900.0,
+        "alimentacao": 450.0,
+        "transporte_local": 180.0,
+        "passeios": 250.0,
+        "outros": 100.0
+      },
+      "total_viagem": 3530.0,
+      "pessoas": 1,
+      "media_por_pessoa": 3530.0,
+      "moeda": "BRL",
+      "observacao": "Estimativa baseada nos valores informados; não inclui despesas não cadastradas."
+    },
+    {
+      "nome": "Exemplo de viagem por várias cidades",
+      "trechos": [
+        {
+          "origem": "CGR",
+          "destino": "GRU",
+          "preco": 650.0
+        },
+        {
+          "origem": "GRU",
+          "destino": "GIG",
+          "preco": 280.0
+        },
+        {
+          "origem": "GIG",
+          "destino": "CGR",
+          "preco": 720.0
+        }
+      ],
+      "despesas": {
+        "passagens": 1650.0,
+        "hospedagem": 900.0,
+        "alimentacao": 450.0,
+        "transporte_local": 180.0,
+        "passeios": 250.0,
+        "outros": 100.0
+      },
+      "total_viagem": 3530.0,
+      "pessoas": 1,
+      "media_por_pessoa": 3530.0,
+      "moeda": "BRL",
+      "observacao": "Estimativa baseada nos valores informados; não inclui despesas não cadastradas."
+    }
+  ]
+}
