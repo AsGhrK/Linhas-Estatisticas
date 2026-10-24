@@ -1,0 +1,397 @@
+Feito em Python
+
+para iniciar 
+
+python -m venv .venv
+.venv\Scripts\activate
+python -m pip install -r requirements.txt
+python main.py
+
+
+
+DOCUMENTAÇÃO DO BACKEND — LINHAS ESTATÍSTICAS
+================================================
+
+TECNOLOGIA
+----------
+Python + FastAPI
+
+ENDEREÇO LOCAL DA API
+---------------------
+http://127.0.0.1:8000
+
+DOCUMENTAÇÃO INTERATIVA
+----------------------
+http://127.0.0.1:8000/docs
+
+A documentação interativa permite visualizar as rotas, preencher os parâmetros e executar testes diretamente pelo navegador.
+
+O backend possui quatro rotas principais de serviço, além da rota inicial.
+
+================================================
+1. VERIFICAR SE O BACKEND ESTÁ FUNCIONANDO
+================================================
+
+Método: GET
+Rota: /api/health
+
+URL completa:
+http://127.0.0.1:8000/api/health
+
+FUNÇÃO:
+Verifica se o serviço está ativo. Pode ser utilizada para testar se o backend iniciou corretamente.
+
+COMO USAR:
+Abra a URL no navegador.
+
+RESPOSTA ESPERADA:
+Um objeto JSON com informações sobre o estado do serviço.
+
+================================================
+2. CONSULTAR O CLIMA
+================================================
+
+Método: GET
+Rota: /api/clima
+
+URL base:
+http://127.0.0.1:8000/api/clima
+
+FUNÇÃO:
+Consulta as condições meteorológicas atuais e a previsão diária de uma cidade.
+
+A API utiliza o serviço Open-Meteo, que fornece dados meteorológicos.
+
+PARÂMETROS:
+
+cidade
+- Obrigatório.
+- Nome da cidade que será consultada.
+- Exemplos: Rio de Janeiro, São Paulo e Campo Grande.
+
+dias
+- Opcional.
+- Quantidade de dias da previsão.
+- Valor padrão: 7.
+- Mínimo: 1.
+- Máximo: 16.
+
+EXEMPLO 1 — RIO DE JANEIRO:
+http://127.0.0.1:8000/api/clima?cidade=Rio%20de%20Janeiro&dias=7
+
+EXEMPLO 2 — SÃO PAULO:
+http://127.0.0.1:8000/api/clima?cidade=Sao%20Paulo&dias=5
+
+EXEMPLO 3 — CAMPO GRANDE:
+http://127.0.0.1:8000/api/clima?cidade=Campo%20Grande&dias=3
+
+DADOS RETORNADOS:
+- Cidade consultada.
+- Latitude e longitude.
+- Data e horário da consulta.
+- Condições meteorológicas atuais.
+- Temperatura atual.
+- Umidade relativa.
+- Sensação térmica.
+- Temperaturas máximas e mínimas por dia.
+- Precipitação prevista em milímetros.
+- Código meteorológico.
+- Fonte dos dados.
+
+COMO USAR:
+O front-end deve enviar o nome da cidade e a quantidade de dias desejada. A resposta será retornada em JSON para ser apresentada na interface.
+
+IMPORTANTE:
+A consulta depende de conexão com a internet. A previsão não garante as condições meteorológicas futuras.
+
+================================================
+3. CONSULTAR HOTÉIS
+================================================
+
+Método: GET
+Rota: /api/hoteis
+
+URL base:
+http://127.0.0.1:8000/api/hoteis
+
+FUNÇÃO:
+Retorna opções demonstrativas de hospedagem, com estimativa de preço por diária e custo total da estadia.
+
+PARÂMETROS:
+
+cidade
+- Obrigatório.
+- Cidade onde o usuário deseja se hospedar.
+
+checkin
+- Obrigatório.
+- Data de entrada no hotel.
+- Formato: AAAA-MM-DD.
+
+checkout
+- Obrigatório.
+- Data de saída do hotel.
+- Formato: AAAA-MM-DD.
+- Deve ser posterior à data de entrada.
+
+hospedes
+- Opcional.
+- Quantidade de hóspedes.
+- Valor padrão: 1.
+- Mínimo: 1.
+- Máximo: 20.
+
+EXEMPLO 1 — RIO DE JANEIRO:
+http://127.0.0.1:8000/api/hoteis?cidade=Rio%20de%20Janeiro&checkin=2026-12-01&checkout=2026-12-05&hospedes=2
+
+EXEMPLO 2 — SÃO PAULO:
+http://127.0.0.1:8000/api/hoteis?cidade=Sao%20Paulo&checkin=2026-12-10&checkout=2026-12-13&hospedes=1
+
+EXEMPLO 3 — FOZ DO IGUAÇU:
+http://127.0.0.1:8000/api/hoteis?cidade=Foz%20do%20Iguacu&checkin=2026-12-15&checkout=2026-12-19&hospedes=2
+
+DADOS RETORNADOS:
+- Cidade.
+- Data de entrada.
+- Data de saída.
+- Quantidade de noites.
+- Quantidade de hóspedes.
+- Nome demonstrativo da hospedagem.
+- Categoria ilustrativa.
+- Preço estimado da diária.
+- Preço total estimado.
+- Moeda utilizada.
+- Fonte e aviso sobre os dados.
+
+COMO USAR:
+O front-end deve enviar a cidade, as datas de entrada e saída e a quantidade de hóspedes. A resposta contém uma lista de hospedagens e os respectivos valores estimados.
+
+CÁLCULO:
+O sistema calcula a quantidade de noites pela diferença entre as datas e multiplica pelo valor estimado da diária. Também pode aplicar fatores demonstrativos relacionados à cidade, ao período e à quantidade de hóspedes.
+
+IMPORTANTE:
+Os hotéis e os preços são demonstrativos. Não representam estabelecimentos confirmados, disponibilidade real ou tarifas de reserva. A implementação atual não consulta uma API de hotéis reais.
+
+================================================
+4. BUSCAR VOOS E CALCULAR TARIFAS
+================================================
+
+Método: POST
+Rota: /api/voos/buscar
+
+URL completa:
+http://127.0.0.1:8000/api/voos/buscar
+
+FUNÇÃO:
+Gera opções demonstrativas de voos entre dois aeroportos, com datas, horários de partida e chegada, duração estimada e tarifas calculadas.
+
+Os preços são estimados a partir de dados históricos da ANAC, quando disponíveis, e de tarifas-base demonstrativas para rotas sem dados encontrados.
+
+PARÂMETROS DO JSON:
+
+origem
+- Obrigatório.
+- Código do aeroporto de origem.
+- Exemplos: SBCG, SBGR e SBGL.
+
+destino
+- Obrigatório.
+- Código do aeroporto de destino.
+- Exemplos: SBGR, SBGL e SBCG.
+
+data_ida
+- Obrigatório.
+- Data de ida.
+- Formato: AAAA-MM-DD.
+
+data_volta
+- Opcional.
+- Data de retorno.
+- Formato: AAAA-MM-DD.
+
+passageiros
+- Opcional.
+- Quantidade de passageiros.
+- Valor padrão: 1.
+- Mínimo: 1.
+- Máximo: 9.
+
+EXEMPLO 1 — CAMPO GRANDE PARA GUARULHOS:
+
+{
+  "origem": "SBCG",
+  "destino": "SBGR",
+  "data_ida": "2026-11-15",
+  "data_volta": "2026-11-20",
+  "passageiros": 1
+}
+
+EXEMPLO 2 — CAMPO GRANDE PARA O RIO DE JANEIRO:
+
+{
+  "origem": "SBCG",
+  "destino": "SBGL",
+  "data_ida": "2026-12-01",
+  "data_volta": "2026-12-05",
+  "passageiros": 2
+}
+
+EXEMPLO 3 — GUARULHOS PARA O GALEÃO:
+
+{
+  "origem": "SBGR",
+  "destino": "SBGL",
+  "data_ida": "2026-12-10",
+  "data_volta": "2026-12-15",
+  "passageiros": 1
+}
+
+COMO TESTAR:
+1. Acesse http://127.0.0.1:8000/docs
+2. Localize POST /api/voos/buscar.
+3. Clique em Try it out.
+4. Cole um dos exemplos JSON.
+5. Clique em Execute.
+6. Confira o código HTTP e a resposta JSON.
+
+IMPORTANTE:
+Essa rota utiliza POST. Portanto, os exemplos JSON devem ser enviados no corpo da requisição, e não adicionados à URL.
+
+DADOS RETORNADOS:
+- Origem e destino.
+- Data da ida.
+- Data da volta, quando informada.
+- Quantidade de passageiros.
+- Lista de opções demonstrativas.
+- Companhia aérea indicada.
+- Horário de saída.
+- Horário de chegada.
+- Duração estimada do voo.
+- Indicação de voo direto.
+- Tarifa estimada por passageiro.
+- Preço total calculado.
+- Fonte utilizada no cálculo.
+- Avisos sobre o caráter demonstrativo dos resultados.
+
+CÁLCULO DAS TARIFAS:
+1. O backend procura registros históricos da rota nos arquivos CSV locais da ANAC.
+2. Quando existem registros, calcula uma média histórica das tarifas encontradas.
+3. Quando não existem registros, utiliza uma tarifa-base demonstrativa.
+4. Aplica fatores de sazonalidade conforme o mês da viagem.
+5. Pode aplicar fatores demonstrativos para companhia aérea e antecedência.
+6. Calcula os valores apresentados para a quantidade de passageiros.
+
+Os valores não são cotações comerciais.
+
+HORÁRIOS:
+Os horários de saída e chegada são gerados por regras determinísticas para fins de apresentação. Não representam horários confirmados de companhias aéreas.
+
+CÓDIGOS DE AEROPORTOS:
+O backend aceita códigos ICAO de quatro letras e alguns aliases IATA previamente cadastrados.
+
+Exemplos:
+- SBCG: Campo Grande.
+- SBGR: Guarulhos.
+- SBGL: Galeão, no Rio de Janeiro.
+- SBRJ: Santos Dumont, no Rio de Janeiro.
+- CGR: alias IATA de Campo Grande.
+- GRU: alias IATA de Guarulhos.
+- GIG: alias IATA do Galeão.
+
+A lista de aliases disponíveis está definida no código do backend e pode ser ampliada.
+
+================================================
+5. ROTA INICIAL
+================================================
+
+Método: GET
+Rota: /
+
+URL completa:
+http://127.0.0.1:8000/
+
+FUNÇÃO:
+Disponibiliza a rota inicial da API. Pode ser utilizada para verificar se existe uma resposta básica na raiz do serviço.
+
+Para consultar as funções detalhadas, utilize /docs.
+
+================================================
+6. CÓDIGOS HTTP MAIS IMPORTANTES
+================================================
+
+200 — OK
+A requisição foi processada com sucesso.
+
+404 — Not Found
+A rota ou o recurso solicitado não foi encontrado. Na consulta de clima, também pode indicar que a cidade não foi localizada.
+
+422 — Unprocessable Content
+Algum parâmetro ou campo enviado está inválido. Exemplos: data no formato incorreto, quantidade de passageiros fora do limite ou checkout anterior ao checkin.
+
+502 — Bad Gateway
+O backend não conseguiu concluir uma consulta ao serviço externo de clima.
+
+500 — Internal Server Error
+Ocorreu um erro interno não tratado pelo backend.
+
+================================================
+7. COMO O FRONT-END DEVE CONSUMIR A API
+================================================
+
+ENDPOINTS:
+
+GET http://127.0.0.1:8000/api/health
+
+GET http://127.0.0.1:8000/api/clima?cidade=Campo%20Grande&dias=7
+
+GET http://127.0.0.1:8000/api/hoteis?cidade=Rio%20de%20Janeiro&checkin=2026-12-01&checkout=2026-12-05&hospedes=2
+
+POST http://127.0.0.1:8000/api/voos/buscar
+
+Para GET, os parâmetros são enviados pela URL.
+
+Para POST, o JSON é enviado no corpo da requisição com o cabeçalho:
+
+Content-Type: application/json
+
+Exemplo de chamada JavaScript para voos:
+
+const response = await fetch(
+  "http://127.0.0.1:8000/api/voos/buscar",
+  {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      origem: "SBCG",
+      destino: "SBGR",
+      data_ida: "2026-11-15",
+      data_volta: "2026-11-20",
+      passageiros: 1
+    })
+  }
+);
+
+if (!response.ok) {
+  throw new Error("Erro ao consultar voos");
+}
+
+const dados = await response.json();
+console.log(dados);
+
+================================================
+8. CONFIGURAÇÕES E LIMITAÇÕES
+================================================
+
+- O backend é independente do front-end.
+- O endereço 127.0.0.1 funciona na máquina em que o servidor está executando.
+- O acesso pelo front-end deve respeitar a configuração CORS do backend.
+- O clima depende de internet e utiliza a API Open-Meteo.
+- Os dados de hotéis são demonstrativos.
+- As tarifas de voos são estimativas para apresentação.
+- Os horários de voos são sintéticos.
+- Os CSVs da ANAC são históricos e não são atualizados automaticamente pelo backend.
+- Para dados comerciais reais, será necessário integrar provedores com APIs próprias.
+
+FIM DA DOCUMENTAÇÃO

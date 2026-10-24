@@ -1,0 +1,85 @@
+INSTALAÇÃO E EXECUÇÃO DO BACKEND — LINHAS ESTATÍSTICAS
+=======================================================
+
+REQUISITOS
+----------
+- Python instalado.
+- Projeto baixado ou copiado para o computador.
+- Conexão com a internet para instalar as dependências e consultar o clima.
+
+1. ABRIR O TERMINAL NA PASTA DO BACKEND
+---------------------------------------
+Abra o PowerShell dentro da pasta onde estão o arquivo requirements.txt e a pasta APP.
+
+Não é necessário utilizar um caminho fixo. Cada computador poderá armazenar o projeto em uma pasta diferente.
+
+2. CRIAR O AMBIENTE VIRTUAL
+---------------------------
+python -m venv .venv
+
+3. ATIVAR O AMBIENTE VIRTUAL
+----------------------------
+Windows PowerShell:
+
+.\.venv\Scripts\Activate.ps1
+
+Se estiver usando o Prompt de Comando (CMD):
+
+.venv\Scripts\activate.bat
+
+4. INSTALAR AS DEPENDÊNCIAS
+----------------------------
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+
+5. INICIAR O SERVIDOR
+---------------------
+python -m uvicorn APP.main:app --reload
+
+6. ACESSAR A API
+----------------
+Endereço local:
+http://127.0.0.1:8000
+
+Documentação interativa:
+http://127.0.0.1:8000/docs
+
+Verificação do serviço:
+http://127.0.0.1:8000/api/health
+
+7. ENCERRAR O SERVIDOR
+----------------------
+Pressione CTRL + C no terminal.
+
+8. EXECUÇÕES FUTURAS
+--------------------
+Depois da primeira instalação, não é necessário criar novamente o ambiente virtual nem reinstalar as dependências, desde que ele continue disponível e o requirements.txt não tenha mudado.
+
+Basta abrir o terminal na pasta do backend, ativar o ambiente virtual e iniciar o servidor.
+
+9. APIS E FONTES DE DADOS
+-------------------------
+Open-Meteo
+https://open-meteo.com/
+Uso: consulta meteorológica e previsão do tempo.
+
+ANAC — Dados abertos
+https://www.gov.br/anac/pt-br/assuntos/dados-e-estatisticas
+Uso: dados históricos utilizados como referência para estimar tarifas aéreas.
+
+FastAPI
+https://fastapi.tiangolo.com/
+Uso: criação e documentação das rotas.
+
+Uvicorn
+https://www.uvicorn.org/
+Uso: execução do servidor.
+
+10. OBSERVAÇÕES
+---------------
+- Os preços dos voos são estimativas para apresentação.
+- Os horários dos voos são demonstrativos.
+- Os hotéis e seus preços são simulados; não representam disponibilidade real.
+- A consulta meteorológica depende de conexão com a internet.
+- O endereço 127.0.0.1 é local ao computador onde o backend está executando.
+- Para integrar o front-end em outro computador, será necessário configurar o endereço da API e, se necessário, o CORS.
