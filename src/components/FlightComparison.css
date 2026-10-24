@@ -1,0 +1,13 @@
+.route-tabs { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 28px; }
+.route-tab { padding: 7px 14px; border: 1px solid var(--line); border-radius: 20px; color: var(--ink-soft); font-size: 13px; font-weight: 600; }
+.route-tab--active { border-color: var(--navy); color: #fff; background: var(--navy); }
+.flight-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; overflow: hidden; border: 1px solid var(--line); border-radius: 6px; background: var(--line); }
+.flight-col { padding: 22px 24px; background: #fff; }
+.flight-col h3 { margin-bottom: 2px; font-size: 15px; font-weight: 600; }
+.flight-route { margin-bottom: 16px; color: var(--ink-soft); font-size: 12.5px; }
+.flight-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 0; border-top: 1px solid var(--line); font-size: 14px; }
+.flight-row:first-of-type { border-top: 0; }
+.carrier { font-weight: 600; }
+.duration { color: var(--ink-soft); font-size: 12.5px; }
+.flight-price { color: var(--navy); font-weight: 700; white-space: nowrap; }
+@media (max-width: 760px) { .flight-grid { grid-template-columns: 1fr; } }

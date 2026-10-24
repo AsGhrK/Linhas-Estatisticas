@@ -1,0 +1,8 @@
+.stats-grid { display: grid; gap: 1px; overflow: hidden; margin-top: 32px; border: 1px solid var(--line); border-radius: 6px; background: var(--line); }
+.stats-grid--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.stats-grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 26px; }
+.stat { min-width: 0; padding: 22px 20px; background: #fff; }
+.stat-number { color: var(--navy); font-family: var(--font-heading); font-size: 26px; font-weight: 700; }
+.stat-label { margin-top: 4px; color: var(--ink-soft); font-size: 12.5px; }
+@media (max-width: 760px) { .stats-grid--4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 420px) { .stats-grid--3 { grid-template-columns: 1fr; } .stat { padding: 17px; } }

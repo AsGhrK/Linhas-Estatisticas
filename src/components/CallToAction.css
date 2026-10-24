@@ -1,0 +1,6 @@
+.cta-section { padding-top: 76px; padding-bottom: 76px; }
+.cta { display: flex; align-items: center; justify-content: space-between; gap: 32px; padding: 52px; border-radius: 8px; color: #fff; background: linear-gradient(135deg, var(--navy-deep), var(--navy)); }
+.cta h2 { max-width: 420px; font-size: 26px; font-weight: 700; }
+.cta p { max-width: 420px; margin-top: 10px; color: #C7D4DD; font-size: 14.5px; }
+.cta-button { min-height: 48px; padding: 14px 30px; }
+@media (max-width: 760px) { .cta-section { padding-top: 48px; padding-bottom: 48px; } .cta { align-items: flex-start; flex-direction: column; padding: 32px; } }
