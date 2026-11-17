@@ -1,0 +1,493 @@
+{
+  "coletado_em": "2026-11-17",
+  "periodo_passagens": {
+    "inicio": "2026-01",
+    "fim": "2026-09"
+  },
+  "origem": {
+    "icao": "SBCG",
+    "cidade": "Campo Grande"
+  },
+  "meses": [
+    "jan",
+    "fev",
+    "mar",
+    "abr",
+    "mai",
+    "jun",
+    "jul",
+    "ago",
+    "set",
+    "out",
+    "nov",
+    "dez"
+  ],
+  "faixas": {
+    "preco_passagem": {
+      "min": 431.79,
+      "max": 944.58
+    },
+    "custo_hotel": null,
+    "custo_alimentacao": null,
+    "temperatura_media": null,
+    "precipitacao": null
+  },
+  "rotas": {
+    "RIO": {
+      "cidade": "Rio de Janeiro",
+      "aeroportos": [
+        "SBRJ",
+        "SBGL"
+      ],
+      "passagens": {
+        "companhias": [
+          {
+            "nome": "GOL",
+            "icao": "GLO",
+            "precos": [
+              649.08,
+              762.83,
+              944.58,
+              884.39,
+              755.46,
+              600.59,
+              548.42,
+              795.4,
+              862.93,
+              null,
+              null,
+              null
+            ],
+            "assentos": [
+              506,
+              522,
+              447,
+              258,
+              434,
+              905,
+              1019,
+              712,
+              574,
+              0,
+              0,
+              0
+            ],
+            "estatisticas": {
+              "n": 5377,
+              "linhas": 2009,
+              "media": 719.53,
+              "mediana": 612.9,
+              "desvio_padrao": 423.65,
+              "coef_variacao": 0.5888,
+              "minimo": 183.22,
+              "maximo": 3959.01,
+              "ponderado_por": "assentos"
+            }
+          },
+          {
+            "nome": "LATAM",
+            "icao": "TAM",
+            "precos": [
+              619.9,
+              689.57,
+              814.32,
+              742.47,
+              725.31,
+              729.18,
+              595.03,
+              777.89,
+              841.59,
+              null,
+              null,
+              null
+            ],
+            "assentos": [
+              1695,
+              807,
+              1197,
+              1182,
+              1102,
+              738,
+              1267,
+              775,
+              828,
+              0,
+              0,
+              0
+            ],
+            "estatisticas": {
+              "n": 9591,
+              "linhas": 3912,
+              "media": 714.27,
+              "mediana": 597.9,
+              "desvio_padrao": 441.86,
+              "coef_variacao": 0.6186,
+              "minimo": 123.7,
+              "maximo": 3994.0,
+              "ponderado_por": "assentos"
+            }
+          },
+          {
+            "nome": "Azul",
+            "icao": "AZU",
+            "precos": [
+              592.67,
+              589.53,
+              884.09,
+              845.8,
+              850.55,
+              646.09,
+              774.51,
+              819.2,
+              927.23,
+              null,
+              null,
+              null
+            ],
+            "assentos": [
+              623,
+              363,
+              394,
+              782,
+              703,
+              867,
+              700,
+              813,
+              634,
+              0,
+              0,
+              0
+            ],
+            "estatisticas": {
+              "n": 5879,
+              "linhas": 3606,
+              "media": 773.45,
+              "mediana": 629.52,
+              "desvio_padrao": 457.36,
+              "coef_variacao": 0.5913,
+              "minimo": 252.0,
+              "maximo": 4634.98,
+              "ponderado_por": "assentos"
+            }
+          }
+        ],
+        "estatisticas": {
+          "n": 20847,
+          "linhas": 9527,
+          "media": 732.32,
+          "mediana": 607.9,
+          "desvio_padrao": 442.44,
+          "coef_variacao": 0.6042,
+          "minimo": 123.7,
+          "maximo": 4634.98,
+          "ponderado_por": "assentos"
+        }
+      },
+      "clima": {
+        "temp_max": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "temp_min": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "precipitacao": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "estacao": null,
+        "periodo": "1991-2020",
+        "fonte": "INMET — Normais Climatológicas 1991–2020"
+      },
+      "hotel": {
+        "n": 0,
+        "diarias": [],
+        "diaria_media": null,
+        "diaria_mediana": null,
+        "noites": 5,
+        "custo_total": null,
+        "fonte": "Accor (all.accor.com)",
+        "coletado_em": null
+      },
+      "alimentacao": {
+        "cafe": [],
+        "almoco": [],
+        "jantar": [],
+        "n": 0,
+        "media_diaria": null,
+        "tipicas": [],
+        "fonte": "quantocustaviajar.com"
+      }
+    },
+    "SAO": {
+      "cidade": "São Paulo",
+      "aeroportos": [
+        "SBSP",
+        "SBGR"
+      ],
+      "passagens": {
+        "companhias": [
+          {
+            "nome": "GOL",
+            "icao": "GLO",
+            "precos": [
+              475.68,
+              533.82,
+              731.15,
+              614.6,
+              478.89,
+              431.79,
+              637.92,
+              648.29,
+              682.8,
+              null,
+              null,
+              null
+            ],
+            "assentos": [
+              3155,
+              1938,
+              1760,
+              1534,
+              3432,
+              3015,
+              1709,
+              2115,
+              1922,
+              0,
+              0,
+              0
+            ],
+            "estatisticas": {
+              "n": 20580,
+              "linhas": 4816,
+              "media": 558.02,
+              "mediana": 438.9,
+              "desvio_padrao": 405.13,
+              "coef_variacao": 0.726,
+              "minimo": 117.9,
+              "maximo": 3666.9,
+              "ponderado_por": "assentos"
+            }
+          },
+          {
+            "nome": "LATAM",
+            "icao": "TAM",
+            "precos": [
+              517.32,
+              635.39,
+              829.07,
+              732.04,
+              593.08,
+              544.22,
+              723.24,
+              741.65,
+              796.71,
+              null,
+              null,
+              null
+            ],
+            "assentos": [
+              4926,
+              4143,
+              4096,
+              4384,
+              4841,
+              5013,
+              4205,
+              3715,
+              3306,
+              0,
+              0,
+              0
+            ],
+            "estatisticas": {
+              "n": 38629,
+              "linhas": 10306,
+              "media": 668.3,
+              "mediana": 512.9,
+              "desvio_padrao": 486.87,
+              "coef_variacao": 0.7285,
+              "minimo": 176.13,
+              "maximo": 4161.6,
+              "ponderado_por": "assentos"
+            }
+          },
+          {
+            "nome": "Azul",
+            "icao": "AZU",
+            "precos": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ],
+            "assentos": [
+              0,
+              10,
+              16,
+              26,
+              5,
+              6,
+              10,
+              22,
+              22,
+              0,
+              0,
+              0
+            ],
+            "estatisticas": {
+              "n": 117,
+              "linhas": 91,
+              "media": 752.91,
+              "mediana": 645.26,
+              "desvio_padrao": 413.11,
+              "coef_variacao": 0.5487,
+              "minimo": 369.0,
+              "maximo": 2699.9,
+              "ponderado_por": "assentos"
+            }
+          }
+        ],
+        "estatisticas": {
+          "n": 59326,
+          "linhas": 15213,
+          "media": 630.21,
+          "mediana": 486.81,
+          "desvio_padrao": 463.03,
+          "coef_variacao": 0.7347,
+          "minimo": 117.9,
+          "maximo": 4161.6,
+          "ponderado_por": "assentos"
+        }
+      },
+      "clima": {
+        "temp_max": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "temp_min": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "precipitacao": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "estacao": "Mirante de Santana",
+        "periodo": "1991-2020",
+        "fonte": "INMET — Normais Climatológicas 1991–2020"
+      },
+      "hotel": {
+        "n": 0,
+        "diarias": [],
+        "diaria_media": null,
+        "diaria_mediana": null,
+        "noites": 5,
+        "custo_total": null,
+        "fonte": "Accor (all.accor.com)",
+        "coletado_em": null
+      },
+      "alimentacao": {
+        "cafe": [],
+        "almoco": [],
+        "jantar": [],
+        "n": 0,
+        "media_diaria": null,
+        "tipicas": [],
+        "fonte": "quantocustaviajar.com"
+      }
+    }
+  },
+  "pendencias": [
+    "alimentacao.RIO.almoco",
+    "alimentacao.RIO.cafe",
+    "alimentacao.RIO.jantar",
+    "alimentacao.RIO.tipicas",
+    "alimentacao.SAO.almoco",
+    "alimentacao.SAO.cafe",
+    "alimentacao.SAO.jantar",
+    "alimentacao.SAO.tipicas",
+    "alimentacao.coletado_em",
+    "clima.RIO.estacao",
+    "clima.RIO.precipitacao",
+    "clima.RIO.temp_max",
+    "clima.RIO.temp_min",
+    "clima.SAO.precipitacao",
+    "clima.SAO.temp_max",
+    "clima.SAO.temp_min",
+    "hoteis.RIO",
+    "hoteis.SAO",
+    "hoteis.checkin",
+    "hoteis.coletado_em"
+  ]
+}

@@ -1,139 +1,534 @@
 {
   "_aviso": "DADOS INVENTADOS. Estrutura real, números falsos. Serve para desenvolver os gráficos antes da coleta de P1 terminar. Nunca usar na apresentação.",
   "coletado_em": "2026-09-20",
-  "ano_referencia": 2025,
-  "origem": { "icao": "SBCG", "cidade": "Campo Grande" },
-
-  "faixas": {
-    "_nota": "Faixas de referência para normalizar o radar. Sem elas, normalizar entre apenas 2 cidades devolve sempre 0 e 1. P1 preenche com o mínimo e o máximo observados no conjunto inteiro (todos os meses, todas as companhias, todos os hotéis das duas rotas).",
-    "preco_passagem": { "min": 612.0, "max": 1284.0 },
-    "custo_hotel": { "min": 318.0, "max": 1140.0 },
-    "custo_alimentacao": { "min": 78.0, "max": 214.0 },
-    "temperatura_media": { "min": 14.0, "max": 34.0 },
-    "precipitacao": { "min": 28.0, "max": 168.0 }
+  "periodo_passagens": {
+    "inicio": "2026-01",
+    "fim": "2026-09"
   },
-
-  "meses": ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"],
-
+  "origem": {
+    "icao": "SBCG",
+    "cidade": "Campo Grande"
+  },
+  "meses": [
+    "jan",
+    "fev",
+    "mar",
+    "abr",
+    "mai",
+    "jun",
+    "jul",
+    "ago",
+    "set",
+    "out",
+    "nov",
+    "dez"
+  ],
+  "faixas": {
+    "preco_passagem": {
+      "min": 612.0,
+      "max": 968.4
+    },
+    "custo_hotel": {
+      "min": 318.0,
+      "max": 1140.0
+    },
+    "custo_alimentacao": {
+      "min": 94.0,
+      "max": 166.0
+    },
+    "temperatura_media": {
+      "min": 18.15,
+      "max": 26.9
+    },
+    "precipitacao": {
+      "min": 28,
+      "max": 168
+    }
+  },
   "rotas": {
-    "SBRJ": {
+    "RIO": {
       "cidade": "Rio de Janeiro",
-      "uf": "RJ",
-
+      "aeroportos": [
+        "SBRJ",
+        "SBGL"
+      ],
       "passagens": {
         "companhias": [
           {
             "nome": "GOL",
-            "classe": "economica",
-            "precos": [742.1, 698.0, null, 815.4, 779.9, 690.0, 905.3, 880.0, 712.5, 733.2, 851.0, 1120.4]
+            "icao": "GLO",
+            "precos": [
+              742.1,
+              698.0,
+              null,
+              815.4,
+              779.9,
+              690.0,
+              905.3,
+              880.0,
+              712.5,
+              null,
+              null,
+              null
+            ],
+            "assentos": [
+              205,
+              117,
+              12,
+              242,
+              373,
+              64,
+              77,
+              314,
+              88,
+              0,
+              0,
+              0
+            ],
+            "estatisticas": {
+              "n": 1480,
+              "linhas": 8,
+              "media": 793.86,
+              "mediana": 779.9,
+              "desvio_padrao": 65.62,
+              "coef_variacao": 0.0827,
+              "minimo": 690.0,
+              "maximo": 905.3,
+              "ponderado_por": "assentos"
+            }
           },
           {
             "nome": "LATAM",
-            "classe": "economica",
-            "precos": [810.0, 764.5, 731.2, 869.9, 822.0, 745.6, 968.4, 931.7, 768.0, 790.3, 903.5, 1284.0]
+            "icao": "TAM",
+            "precos": [
+              810.0,
+              764.5,
+              731.2,
+              869.9,
+              822.0,
+              745.6,
+              968.4,
+              931.7,
+              768.0,
+              null,
+              null,
+              null
+            ],
+            "assentos": [
+              227,
+              338,
+              69,
+              299,
+              149,
+              59,
+              84,
+              262,
+              254,
+              0,
+              0,
+              0
+            ],
+            "estatisticas": {
+              "n": 1741,
+              "linhas": 9,
+              "media": 827.0,
+              "mediana": 810.0,
+              "desvio_padrao": 69.48,
+              "coef_variacao": 0.084,
+              "minimo": 731.2,
+              "maximo": 968.4,
+              "ponderado_por": "assentos"
+            }
           },
           {
             "nome": "Azul",
-            "classe": "economica",
-            "precos": [689.4, 654.0, 640.8, 758.2, 726.5, 612.0, 848.0, 819.3, 671.2, 694.7, 802.1, 1042.6]
+            "icao": "AZU",
+            "precos": [
+              689.4,
+              654.0,
+              640.8,
+              758.2,
+              726.5,
+              612.0,
+              848.0,
+              819.3,
+              671.2,
+              null,
+              null,
+              null
+            ],
+            "assentos": [
+              75,
+              163,
+              86,
+              322,
+              257,
+              70,
+              329,
+              103,
+              154,
+              0,
+              0,
+              0
+            ],
+            "estatisticas": {
+              "n": 1559,
+              "linhas": 9,
+              "media": 740.12,
+              "mediana": 726.5,
+              "desvio_padrao": 74.98,
+              "coef_variacao": 0.1013,
+              "minimo": 612.0,
+              "maximo": 848.0,
+              "ponderado_por": "assentos"
+            }
           }
         ],
         "estatisticas": {
-          "n": 35,
-          "media": 812.45,
+          "n": 4780,
+          "linhas": 26,
+          "media": 788.41,
           "mediana": 779.9,
-          "desvio_padrao": 148.72,
-          "coef_variacao": 0.183,
+          "desvio_padrao": 78.96,
+          "coef_variacao": 0.1002,
           "minimo": 612.0,
-          "maximo": 1284.0
+          "maximo": 968.4,
+          "ponderado_por": "assentos"
         }
       },
-
       "clima": {
-        "temp_max": [30.1, 30.4, 29.7, 28.2, 26.8, 25.6, 25.3, 25.9, 26.1, 27.0, 28.1, 29.3],
-        "temp_min": [23.2, 23.4, 23.0, 21.8, 20.4, 19.1, 18.6, 19.0, 19.7, 20.8, 21.7, 22.6],
-        "precipitacao": [137, 130, 135, 95, 70, 55, 41, 44, 53, 86, 98, 134],
-        "fonte": "ClimaTempo — climatologia"
+        "temp_max": [
+          30.1,
+          30.4,
+          29.7,
+          28.2,
+          26.8,
+          25.6,
+          25.3,
+          25.9,
+          26.1,
+          27.0,
+          28.1,
+          29.3
+        ],
+        "temp_min": [
+          23.2,
+          23.4,
+          23.0,
+          21.8,
+          20.4,
+          19.1,
+          18.6,
+          19.0,
+          19.7,
+          20.8,
+          21.7,
+          22.6
+        ],
+        "precipitacao": [
+          137,
+          130,
+          135,
+          95,
+          70,
+          55,
+          41,
+          44,
+          53,
+          86,
+          98,
+          134
+        ],
+        "estacao": "Estação fictícia",
+        "periodo": "1991-2020",
+        "fonte": "INMET — Normais Climatológicas 1991–2020"
       },
-
       "hotel": {
         "n": 6,
-        "diarias": [412.0, 489.9, 574.0, 601.5, 728.4, 1140.0],
+        "diarias": [
+          412.0,
+          489.9,
+          574.0,
+          601.5,
+          728.4,
+          1140.0
+        ],
         "diaria_media": 657.63,
         "diaria_mediana": 587.75,
         "noites": 5,
-        "custo_total": 2938.75,
-        "fonte": "Accor"
+        "custo_total": 3288.17,
+        "fonte": "Accor (all.accor.com)",
+        "coletado_em": "2026-09-20"
       },
-
       "alimentacao": {
-        "cafe": 24.0,
-        "almoco": 48.0,
-        "jantar": 62.0,
-        "media_diaria": 134.0,
-        "tipicas": ["Feijoada", "Pão de queijo", "Açaí na tigela"],
+        "cafe": [
+          18.0,
+          24.0,
+          30.0,
+          26.0
+        ],
+        "almoco": [
+          38.0,
+          48.0,
+          58.0,
+          52.0
+        ],
+        "jantar": [
+          50.0,
+          62.0,
+          78.0,
+          66.0
+        ],
+        "n": 4,
+        "media_diaria": 137.5,
+        "tipicas": [
+          "Feijoada",
+          "Pão de queijo",
+          "Açaí na tigela"
+        ],
         "fonte": "quantocustaviajar.com"
       }
     },
-
-    "SBSP": {
+    "SAO": {
       "cidade": "São Paulo",
-      "uf": "SP",
-
+      "aeroportos": [
+        "SBSP",
+        "SBGR"
+      ],
       "passagens": {
         "companhias": [
           {
             "nome": "GOL",
-            "classe": "economica",
-            "precos": [668.0, 641.2, 630.0, 704.8, 688.5, 634.0, 792.1, 770.6, 655.3, 672.0, 745.9, 968.2]
+            "icao": "GLO",
+            "precos": [
+              668.0,
+              641.2,
+              630.0,
+              704.8,
+              688.5,
+              634.0,
+              792.1,
+              770.6,
+              655.3,
+              null,
+              null,
+              null
+            ],
+            "assentos": [
+              362,
+              361,
+              338,
+              71,
+              335,
+              339,
+              243,
+              65,
+              153,
+              0,
+              0,
+              0
+            ],
+            "estatisticas": {
+              "n": 2267,
+              "linhas": 9,
+              "media": 672.55,
+              "mediana": 655.3,
+              "desvio_padrao": 50.51,
+              "coef_variacao": 0.0751,
+              "minimo": 630.0,
+              "maximo": 792.1,
+              "ponderado_por": "assentos"
+            }
           },
           {
             "nome": "LATAM",
-            "classe": "economica",
-            "precos": [721.4, 690.0, 678.3, 756.0, 733.9, 681.5, 854.7, 826.0, 702.4, 718.8, 801.2, 1046.0]
+            "icao": "TAM",
+            "precos": [
+              721.4,
+              690.0,
+              678.3,
+              756.0,
+              733.9,
+              681.5,
+              854.7,
+              826.0,
+              702.4,
+              null,
+              null,
+              null
+            ],
+            "assentos": [
+              63,
+              325,
+              108,
+              188,
+              254,
+              113,
+              316,
+              100,
+              332,
+              0,
+              0,
+              0
+            ],
+            "estatisticas": {
+              "n": 1799,
+              "linhas": 9,
+              "media": 741.74,
+              "mediana": 721.4,
+              "desvio_padrao": 62.62,
+              "coef_variacao": 0.0844,
+              "minimo": 678.3,
+              "maximo": 854.7,
+              "ponderado_por": "assentos"
+            }
           },
           {
             "nome": "Azul",
-            "classe": "economica",
-            "precos": [634.5, 618.0, null, 671.2, 652.0, 615.4, 741.8, 726.0, 628.9, 641.7, 709.3, 894.5]
+            "icao": "AZU",
+            "precos": [
+              634.5,
+              618.0,
+              null,
+              671.2,
+              652.0,
+              615.4,
+              741.8,
+              726.0,
+              628.9,
+              null,
+              null,
+              null
+            ],
+            "assentos": [
+              197,
+              326,
+              12,
+              389,
+              132,
+              92,
+              337,
+              332,
+              367,
+              0,
+              0,
+              0
+            ],
+            "estatisticas": {
+              "n": 2172,
+              "linhas": 8,
+              "media": 668.54,
+              "mediana": 652.0,
+              "desvio_padrao": 47.22,
+              "coef_variacao": 0.0706,
+              "minimo": 615.4,
+              "maximo": 741.8,
+              "ponderado_por": "assentos"
+            }
           }
         ],
         "estatisticas": {
-          "n": 35,
-          "media": 722.31,
-          "mediana": 704.8,
-          "desvio_padrao": 101.44,
-          "coef_variacao": 0.14,
+          "n": 6238,
+          "linhas": 26,
+          "media": 691.11,
+          "mediana": 678.3,
+          "desvio_padrao": 62.25,
+          "coef_variacao": 0.0901,
           "minimo": 615.4,
-          "maximo": 1046.0
+          "maximo": 854.7,
+          "ponderado_por": "assentos"
         }
       },
-
       "clima": {
-        "temp_max": [27.8, 28.1, 27.4, 25.9, 23.6, 22.8, 22.9, 24.3, 24.8, 25.7, 26.5, 27.2],
-        "temp_min": [19.1, 19.3, 18.8, 17.2, 14.8, 13.6, 13.4, 14.2, 15.3, 16.6, 17.5, 18.4],
-        "precipitacao": [168, 152, 131, 74, 58, 45, 38, 28, 72, 105, 122, 158],
-        "fonte": "ClimaTempo — climatologia"
+        "temp_max": [
+          27.8,
+          28.1,
+          27.4,
+          25.9,
+          23.6,
+          22.8,
+          22.9,
+          24.3,
+          24.8,
+          25.7,
+          26.5,
+          27.2
+        ],
+        "temp_min": [
+          19.1,
+          19.3,
+          18.8,
+          17.2,
+          14.8,
+          13.6,
+          13.4,
+          14.2,
+          15.3,
+          16.6,
+          17.5,
+          18.4
+        ],
+        "precipitacao": [
+          168,
+          152,
+          131,
+          74,
+          58,
+          45,
+          38,
+          28,
+          72,
+          105,
+          122,
+          158
+        ],
+        "estacao": "Estação fictícia",
+        "periodo": "1991-2020",
+        "fonte": "INMET — Normais Climatológicas 1991–2020"
       },
-
       "hotel": {
         "n": 6,
-        "diarias": [318.0, 366.5, 421.0, 468.7, 552.3, 689.0],
+        "diarias": [
+          318.0,
+          366.5,
+          421.0,
+          468.7,
+          552.3,
+          689.0
+        ],
         "diaria_media": 469.25,
         "diaria_mediana": 444.85,
         "noites": 5,
-        "custo_total": 2224.25,
-        "fonte": "Accor"
+        "custo_total": 2346.25,
+        "fonte": "Accor (all.accor.com)",
+        "coletado_em": "2026-09-20"
       },
-
       "alimentacao": {
-        "cafe": 21.0,
-        "almoco": 42.0,
-        "jantar": 55.0,
-        "media_diaria": 118.0,
-        "tipicas": ["Pastel de feira", "Sanduíche de mortadela", "Virado à paulista"],
+        "cafe": [
+          16.0,
+          21.0,
+          27.0
+        ],
+        "almoco": [
+          34.0,
+          42.0,
+          50.0
+        ],
+        "jantar": [
+          44.0,
+          55.0,
+          70.0
+        ],
+        "n": 3,
+        "media_diaria": 119.67,
+        "tipicas": [
+          "Pastel de feira",
+          "Sanduíche de mortadela",
+          "Virado à paulista"
+        ],
         "fonte": "quantocustaviajar.com"
       }
     }
-  }
+  },
+  "pendencias": []
 }
