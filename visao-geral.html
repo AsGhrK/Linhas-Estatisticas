@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Visão Geral — Linhas Estatísticas</title>
+  <meta name="description" content="O radar das duas cidades nos cinco eixos e o score composto, com os pesos de passagem, hospedagem, alimentação e clima que você escolhe.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;600;800&family=Atkinson+Hyperlegible+Mono:wght@400;600&display=swap">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/animacoes.css">
+</head>
+<body>
+  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="cabecalho-site">
+    <div class="wrap cabecalho-linha">
+      <a class="marca" href="index.html">Linhas Estatísticas</a>
+      <nav class="rota" aria-label="Telas da apresentação">
+        <ol>
+          <li><a href="index.html">Principal</a></li>
+          <li><a href="dados-busca.html">Dados da Busca</a></li>
+          <li><a href="dados-precos.html">Dados e Preços</a></li>
+          <li><a href="detalhes.html">Detalhes</a></li>
+          <li><a href="clima.html">Clima</a></li>
+          <li><a href="hotel.html">Hotel</a></li>
+          <li><a href="alimentacao.html">Alimentação</a></li>
+          <li><a href="visao-geral.html" aria-current="page">Visão Geral</a></li>
+        </ol>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo" tabindex="-1">
+    <div class="tela">
+      <div class="wrap">
+        <h1>Qual viagem combina mais com o que você prioriza?</h1>
+        <p>Não existe a melhor viagem em absoluto. O radar mostra como cada cidade se sai em cada parte; os pesos dizem quanto cada parte importa para você, e o score composto muda com eles.</p>
+
+        <section class="tela-secao" aria-labelledby="titulo-radar" data-revelar>
+          <h2 id="titulo-radar">Cada cidade em cada eixo</h2>
+          <p>O radar mostra os cinco eixos sem peso. Os pesos entram só no score composto, então mexer neles muda a conclusão e não o desenho.</p>
+          <figure class="grafico">
+            <div class="grafico-canvas grafico-canvas-radar" data-grafico><canvas id="grafico-radar" role="img" aria-label="Radar com os cinco eixos, de zero a um, para Rio de Janeiro e São Paulo. Quanto mais longe do centro, melhor."></canvas></div>
+            <figcaption class="grafico-fonte">Zero é o pior valor do conjunto e um é o melhor. Passagem: ANAC, de <span data-campo="periodo_passagens.inicio" data-formato="periodo"></span> a <span data-campo="periodo_passagens.fim" data-formato="periodo"></span>, média ponderada por assento vendido. Clima: <span data-campo="rotas.RIO.clima.fonte"></span>. Hotel: <span data-campo="rotas.RIO.hotel.fonte"></span>. Alimentação: <span data-campo="rotas.RIO.alimentacao.fonte"></span>.</figcaption>
+          </figure>
+        </section>
+
+        <section class="tela-secao" aria-labelledby="titulo-pesos">
+          <h2 id="titulo-pesos">Quanto pesa cada parte</h2>
+          <p>Arraste o controle ou use as setas do teclado. A porcentagem é o peso efetivo: o peso dividido pela soma dos quatro. O peso do clima se divide igualmente entre conforto térmico e tempo seco.</p>
+          <div class="pesos" data-pesos role="group" aria-labelledby="titulo-pesos">
+            <div class="peso">
+              <label for="peso-passagem">Passagem</label>
+              <input id="peso-passagem" name="passagem" type="range" min="0" max="100" step="5" value="25" aria-describedby="efetivo-passagem">
+              <output id="efetivo-passagem" for="peso-passagem">—</output>
+            </div>
+            <div class="peso">
+              <label for="peso-hospedagem">Hospedagem</label>
+              <input id="peso-hospedagem" name="hospedagem" type="range" min="0" max="100" step="5" value="25" aria-describedby="efetivo-hospedagem">
+              <output id="efetivo-hospedagem" for="peso-hospedagem">—</output>
+            </div>
+            <div class="peso">
+              <label for="peso-alimentacao">Alimentação</label>
+              <input id="peso-alimentacao" name="alimentacao" type="range" min="0" max="100" step="5" value="25" aria-describedby="efetivo-alimentacao">
+              <output id="efetivo-alimentacao" for="peso-alimentacao">—</output>
+            </div>
+            <div class="peso">
+              <label for="peso-clima">Clima</label>
+              <input id="peso-clima" name="clima" type="range" min="0" max="100" step="5" value="25" aria-describedby="efetivo-clima">
+              <output id="efetivo-clima" for="peso-clima">—</output>
+            </div>
+            <div class="pesos-rodape">
+              <p class="pesos-soma">Soma dos pesos: <span id="pesos-soma">—</span></p>
+              <button class="botao botao-contorno" type="button" id="pesos-iguais">Pesos iguais</button>
+            </div>
+          </div>
+          <p class="conclusao" id="conclusao" aria-live="polite">A conclusão aparece quando os dados carregarem.</p>
+        </section>
+
+        <section class="tela-secao" aria-labelledby="titulo-metodo">
+          <h2 id="titulo-metodo">Como o radar é calculado</h2>
+          <ul class="metodo">
+            <li>Cada eixo é normalizado pelo mínimo e pelo máximo do conjunto: o pior valor vira zero e o melhor vira um. A passagem entra pela tarifa média ponderada pelos assentos vendidos.</li>
+            <li>Em passagem, hospedagem, alimentação e chuva, menor é melhor, então a escala é invertida: a cidade mais barata ou mais seca fica mais longe do centro.</li>
+            <li>Conforto térmico não usa mínimo e máximo. Ele mede a distância da temperatura média até uma temperatura ideal declarada no relatório, e tanto o calor quanto o frio demais pontuam pouco.</li>
+            <li>O score composto é a média ponderada dos eixos com os pesos acima. Eixo sem dado coletado fica de fora do score, e o peso dele sai da soma; a conclusão diz quais eixos ficaram de fora.</li>
+          </ul>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="rodape-site">
+    <div class="wrap">
+      <p><span class="marca">Linhas Estatísticas</span></p>
+      <p>Projeto Final de Estatística — TADS, IFMS Nova Andradina</p>
+      <p>Equipe: Filipe Rioske, Victor Solique, Davi Casari e João Pegarare</p>
+      <p>Fontes: ANAC, INMET, Accor, quantocustaviajar.com</p>
+      <p><a href="docs/backlog.html">Plano da equipe</a></p>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js" integrity="sha512-CQBWl4fJHWbryGE+Pc7UAxWMUMNMWzWxF4SQo9CgkJIN1kx6djDQZjh3Y8SZ1d+6I+1zze6Z7kHXO7q3UyZAWw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="js/normalizar.js"></script>
+  <script src="js/reveal.js"></script>
+  <script src="js/graficos.js"></script>
+  <script src="js/tabelas.js"></script>
+  <script src="js/pesos.js"></script>
+</body>
+</html>

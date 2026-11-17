@@ -260,3 +260,30 @@ a.cartao:hover { border-color: var(--aerovia); }
 
 /* Gráfico sem dado (ex.: clima ainda não coletado). */
 .grafico-vazio { display: flex; align-items: center; justify-content: center; height: 100%; padding: 0 16px; text-align: center; color: var(--mute); font-size: 16px; max-width: none; }
+
+/* Visão Geral: radar, pesos e conclusão */
+.grafico-canvas-radar { height: 460px; }
+.pesos { margin-top: 16px; padding: 4px 20px 20px; max-width: 760px; background: var(--surface); border: 1px solid var(--rule); border-radius: var(--raio-painel); }
+.peso {
+  display: grid; grid-template-columns: 11rem minmax(0, 1fr) 4.5rem; grid-template-areas: "rotulo barra saida";
+  align-items: center; gap: 16px; min-height: 64px; border-bottom: 1px solid var(--rule);
+}
+.peso label { grid-area: rotulo; font-weight: 600; }
+.peso input[type="range"] { grid-area: barra; width: 100%; height: 44px; margin: 0; accent-color: var(--aerovia); cursor: pointer; }
+.peso output { grid-area: saida; text-align: right; font-weight: 600; font-variant-numeric: tabular-nums; }
+.pesos-rodape { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; margin-top: 16px; }
+.pesos-soma { font-size: 16px; line-height: 1.45; color: var(--mute); }
+.pesos-soma span { color: var(--ink); font-weight: 600; font-variant-numeric: tabular-nums; }
+.conclusao { margin-top: 24px; padding: 4px 0 4px 20px; border-left: 4px solid var(--aerovia); font-size: 25px; font-weight: 600; line-height: 1.35; }
+.conclusao-nota { display: block; margin-top: 8px; font-size: 18px; font-weight: 400; line-height: 1.45; color: var(--mute); }
+.metodo { margin-top: 12px; padding-left: 1.2em; }
+.metodo li + li { margin-top: 8px; }
+
+@media (max-width: 760px) {
+  .grafico-canvas-radar { height: 300px; }
+  .pesos { padding: 4px 16px 16px; }
+  .peso { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "rotulo saida" "barra barra"; gap: 0 12px; padding-top: 10px; }
+  .pesos-rodape .botao { width: 100%; }
+  .conclusao { font-size: 22px; padding-left: 16px; }
+  .conclusao-nota { font-size: 16px; }
+}
