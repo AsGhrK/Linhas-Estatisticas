@@ -87,7 +87,9 @@
     'precipitacao'
   ];
 
+  /* Faixa null (sem dado coletado para o eixo) ou valor null: eixo sem nota. */
   function pontuarEixo(eixo, valor, faixa) {
+    if (!faixa) return null;
     var z = normalizar(valor, faixa.min, faixa.max);
     if (z === null) return null;
     return MENOR_E_MELHOR.indexOf(eixo) !== -1 ? 1 - z : z;
@@ -115,39 +117,58 @@
     'Tempo seco'
   ];
 
-  function perfilRadar(dados, sigla) {
-    var rota = dados.rotas[sigla];
+  function algumNulo(lista) {
+    return lista.some(function (v) {
+      return v === null || v === undefined || Number.isNaN(v);
+    });
+  }
+
+  /* Eixos na ordem de EIXOS_RADAR. Eixo sem dado devolve null.
+     Passagem usa a média ponderada por assentos já calculada no pipeline. */
+  function perfilRadar(dados, chave) {
+    var rota = dados.rotas[chave];
     var f = dados.faixas;
+    var c = rota.clima;
 
-    var precos = rota.passagens.companhias.reduce(function (acc, c) {
-      return acc.concat(c.precos);
-    }, []);
+    var conforto = null;
+    if (!algumNulo(c.temp_max) && !algumNulo(c.temp_min)) {
+      conforto = confortoTermico(media(c.temp_max.map(function (mx, i) {
+        return (mx + c.temp_min[i]) / 2;
+      })));
+    }
 
-    var tempMedia = media(rota.clima.temp_max.map(function (mx, i) {
-      return (mx + rota.clima.temp_min[i]) / 2;
-    }));
+    var chuva = algumNulo(c.precipitacao) ? null : media(c.precipitacao);
 
     return [
-      pontuarEixo('preco_passagem', media(precos), f.preco_passagem),
+      pontuarEixo('preco_passagem', rota.passagens.estatisticas.media, f.preco_passagem),
       pontuarEixo('custo_hotel', rota.hotel.diaria_mediana, f.custo_hotel),
       pontuarEixo('custo_alimentacao', rota.alimentacao.media_diaria, f.custo_alimentacao),
-      confortoTermico(tempMedia),
-      pontuarEixo('precipitacao', media(rota.clima.precipitacao), f.precipitacao)
+      conforto,
+      pontuarEixo('precipitacao', chuva, f.precipitacao)
     ];
   }
 
-  /* Score composto. Pesos somam 1 — se não somarem, normaliza sozinho.
-     Deixar os pesos visíveis na interface é o que torna o resultado honesto:
-     "melhor viagem" é função da preferência declarada, não fato objetivo. */
+  /* Pesos por dimensão (4) viram pesos por eixo (5): o clima vale um eixo
+     de conforto térmico e um de tempo seco, metade para cada. */
+  function expandirPesos(p) {
+    return [p.passagem, p.hospedagem, p.alimentacao, p.clima / 2, p.clima / 2];
+  }
+
+  /* Média ponderada dos eixos com nota. Eixo null sai da conta e o peso dele
+     sai da soma, para dado ausente não derrubar o score. Soma de pesos 0
+     (ou nenhum eixo com nota) devolve null. "Melhor viagem" é função da
+     preferência declarada, por isso os pesos ficam visíveis na interface. */
   function scoreComposto(pontos, pesos) {
-    var p = pesos || EIXOS_RADAR.map(function () { return 1 / EIXOS_RADAR.length; });
-    var somaPesos = p.reduce(function (a, b) { return a + b; }, 0);
+    var p = pesos || EIXOS_RADAR.map(function () { return 1; });
+    var soma = 0;
     var total = 0;
     for (var i = 0; i < pontos.length; i++) {
-      if (pontos[i] === null) continue;
-      total += pontos[i] * (p[i] / somaPesos);
+      if (pontos[i] === null || pontos[i] === undefined) continue;
+      soma += p[i];
+      total += pontos[i] * p[i];
     }
-    return total;
+    if (soma === 0) return null;
+    return total / soma;
   }
 
   /* ---------- formatação ---------- */
@@ -160,6 +181,15 @@
       minimumFractionDigits: casas === undefined ? 1 : casas,
       maximumFractionDigits: casas === undefined ? 1 : casas
     });
+  }
+
+  function porcentagem(fracao, casas) {
+    if (fracao === null || fracao === undefined) return '—';
+    var n = casas === undefined ? 1 : casas;
+    return (fracao * 100).toLocaleString('pt-BR', {
+      minimumFractionDigits: n,
+      maximumFractionDigits: n
+    }) + '%';
   }
 
   LE.stats = {
@@ -175,9 +205,11 @@
     confortoTermico: confortoTermico,
     perfilRadar: perfilRadar,
     scoreComposto: scoreComposto,
+    expandirPesos: expandirPesos,
     MENOR_E_MELHOR: MENOR_E_MELHOR,
     EIXOS_RADAR: EIXOS_RADAR,
     moeda: moeda,
-    numero: numero
+    numero: numero,
+    porcentagem: porcentagem
   };
 })(window);
