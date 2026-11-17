@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Alimentação — Linhas Estatísticas</title>
+  <meta name="description" content="Quanto custa café, almoço e jantar em Rio de Janeiro e São Paulo, e as comidas típicas de cada cidade.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;600;800&family=Atkinson+Hyperlegible+Mono:wght@400;600&display=swap">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/animacoes.css">
+</head>
+<body>
+  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="cabecalho-site">
+    <div class="wrap cabecalho-linha">
+      <a class="marca" href="index.html">Linhas Estatísticas</a>
+      <nav class="rota" aria-label="Telas da apresentação">
+        <ol>
+          <li><a href="index.html">Principal</a></li>
+          <li><a href="dados-busca.html">Dados da Busca</a></li>
+          <li><a href="dados-precos.html">Dados e Preços</a></li>
+          <li><a href="detalhes.html">Detalhes</a></li>
+          <li><a href="clima.html">Clima</a></li>
+          <li><a href="hotel.html">Hotel</a></li>
+          <li><a href="alimentacao.html" aria-current="page">Alimentação</a></li>
+          <li><a href="visao-geral.html">Visão Geral</a></li>
+        </ol>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo" tabindex="-1">
+    <div class="tela">
+      <div class="wrap">
+        <h1>Quanto custa comer em cada cidade?</h1>
+        <p>O preço médio de cada refeição, o gasto de um dia inteiro e as comidas típicas de cada lugar.</p>
+        <section class="tela-secao" id="rota-RIO" aria-labelledby="titulo-RIO" data-revelar>
+          <h2 id="titulo-RIO">Rio de Janeiro</h2>
+          <dl class="resumo">
+            <div><dt>Café da manhã</dt><dd data-campo="rotas.RIO.alimentacao.medias.cafe" data-formato="moeda"></dd></div>
+            <div><dt>Almoço</dt><dd data-campo="rotas.RIO.alimentacao.medias.almoco" data-formato="moeda"></dd></div>
+            <div><dt>Jantar</dt><dd data-campo="rotas.RIO.alimentacao.medias.jantar" data-formato="moeda"></dd></div>
+            <div><dt>Média diária</dt><dd data-campo="rotas.RIO.alimentacao.media_diaria" data-formato="moeda"></dd></div>
+            <div><dt>Preços coletados por refeição (n)</dt><dd data-campo="rotas.RIO.alimentacao.n" data-formato="inteiro"></dd></div>
+          </dl>
+          <h3>O que se come</h3>
+          <ul class="lista-dados" data-lista="rotas.RIO.alimentacao.tipicas" data-vazio="Ainda não coletado.">
+            <template><li data-campo="."></li></template>
+          </ul>
+          <p class="grafico-fonte">Fonte: <span data-campo="rotas.RIO.alimentacao.fonte"></span>. A média diária soma as médias de café, almoço e jantar.</p>
+        </section>
+        <section class="tela-secao" id="rota-SAO" aria-labelledby="titulo-SAO" data-revelar>
+          <h2 id="titulo-SAO">São Paulo</h2>
+          <dl class="resumo">
+            <div><dt>Café da manhã</dt><dd data-campo="rotas.SAO.alimentacao.medias.cafe" data-formato="moeda"></dd></div>
+            <div><dt>Almoço</dt><dd data-campo="rotas.SAO.alimentacao.medias.almoco" data-formato="moeda"></dd></div>
+            <div><dt>Jantar</dt><dd data-campo="rotas.SAO.alimentacao.medias.jantar" data-formato="moeda"></dd></div>
+            <div><dt>Média diária</dt><dd data-campo="rotas.SAO.alimentacao.media_diaria" data-formato="moeda"></dd></div>
+            <div><dt>Preços coletados por refeição (n)</dt><dd data-campo="rotas.SAO.alimentacao.n" data-formato="inteiro"></dd></div>
+          </dl>
+          <h3>O que se come</h3>
+          <ul class="lista-dados" data-lista="rotas.SAO.alimentacao.tipicas" data-vazio="Ainda não coletado.">
+            <template><li data-campo="."></li></template>
+          </ul>
+          <p class="grafico-fonte">Fonte: <span data-campo="rotas.SAO.alimentacao.fonte"></span>. A média diária soma as médias de café, almoço e jantar.</p>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="rodape-site">
+    <div class="wrap">
+      <p><span class="marca">Linhas Estatísticas</span></p>
+      <p>Projeto Final de Estatística — TADS, IFMS Nova Andradina</p>
+      <p>Equipe: Filipe Rioske, Victor Solique, Davi Casari e João Pegarare</p>
+      <p>Fontes: ANAC, INMET, Accor, quantocustaviajar.com</p>
+      <p><a href="docs/backlog.html">Plano da equipe</a></p>
+    </div>
+  </footer>
+
+  <script src="js/normalizar.js"></script>
+  <script src="js/reveal.js"></script>
+  <script src="js/graficos.js"></script>
+  <script src="js/tabelas.js"></script>
+</body>
+</html>

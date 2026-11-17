@@ -5,9 +5,8 @@
 (function () {
   'use strict';
 
-  var VALIDOS = { RIO: true, SAO: true };
   var destino = new URLSearchParams(window.location.search).get('destino');
-  if (!destino || !VALIDOS[destino]) return;
+  if (destino !== 'RIO' && destino !== 'SAO') return;
 
   var secao = document.getElementById('rota-' + destino);
   if (secao) secao.classList.add('rota-destacada');

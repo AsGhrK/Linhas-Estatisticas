@@ -42,22 +42,22 @@
           <h2 id="titulo-rio">Rio de Janeiro</h2>
           <figure class="grafico">
             <div class="grafico-canvas" data-grafico><canvas id="grafico-precos-rio" role="img" aria-label="Tarifa média por mês e por companhia, Campo Grande para Rio de Janeiro"></canvas></div>
-            <figcaption class="grafico-fonte">Fonte: ANAC, microdados de tarifas aéreas comercializadas. Período: <span data-campo="periodo_passagens.inicio"></span> a <span data-campo="periodo_passagens.fim"></span>. Média ponderada por assento vendido.</figcaption>
+            <figcaption class="grafico-fonte">Fonte: ANAC, microdados de tarifas aéreas comercializadas. Período: <span data-campo="periodo_passagens.inicio" data-formato="periodo"></span> a <span data-campo="periodo_passagens.fim" data-formato="periodo"></span>. Média ponderada por assento vendido.</figcaption>
           </figure>
           <div class="resumo-preco">
-            <p>Mês mais caro: <strong data-campo="rotas.RIO.passagens.mes_mais_caro.mes"></strong>, com média de <strong data-campo="rotas.RIO.passagens.mes_mais_caro.media" data-formato="moeda"></strong>.</p>
-            <p>Mês mais barato: <strong data-campo="rotas.RIO.passagens.mes_mais_barato.mes"></strong>, com média de <strong data-campo="rotas.RIO.passagens.mes_mais_barato.media" data-formato="moeda"></strong>.</p>
+            <p>Mês mais caro: <strong data-campo="rotas.RIO.passagens.mes_mais_caro.mes" data-formato="mes"></strong>, com média de <strong data-campo="rotas.RIO.passagens.mes_mais_caro.media" data-formato="moeda"></strong>.</p>
+            <p>Mês mais barato: <strong data-campo="rotas.RIO.passagens.mes_mais_barato.mes" data-formato="mes"></strong>, com média de <strong data-campo="rotas.RIO.passagens.mes_mais_barato.media" data-formato="moeda"></strong>.</p>
           </div>
         </section>
         <section class="tela-secao" aria-labelledby="titulo-sao" data-revelar>
           <h2 id="titulo-sao">São Paulo</h2>
           <figure class="grafico">
             <div class="grafico-canvas" data-grafico><canvas id="grafico-precos-sao" role="img" aria-label="Tarifa média por mês e por companhia, Campo Grande para São Paulo"></canvas></div>
-            <figcaption class="grafico-fonte">Fonte: ANAC, microdados de tarifas aéreas comercializadas. Período: <span data-campo="periodo_passagens.inicio"></span> a <span data-campo="periodo_passagens.fim"></span>. Média ponderada por assento vendido.</figcaption>
+            <figcaption class="grafico-fonte">Fonte: ANAC, microdados de tarifas aéreas comercializadas. Período: <span data-campo="periodo_passagens.inicio" data-formato="periodo"></span> a <span data-campo="periodo_passagens.fim" data-formato="periodo"></span>. Média ponderada por assento vendido.</figcaption>
           </figure>
           <div class="resumo-preco">
-            <p>Mês mais caro: <strong data-campo="rotas.SAO.passagens.mes_mais_caro.mes"></strong>, com média de <strong data-campo="rotas.SAO.passagens.mes_mais_caro.media" data-formato="moeda"></strong>.</p>
-            <p>Mês mais barato: <strong data-campo="rotas.SAO.passagens.mes_mais_barato.mes"></strong>, com média de <strong data-campo="rotas.SAO.passagens.mes_mais_barato.media" data-formato="moeda"></strong>.</p>
+            <p>Mês mais caro: <strong data-campo="rotas.SAO.passagens.mes_mais_caro.mes" data-formato="mes"></strong>, com média de <strong data-campo="rotas.SAO.passagens.mes_mais_caro.media" data-formato="moeda"></strong>.</p>
+            <p>Mês mais barato: <strong data-campo="rotas.SAO.passagens.mes_mais_barato.mes" data-formato="mes"></strong>, com média de <strong data-campo="rotas.SAO.passagens.mes_mais_barato.media" data-formato="moeda"></strong>.</p>
           </div>
         </section>
         <p class="nota nota-meses">Meses sem ponto na linha não têm assentos suficientes no período (menos de trinta) ou ainda não foram publicados pela ANAC.</p>

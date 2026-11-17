@@ -142,7 +142,25 @@ a.cartao:hover { border-color: var(--aerovia); }
 .resumo-preco { margin-top: 12px; display: grid; gap: 4px; max-width: 68ch; }
 .nota-meses { margin-top: 32px; max-width: 68ch; }
 
+/* Detalhes, hotel e alimentação */
+.cartoes { margin-top: 32px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.cartoes .cartao h2 { margin-top: 0; font-size: 25px; }
+.cartoes .cartao p + p { margin-top: 8px; }
+.cartoes .cartao-resumo { color: var(--mute); font-size: 18px; }
+.cartoes .cartao-resumo strong { color: var(--ink); font-weight: 600; }
+.lista-dados { margin-top: 16px; list-style: none; background: var(--surface); border: 1px solid var(--rule); border-radius: var(--raio-painel); max-width: none; }
+.lista-dados li { display: flex; justify-content: space-between; gap: 16px; padding: 10px 14px; border-bottom: 1px solid var(--rule); max-width: none; }
+.lista-dados li:last-of-type { border-bottom: 0; }
+.lista-dados [data-num] { font-variant-numeric: tabular-nums; text-align: right; }
+.lista-dados .lista-vazia { color: var(--mute); }
+.tela-secao > h3 { margin-top: 24px; }
+.resumo { margin-top: 16px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+.resumo > div { padding: 12px 14px; background: var(--surface); border: 1px solid var(--rule); border-radius: var(--raio-painel); }
+.resumo dt { font-size: 16px; line-height: 1.45; color: var(--mute); }
+.resumo dd { font-size: 25px; font-weight: 600; font-variant-numeric: tabular-nums; }
+
 @media (max-width: 760px) {
+  .cartoes { grid-template-columns: minmax(0, 1fr); }
   .cabecalho-linha { flex-direction: column; align-items: flex-start; gap: 0; padding-top: 12px; }
   .rota { width: 100%; }
   .rota ol { justify-content: flex-start; gap: 16px; }
