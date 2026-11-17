@@ -1,0 +1,26 @@
+.search-wrap { position: relative; z-index: 5; margin-top: -52px; }
+.search-card {
+  position: relative;
+  padding: 26px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 0 18px 40px -22px rgba(8,40,64,.35);
+}
+.search-title { margin-bottom: 16px; color: var(--ink-soft); font-size: 13px; font-weight: 600; }
+.search-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)) auto; gap: 12px; }
+.field { min-width: 0; padding: 11px 12px; border: 1px solid var(--line); border-radius: 4px; }
+.field label { display: block; margin-bottom: 3px; color: var(--ink-soft); font-size: 11px; }
+.field input, .field select { width: 100%; border: 0; outline: 0; color: var(--ink); background: transparent; font: inherit; font-size: 14px; }
+.field input:focus-visible, .field select:focus-visible { outline: 2px solid var(--sky); outline-offset: 3px; border-radius: 2px; }
+.field:focus-within { border-color: var(--sky); }
+.field select { cursor: pointer; }
+.btn-primary { display: inline-flex; align-items: center; justify-content: center; border: 0; border-radius: 4px; padding: 0 26px; color: #fff; background: var(--coral); font-size: 14px; font-weight: 600; cursor: pointer; white-space: nowrap; transition: background-color .15s ease, transform .15s ease; }
+.btn-primary:hover { background: #d6663c; }
+.btn-primary:active { transform: translateY(1px); }
+.btn-primary:focus-visible { outline: 3px solid var(--sky); outline-offset: 3px; }
+.search-feedback { display: grid; gap: 4px; margin-top: 18px; padding: 14px 16px; border-left: 3px solid var(--sky); background: #F1F7FC; font-size: 13px; }
+.search-feedback small { color: var(--ink-soft); }
+@media (max-width: 900px) { .search-row { grid-template-columns: repeat(2, minmax(0, 1fr)); } .search-button { min-height: 46px; grid-column: 1 / -1; } }
+@media (max-width: 760px) { .search-wrap { margin-top: 24px; } }
+@media (max-width: 480px) { .search-card { padding: 18px; } .search-row { grid-template-columns: 1fr; } .search-button { grid-column: auto; } }

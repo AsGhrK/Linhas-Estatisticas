@@ -1,0 +1,12 @@
+.overview-grid { display: grid; grid-template-columns: .85fr 1.15fr; align-items: center; gap: 48px; }
+.overview-grid .section-head { margin-bottom: 0; }
+.legend { display: flex; flex-wrap: wrap; gap: 22px; margin-top: 20px; font-size: 13px; }
+.legend span { display: inline-flex; align-items: center; gap: 7px; color: var(--ink-soft); }
+.legend-swatch { width: 10px; height: 10px; border-radius: 50%; }
+.legend-swatch--sp { background: var(--sky); }
+.legend-swatch--rj { background: var(--coral); }
+.checklist { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 26px; }
+.checklist div { padding: 13px 16px; border: 1px solid var(--line); border-radius: 4px; background: #fff; font-size: 13.5px; font-weight: 500; }
+.radar-chart { display: block; width: 100%; max-height: 360px; }
+@media (max-width: 760px) { .overview-grid { grid-template-columns: 1fr; gap: 28px; } .radar-chart { max-width: 480px; justify-self: center; } }
+@media (max-width: 420px) { .checklist { grid-template-columns: 1fr; } }
