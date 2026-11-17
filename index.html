@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Linhas Estatísticas</title>
+  <meta name="description" content="Campo Grande para o Rio ou para São Paulo? Uma comparação de passagem, clima, hotel e alimentação com dados da ANAC, do INMET e de outras fontes.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;600;800&family=Atkinson+Hyperlegible+Mono:wght@400;600&display=swap">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/animacoes.css">
+</head>
+<body>
+  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="cabecalho-site">
+    <div class="wrap cabecalho-linha">
+      <a class="marca" href="index.html">Linhas Estatísticas</a>
+      <nav class="rota" aria-label="Telas da apresentação">
+        <ol>
+          <li><a href="index.html" aria-current="page">Principal</a></li>
+          <li><a href="dados-busca.html">Dados da Busca</a></li>
+          <li><a href="dados-precos.html">Dados e Preços</a></li>
+          <li><a href="detalhes.html">Detalhes</a></li>
+          <li><a href="clima.html">Clima</a></li>
+          <li><a href="hotel.html">Hotel</a></li>
+          <li><a href="alimentacao.html">Alimentação</a></li>
+          <li><a href="visao-geral.html">Visão Geral</a></li>
+        </ol>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo" tabindex="-1">
+    <section class="hero" aria-labelledby="titulo-hero">
+      <svg class="hero-quadricula" aria-hidden="true" focusable="false">
+        <defs>
+          <pattern id="quadricula" width="96" height="96" patternUnits="userSpaceOnUse">
+            <path d="M96 0H0V96"/>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#quadricula)"/>
+      </svg>
+
+      <div class="wrap hero-grade">
+        <div class="hero-texto">
+          <h1 id="titulo-hero">Campo Grande para o Rio ou para São Paulo?</h1>
+          <p>A comparação junta as tarifas da ANAC, ponderadas pelos assentos vendidos, a climatologia, os hotéis e a alimentação de cada cidade. Quanto cada parte pesa é escolha sua.</p>
+        </div>
+
+        <svg class="rota-hero" viewBox="0 0 560 380" role="img" aria-labelledby="rota-hero-titulo">
+          <title id="rota-hero-titulo">Rota aérea de Campo Grande (SBCG) que se divide em duas: uma para o Rio de Janeiro (SBRJ e SBGL) e outra para São Paulo (SBSP e SBGR). Desenho esquemático, fora de escala.</title>
+          <path class="aerovia" data-desenhar pathLength="1" d="M60 200 L250 214 L500 116"/>
+          <path class="aerovia" data-desenhar pathLength="1" d="M60 200 L250 214 L440 296"/>
+          <path class="fixo" d="M250 202 L261 221 L239 221 Z"/>
+          <circle class="aeroporto" cx="60" cy="200" r="10"/>
+          <circle class="aeroporto" cx="500" cy="116" r="10"/>
+          <circle class="aeroporto" cx="440" cy="296" r="10"/>
+          <text class="codigo" x="40" y="172">SBCG</text>
+          <text class="cidade" x="40" y="242">Campo Grande</text>
+          <text class="cidade" x="520" y="56" text-anchor="end">Rio de Janeiro</text>
+          <text class="codigo" x="520" y="88" text-anchor="end">SBRJ / SBGL</text>
+          <text class="codigo" x="440" y="338" text-anchor="middle">SBSP / SBGR</text>
+          <text class="cidade" x="440" y="366" text-anchor="middle">São Paulo</text>
+        </svg>
+      </div>
+    </section>
+
+    <div class="wrap busca" id="busca">
+      <form class="cartao cartao-busca busca-form" action="dados-busca.html" method="get" aria-label="Escolher o destino">
+        <div class="campo">
+          <label for="origem">Origem</label>
+          <input id="origem" type="text" value="Campo Grande (SBCG)" readonly>
+        </div>
+        <div class="campo">
+          <label for="destino">Destino</label>
+          <select id="destino" name="destino">
+            <option value="RIO">Rio de Janeiro (SBRJ / SBGL)</option>
+            <option value="SAO">São Paulo (SBSP / SBGR)</option>
+          </select>
+        </div>
+        <button class="botao" type="submit">Ver a comparação</button>
+      </form>
+    </div>
+
+    <section class="wrap secao-telas" aria-labelledby="titulo-telas" data-revelar>
+      <h2 id="titulo-telas">O que a apresentação mostra</h2>
+      <p>Cada tela responde a uma pergunta. A ordem abaixo é a ordem da apresentação.</p>
+      <ol class="telas">
+        <li aria-current="page"><strong>Principal</strong><span>Esta tela: a pergunta e a escolha do destino.</span></li>
+        <li><a href="dados-busca.html">Dados da Busca</a><span>As tarifas de cada companhia, com as duas rotas lado a lado.</span></li>
+        <li><a href="dados-precos.html">Dados e Preços</a><span>Quanto custa a passagem em cada mês, com o mais caro e o mais barato marcados.</span></li>
+        <li><a href="detalhes.html">Detalhes</a><span>A entrada para o clima, os hotéis e a alimentação do destino.</span></li>
+        <li><a href="clima.html">Clima</a><span>Temperatura e chuva de cada cidade pela climatologia do INMET.</span></li>
+        <li><a href="hotel.html">Hotel</a><span>As diárias dos hotéis e o custo médio da hospedagem em cada cidade.</span></li>
+        <li><a href="alimentacao.html">Alimentação</a><span>Quanto custa uma refeição e o que se come em cada cidade.</span></li>
+        <li><a href="visao-geral.html">Visão Geral</a><span>O score composto no radar, com os pesos que você ajusta.</span></li>
+      </ol>
+      <a class="botao botao-contorno" href="dados-busca.html">Começar pela busca</a>
+    </section>
+  </main>
+
+  <footer class="rodape-site">
+    <div class="wrap">
+      <p><span class="marca">Linhas Estatísticas</span></p>
+      <p>Projeto Final de Estatística — TADS, IFMS Nova Andradina</p>
+      <p>Equipe: Filipe Rioske, Victor Solique, Davi Casari e João Pegarare</p>
+      <p>Fontes: ANAC, INMET, Accor, quantocustaviajar.com</p>
+      <p><a href="docs/backlog.html">Plano da equipe</a></p>
+    </div>
+  </footer>
+
+  <script src="js/reveal.js"></script>
+</body>
+</html>

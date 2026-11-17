@@ -7,7 +7,7 @@
       <nav class="rota" aria-label="Telas da apresentação">
         <ol>
           <li><a href="index.html" aria-current="page">Principal</a></li>
-          <li><a href="busca.html">Dados da Busca</a></li>
+          <li><a href="dados-busca.html">Dados da Busca</a></li>
           ... (8 itens: Principal, Dados da Busca, Dados e Preços, Detalhes,
                Clima, Hotel, Alimentação, Visão Geral)
         </ol>
@@ -138,4 +138,92 @@ a.cartao:hover { border-color: var(--aerovia); }
   .grafico { padding: 12px 12px 0; }
   h2 { font-size: 27px; }
   .tabela-dados { font-size: 16px; }
+}
+
+/* Link para pular ao conteúdo (todas as telas) */
+.pular {
+  position: absolute; left: var(--margem); top: -120px; z-index: 10;
+  padding: 10px 16px;
+  background: var(--surface); color: var(--ink);
+  border: 2px solid var(--aerovia); border-radius: var(--raio-controle);
+  font-size: 16px; font-weight: 600; text-decoration: none;
+}
+.pular:focus { top: 12px; }
+
+/* Controles: botão e campo de formulário (todas as telas) */
+.botao {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 52px; padding: 12px 24px;
+  background: var(--aerovia); color: var(--surface);
+  border: 2px solid var(--aerovia); border-radius: var(--raio-controle);
+  font-size: 20px; font-weight: 600; line-height: 1.2;
+  text-decoration: none; white-space: nowrap; cursor: pointer;
+}
+.botao:hover { background: var(--ink); border-color: var(--ink); }
+.botao-contorno { background: transparent; color: var(--ink); }
+.botao-contorno:hover { background: var(--surface); border-color: var(--aerovia); color: var(--ink); }
+.campo { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.campo label { font-size: 16px; font-weight: 600; line-height: 1.2; color: var(--mute); }
+.campo input, .campo select {
+  width: 100%; min-height: 52px; padding: 10px 14px;
+  background: var(--surface);
+  border: 1px solid var(--mute); border-radius: var(--raio-controle);
+  font-size: 20px; line-height: 1.2;
+}
+.campo input[readonly] { background: var(--surface-2); border-color: var(--surface-2); cursor: default; }
+
+/* Página Principal */
+.hero { position: relative; overflow: hidden; padding: 64px 0 144px; border-bottom: 1px solid var(--rule); }
+.hero-quadricula { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; pointer-events: none; }
+.hero-quadricula path { fill: none; stroke: var(--rule); stroke-width: 1; }
+.hero-grade {
+  position: relative;
+  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: 40px; align-items: center;
+}
+.hero h1 { max-width: 14ch; }
+.hero-texto p { margin-top: 20px; max-width: 40ch; }
+.rota-hero { display: block; width: 100%; height: auto; }
+.rota-hero .aerovia { fill: none; stroke: var(--aerovia); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+.rota-hero .aeroporto { fill: var(--surface); stroke: var(--aerovia); stroke-width: 3; }
+.rota-hero .fixo { fill: var(--aerovia); }
+.rota-hero .codigo { fill: var(--ink); font-size: 24px; font-weight: 600; letter-spacing: .04em; }
+.rota-hero .cidade { fill: var(--mute); font-size: 20px; }
+
+.busca { position: relative; z-index: 1; margin-top: -96px; }
+.busca-form { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto; gap: 16px; align-items: end; }
+
+.secao-telas { padding-block: 24px 0; }
+.telas { position: relative; margin-top: 28px; list-style: none; counter-reset: passo; }
+.telas li { position: relative; counter-increment: passo; padding: 0 0 22px 56px; }
+.telas li::before {
+  content: counter(passo);
+  position: absolute; left: 0; top: 0;
+  display: grid; place-items: center;
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--surface); border: 1px solid var(--rule);
+  font-size: 16px; font-weight: 600; color: var(--mute);
+}
+.telas li::after { content: ""; position: absolute; left: 16px; top: 32px; bottom: 0; width: 1px; background: var(--rule); }
+.telas li:last-child::after { display: none; }
+.telas li[aria-current="page"]::before { background: var(--aerovia); border-color: var(--aerovia); color: var(--surface); }
+.telas a, .telas strong { font-weight: 600; }
+.telas a { text-decoration-color: var(--aerovia); text-underline-offset: 4px; }
+.telas a:hover { color: var(--aerovia); }
+.telas span { display: block; color: var(--mute); }
+.secao-telas .botao { margin-top: 12px; }
+
+.rodape-site p + p { margin-top: 4px; }
+.rodape-site .marca { color: var(--ink); }
+.rodape-site a { text-underline-offset: 3px; }
+
+@media (max-width: 760px) {
+  .hero { padding: 32px 0 128px; }
+  .hero-grade { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .busca-form { grid-template-columns: minmax(0, 1fr); }
+  .busca .botao, .secao-telas .botao { width: 100%; }
+  .cartao.cartao-busca { padding: 20px 16px; }
+  .telas li { padding-left: 48px; }
+  .rota-hero .codigo { font-size: 28px; }
+  .rota-hero .cidade { font-size: 25px; }
 }

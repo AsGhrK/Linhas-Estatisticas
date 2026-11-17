@@ -1,13 +1,14 @@
 /*
   Animações. Para a Tarefa 6 (js/reveal.js):
   - Elemento com [data-revelar] começa invisível e ganha a classe .visivel
-    ao entrar na tela (fade de 200 ms, sem deslizar).
+    ao entrar na tela (fade de 200 ms, sem deslizar). O estado invisível só
+    vale com <html class="js">, que o reveal.js põe: sem JS, nada some.
   - Linha de rota do hero: <svg class="rota-hero"><path data-desenhar pathLength="1" .../></svg>.
     Com pathLength="1" o traço se desenha sozinho ao carregar (900 ms, ease-out, uma vez).
   - prefers-reduced-motion: tudo aparece pronto, sem movimento.
 */
-[data-revelar] { opacity: 0; transition: opacity 200ms ease-out; }
-[data-revelar].visivel { opacity: 1; }
+.js [data-revelar] { opacity: 0; transition: opacity 200ms ease-out; }
+.js [data-revelar].visivel { opacity: 1; }
 
 .rota-hero path[data-desenhar] {
   stroke-dasharray: 1;
@@ -18,7 +19,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  [data-revelar] { opacity: 1; transition: none; }
+  .js [data-revelar] { opacity: 1; transition: none; }
   .rota-hero path[data-desenhar] { animation: none; stroke-dashoffset: 0; }
   *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
 }
