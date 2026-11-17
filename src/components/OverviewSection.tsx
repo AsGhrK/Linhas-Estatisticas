@@ -12,7 +12,7 @@ export default function OverviewSection() {
     <section id="visao-geral" className="content-section section-alt">
       <div className="wrap overview-grid">
         <div>
-          <SectionHeading tag="Seção 04 — Visão geral" title="Todos os critérios, um só painel comparativo" description="Lorem ipsum dolor sit amet consectetur adipiscing elit. Nulla facilisi, vestibulum ante ipsum primis in faucibus orci luctus et ultrices." />
+          <SectionHeading tag="Seção 04 — Visão geral" title="Todos os critérios, um só painel comparativo" description="O radar coloca preço, clima, hospedagem e alimentação na mesma escala de 0 a 1. Nos critérios de custo, a escala é invertida: quanto mais longe do centro, melhor para quem viaja." />
           <div className="legend">
             <span><i className="legend-swatch legend-swatch--sp" />São Paulo</span>
             <span><i className="legend-swatch legend-swatch--rj" />Rio de Janeiro</span>

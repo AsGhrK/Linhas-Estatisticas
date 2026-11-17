@@ -13,7 +13,7 @@ export default function Footer() {
       <div className="wrap footer-grid">
         <div className="footer-brand">
           <a className="brand" href="#inicio">Linhas Estatísticas</a>
-          <p>Lorem ipsum dolor sit amet consectetur adipiscing elit, plataforma de comparação de viagens orientada a dados.</p>
+          <p>Plataforma de comparação de viagens orientada a dados.</p>
         </div>
         {footerColumns.map((column) => (
           <div key={column.title}>

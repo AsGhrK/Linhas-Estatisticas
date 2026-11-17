@@ -7,7 +7,7 @@ export default function FlightComparison() {
   return (
     <section id="voos" className="content-section">
       <div className="wrap">
-        <SectionHeading tag="Seção 01 — Voos" title="Duas rotas, lado a lado, sem abas escondidas" description="Lorem ipsum dolor sit amet consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique, duis cursus mi quis viverra ornare." />
+        <SectionHeading tag="Seção 01 — Voos" title="Duas rotas, lado a lado, sem abas escondidas" description="Compare as tarifas da GOL, da LATAM e da Azul saindo de Campo Grande para o Rio de Janeiro e para São Paulo. Os preços vêm de dados públicos da ANAC." />
         <div className="route-tabs" aria-label="Rotas demonstradas">
           <span className="route-tab route-tab--active">SBCG → SBRJ</span>
           <span className="route-tab">SBCG → SBSP</span>

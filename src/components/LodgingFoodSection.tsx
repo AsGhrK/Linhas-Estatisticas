@@ -7,7 +7,7 @@ export default function LodgingFoodSection() {
   return (
     <section id="hospedagem" className="content-section">
       <div className="wrap">
-        <SectionHeading tag="Seção 03 — Hospedagem e alimentação" title="Hotéis, restaurantes e pratos típicos de cada destino" description="Lorem ipsum dolor sit amet consectetur adipiscing elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet, cras justo odio." />
+        <SectionHeading tag="Seção 03 — Hospedagem e alimentação" title="Hotéis, restaurantes e pratos típicos de cada destino" description="Diárias de hotéis da mesma rede nas duas cidades e o custo médio das refeições do dia, para estimar quanto a estadia pesa no orçamento." />
         <div className="hospitality-grid">
           <div className="hotel-list">
             {hotels.map((hotel) => (
@@ -23,7 +23,7 @@ export default function LodgingFoodSection() {
           </div>
           <div className="food-panel">
             <h3>Comidas típicas</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor.</p>
+            <p>Alguns pratos tradicionais do Rio de Janeiro e de São Paulo para provar durante a viagem.</p>
             <div className="tag-list">
               {typicalFoods.map((food) => <span key={food}>{food}</span>)}
             </div>
