@@ -130,6 +130,18 @@ a.cartao:hover { border-color: var(--aerovia); }
 .tabela-dados thead th { background: var(--surface-2); font-weight: 600; }
 .tabela-dados .num, .tabela-dados td[data-num], .tabela-dados th[data-num] { text-align: right; font-variant-numeric: tabular-nums; }
 
+/* Telas internas */
+.tela { padding-block: 40px 56px; }
+.tela > .wrap > h1 + p { max-width: 68ch; }
+.tela-secao { margin-top: 40px; }
+.tela-secao h2 + p { margin-top: 8px; }
+.tabela-rolagem { margin-top: 16px; overflow-x: auto; border: 1px solid var(--rule); border-radius: var(--raio-painel); }
+.tabela-dados caption { padding: 12px 14px; text-align: left; font-weight: 600; font-size: 20px; background: var(--surface); }
+.tabela-dados tfoot td, .tabela-dados tfoot th { font-weight: 600; background: var(--surface-2); }
+.rota-destacada { border-left: 4px solid var(--aerovia); background: var(--surface); padding-left: 20px; }
+.resumo-preco { margin-top: 12px; display: grid; gap: 4px; max-width: 68ch; }
+.nota-meses { margin-top: 32px; max-width: 68ch; }
+
 @media (max-width: 760px) {
   .cabecalho-linha { flex-direction: column; align-items: flex-start; gap: 0; padding-top: 12px; }
   .rota { width: 100%; }

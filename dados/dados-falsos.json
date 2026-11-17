@@ -194,6 +194,28 @@
           "minimo": 612.0,
           "maximo": 968.4,
           "ponderado_por": "assentos"
+        },
+        "mensal": [
+          764.71,
+          722.77,
+          681.04,
+          812.94,
+          770.34,
+          678.71,
+          877.64,
+          890.74,
+          728.1,
+          null,
+          null,
+          null
+        ],
+        "mes_mais_caro": {
+          "mes": "ago",
+          "media": 890.74
+        },
+        "mes_mais_barato": {
+          "mes": "jun",
+          "media": 678.71
         }
       },
       "clima": {
@@ -437,6 +459,28 @@
           "minimo": 615.4,
           "maximo": 854.7,
           "ponderado_por": "assentos"
+        },
+        "mensal": [
+          662.8,
+          649.4,
+          641.7,
+          699.48,
+          697.81,
+          640.72,
+          795.26,
+          751.95,
+          662.28,
+          null,
+          null,
+          null
+        ],
+        "mes_mais_caro": {
+          "mes": "jul",
+          "media": 795.26
+        },
+        "mes_mais_barato": {
+          "mes": "jun",
+          "media": 640.72
         }
       },
       "clima": {

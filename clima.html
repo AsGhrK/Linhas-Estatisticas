@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Clima — Linhas Estatísticas</title>
+  <meta name="description" content="Temperatura média e chuva de cada mês no Rio de Janeiro e em São Paulo, pela climatologia do INMET.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;600;800&family=Atkinson+Hyperlegible+Mono:wght@400;600&display=swap">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/animacoes.css">
+</head>
+<body>
+  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="cabecalho-site">
+    <div class="wrap cabecalho-linha">
+      <a class="marca" href="index.html">Linhas Estatísticas</a>
+      <nav class="rota" aria-label="Telas da apresentação">
+        <ol>
+          <li><a href="index.html">Principal</a></li>
+          <li><a href="dados-busca.html">Dados da Busca</a></li>
+          <li><a href="dados-precos.html">Dados e Preços</a></li>
+          <li><a href="detalhes.html">Detalhes</a></li>
+          <li><a href="clima.html" aria-current="page">Clima</a></li>
+          <li><a href="hotel.html">Hotel</a></li>
+          <li><a href="alimentacao.html">Alimentação</a></li>
+          <li><a href="visao-geral.html">Visão Geral</a></li>
+        </ol>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo" tabindex="-1">
+    <div class="tela">
+      <div class="wrap">
+        <h1>Qual cidade é mais quente e mais chuvosa em cada mês?</h1>
+        <p>Climatologia é o comportamento típico do mês, não previsão. Temperatura e chuva ficam em gráficos separados, cada um com a sua escala.</p>
+        <section class="tela-secao" aria-labelledby="titulo-temperatura" data-revelar>
+          <h2 id="titulo-temperatura">Temperatura média</h2>
+          <figure class="grafico">
+            <div class="grafico-canvas" data-grafico><canvas id="grafico-temperatura" role="img" aria-label="Temperatura média mensal, Rio de Janeiro e São Paulo"></canvas></div>
+            <figcaption class="grafico-fonte">Estações: Rio de Janeiro, <span data-campo="rotas.RIO.clima.estacao"></span>; São Paulo, <span data-campo="rotas.SAO.clima.estacao"></span>. Período: <span data-campo="rotas.RIO.clima.periodo"></span>. Fonte: <span data-campo="rotas.RIO.clima.fonte"></span>.</figcaption>
+          </figure>
+        </section>
+        <section class="tela-secao" aria-labelledby="titulo-precipitacao" data-revelar>
+          <h2 id="titulo-precipitacao">Chuva</h2>
+          <figure class="grafico">
+            <div class="grafico-canvas" data-grafico><canvas id="grafico-precipitacao" role="img" aria-label="Precipitação mensal, Rio de Janeiro e São Paulo"></canvas></div>
+            <figcaption class="grafico-fonte">Estações: Rio de Janeiro, <span data-campo="rotas.RIO.clima.estacao"></span>; São Paulo, <span data-campo="rotas.SAO.clima.estacao"></span>. Período: <span data-campo="rotas.RIO.clima.periodo"></span>. Fonte: <span data-campo="rotas.RIO.clima.fonte"></span>.</figcaption>
+          </figure>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="rodape-site">
+    <div class="wrap">
+      <p><span class="marca">Linhas Estatísticas</span></p>
+      <p>Projeto Final de Estatística — TADS, IFMS Nova Andradina</p>
+      <p>Equipe: Filipe Rioske, Victor Solique, Davi Casari e João Pegarare</p>
+      <p>Fontes: ANAC, INMET, Accor, quantocustaviajar.com</p>
+      <p><a href="docs/backlog.html">Plano da equipe</a></p>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js" integrity="sha512-CQBWl4fJHWbryGE+Pc7UAxWMUMNMWzWxF4SQo9CgkJIN1kx6djDQZjh3Y8SZ1d+6I+1zze6Z7kHXO7q3UyZAWw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="js/normalizar.js"></script>
+  <script src="js/reveal.js"></script>
+  <script src="js/graficos.js"></script>
+  <script src="js/tabelas.js"></script>
+</body>
+</html>

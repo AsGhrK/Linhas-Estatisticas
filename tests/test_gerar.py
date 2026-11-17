@@ -107,6 +107,33 @@ class TestGerar(unittest.TestCase):
         self.assertEqual(self.gol(d)["estatisticas"]["n"], 47)
         self.assertEqual(self.gol(d)["nome"], "GOL")
 
+    def test_mensal_e_extremos(self):
+        d = gerar(self.recorte, self.manual, "2026-11-17")
+        rio = d["rotas"]["RIO"]["passagens"]
+        self.assertEqual(len(rio["mensal"]), 12)
+        self.assertEqual(rio["mensal"][0], round((400 * 20 + 500 * 15) / 35, 2))
+        self.assertIsNone(rio["mensal"][2])  # 12 assentos: abaixo do mínimo
+        self.assertEqual(rio["mes_mais_caro"], {"mes": "jan", "media": 442.86})
+        self.assertEqual(rio["mes_mais_barato"], {"mes": "jan", "media": 442.86})
+
+    def test_mensal_junta_companhias_e_acha_extremos(self):
+        extra = ["2026;2;TAM;SBCG;SBRJ;200.0;30", "2026;2;GLO;SBCG;SBRJ;300.0;10",
+                 "2026;4;GLO;SBCG;SBGL;10.0;5"]
+        self.recorte.write_text(CABECALHO + "\n".join(LINHAS + extra) + "\n", encoding="utf-8")
+        rio = gerar(self.recorte, self.manual, "2026-11-17")["rotas"]["RIO"]["passagens"]
+        self.assertEqual(rio["mensal"][1], 225.0)   # (200*30 + 300*10) / 40
+        self.assertIsNone(rio["mensal"][3])         # 5 assentos
+        self.assertEqual(rio["mes_mais_barato"], {"mes": "fev", "media": 225.0})
+        self.assertEqual(rio["mes_mais_caro"], {"mes": "jan", "media": 442.86})
+
+    def test_extremos_null_sem_meses_validos(self):
+        self.recorte.write_text(CABECALHO + "2026;1;GLO;SBCG;SBRJ;400.0;5\n", encoding="utf-8")
+        d = gerar(self.recorte, self.manual, "2026-11-17")
+        rio = d["rotas"]["RIO"]["passagens"]
+        self.assertEqual(rio["mensal"], [None] * 12)
+        self.assertIsNone(rio["mes_mais_caro"])
+        self.assertIsNone(rio["mes_mais_barato"])
+
     def test_so_companhias_com_linhas(self):
         d = gerar(self.recorte, self.manual, "2026-11-17")
         self.assertEqual([c["icao"] for c in d["rotas"]["RIO"]["passagens"]["companhias"]], ["GLO"])

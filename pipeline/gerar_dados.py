@@ -63,13 +63,37 @@ def _companhia(nome, icao, linhas):
             "estatisticas": _resumo(linhas)}
 
 
+def _mensal(linhas):
+    """Média ponderada por assento de cada mês, juntando todas as companhias."""
+    medias = []
+    for mes in range(1, 13):
+        do_mes = [l for l in linhas if l["mes"] == mes]
+        if sum(l["assentos"] for l in do_mes) < MIN_ASSENTOS_MES:
+            medias.append(None)
+        else:
+            medias.append(round(media_ponderada([l["tarifa"] for l in do_mes],
+                                                [l["assentos"] for l in do_mes]), 2))
+    return medias
+
+
+def _extremo(mensal, escolher):
+    validos = [(i, m) for i, m in enumerate(mensal) if m is not None]
+    if not validos:
+        return None
+    i, media = escolher(validos, key=lambda par: par[1])
+    return {"mes": MESES[i], "media": media}
+
+
 def _passagens(linhas_rota):
     companhias = []
     for nome, icao in COMPANHIAS:
         do_icao = [l for l in linhas_rota if l["empresa"] == icao]
         if do_icao:
             companhias.append(_companhia(nome, icao, do_icao))
-    return {"companhias": companhias, "estatisticas": _resumo(linhas_rota)}
+    mensal = _mensal(linhas_rota)
+    return {"companhias": companhias, "estatisticas": _resumo(linhas_rota),
+            "mensal": mensal, "mes_mais_caro": _extremo(mensal, max),
+            "mes_mais_barato": _extremo(mensal, min)}
 
 
 def _clima(manual, chave, pendencias):
