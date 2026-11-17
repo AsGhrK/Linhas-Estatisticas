@@ -49,6 +49,7 @@
     afterDatasetsDraw: function (chart) {
       if (chart.config.type !== 'line') return;
       var ctx = chart.ctx;
+      var t = tinta();
       ctx.save();
       ctx.font = '600 12px system-ui, sans-serif';
       ctx.textBaseline = 'middle';
@@ -58,8 +59,11 @@
         for (var p = meta.data.length - 1; p >= 0; p--) {
           var ponto = meta.data[p];
           if (ds.data[p] === null || ds.data[p] === undefined) continue;
+          // Cor só na marca; o texto fica em tinta (--ink).
           ctx.fillStyle = ds.borderColor;
-          ctx.fillText(ds.label, ponto.x + 10, ponto.y);
+          ctx.fillRect(ponto.x + 8, ponto.y - 1, 12, 2);
+          ctx.fillStyle = t.texto;
+          ctx.fillText(ds.label, ponto.x + 24, ponto.y);
           break;
         }
       });
@@ -125,7 +129,7 @@
     var rota = dados.rotas[sigla];
     var opcoes = base(t);
 
-    opcoes.layout = { padding: { right: 64 } };   // espaço para o rótulo direto
+    opcoes.layout = { padding: { right: 88 } };   // espaço para o rótulo direto
     opcoes.scales = eixos(t, 'Tarifa (R$)', function (v) {
       return 'R$ ' + v.toLocaleString('pt-BR');
     });
@@ -173,7 +177,7 @@
     var t = tinta();
     var opcoes = base(t);
 
-    opcoes.layout = { padding: { right: 64 } };
+    opcoes.layout = { padding: { right: 88 } };
     opcoes.scales = eixos(t, 'Temperatura média (°C)', function (v) { return v + '°'; });
     opcoes.plugins.tooltip.callbacks = {
       label: function (item) { return item.dataset.label + ': ' + S.numero(item.parsed.y) + ' °C'; }
