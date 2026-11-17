@@ -1,0 +1,4 @@
+dados/anac/brutos/
+__pycache__/
+*.pyc
+.venv/
