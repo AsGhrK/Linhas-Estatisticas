@@ -112,7 +112,9 @@ def _hotel(manual, chave, pendencias):
     pendente = not itens or len(diarias) != len(itens)
     if pendente:
         pendencias.append(f"hoteis.{chave}")
-    bloco = {"n": 0, "diarias": diarias, "diaria_media": None, "diaria_mediana": None,
+    hoteis = [] if pendente else [
+        {"nome": i["nome"], "url": i["url"], "diaria": i["diaria"]} for i in itens]
+    bloco = {"n": 0, "hoteis": hoteis, "diarias": diarias, "diaria_media": None, "diaria_mediana": None,
              "noites": manual.get("noites"), "custo_total": None,
              "fonte": manual.get("fonte"), "coletado_em": manual.get("coletado_em")}
     if not pendente:
@@ -132,6 +134,7 @@ def _alimentacao(manual, chave, pendencias):
     completa = all(a[r] for r in REFEICOES)
     return {
         "cafe": a["cafe"], "almoco": a["almoco"], "jantar": a["jantar"],
+        "medias": {r: round(statistics.mean(a[r]), 2) if a[r] else None for r in REFEICOES},
         "n": min(len(a[r]) for r in REFEICOES),
         "media_diaria": round(sum(statistics.mean(a[r]) for r in REFEICOES), 2) if completa else None,
         "tipicas": a["tipicas"], "fonte": manual.get("fonte"),

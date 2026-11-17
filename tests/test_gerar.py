@@ -163,6 +163,39 @@ class TestGerar(unittest.TestCase):
         self.assertEqual(a["media_diaria"], 25 + 50 + 60)
         self.assertEqual(a["n"], 2)
 
+    def test_hotel_lista_hoteis_na_ordem_do_arquivo(self):
+        d = gerar(self.recorte, self.manual_completo, "2026-11-17")
+        h = d["rotas"]["RIO"]["hotel"]
+        self.assertEqual(h["hoteis"], [{"nome": "H0", "url": "u", "diaria": 400},
+                                       {"nome": "H1", "url": "u", "diaria": 500},
+                                       {"nome": "H2", "url": "u", "diaria": 600}])
+        self.assertEqual(h["diarias"], [400, 500, 600])
+
+    def test_hotel_pendente_tem_lista_vazia(self):
+        d = gerar(self.recorte, self.manual, "2026-11-17")
+        self.assertEqual(d["rotas"]["SAO"]["hotel"]["hoteis"], [])
+
+    def test_medias_de_refeicao(self):
+        d = gerar(self.recorte, self.manual_completo, "2026-11-17")
+        self.assertEqual(d["rotas"]["RIO"]["alimentacao"]["medias"],
+                         {"cafe": 25, "almoco": 50, "jantar": 60})
+        sao = d["rotas"]["SAO"]["alimentacao"]["medias"]
+        self.assertEqual(sao, {"cafe": 18, "almoco": 45, "jantar": 55})
+
+    def test_media_arredondada_em_2_casas(self):
+        m = copy.deepcopy(MANUAL)
+        m["alimentacao.json"]["RIO"]["cafe"] = [10, 10, 11]
+        pasta = Path(self.tmp.name) / "arred"
+        escrever(pasta, m)
+        d = gerar(self.recorte, pasta, "2026-11-17")
+        self.assertEqual(d["rotas"]["RIO"]["alimentacao"]["medias"]["cafe"], 10.33)
+
+    def test_media_de_refeicao_pendente_e_null(self):
+        d = gerar(self.recorte, self.manual, "2026-11-17")
+        medias = d["rotas"]["RIO"]["alimentacao"]["medias"]
+        self.assertIsNone(medias["cafe"])
+        self.assertEqual(medias["almoco"], 50)
+
     def test_faixas(self):
         d = gerar(self.recorte, self.manual_completo, "2026-11-17")
         f = d["faixas"]

@@ -254,6 +254,7 @@
       },
       "hotel": {
         "n": 0,
+        "hoteis": [],
         "diarias": [],
         "diaria_media": null,
         "diaria_mediana": null,
@@ -266,6 +267,11 @@
         "cafe": [],
         "almoco": [],
         "jantar": [],
+        "medias": {
+          "cafe": null,
+          "almoco": null,
+          "jantar": null
+        },
         "n": 0,
         "media_diaria": null,
         "tipicas": [],
@@ -493,6 +499,7 @@
       },
       "hotel": {
         "n": 0,
+        "hoteis": [],
         "diarias": [],
         "diaria_media": null,
         "diaria_mediana": null,
@@ -505,6 +512,11 @@
         "cafe": [],
         "almoco": [],
         "jantar": [],
+        "medias": {
+          "cafe": null,
+          "almoco": null,
+          "jantar": null
+        },
         "n": 0,
         "media_diaria": null,
         "tipicas": [],

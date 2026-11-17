@@ -267,6 +267,38 @@
       },
       "hotel": {
         "n": 6,
+        "hoteis": [
+          {
+            "nome": "Hotel Copacabana Exemplo",
+            "url": "https://exemplo.invalid/0",
+            "diaria": 412.0
+          },
+          {
+            "nome": "Hotel Centro Exemplo",
+            "url": "https://exemplo.invalid/1",
+            "diaria": 489.9
+          },
+          {
+            "nome": "Hotel Ipanema Exemplo",
+            "url": "https://exemplo.invalid/2",
+            "diaria": 574.0
+          },
+          {
+            "nome": "Hotel Botafogo Exemplo",
+            "url": "https://exemplo.invalid/3",
+            "diaria": 601.5
+          },
+          {
+            "nome": "Hotel Barra Exemplo",
+            "url": "https://exemplo.invalid/4",
+            "diaria": 728.4
+          },
+          {
+            "nome": "Hotel Leblon Exemplo",
+            "url": "https://exemplo.invalid/5",
+            "diaria": 1140.0
+          }
+        ],
         "diarias": [
           412.0,
           489.9,
@@ -301,6 +333,11 @@
           78.0,
           66.0
         ],
+        "medias": {
+          "cafe": 24.5,
+          "almoco": 49.0,
+          "jantar": 64.0
+        },
         "n": 4,
         "media_diaria": 137.5,
         "tipicas": [
@@ -532,6 +569,38 @@
       },
       "hotel": {
         "n": 6,
+        "hoteis": [
+          {
+            "nome": "Hotel Paulista Exemplo",
+            "url": "https://exemplo.invalid/0",
+            "diaria": 318.0
+          },
+          {
+            "nome": "Hotel Centro Exemplo",
+            "url": "https://exemplo.invalid/1",
+            "diaria": 366.5
+          },
+          {
+            "nome": "Hotel Pinheiros Exemplo",
+            "url": "https://exemplo.invalid/2",
+            "diaria": 421.0
+          },
+          {
+            "nome": "Hotel Moema Exemplo",
+            "url": "https://exemplo.invalid/3",
+            "diaria": 468.7
+          },
+          {
+            "nome": "Hotel Itaim Exemplo",
+            "url": "https://exemplo.invalid/4",
+            "diaria": 552.3
+          },
+          {
+            "nome": "Hotel Liberdade Exemplo",
+            "url": "https://exemplo.invalid/5",
+            "diaria": 689.0
+          }
+        ],
         "diarias": [
           318.0,
           366.5,
@@ -563,6 +632,11 @@
           55.0,
           70.0
         ],
+        "medias": {
+          "cafe": 21.33,
+          "almoco": 42.0,
+          "jantar": 56.33
+        },
         "n": 3,
         "media_diaria": 119.67,
         "tipicas": [
