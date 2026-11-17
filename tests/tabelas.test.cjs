@@ -172,3 +172,11 @@ test('data-campo dentro do template nunca é preenchido direto', () => {
   T.preencher(el('div', {}, [ul]));
   assert.strictEqual(modelo.children[0].textContent, '');
 });
+
+test('formatar: data AAAA-MM-DD por extenso curto', () => {
+  assert.strictEqual(T.formatar('2026-11-17', 'data'), '17 de nov. de 2026');
+  assert.strictEqual(T.formatar('2026-01-05', 'data'), '5 de jan. de 2026');
+  assert.strictEqual(T.formatar('2026-11', 'data'), '2026-11');
+  assert.strictEqual(T.formatar('ontem', 'data'), 'ontem');
+  assert.strictEqual(T.formatar(null, 'data'), '—');
+});

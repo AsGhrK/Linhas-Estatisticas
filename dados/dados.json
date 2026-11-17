@@ -275,7 +275,8 @@
         "n": 0,
         "media_diaria": null,
         "tipicas": [],
-        "fonte": "quantocustaviajar.com"
+        "fonte": "quantocustaviajar.com",
+        "coletado_em": null
       }
     },
     "SAO": {
@@ -520,7 +521,8 @@
         "n": 0,
         "media_diaria": null,
         "tipicas": [],
-        "fonte": "quantocustaviajar.com"
+        "fonte": "quantocustaviajar.com",
+        "coletado_em": null
       }
     }
   },

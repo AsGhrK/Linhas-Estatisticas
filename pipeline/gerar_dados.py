@@ -138,6 +138,7 @@ def _alimentacao(manual, chave, pendencias):
         "n": min(len(a[r]) for r in REFEICOES),
         "media_diaria": round(sum(statistics.mean(a[r]) for r in REFEICOES), 2) if completa else None,
         "tipicas": a["tipicas"], "fonte": manual.get("fonte"),
+        "coletado_em": manual.get("coletado_em"),
     }
 
 

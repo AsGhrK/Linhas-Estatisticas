@@ -196,6 +196,20 @@ class TestGerar(unittest.TestCase):
         self.assertIsNone(medias["cafe"])
         self.assertEqual(medias["almoco"], 50)
 
+    def test_alimentacao_leva_data_de_coleta(self):
+        d = gerar(self.recorte, self.manual_completo, "2026-11-17")
+        for k in ("RIO", "SAO"):
+            self.assertEqual(d["rotas"][k]["alimentacao"]["coletado_em"], "2026-11-10")
+
+    def test_alimentacao_sem_data_de_coleta_e_null(self):
+        m = copy.deepcopy(MANUAL)
+        m["alimentacao.json"]["coletado_em"] = None
+        pasta = Path(self.tmp.name) / "semdata"
+        escrever(pasta, m)
+        d = gerar(self.recorte, pasta, "2026-11-17")
+        self.assertIsNone(d["rotas"]["RIO"]["alimentacao"]["coletado_em"])
+        self.assertIn("alimentacao.coletado_em", d["pendencias"])
+
     def test_faixas(self):
         d = gerar(self.recorte, self.manual_completo, "2026-11-17")
         f = d["faixas"]

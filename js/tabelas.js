@@ -32,6 +32,12 @@
     return m ? MESES_ABREV[Number(m[2]) - 1] + '. de ' + m[1] : String(valor);
   }
 
+  /* "2026-11-17" -> "17 de nov. de 2026". Outro formato volta como texto. */
+  function data(valor) {
+    var m = /^(\d{4})-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/.exec(String(valor));
+    return m ? Number(m[3]) + ' de ' + MESES_ABREV[Number(m[2]) - 1] + '. de ' + m[1] : String(valor);
+  }
+
   /* "ago" -> "agosto". Abreviação desconhecida volta como texto. */
   function mes(valor) {
     var i = MESES_ABREV.indexOf(String(valor));
@@ -47,6 +53,7 @@
       case 'inteiro': return valor.toLocaleString('pt-BR', { maximumFractionDigits: 0 });
       case 'periodo': return periodo(valor);
       case 'mes': return mes(valor);
+      case 'data': return data(valor);
       default: return String(valor);
     }
   }
