@@ -1,0 +1,81 @@
+/*
+  Tokens de Linhas Estatísticas (carta aeronáutica).
+  Fontes (cada página faz <link>; @import não é permitido):
+  https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;600;800&family=Atkinson+Hyperlegible+Mono:wght@400;600&display=swap
+  Tema: claro por padrão; escuro por prefers-color-scheme ou [data-theme="dark"].
+  [data-theme="light"] força o claro mesmo com o sistema em escuro.
+  Os valores de série foram validados com validate_palette.js (ver direção de arte).
+  js/graficos.js lê --cor-* com getComputedStyle.
+*/
+:root {
+  --ground: #EDF1EE;
+  --surface: #FFFFFF;
+  --surface-2: #E2E9E5;
+  --ink: #14212B;
+  --mute: #4A5A63;
+  --rule: #C9D3CE;
+  --aerovia: #B0306E;
+  --alerta: #8A3A06;
+  --alerta-soft: #FBEBDD;
+
+  --cor-azul: #1D5FA8;
+  --cor-latam: #B0306E;
+  --cor-gol: #A86A00;
+  --cor-rio: #007E68;
+  --cor-sao: #6150B8;
+
+  --sombra-busca: 0 6px 24px rgba(20, 33, 43, .18);
+
+  --fonte: "Atkinson Hyperlegible Next", "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --fonte-tabela: "Atkinson Hyperlegible Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+
+  --raio-painel: 10px;
+  --raio-controle: 6px;
+  --coluna: 1120px;
+  --margem: 24px;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground: #0F1A21;
+    --surface: #16222B;
+    --surface-2: #1E2C36;
+    --ink: #E4ECEF;
+    --mute: #9FB0BA;
+    --rule: #2A3A45;
+    --aerovia: #D0679A;
+    --alerta: #F2B98A;
+    --alerta-soft: #33210F;
+    --cor-azul: #5B93D4;
+    --cor-latam: #D0679A;
+    --cor-gol: #BF8A28;
+    --cor-rio: #2FA88F;
+    --cor-sao: #8F7FE0;
+    --sombra-busca: 0 6px 24px rgba(0, 0, 0, .5);
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --ground: #0F1A21;
+  --surface: #16222B;
+  --surface-2: #1E2C36;
+  --ink: #E4ECEF;
+  --mute: #9FB0BA;
+  --rule: #2A3A45;
+  --aerovia: #D0679A;
+  --alerta: #F2B98A;
+  --alerta-soft: #33210F;
+  --cor-azul: #5B93D4;
+  --cor-latam: #D0679A;
+  --cor-gol: #BF8A28;
+  --cor-rio: #2FA88F;
+  --cor-sao: #8F7FE0;
+  --sombra-busca: 0 6px 24px rgba(0, 0, 0, .5);
+  color-scheme: dark;
+}
+
+@media (max-width: 760px) {
+  :root { --margem: 16px; }
+}

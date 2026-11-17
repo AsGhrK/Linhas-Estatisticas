@@ -1,0 +1,141 @@
+/*
+  Base visual. Marcação esperada do cabeçalho (Tarefa 6):
+
+  <header class="cabecalho-site">
+    <div class="wrap cabecalho-linha">
+      <a class="marca" href="index.html">Linhas Estatísticas</a>
+      <nav class="rota" aria-label="Telas da apresentação">
+        <ol>
+          <li><a href="index.html" aria-current="page">Principal</a></li>
+          <li><a href="busca.html">Dados da Busca</a></li>
+          ... (8 itens: Principal, Dados da Busca, Dados e Preços, Detalhes,
+               Clima, Hotel, Alimentação, Visão Geral)
+        </ol>
+      </nav>
+    </div>
+  </header>
+
+  O <ol> é numerado porque as 8 telas são a ordem da apresentação. O número
+  vem de counter CSS; a linha fina e os pontos são desenhados aqui.
+  Abaixo de 760 px a rota rola na horizontal dentro do próprio nav.
+
+  Faixa de pendências:
+    <div class="faixa-pendencias"><svg aria-hidden="true">…</svg><span>Dados provisórios</span></div>
+  Gráfico:
+    <figure class="grafico"><div class="grafico-canvas"><canvas></canvas></div>
+    <figcaption class="grafico-fonte">n = … · fonte · período</figcaption></figure>
+*/
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; padding: 0; }
+html { scroll-padding-top: 88px; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--fonte);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.55;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+img, svg, canvas { max-width: 100%; }
+button, input, select, textarea { font: inherit; color: inherit; }
+a { color: inherit; }
+p, li { max-width: 68ch; }
+
+h1 { font-size: clamp(36px, 5vw, 49px); font-weight: 800; line-height: 1.05; }
+h2 { font-size: 31px; font-weight: 800; line-height: 1.15; }
+h3 { font-size: 25px; font-weight: 600; line-height: 1.25; }
+h1, h2, h3 { max-width: 24ch; text-wrap: balance; }
+h2, h3 { margin-top: 40px; }
+h1 + p, h2 + p, h3 + p { margin-top: 12px; }
+small, .nota { font-size: 16px; line-height: 1.45; color: var(--mute); }
+.icao { font-weight: 600; letter-spacing: .04em; }
+
+:focus-visible { outline: 3px solid var(--aerovia); outline-offset: 3px; }
+button, a, input, select { -webkit-tap-highlight-color: transparent; }
+
+.wrap { width: 100%; max-width: var(--coluna); margin: 0 auto; padding: 0 var(--margem); }
+.sr-only {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap;
+}
+
+/* Cabeçalho e rota */
+.cabecalho-site { background: var(--surface); border-bottom: 1px solid var(--rule); }
+.cabecalho-linha { display: flex; align-items: center; gap: 32px; min-height: 72px; }
+.marca { flex: 0 0 auto; font-size: 20px; font-weight: 800; text-decoration: none; white-space: nowrap; }
+.rota { flex: 1 1 auto; min-width: 0; overflow-x: auto; scrollbar-width: thin; }
+.rota ol {
+  position: relative; display: flex; justify-content: space-between; gap: 8px;
+  min-width: max-content; list-style: none; counter-reset: tela; padding: 12px 0;
+}
+.rota ol::before { content: ""; position: absolute; left: 12px; right: 12px; top: 25px; height: 1px; background: var(--rule); }
+.rota li { position: relative; counter-increment: tela; max-width: none; }
+.rota a {
+  position: relative;
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  padding: 0 8px;
+  font-size: 16px; line-height: 1.2; color: var(--mute); text-decoration: none; white-space: nowrap;
+}
+.rota a::before {
+  content: counter(tela);
+  display: grid; place-items: center;
+  width: 26px; height: 26px; border-radius: 50%;
+  background: var(--surface); border: 1px solid var(--rule);
+  font-size: 14px; font-weight: 600; color: var(--mute);
+}
+.rota a:hover { color: var(--ink); }
+.rota a[aria-current="page"] { color: var(--ink); font-weight: 600; }
+.rota a[aria-current="page"]::before { background: var(--aerovia); border-color: var(--aerovia); color: var(--surface); }
+
+/* Rodapé */
+.rodape-site { margin-top: 64px; padding: 32px 0; border-top: 1px solid var(--rule); font-size: 16px; line-height: 1.45; color: var(--mute); }
+
+/* Cartão (3 destinos da tela Detalhes; busca da landing) */
+.cartao {
+  display: block;
+  padding: 24px;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--raio-painel);
+  color: inherit; text-decoration: none;
+}
+a.cartao:hover { border-color: var(--aerovia); }
+.cartao-busca { box-shadow: var(--sombra-busca); }
+
+/* Faixa de pendências */
+.faixa-pendencias {
+  display: flex; align-items: center; gap: 12px;
+  width: 100%; padding: 12px var(--margem);
+  background: var(--alerta-soft); color: var(--alerta);
+  border-radius: 0;
+  font-size: 16px; font-weight: 600; line-height: 1.45;
+}
+.faixa-pendencias svg { flex: 0 0 auto; width: 20px; height: 20px; }
+
+/* Gráfico */
+.grafico { margin: 24px 0 0; background: var(--surface); border: 1px solid var(--rule); border-radius: var(--raio-painel); padding: 16px 16px 0; }
+.grafico-canvas { position: relative; height: 380px; }
+.grafico-canvas canvas { display: block; width: 100% !important; height: 100% !important; }
+.grafico-fonte { padding: 12px 0 14px; font-size: 16px; line-height: 1.45; color: var(--mute); max-width: none; }
+
+/* Tabela de dados */
+.tabela-dados { width: 100%; border-collapse: collapse; background: var(--surface); font-size: 18px; }
+.tabela-dados th, .tabela-dados td { padding: 10px 14px; border-bottom: 1px solid var(--rule); text-align: left; }
+.tabela-dados thead th { background: var(--surface-2); font-weight: 600; }
+.tabela-dados .num, .tabela-dados td[data-num], .tabela-dados th[data-num] { text-align: right; font-variant-numeric: tabular-nums; }
+
+@media (max-width: 760px) {
+  .cabecalho-linha { flex-direction: column; align-items: flex-start; gap: 0; padding-top: 12px; }
+  .rota { width: 100%; }
+  .rota ol { justify-content: flex-start; gap: 16px; }
+  .grafico-canvas { height: 300px; }
+  .grafico { padding: 12px 12px 0; }
+  h2 { font-size: 27px; }
+  .tabela-dados { font-size: 16px; }
+}
