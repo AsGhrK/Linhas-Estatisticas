@@ -7,14 +7,10 @@
   var LE = (global.LE = global.LE || {});
   var S = LE.stats;
 
-  var FONTE = 'dados/dados-falsos.json';   // trocar para 'dados/dados.json'
+  var FONTE = document.documentElement.dataset.fonte || 'dados/dados.json';
 
-  /* Paleta validada: banda de luminosidade, piso de croma, separação para
-     daltonismo (ΔE 10.6 claro / 10.3 escuro) e contraste contra o fundo. */
-  var PALETA = {
-    claro:  ['#1F6FB2', '#BC6116', '#0A8B6E'],
-    escuro: ['#4E9BD8', '#C4762F', '#2E9C7F']
-  };
+  var COR_COMPANHIA = { GLO: '--cor-gol', TAM: '--cor-latam', AZU: '--cor-azul' };
+  var COR_ROTA = { RIO: '--cor-rio', SAO: '--cor-sao' };
 
   function temaEscuro() {
     var stamp = document.documentElement.getAttribute('data-theme');
@@ -28,19 +24,21 @@
     return v || alternativa;
   }
 
-  function series() {
-    var base = temaEscuro() ? PALETA.escuro : PALETA.claro;
-    return base.map(function (cor, i) {
-      return cssVar('--serie-' + (i + 1), cor);
-    });
+  /* Cor por entidade (companhia ou rota), nunca por índice. Token ausente é
+     bug do CSS: cai em --ink para ficar visível, não em um hex inventado. */
+  function corDe(token) {
+    return cssVar(token, cssVar('--ink', 'currentColor'));
   }
+
+  function corCompanhia(icao) { return corDe(COR_COMPANHIA[icao]); }
+  function corRota(sigla) { return corDe(COR_ROTA[sigla]); }
 
   function tinta() {
     return {
-      texto: cssVar('--ink', temaEscuro() ? '#E6ECF3' : '#0E1A2B'),
-      fraca: cssVar('--mute', temaEscuro() ? '#94A4B6' : '#5B6B7F'),
-      grade: cssVar('--rule', temaEscuro() ? '#25333F' : '#D6DEE7'),
-      fundo: cssVar('--surface', temaEscuro() ? '#131D28' : '#FFFFFF')
+      texto: cssVar('--ink', 'currentColor'),
+      fraca: cssVar('--mute', 'currentColor'),
+      grade: cssVar('--rule', 'currentColor'),
+      fundo: cssVar('--surface', 'currentColor')
     };
   }
 
@@ -124,7 +122,6 @@
 
   function precos(canvas, dados, sigla) {
     var t = tinta();
-    var cor = series();
     var rota = dados.rotas[sigla];
     var opcoes = base(t);
 
@@ -140,12 +137,13 @@
       type: 'line',
       data: {
         labels: dados.meses,
-        datasets: rota.passagens.companhias.map(function (c, i) {
+        datasets: rota.passagens.companhias.map(function (c) {
+          var cor = corCompanhia(c.icao);
           return {
             label: c.nome,
             data: c.precos,               // null vira buraco na linha, não mergulho
-            borderColor: cor[i],
-            backgroundColor: cor[i],
+            borderColor: cor,
+            backgroundColor: cor,
             borderWidth: 2,
             pointRadius: 4,
             pointHoverRadius: 8,
@@ -163,13 +161,20 @@
 
   /* ---------- 3. Temperatura média mensal, duas cidades ---------- */
 
+  /* (máxima + mínima) / 2 por mês; mês sem uma das duas fica null. */
+  function mediaMensal(c) {
+    return c.temp_max.map(function (mx, i) {
+      var mn = c.temp_min[i];
+      return mx === null || mn === null || mx === undefined || mn === undefined ? null : (mx + mn) / 2;
+    });
+  }
+
   function temperatura(canvas, dados) {
     var t = tinta();
-    var cor = series();
     var opcoes = base(t);
 
     opcoes.layout = { padding: { right: 64 } };
-    opcoes.scales = eixos(t, 'Temperatura máxima média (°C)', function (v) { return v + '°'; });
+    opcoes.scales = eixos(t, 'Temperatura média (°C)', function (v) { return v + '°'; });
     opcoes.plugins.tooltip.callbacks = {
       label: function (item) { return item.dataset.label + ': ' + S.numero(item.parsed.y) + ' °C'; }
     };
@@ -178,12 +183,13 @@
       type: 'line',
       data: {
         labels: dados.meses,
-        datasets: Object.keys(dados.rotas).map(function (sigla, i) {
+        datasets: Object.keys(dados.rotas).map(function (sigla) {
+          var cor = corRota(sigla);
           return {
             label: dados.rotas[sigla].cidade,
-            data: dados.rotas[sigla].clima.temp_max,
-            borderColor: cor[i],
-            backgroundColor: cor[i],
+            data: mediaMensal(dados.rotas[sigla].clima),
+            borderColor: cor,
+            backgroundColor: cor,
             borderWidth: 2,
             pointRadius: 4,
             pointHoverRadius: 8,
@@ -205,7 +211,6 @@
 
   function precipitacao(canvas, dados) {
     var t = tinta();
-    var cor = series();
     var opcoes = base(t);
 
     opcoes.scales = eixos(t, 'Precipitação (mm)', function (v) { return v + ' mm'; });
@@ -217,11 +222,12 @@
       type: 'bar',
       data: {
         labels: dados.meses,
-        datasets: Object.keys(dados.rotas).map(function (sigla, i) {
+        datasets: Object.keys(dados.rotas).map(function (sigla) {
+          var cor = corRota(sigla);
           return {
             label: dados.rotas[sigla].cidade,
             data: dados.rotas[sigla].clima.precipitacao,
-            backgroundColor: cor[i],
+            backgroundColor: cor,
             borderRadius: { topLeft: 4, topRight: 4 },  // ponta arredondada, base ancorada
             borderSkipped: 'bottom',
             borderColor: t.fundo,
@@ -239,22 +245,22 @@
 
   function radar(canvas, dados) {
     var t = tinta();
-    var cor = series();
 
     return registrar(canvas, {
       type: 'radar',
       data: {
         labels: S.EIXOS_RADAR,
-        datasets: Object.keys(dados.rotas).map(function (sigla, i) {
+        datasets: Object.keys(dados.rotas).map(function (sigla) {
+          var cor = corRota(sigla);
           return {
             label: dados.rotas[sigla].cidade,
             data: S.perfilRadar(dados, sigla),
-            borderColor: cor[i],
-            backgroundColor: cor[i] + '22',
+            borderColor: cor,
+            backgroundColor: cor + '22',
             borderWidth: 2,
             pointRadius: 4,
             pointHoverRadius: 8,
-            pointBackgroundColor: cor[i],
+            pointBackgroundColor: cor,
             pointBorderColor: t.fundo,
             pointBorderWidth: 2
           };
@@ -316,13 +322,89 @@
     return el.tagName === 'CANVAS' ? el : el.querySelector('canvas');
   }
 
+  function todoNulo(lista) {
+    return !lista.some(function (v) { return v !== null && v !== undefined; });
+  }
+
+  /* Troca o conteúdo da caixa do gráfico por um aviso, sem desenhar vazio. */
+  function mostrarVazio(canvas, texto) {
+    if (graficos[canvas.id]) { graficos[canvas.id].destroy(); delete graficos[canvas.id]; }
+    var caixa = canvas.parentElement;
+    caixa.textContent = '';
+    var p = document.createElement('p');
+    p.className = 'grafico-vazio';
+    p.textContent = texto;
+    caixa.appendChild(p);
+  }
+
+  function comDados(vazio, texto, desenhar) {
+    return function (c, d) {
+      if (vazio(d)) { mostrarVazio(c, texto); return; }
+      desenhar(c, d);
+    };
+  }
+
+  function semClima(d) {
+    return Object.keys(d.rotas).every(function (k) {
+      var cl = d.rotas[k].clima;
+      return todoNulo(cl.temp_max) || todoNulo(cl.temp_min);
+    });
+  }
+  function semChuva(d) {
+    return Object.keys(d.rotas).every(function (k) { return todoNulo(d.rotas[k].clima.precipitacao); });
+  }
+  function semPrecos(sigla) {
+    return function (d) {
+      return d.rotas[sigla].passagens.companhias.every(function (c) { return todoNulo(c.precos); });
+    };
+  }
+  function semRadar(d) {
+    return Object.keys(d.rotas).every(function (k) { return todoNulo(S.perfilRadar(d, k)); });
+  }
+
   var TELAS = [
-    ['#grafico-precos-sbrj', function (c, d) { precos(c, d, 'SBRJ'); }],
-    ['#grafico-precos-sbsp', function (c, d) { precos(c, d, 'SBSP'); }],
-    ['#grafico-temperatura', temperatura],
-    ['#grafico-precipitacao', precipitacao],
-    ['#grafico-radar', radar]
+    ['#grafico-precos-rio', comDados(semPrecos('RIO'), 'Preços ainda não coletados.', function (c, d) { precos(c, d, 'RIO'); })],
+    ['#grafico-precos-sao', comDados(semPrecos('SAO'), 'Preços ainda não coletados.', function (c, d) { precos(c, d, 'SAO'); })],
+    ['#grafico-temperatura', comDados(semClima, 'Dados de clima ainda não coletados.', temperatura)],
+    ['#grafico-precipitacao', comDados(semChuva, 'Dados de clima ainda não coletados.', precipitacao)],
+    ['#grafico-radar', comDados(semRadar, 'Dados ainda não coletados.', radar)]
   ];
+
+  var ICONE_ALERTA = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" '
+    + 'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+    + '<path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4"/><path d="M12 17.5v.01"/></svg>';
+
+  function faixaPendencias(dados) {
+    var pend = dados.pendencias || [];
+    if (!pend.length && !dados._aviso) return;
+    var main = document.querySelector('main');
+    if (!main || main.querySelector('.faixa-pendencias')) return;
+    var faixa = document.createElement('div');
+    faixa.className = 'faixa-pendencias';
+    faixa.setAttribute('role', 'status');
+    faixa.innerHTML = ICONE_ALERTA;
+    var span = document.createElement('span');
+    span.textContent = 'Dados provisórios: ' + (dados._aviso || 'faltam ' + pend.join(', '));
+    faixa.appendChild(span);
+    main.insertBefore(faixa, main.firstChild);
+  }
+
+  var MSG_ERRO = 'Os dados não carregaram. Abra o site por um servidor local: python -m http.server 8000';
+
+  function falhou(erro) {
+    console.error('[graficos]', erro);
+    document.querySelectorAll('[data-grafico]').forEach(function (el) { el.textContent = MSG_ERRO; });
+    var main = document.querySelector('main');
+    if (main && !main.querySelector('.faixa-pendencias')) {
+      var faixa = document.createElement('div');
+      faixa.className = 'faixa-pendencias';
+      faixa.setAttribute('role', 'alert');
+      var span = document.createElement('span');
+      span.textContent = MSG_ERRO;
+      faixa.appendChild(span);
+      main.insertBefore(faixa, main.firstChild);
+    }
+  }
 
   function iniciar() {
     fetch(FONTE)
@@ -332,6 +414,8 @@
       })
       .then(function (dados) {
         LE.dados = dados;
+        faixaPendencias(dados);
+        document.dispatchEvent(new CustomEvent('le:dados', { detail: dados }));
 
         TELAS.forEach(function (par) {
           quandoAparecer(par[0], function (el) {
@@ -350,13 +434,7 @@
             });
           });
       })
-      .catch(function (erro) {
-        console.error('[graficos]', erro);
-        document.querySelectorAll('[data-grafico]').forEach(function (el) {
-          el.textContent = 'Dados indisponíveis. Rode o site por um servidor local — '
-            + 'fetch não funciona abrindo o arquivo direto do disco.';
-        });
-      });
+      .catch(falhou);
   }
 
   LE.graficos = { iniciar: iniciar, instancias: graficos };

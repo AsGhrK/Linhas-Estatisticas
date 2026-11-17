@@ -227,3 +227,6 @@ a.cartao:hover { border-color: var(--aerovia); }
   .rota-hero .codigo { font-size: 28px; }
   .rota-hero .cidade { font-size: 25px; }
 }
+
+/* Gráfico sem dado (ex.: clima ainda não coletado). */
+.grafico-vazio { display: flex; align-items: center; justify-content: center; height: 100%; padding: 0 16px; text-align: center; color: var(--mute); font-size: 16px; max-width: none; }
