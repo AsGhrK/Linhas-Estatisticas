@@ -94,7 +94,7 @@ button, a, input, select { -webkit-tap-highlight-color: transparent; }
 .rota a[aria-current="page"]::before { background: var(--aerovia); border-color: var(--aerovia); color: var(--surface); }
 
 /* Rodapé */
-.rodape-site { margin-top: 64px; padding: 32px 0; border-top: 1px solid var(--rule); font-size: 16px; line-height: 1.45; color: var(--mute); }
+.rodape-site { margin-top: 64px; padding-block: 32px; border-top: 1px solid var(--rule); font-size: 16px; line-height: 1.45; color: var(--mute); }
 
 /* Cartão (3 destinos da tela Detalhes; busca da landing) */
 .cartao {
