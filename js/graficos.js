@@ -30,6 +30,17 @@
     return cssVar(token, cssVar('--ink', 'currentColor'));
   }
 
+  /* Uma vez para todos os gráficos: a fonte do site em 16 px, o mínimo para o
+     projetor. As telas sem gráfico não carregam o Chart.js. */
+  if (global.Chart) {
+    Chart.defaults.font.family = cssVar('--fonte', 'system-ui, sans-serif');
+    Chart.defaults.font.size = 16;
+  }
+
+  function fonteRotulo() {
+    return '600 ' + Chart.defaults.font.size + 'px ' + Chart.defaults.font.family;
+  }
+
   function corCompanhia(icao) { return corDe(COR_COMPANHIA[icao]); }
   function corRota(sigla) { return corDe(COR_ROTA[sigla]); }
 
@@ -51,7 +62,7 @@
       var ctx = chart.ctx;
       var t = tinta();
       ctx.save();
-      ctx.font = '600 12px system-ui, sans-serif';
+      ctx.font = fonteRotulo();
       ctx.textBaseline = 'middle';
       chart.data.datasets.forEach(function (ds, i) {
         var meta = chart.getDatasetMeta(i);
@@ -71,18 +82,28 @@
     }
   };
 
+  /* Espaço à direita para o maior rótulo direto: marca de 24 px, texto e folga. */
+  function folgaRotulos(canvas, rotulos) {
+    var ctx = canvas.getContext('2d');
+    ctx.save();
+    ctx.font = fonteRotulo();
+    var maior = Math.max.apply(null, rotulos.map(function (r) { return ctx.measureText(r).width; }));
+    ctx.restore();
+    return Math.ceil(24 + maior + 16);
+  }
+
   function eixos(t, rotuloY, formatador) {
     return {
       x: {
         grid: { display: false },
         border: { color: t.grade },
-        ticks: { color: t.fraca, font: { size: 12 } }
+        ticks: { color: t.fraca }
       },
       y: {
-        title: { display: true, text: rotuloY, color: t.fraca, font: { size: 12 } },
+        title: { display: true, text: rotuloY, color: t.fraca },
         grid: { color: t.grade, drawTicks: false },
         border: { display: false },
-        ticks: { color: t.fraca, font: { size: 12 }, padding: 8, callback: formatador }
+        ticks: { color: t.fraca, padding: 8, callback: formatador }
       }
     };
   }
@@ -124,28 +145,53 @@
 
   /* ---------- 1 e 2. Preço mensal por companhia, um gráfico por rota ---------- */
 
+  /* Frase sob o gráfico de preços com as companhias que ficaram fora dele. */
+  function notaFora(canvas, nomes) {
+    var figura = canvas.closest('figure');
+    if (!figura) return;
+    var nota = figura.querySelector('.grafico-fora');
+    if (!nomes.length) { if (nota) nota.remove(); return; }
+    if (!nota) {
+      nota = document.createElement('p');
+      nota.className = 'grafico-fonte grafico-fora';
+      figura.appendChild(nota);
+    }
+    // No máximo duas: com as três sem dado, o gráfico nem é desenhado.
+    nota.textContent = nomes.join(' e ') + (nomes.length > 1 ? ' ficam' : ' fica')
+      + ' fora do gráfico: em nenhum mês houve assentos suficientes nesta rota.';
+  }
+
   function precos(canvas, dados, sigla) {
     var t = tinta();
     var rota = dados.rotas[sigla];
     var opcoes = base(t);
+    var companhias = rota.passagens.companhias.filter(function (c) { return !todoNulo(c.precos); });
+    notaFora(canvas, rota.passagens.companhias
+      .filter(function (c) { return todoNulo(c.precos); })
+      .map(function (c) { return c.nome; }));
 
-    opcoes.layout = { padding: { right: 88 } };   // espaço para o rótulo direto
+    opcoes.layout = { padding: { right: folgaRotulos(canvas, companhias.map(function (c) { return c.nome; })) } };
     opcoes.scales = eixos(t, 'Tarifa (R$)', function (v) {
       return 'R$ ' + v.toLocaleString('pt-BR');
     });
     opcoes.plugins.tooltip.callbacks = {
-      label: function (item) { return item.dataset.label + ': ' + S.moeda(item.parsed.y); }
+      label: function (item) {
+        var assentos = item.dataset.assentos[item.dataIndex];
+        return item.dataset.label + ': ' + S.moeda(item.parsed.y)
+          + ' (' + assentos.toLocaleString('pt-BR') + ' assentos)';
+      }
     };
 
     return registrar(canvas, {
       type: 'line',
       data: {
         labels: dados.meses,
-        datasets: rota.passagens.companhias.map(function (c) {
+        datasets: companhias.map(function (c) {
           var cor = corCompanhia(c.icao);
           return {
             label: c.nome,
             data: c.precos,               // null vira buraco na linha, não mergulho
+            assentos: c.assentos,         // lido pelo tooltip
             borderColor: cor,
             backgroundColor: cor,
             borderWidth: 2,
@@ -176,8 +222,9 @@
   function temperatura(canvas, dados) {
     var t = tinta();
     var opcoes = base(t);
+    var siglas = Object.keys(dados.rotas).filter(function (k) { return !todoNulo(mediaMensal(dados.rotas[k].clima)); });
 
-    opcoes.layout = { padding: { right: 88 } };
+    opcoes.layout = { padding: { right: folgaRotulos(canvas, siglas.map(function (k) { return dados.rotas[k].cidade; })) } };
     opcoes.scales = eixos(t, 'Temperatura média (°C)', function (v) { return v + '°'; });
     opcoes.plugins.tooltip.callbacks = {
       label: function (item) { return item.dataset.label + ': ' + S.numero(item.parsed.y) + ' °C'; }
@@ -187,7 +234,7 @@
       type: 'line',
       data: {
         labels: dados.meses,
-        datasets: Object.keys(dados.rotas).map(function (sigla) {
+        datasets: siglas.map(function (sigla) {
           var cor = corRota(sigla);
           return {
             label: dados.rotas[sigla].cidade,
@@ -247,18 +294,30 @@
 
   /* ---------- 5. Radar comparativo ---------- */
 
+  /* Eixo sem nota nas duas cidades leva o motivo no rótulo, pelo mesmo
+     critério da conclusão da Visão Geral. */
+  function rotulosRadar(dados, perfis) {
+    var pequena = S.eixosAmostraPequena(dados);
+    return S.EIXOS_RADAR.map(function (nome, i) {
+      if (perfis.some(function (p) { return p[i] !== null && p[i] !== undefined; })) return nome;
+      return nome + (pequena.indexOf(nome) === -1 ? ' (sem dado)' : ' (amostra pequena)');
+    });
+  }
+
   function radar(canvas, dados) {
     var t = tinta();
+    var siglas = Object.keys(dados.rotas);
+    var perfis = siglas.map(function (sigla) { return S.perfilRadar(dados, sigla); });
 
     return registrar(canvas, {
       type: 'radar',
       data: {
-        labels: S.EIXOS_RADAR,
-        datasets: Object.keys(dados.rotas).map(function (sigla) {
+        labels: rotulosRadar(dados, perfis),
+        datasets: siglas.map(function (sigla, i) {
           var cor = corRota(sigla);
           return {
             label: dados.rotas[sigla].cidade,
-            data: S.perfilRadar(dados, sigla),
+            data: perfis[i],
             borderColor: cor,
             backgroundColor: cor + '22',
             borderWidth: 2,
@@ -279,11 +338,15 @@
             max: 1,
             angleLines: { color: t.grade },
             grid: { color: t.grade },
-            pointLabels: { color: t.texto, font: { size: 13, weight: '600' } },
+            // O radar tem tamanho próprio para estes rótulos; volta ao padrão do site.
+            pointLabels: { color: t.texto, font: { size: Chart.defaults.font.size, weight: '600' } },
+            // Fundo opaco: a grade não corta o número, e as séries passam por cima dele.
             ticks: {
               stepSize: 0.25,
               color: t.fraca,
-              backdropColor: 'transparent',
+              showLabelBackdrop: true,
+              backdropColor: t.fundo,
+              backdropPadding: 2,
               callback: function (v) { return v.toFixed(2).replace('.', ','); }
             }
           }

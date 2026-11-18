@@ -37,14 +37,14 @@
     <div class="tela">
       <div class="wrap">
         <h1>Quanto custa a passagem em cada mês?</h1>
-        <p>A tarifa média de cada companhia, mês a mês, para as duas cidades. O mais caro e o mais barato aparecem junto de cada gráfico.</p>
+        <p>A tarifa média de cada companhia, mês a mês, para as duas cidades. O mês mais caro e o mais barato aparecem junto de cada gráfico e usam a média ponderada de todas as companhias juntas.</p>
         <p>As tarifas vêm dos microdados de tarifas aéreas domésticas da ANAC. São os preços das passagens vendidas ao público, registrados todo mês pelas companhias.</p>
         <p class="nota">Fonte: <a href="https://www.gov.br/anac/pt-br/assuntos/dados-e-estatisticas" target="_blank" rel="noopener noreferrer">ANAC — Dados e Estatísticas</a>. Acesso em <span data-campo="fonte_passagens.acesso_em" data-formato="data"></span>.</p>
         <section class="tela-secao" aria-labelledby="titulo-rio" data-revelar>
           <h2 id="titulo-rio">Rio de Janeiro</h2>
           <figure class="grafico">
             <div class="grafico-canvas" data-grafico><canvas id="grafico-precos-rio" role="img" aria-label="Tarifa média por mês e por companhia, Campo Grande para Rio de Janeiro"></canvas></div>
-            <figcaption class="grafico-fonte">Fonte: ANAC, microdados de tarifas aéreas comercializadas. Período: <span data-campo="periodo_passagens.inicio" data-formato="periodo"></span> a <span data-campo="periodo_passagens.fim" data-formato="periodo"></span>. Média ponderada por assento vendido.</figcaption>
+            <figcaption class="grafico-fonte">Fonte: ANAC, microdados de tarifas aéreas comercializadas. Período: <span data-campo="periodo_passagens.inicio" data-formato="periodo"></span> a <span data-campo="periodo_passagens.fim" data-formato="periodo"></span>. Média ponderada por assento vendido, n = <span data-campo="rotas.RIO.passagens.estatisticas.n" data-formato="inteiro"></span> assentos.</figcaption>
           </figure>
           <div class="resumo-preco">
             <p>Mês mais caro: <strong data-campo="rotas.RIO.passagens.mes_mais_caro.mes" data-formato="mes"></strong>, com média de <strong data-campo="rotas.RIO.passagens.mes_mais_caro.media" data-formato="moeda"></strong>.</p>
@@ -55,7 +55,7 @@
           <h2 id="titulo-sao">São Paulo</h2>
           <figure class="grafico">
             <div class="grafico-canvas" data-grafico><canvas id="grafico-precos-sao" role="img" aria-label="Tarifa média por mês e por companhia, Campo Grande para São Paulo"></canvas></div>
-            <figcaption class="grafico-fonte">Fonte: ANAC, microdados de tarifas aéreas comercializadas. Período: <span data-campo="periodo_passagens.inicio" data-formato="periodo"></span> a <span data-campo="periodo_passagens.fim" data-formato="periodo"></span>. Média ponderada por assento vendido.</figcaption>
+            <figcaption class="grafico-fonte">Fonte: ANAC, microdados de tarifas aéreas comercializadas. Período: <span data-campo="periodo_passagens.inicio" data-formato="periodo"></span> a <span data-campo="periodo_passagens.fim" data-formato="periodo"></span>. Média ponderada por assento vendido, n = <span data-campo="rotas.SAO.passagens.estatisticas.n" data-formato="inteiro"></span> assentos.</figcaption>
           </figure>
           <div class="resumo-preco">
             <p>Mês mais caro: <strong data-campo="rotas.SAO.passagens.mes_mais_caro.mes" data-formato="mes"></strong>, com média de <strong data-campo="rotas.SAO.passagens.mes_mais_caro.media" data-formato="moeda"></strong>.</p>
