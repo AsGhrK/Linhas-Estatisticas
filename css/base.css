@@ -133,6 +133,7 @@ a.cartao:hover { border-color: var(--aerovia); }
 /* Telas internas */
 .tela { padding-block: 40px 56px; }
 .tela > .wrap > h1 + p { max-width: 68ch; }
+.tela > .wrap > p + p, .tela-secao > p + p { margin-top: 12px; }
 .tela-secao { margin-top: 40px; }
 .tela-secao h2 + p { margin-top: 8px; }
 .tabela-rolagem { margin-top: 16px; overflow-x: auto; border: 1px solid var(--rule); border-radius: var(--raio-painel); }

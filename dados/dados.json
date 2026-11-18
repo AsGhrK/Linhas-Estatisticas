@@ -28,7 +28,10 @@
       "max": 944.58
     },
     "custo_hotel": null,
-    "custo_alimentacao": null,
+    "custo_alimentacao": {
+      "min": 137,
+      "max": 141
+    },
     "temperatura_media": null,
     "precipitacao": null
   },
@@ -264,19 +267,29 @@
         "coletado_em": null
       },
       "alimentacao": {
-        "cafe": [],
-        "almoco": [],
-        "jantar": [],
+        "cafe": [
+          24
+        ],
+        "almoco": [
+          50
+        ],
+        "jantar": [
+          63
+        ],
         "medias": {
-          "cafe": null,
-          "almoco": null,
-          "jantar": null
+          "cafe": 24,
+          "almoco": 50,
+          "jantar": 63
         },
-        "n": 0,
-        "media_diaria": null,
-        "tipicas": [],
-        "fonte": "quantocustaviajar.com",
-        "coletado_em": null
+        "n": 1,
+        "media_diaria": 137,
+        "tipicas": [
+          "Feijoada carioca",
+          "Filé à Oswaldo Aranha",
+          "Biscoito Globo e mate"
+        ],
+        "fonte": "Quanto Custa Viajar, faixa econômica",
+        "coletado_em": "2026-11-17"
       }
     },
     "SAO": {
@@ -510,32 +523,33 @@
         "coletado_em": null
       },
       "alimentacao": {
-        "cafe": [],
-        "almoco": [],
-        "jantar": [],
+        "cafe": [
+          26
+        ],
+        "almoco": [
+          52
+        ],
+        "jantar": [
+          63
+        ],
         "medias": {
-          "cafe": null,
-          "almoco": null,
-          "jantar": null
+          "cafe": 26,
+          "almoco": 52,
+          "jantar": 63
         },
-        "n": 0,
-        "media_diaria": null,
-        "tipicas": [],
-        "fonte": "quantocustaviajar.com",
-        "coletado_em": null
+        "n": 1,
+        "media_diaria": 141,
+        "tipicas": [
+          "Virado à paulista",
+          "Sanduíche de mortadela",
+          "Pastel com caldo de cana"
+        ],
+        "fonte": "Quanto Custa Viajar, faixa econômica",
+        "coletado_em": "2026-11-17"
       }
     }
   },
   "pendencias": [
-    "alimentacao.RIO.almoco",
-    "alimentacao.RIO.cafe",
-    "alimentacao.RIO.jantar",
-    "alimentacao.RIO.tipicas",
-    "alimentacao.SAO.almoco",
-    "alimentacao.SAO.cafe",
-    "alimentacao.SAO.jantar",
-    "alimentacao.SAO.tipicas",
-    "alimentacao.coletado_em",
     "clima.RIO.estacao",
     "clima.RIO.precipitacao",
     "clima.RIO.temp_max",

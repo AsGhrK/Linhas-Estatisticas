@@ -1,18 +1,18 @@
 {
-  "fonte": "quantocustaviajar.com",
-  "coletado_em": null,
+  "fonte": "Quanto Custa Viajar, faixa econômica",
+  "coletado_em": "2026-11-17",
   "RIO": {
-    "cafe": [],
-    "almoco": [],
-    "jantar": [],
-    "tipicas": [],
-    "fonte_tipicas": null
+    "cafe": [24],
+    "almoco": [50],
+    "jantar": [63],
+    "tipicas": ["Feijoada carioca", "Filé à Oswaldo Aranha", "Biscoito Globo e mate"],
+    "fonte_tipicas": "Quanto Custa Viajar"
   },
   "SAO": {
-    "cafe": [],
-    "almoco": [],
-    "jantar": [],
-    "tipicas": [],
-    "fonte_tipicas": null
+    "cafe": [26],
+    "almoco": [52],
+    "jantar": [63],
+    "tipicas": ["Virado à paulista", "Sanduíche de mortadela", "Pastel com caldo de cana"],
+    "fonte_tipicas": "Quanto Custa Viajar"
   }
 }

@@ -104,6 +104,7 @@ linhas-estatisticas/
 ├── dados/
 │   ├── dados.json             # gerado pelo pipeline; é o que o site lê
 │   ├── dados-falsos.json      # números inventados, para desenvolver sem esperar a coleta
+│   ├── fontes.md              # URL e data de acesso de cada fonte
 │   ├── anac/
 │   │   ├── brutos/            # microdados da ANAC (fora do git)
 │   │   └── tarifas_sbcg.csv   # recorte SBCG → Rio e São Paulo (versionado)
@@ -381,10 +382,10 @@ P1 está no caminho crítico: P3 e P4 dependem do `dados.json`. Por isso o schem
 | Preços de passagem | ANAC — microdados de tarifas aéreas comercializadas, voos domésticos, jan–set/2026 |
 | Climatologia | INMET — Normais Climatológicas do Brasil 1991–2020 (Rio de Janeiro; São Paulo, Mirante de Santana) |
 | Hospedagem | Accor (`all.accor.com`) |
-| Alimentação | `quantocustaviajar.com` |
-| Comidas típicas | Food To Save, Terra |
+| Alimentação | Quanto Custa Viajar, faixa econômica |
+| Comidas típicas | Quanto Custa Viajar |
 
-A fonte, a estação e a data de coleta de cada dado manual ficam no próprio arquivo de `dados/manual/`, seguem para o `dados.json` e são reproduzidas no relatório.
+A fonte, a estação e a data de coleta de cada dado manual ficam no próprio arquivo de `dados/manual/`, seguem para o `dados.json` e são reproduzidas no relatório. As URLs e as datas de acesso estão em [`dados/fontes.md`](dados/fontes.md).
 
 ## Limitações
 
@@ -396,6 +397,7 @@ Declaradas aqui e no relatório. Reconhecer o limite do próprio método é o qu
 - **Viracopos fica fora.** `SBKP` fica em Campinas e não entra na rota de São Paulo, o que reduz o volume da Azul nessa rota.
 - **Tarifa sem taxas.** O valor da ANAC é a tarifa comercializada, sem taxas de embarque. O passageiro paga mais do que o número mostrado.
 - **Recorte temporal único na hospedagem e na alimentação.** Diárias e refeições refletem uma janela de coleta de poucos dias. Uma coleta em outro período produziria outros números e possivelmente outra conclusão.
+- **Alimentação com um valor por refeição.** Café, almoço e jantar têm um só preço por cidade (n = 1), da faixa econômica de uma só fonte, o Quanto Custa Viajar. Não há dispersão a medir, e o eixo de alimentação do radar compara dois números, não duas amostras.
 - **Viés de rede hoteleira.** As diárias vêm de uma só rede. O custo de hospedagem apurado representa aquele padrão de hotel, não o mercado da cidade.
 - **Climatologia não é previsão.** As séries de temperatura e chuva são as médias de 1991–2020, não o clima de 2026. Descrevem o comportamento típico do mês, não o tempo que fará numa data específica.
 - **Sem validação cruzada de preço.** Os valores não foram conferidos contra uma segunda fonte independente.
