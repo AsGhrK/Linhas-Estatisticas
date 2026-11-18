@@ -24,7 +24,7 @@ O sistema compara as rotas de **Campo Grande (SBCG)** para os dez destinos com m
 
 ## O que é
 
-Um site estático de 8 telas, mais uma página de fontes, que apresenta uma análise comparativa entre dez rotas. Cada tela mostra até quatro cidades de cada vez, escolhidas pelo visitante; a Visão Geral traz também o ranking das dez. As passagens vêm dos microdados de tarifas da ANAC, recortados e resumidos por um pipeline offline em Python. Clima, hospedagem e alimentação são digitados à mão a partir de fontes públicas. Tudo é consolidado num único `dados.json` e renderizado em tabelas e gráficos no navegador.
+Um site estático de 8 telas, mais uma página de fontes, que apresenta uma análise comparativa entre dez rotas. Cada tela compara até três cidades de cada vez, escolhidas pelo visitante; a Visão Geral traz também o ranking das dez. As passagens vêm dos microdados de tarifas da ANAC, recortados e resumidos por um pipeline offline em Python. Clima, hospedagem e alimentação são digitados à mão a partir de fontes públicas. Tudo é consolidado num único `dados.json` e renderizado em tabelas e gráficos no navegador.
 
 A entrega tem duas metades:
 
@@ -96,7 +96,7 @@ linhas-estatisticas/
 │
 ├── js/
 │   ├── normalizar.js          # LE.stats: min-max, inversão de eixos, conforto térmico, score
-│   ├── selecao.js             # cidades em comparação (até 4), na URL e no localStorage
+│   ├── selecao.js             # cidades em comparação (até 3, cor pela posição), na URL e no localStorage
 │   ├── reveal.js              # IntersectionObserver + LE.aoRevelar
 │   ├── graficos.js            # fetch do JSON, evento le:dados, instâncias Chart.js
 │   ├── tabelas.js             # preenche data-campo, as listas e os modelos por cidade (data-por-cidade)
