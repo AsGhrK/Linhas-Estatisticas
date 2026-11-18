@@ -5,6 +5,7 @@ Sobe `python -m http.server` numa porta livre, abre cada tela no Chromium
 (Playwright) e derruba o servidor no fim. Rodar: python tests/site.smoke.py
 Precisa de internet: o Chart.js e as fontes vêm de CDN.
 """
+import json
 import socket
 import subprocess
 import sys
@@ -42,6 +43,8 @@ class TestSite(unittest.TestCase):
         cls.servidor = subprocess.Popen(
             [sys.executable, '-m', 'http.server', str(porta), '--bind', '127.0.0.1'],
             cwd=RAIZ, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        # Class cleanups rodam mesmo se o setUpClass falhar, e uma falha não pula as outras.
+        cls.addClassCleanup(lambda: (cls.servidor.terminate(), cls.servidor.wait()))
         for _ in range(50):
             try:
                 urllib.request.urlopen(cls.base, timeout=1)
@@ -49,17 +52,11 @@ class TestSite(unittest.TestCase):
             except OSError:
                 time.sleep(0.1)
         else:
-            cls.servidor.terminate()
             raise RuntimeError('o servidor local não subiu em ' + cls.base)
         cls.pw = sync_playwright().start()
+        cls.addClassCleanup(cls.pw.stop)
         cls.navegador = cls.pw.chromium.launch()
-
-    @classmethod
-    def tearDownClass(cls):
-        cls.navegador.close()
-        cls.pw.stop()
-        cls.servidor.terminate()
-        cls.servidor.wait()
+        cls.addClassCleanup(cls.navegador.close)
 
     def abrir(self, falsos=False, **opcoes):
         pagina = self.navegador.new_page(**opcoes)
@@ -110,9 +107,11 @@ class TestSite(unittest.TestCase):
         pagina.get_by_text('Defina ao menos um peso maior que zero.').wait_for()
 
     def test_faixa_de_pendencias(self):
+        # O dados.json real também tem pendências: só o _aviso prova que a troca valeu.
+        aviso = json.loads(FALSOS.read_text(encoding='utf-8'))['_aviso']
         pagina, _ = self.abrir(falsos=True)
         pagina.goto(self.base + 'dados-busca.html', wait_until='networkidle')
-        self.assertTrue(pagina.locator('.faixa-pendencias').is_visible())
+        pagina.locator('.faixa-pendencias', has_text=aviso).wait_for(timeout=5000)
 
     def test_largura_projetor(self):
         pagina, _ = self.abrir(viewport={'width': 1280, 'height': 720})
