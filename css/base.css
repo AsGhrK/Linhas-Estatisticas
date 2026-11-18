@@ -289,3 +289,13 @@ a.cartao:hover { border-color: var(--aerovia); }
   .conclusao-nota { font-size: 16px; }
 }
 .grafico-fora { padding-top: 0; }
+
+/* Seletor das cidades em comparação (js/selecao.js). */
+.seletor-cidades { margin-top: 24px; padding: 14px 16px 16px; border: 1px solid var(--rule); border-radius: var(--raio-painel); background: var(--surface); }
+.seletor-cidades legend { padding: 0 6px; font-weight: 600; }
+.seletor-opcoes { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 4px; }
+.seletor-opcoes label { display: inline-flex; align-items: center; gap: 8px; font-size: 18px; cursor: pointer; }
+.seletor-opcoes input { width: 20px; height: 20px; accent-color: var(--aerovia); }
+.seletor-opcoes input:disabled + .seletor-cor { opacity: .4; }
+.seletor-opcoes label:has(input:disabled) { color: var(--mute); cursor: not-allowed; }
+.seletor-cor { width: 12px; height: 12px; border-radius: 50%; flex: none; }

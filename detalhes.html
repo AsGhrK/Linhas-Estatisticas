@@ -38,25 +38,23 @@
       <div class="wrap">
         <h1>O que pesa na viagem além da passagem?</h1>
         <p>Hotel, clima e alimentação mudam o custo e o conforto da viagem. Cada cartão traz um resumo e leva à tela completa.</p>
+        <div data-seletor-cidades></div>
         <div class="cartoes" data-revelar>
         <a class="cartao" href="hotel.html">
           <h2>Hotel</h2>
           <p>Diária mediana dos hotéis pesquisados em cada cidade.</p>
-          <p class="cartao-resumo">Rio de Janeiro: <strong data-campo="rotas.RIO.hotel.diaria_mediana" data-formato="moeda"></strong></p>
-          <p class="cartao-resumo">São Paulo: <strong data-campo="rotas.SAO.hotel.diaria_mediana" data-formato="moeda"></strong></p>
+          <div data-por-cidade><template><p class="cartao-resumo"><span data-nome-cidade></span>: <strong data-campo="rotas.{rota}.hotel.diaria_mediana" data-formato="moeda"></strong></p></template></div>
         </a>
         <a class="cartao" href="clima.html">
           <h2>Clima</h2>
-          <p>Estação do INMET que representa cada cidade e o período da climatologia.</p>
-          <p class="cartao-resumo">Rio de Janeiro: <strong data-campo="rotas.RIO.clima.estacao"></strong></p>
-          <p class="cartao-resumo">São Paulo: <strong data-campo="rotas.SAO.clima.estacao"></strong></p>
+          <p>Estações do INMET que representam cada cidade e o período da climatologia.</p>
+          <div data-por-cidade><template><p class="cartao-resumo"><span data-nome-cidade></span>: <strong data-campo="rotas.{rota}.clima.estacao"></strong></p></template></div>
           <p class="cartao-resumo">Período: <strong data-campo="rotas.RIO.clima.periodo" data-formato="periodo"></strong></p>
         </a>
         <a class="cartao" href="alimentacao.html">
           <h2>Alimentação</h2>
           <p>Gasto médio com café, almoço e jantar em um dia.</p>
-          <p class="cartao-resumo">Rio de Janeiro: <strong data-campo="rotas.RIO.alimentacao.media_diaria" data-formato="moeda"></strong></p>
-          <p class="cartao-resumo">São Paulo: <strong data-campo="rotas.SAO.alimentacao.media_diaria" data-formato="moeda"></strong></p>
+          <div data-por-cidade><template><p class="cartao-resumo"><span data-nome-cidade></span>: <strong data-campo="rotas.{rota}.alimentacao.media_diaria" data-formato="moeda"></strong></p></template></div>
         </a>
         </div>
       </div>
@@ -68,13 +66,14 @@
       <p><span class="marca">Linhas Estatísticas</span></p>
       <p>Projeto Final de Estatística — TADS, IFMS Nova Andradina</p>
       <p>Equipe: Filipe Rioske, Victor Solique, Davi Casari e João Pegarare</p>
-      <p>Fontes: ANAC, INMET, Accor e Quanto Custa Viajar. <a href="fontes.html">Fontes e datas de acesso</a></p>
+      <p>Fontes: ANAC, INMET, Accor, Quanto Custa Viajar e Numbeo. <a href="fontes.html">Fontes e datas de acesso</a></p>
       <p>Dados coletados de fontes públicas, com fins acadêmicos.</p>
       <p><a href="docs/backlog.html">Plano da equipe</a></p>
     </div>
   </footer>
 
   <script src="js/normalizar.js"></script>
+  <script src="js/selecao.js"></script>
   <script src="js/reveal.js"></script>
   <script src="js/graficos.js"></script>
   <script src="js/tabelas.js"></script>

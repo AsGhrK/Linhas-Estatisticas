@@ -28,6 +28,7 @@
 
   var MSG_SEM_PESO = 'Defina ao menos um peso maior que zero.';
   var MSG_EMPATE = 'As duas cidades ficam praticamente empatadas com estes pesos.';
+  var MSG_EMPATE_TOPO = 'As duas primeiras ficam praticamente empatadas.';
   var MSG_SEM_DADOS = 'Ainda faltam dados para calcular o score com estes pesos.';
   var MSG_FORA = 'Fora do cálculo por falta de dados: ';
   var MSG_PEQUENA = 'Fora do cálculo por amostra pequena: ';
@@ -47,8 +48,8 @@
     return S.EIXOS_RADAR.filter(function (_, i) { return pontos[i] === null || pontos[i] === undefined; });
   }
 
-  /* Falta de dados: uma lista só quando as duas cidades perdem os mesmos eixos;
-     senão, por cidade. Amostra pequena vale para as duas cidades e sai à parte. */
+  /* Falta de dados: uma lista só quando todas as cidades perdem os mesmos eixos;
+     senão, por cidade. Amostra pequena vale para todas e sai à parte. */
   function fraseFora(cidades, pequena) {
     var falta = cidades.map(function (c) {
       return { nome: c.nome, fora: c.fora.filter(function (e) { return pequena.indexOf(e) === -1; }) };
@@ -80,7 +81,7 @@
   }
 
   /* Texto de cada controle: a parte do peso que entra no score, em porcentagem
-     inteira, contando só os eixos com nota nas duas cidades. Com um eixo só, o
+     inteira, contando só os eixos com nota em todas as cidades. Com um eixo só, o
      clima entra com metade do peso, como no scoreComposto. Sem dados, conta tudo. */
   function efetivos(dados, pesos) {
     var perfis = dados ? Object.keys(dados.rotas).map(function (k) { return S.perfilRadar(dados, k); }) : [];
@@ -123,21 +124,31 @@
     if (!comScore.length) {
       principal = MSG_SEM_DADOS;
     } else if (semScore.length) {
-      principal = 'Com estes pesos, ' + comScore.map(function (c) {
-        return c.nome + ' soma ' + S.numero(c.score, CASAS_SCORE);
-      }).join(' e ') + '; ' + juntar(semScore.map(function (c) { return c.nome; }))
-        + ' ainda não tem dados para estes pesos.';
+      principal = 'Com estes pesos, ' + juntar(comScore.map(soma)) + '; '
+        + juntar(semScore.map(function (c) { return c.nome; }))
+        + (semScore.length > 1 ? ' ainda não têm' : ' ainda não tem') + ' dados para estes pesos.';
     } else {
       var ordem = cidades.slice().sort(function (a, b) { return b.score - a.score; });
-      var a = ordem[0];
-      var b = ordem[1];
-      principal = Math.abs(a.score - b.score) < EMPATE
-        ? MSG_EMPATE
-        : 'Com estes pesos, ' + a.nome + ' soma ' + S.numero(a.score, CASAS_SCORE)
-          + ' e ' + b.nome + ' soma ' + S.numero(b.score, CASAS_SCORE) + '.';
+      var empate = ordem.length > 1 && Math.abs(ordem[0].score - ordem[1].score) < EMPATE;
+      if (empate && ordem.length === 2) principal = MSG_EMPATE;
+      else principal = 'Com estes pesos, ' + juntar(ordem.map(soma)) + '.' + (empate ? ' ' + MSG_EMPATE_TOPO : '');
     }
 
     return { principal: principal, fora: fraseFora(cidades, S.eixosAmostraPequena(dados)) };
+  }
+
+  function soma(c) { return c.nome + ' soma ' + S.numero(c.score, CASAS_SCORE); }
+
+  /* Todas as cidades do estudo, da maior para a menor nota; sem nota, no fim. */
+  function ranking(dados, pesos) {
+    var pesos5 = S.expandirPesos(pesos);
+    return Object.keys(dados.rotas).map(function (k) {
+      return { sigla: k, nome: dados.rotas[k].cidade, score: S.scoreComposto(S.perfilRadar(dados, k), pesos5) };
+    }).sort(function (a, b) {
+      if (a.score === null) return 1;
+      if (b.score === null) return -1;
+      return b.score - a.score;
+    });
   }
 
   function conclusao(dados, pesos) {
@@ -149,6 +160,7 @@
     conclusao: conclusao,
     partes: partes,
     efetivos: efetivos,
+    ranking: ranking,
     PESO_INICIAL: PESO_INICIAL,
     EMPATE: EMPATE
   };
@@ -174,7 +186,8 @@
 
   function atualizar() {
     var pesos = lerPesos();
-    var textos = efetivos(dadosAtuais, pesos);
+    var naTela = dadosAtuais && LE.selecao ? LE.selecao.daTela(dadosAtuais) : dadosAtuais;
+    var textos = efetivos(naTela, pesos);
 
     DIMENSOES.forEach(function (k) {
       var saida = doc.getElementById('efetivo-' + k);
@@ -185,7 +198,8 @@
 
     var alvo = doc.getElementById('conclusao');
     if (!alvo || !dadosAtuais) return;
-    var p = partes(dadosAtuais, pesos);
+    desenharRanking(pesos);
+    var p = partes(naTela, pesos);
     var frase = doc.createElement('span');
     frase.textContent = p.principal;
     alvo.replaceChildren(frase);
@@ -195,6 +209,27 @@
       nota.textContent = ' ' + p.fora;
       alvo.appendChild(nota);
     }
+  }
+
+  /* Tabela com as dez cidades: <tbody data-ranking>. */
+  function desenharRanking(pesos) {
+    var corpo = doc.querySelector('[data-ranking]');
+    if (!corpo || !dadosAtuais) return;
+    corpo.replaceChildren();
+    ranking(dadosAtuais, pesos).forEach(function (c, i) {
+      var linha = doc.createElement('tr');
+      var pos = doc.createElement('td');
+      pos.setAttribute('data-num', '');
+      pos.textContent = c.score === null ? '—' : String(i + 1);
+      var nome = doc.createElement('th');
+      nome.scope = 'row';
+      nome.textContent = c.nome;
+      var nota = doc.createElement('td');
+      nota.setAttribute('data-num', '');
+      nota.textContent = c.score === null ? 'sem dados' : S.numero(c.score, CASAS_SCORE);
+      linha.append(pos, nome, nota);
+      corpo.appendChild(linha);
+    });
   }
 
   function pesosIguais() {
@@ -231,6 +266,7 @@
   }
 
   doc.addEventListener('le:dados', function (e) { comDados(e.detail); });
+  doc.addEventListener('le:selecao', function () { atualizar(); });
 
   function iniciar() {
     ligar();

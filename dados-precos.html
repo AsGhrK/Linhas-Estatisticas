@@ -37,31 +37,25 @@
     <div class="tela">
       <div class="wrap">
         <h1>Quanto custa a passagem em cada mês?</h1>
-        <p>A tarifa média de cada companhia, mês a mês, para as duas cidades. O mês mais caro e o mais barato aparecem junto de cada gráfico e usam a média ponderada de todas as companhias juntas.</p>
+        <p>A tarifa média de cada companhia, mês a mês, para cada cidade escolhida. O mês mais caro e o mais barato aparecem junto de cada gráfico e usam a média ponderada de todas as companhias juntas.</p>
         <p>As tarifas vêm dos microdados de tarifas aéreas domésticas da ANAC. São os preços das passagens vendidas ao público, registrados todo mês pelas companhias.</p>
         <p class="nota">Fonte: <a href="https://www.gov.br/anac/pt-br/assuntos/dados-e-estatisticas" target="_blank" rel="noopener noreferrer">ANAC — Dados e Estatísticas</a>. Acesso em <span data-campo="fonte_passagens.acesso_em" data-formato="data"></span>.</p>
-        <section class="tela-secao" aria-labelledby="titulo-rio" data-revelar>
-          <h2 id="titulo-rio">Rio de Janeiro</h2>
+        <div data-seletor-cidades></div>
+        <div data-por-cidade>
+          <template>
+        <section class="tela-secao" id="rota-{rota}" aria-labelledby="titulo-{rota}" data-revelar>
+          <h2 id="titulo-{rota}"><span data-nome-cidade></span></h2>
           <figure class="grafico">
-            <div class="grafico-canvas" data-grafico><canvas id="grafico-precos-rio" role="img" aria-label="Tarifa média por mês e por companhia, Campo Grande para Rio de Janeiro"></canvas></div>
-            <figcaption class="grafico-fonte">Fonte: ANAC, microdados de tarifas aéreas comercializadas. Período: <span data-campo="periodo_passagens.inicio" data-formato="periodo"></span> a <span data-campo="periodo_passagens.fim" data-formato="periodo"></span>. Média ponderada por assento vendido, n = <span data-campo="rotas.RIO.passagens.estatisticas.n" data-formato="inteiro"></span> assentos.</figcaption>
+            <div class="grafico-canvas" data-grafico><canvas id="grafico-precos-{rota}" data-precos="{rota}" role="img" aria-label="Tarifa média por mês e por companhia, Campo Grande para {cidade}"></canvas></div>
+            <figcaption class="grafico-fonte">Fonte: ANAC, microdados de tarifas aéreas comercializadas. Período: <span data-campo="periodo_passagens.inicio" data-formato="periodo"></span> a <span data-campo="periodo_passagens.fim" data-formato="periodo"></span>. Média ponderada por assento vendido, n = <span data-campo="rotas.{rota}.passagens.estatisticas.n" data-formato="inteiro"></span> assentos.</figcaption>
           </figure>
           <div class="resumo-preco">
-            <p>Mês mais caro: <strong data-campo="rotas.RIO.passagens.mes_mais_caro.mes" data-formato="mes"></strong>, com média de <strong data-campo="rotas.RIO.passagens.mes_mais_caro.media" data-formato="moeda"></strong>.</p>
-            <p>Mês mais barato: <strong data-campo="rotas.RIO.passagens.mes_mais_barato.mes" data-formato="mes"></strong>, com média de <strong data-campo="rotas.RIO.passagens.mes_mais_barato.media" data-formato="moeda"></strong>.</p>
+            <p>Mês mais caro: <strong data-campo="rotas.{rota}.passagens.mes_mais_caro.mes" data-formato="mes"></strong>, com média de <strong data-campo="rotas.{rota}.passagens.mes_mais_caro.media" data-formato="moeda"></strong>.</p>
+            <p>Mês mais barato: <strong data-campo="rotas.{rota}.passagens.mes_mais_barato.mes" data-formato="mes"></strong>, com média de <strong data-campo="rotas.{rota}.passagens.mes_mais_barato.media" data-formato="moeda"></strong>.</p>
           </div>
         </section>
-        <section class="tela-secao" aria-labelledby="titulo-sao" data-revelar>
-          <h2 id="titulo-sao">São Paulo</h2>
-          <figure class="grafico">
-            <div class="grafico-canvas" data-grafico><canvas id="grafico-precos-sao" role="img" aria-label="Tarifa média por mês e por companhia, Campo Grande para São Paulo"></canvas></div>
-            <figcaption class="grafico-fonte">Fonte: ANAC, microdados de tarifas aéreas comercializadas. Período: <span data-campo="periodo_passagens.inicio" data-formato="periodo"></span> a <span data-campo="periodo_passagens.fim" data-formato="periodo"></span>. Média ponderada por assento vendido, n = <span data-campo="rotas.SAO.passagens.estatisticas.n" data-formato="inteiro"></span> assentos.</figcaption>
-          </figure>
-          <div class="resumo-preco">
-            <p>Mês mais caro: <strong data-campo="rotas.SAO.passagens.mes_mais_caro.mes" data-formato="mes"></strong>, com média de <strong data-campo="rotas.SAO.passagens.mes_mais_caro.media" data-formato="moeda"></strong>.</p>
-            <p>Mês mais barato: <strong data-campo="rotas.SAO.passagens.mes_mais_barato.mes" data-formato="mes"></strong>, com média de <strong data-campo="rotas.SAO.passagens.mes_mais_barato.media" data-formato="moeda"></strong>.</p>
-          </div>
-        </section>
+          </template>
+        </div>
         <p class="nota nota-meses">Meses sem ponto na linha não têm assentos suficientes no período (menos de trinta) ou ainda não foram publicados pela ANAC.</p>
       </div>
     </div>
@@ -72,7 +66,7 @@
       <p><span class="marca">Linhas Estatísticas</span></p>
       <p>Projeto Final de Estatística — TADS, IFMS Nova Andradina</p>
       <p>Equipe: Filipe Rioske, Victor Solique, Davi Casari e João Pegarare</p>
-      <p>Fontes: ANAC, INMET, Accor e Quanto Custa Viajar. <a href="fontes.html">Fontes e datas de acesso</a></p>
+      <p>Fontes: ANAC, INMET, Accor, Quanto Custa Viajar e Numbeo. <a href="fontes.html">Fontes e datas de acesso</a></p>
       <p>Dados coletados de fontes públicas, com fins acadêmicos.</p>
       <p><a href="docs/backlog.html">Plano da equipe</a></p>
     </div>
@@ -80,6 +74,7 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js" integrity="sha512-CQBWl4fJHWbryGE+Pc7UAxWMUMNMWzWxF4SQo9CgkJIN1kx6djDQZjh3Y8SZ1d+6I+1zze6Z7kHXO7q3UyZAWw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="js/normalizar.js"></script>
+  <script src="js/selecao.js"></script>
   <script src="js/reveal.js"></script>
   <script src="js/graficos.js"></script>
   <script src="js/tabelas.js"></script>

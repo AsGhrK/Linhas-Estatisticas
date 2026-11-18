@@ -10,14 +10,6 @@
   var FONTE = document.documentElement.dataset.fonte || 'dados/dados.json';
 
   var COR_COMPANHIA = { GLO: '--cor-gol', TAM: '--cor-latam', AZU: '--cor-azul' };
-  var COR_ROTA = { RIO: '--cor-rio', SAO: '--cor-sao' };
-
-  function temaEscuro() {
-    var stamp = document.documentElement.getAttribute('data-theme');
-    if (stamp === 'dark') return true;
-    if (stamp === 'light') return false;
-    return window.matchMedia('(prefers-color-scheme: dark)').matches;
-  }
 
   function cssVar(nome, alternativa) {
     var v = getComputedStyle(document.documentElement).getPropertyValue(nome).trim();
@@ -42,7 +34,8 @@
   }
 
   function corCompanhia(icao) { return corDe(COR_COMPANHIA[icao]); }
-  function corRota(sigla) { return corDe(COR_ROTA[sigla]); }
+  /* Cada cidade tem um token próprio em css/tokens.css: --cor-<sigla>. */
+  function corRota(sigla) { return corDe('--cor-' + sigla.toLowerCase()); }
 
   function tinta() {
     return {
@@ -209,7 +202,7 @@
     });
   }
 
-  /* ---------- 3. Temperatura média mensal, duas cidades ---------- */
+  /* ---------- 3. Temperatura média mensal, cidades em comparação ---------- */
 
   /* (máxima + mínima) / 2 por mês; mês sem uma das duas fica null. */
   function mediaMensal(c) {
@@ -255,7 +248,7 @@
     });
   }
 
-  /* ---------- 4. Precipitação mensal, duas cidades ----------
+  /* ---------- 4. Precipitação mensal, cidades em comparação ----------
      Gráfico separado de propósito. Chuva e temperatura no mesmo desenho
      exigiriam dois eixos Y, e duas escalas arbitrárias deixam o autor
      escolher onde as curvas se cruzam. */
@@ -294,7 +287,7 @@
 
   /* ---------- 5. Radar comparativo ---------- */
 
-  /* Eixo sem nota nas duas cidades leva o motivo no rótulo, pelo mesmo
+  /* Eixo sem nota em nenhuma cidade leva o motivo no rótulo, pelo mesmo
      critério da conclusão da Visão Geral. */
   function rotulosRadar(dados, perfis) {
     var pequena = S.eixosAmostraPequena(dados);
@@ -429,13 +422,37 @@
     return Object.keys(d.rotas).every(function (k) { return todoNulo(S.perfilRadar(d, k)); });
   }
 
+  /* Só as cidades em comparação (js/selecao.js); sem ele, todas. */
+  function daTela(d) { return LE.selecao ? LE.selecao.daTela(d) : d; }
+  function naTela(fn) { return function (c, d) { fn(c, daTela(d)); }; }
+
   var TELAS = [
-    ['#grafico-precos-rio', comDados(semPrecos('RIO'), 'Preços ainda não coletados.', function (c, d) { precos(c, d, 'RIO'); })],
-    ['#grafico-precos-sao', comDados(semPrecos('SAO'), 'Preços ainda não coletados.', function (c, d) { precos(c, d, 'SAO'); })],
-    ['#grafico-temperatura', comDados(semClima, 'Dados de clima ainda não coletados.', temperatura)],
-    ['#grafico-precipitacao', comDados(semChuva, 'Dados de clima ainda não coletados.', precipitacao)],
-    ['#grafico-radar', comDados(semRadar, 'Dados ainda não coletados.', radar)]
+    ['#grafico-temperatura', naTela(comDados(semClima, 'Dados de clima ainda não coletados.', temperatura))],
+    ['#grafico-precipitacao', naTela(comDados(semChuva, 'Dados de clima ainda não coletados.', precipitacao))],
+    ['#grafico-radar', naTela(comDados(semRadar, 'Dados ainda não coletados.', radar))]
   ];
+
+  /* Um gráfico de preços por cidade, em <canvas data-precos="SIGLA"> criados
+     pelo js/tabelas.js a partir do modelo por cidade. */
+  function desenharPrecos(dados) {
+    document.querySelectorAll('canvas[data-precos]').forEach(function (c) {
+      var sigla = c.getAttribute('data-precos');
+      if (!dados.rotas[sigla]) return;
+      comDados(semPrecos(sigla), 'Preços ainda não coletados.', function (cv, d) { precos(cv, d, sigla); })(c, dados);
+    });
+  }
+
+  function redesenhar(dados) {
+    Object.keys(graficos).forEach(function (id) {
+      if (!document.getElementById(id)) { graficos[id].destroy(); delete graficos[id]; }
+    });
+    desenharPrecos(dados);
+    TELAS.forEach(function (par) {
+      var el = document.querySelector(par[0]);
+      var c = el && canvasDe(el);
+      if (c) par[1](c, dados);
+    });
+  }
 
   var ICONE_ALERTA = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" '
     + 'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
@@ -484,6 +501,7 @@
         faixaPendencias(dados);
         document.dispatchEvent(new CustomEvent('le:dados', { detail: dados }));
 
+        desenharPrecos(dados);
         TELAS.forEach(function (par) {
           quandoAparecer(par[0], function (el) {
             var c = canvasDe(el);
@@ -491,15 +509,13 @@
           });
         });
 
-        // Troca de tema: redesenha com as cores do tema novo.
+        // Troca de tema e troca de cidades: redesenha. O setTimeout deixa o
+        // js/tabelas.js recriar antes as seções por cidade.
         window.matchMedia('(prefers-color-scheme: dark)')
-          .addEventListener('change', function () {
-            TELAS.forEach(function (par) {
-              var el = document.querySelector(par[0]);
-              var c = el && canvasDe(el);
-              if (c && graficos[c.id]) par[1](c, dados);
-            });
-          });
+          .addEventListener('change', function () { redesenhar(dados); });
+        document.addEventListener('le:selecao', function () {
+          setTimeout(function () { redesenhar(dados); }, 0);
+        });
       })
       .catch(falhou);
   }

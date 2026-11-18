@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Linhas Estatísticas</title>
-  <meta name="description" content="Campo Grande para o Rio ou para São Paulo? Uma comparação de passagem, clima, hotel e alimentação com dados da ANAC, do INMET e de outras fontes.">
+  <meta name="description" content="Para onde voar saindo de Campo Grande? Dez destinos comparados em passagem, clima, hotel e alimentação, com dados da ANAC, do INMET e de outras fontes.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;600;800&family=Atkinson+Hyperlegible+Mono:wght@400;600&display=swap">
@@ -46,24 +46,45 @@
 
       <div class="wrap hero-grade">
         <div class="hero-texto">
-          <h1 id="titulo-hero">Campo Grande para o Rio ou para São Paulo?</h1>
-          <p>A comparação junta as tarifas da ANAC, ponderadas pelos assentos vendidos, a climatologia, os hotéis e a alimentação de cada cidade. Quanto cada parte pesa é escolha sua.</p>
+          <h1 id="titulo-hero">Para onde voar saindo de Campo Grande?</h1>
+          <p>A comparação junta as tarifas da ANAC, ponderadas pelos assentos vendidos, a climatologia, os hotéis e a alimentação de dez destinos. Quanto cada parte pesa é escolha sua.</p>
         </div>
 
         <svg class="rota-hero" viewBox="0 0 560 380" role="img" aria-labelledby="rota-hero-titulo">
-          <title id="rota-hero-titulo">Rota aérea de Campo Grande (SBCG) que se divide em duas: uma para o Rio de Janeiro (SBRJ e SBGL) e outra para São Paulo (SBSP e SBGR). Desenho esquemático, fora de escala.</title>
-          <path class="aerovia" data-desenhar pathLength="1" d="M60 200 L250 214 L500 116"/>
-          <path class="aerovia" data-desenhar pathLength="1" d="M60 200 L250 214 L440 296"/>
-          <path class="fixo" d="M250 202 L261 221 L239 221 Z"/>
-          <circle class="aeroporto" cx="60" cy="200" r="10"/>
-          <circle class="aeroporto" cx="500" cy="116" r="10"/>
-          <circle class="aeroporto" cx="440" cy="296" r="10"/>
-          <text class="codigo" x="40" y="172">SBCG</text>
-          <text class="cidade" x="40" y="242">Campo Grande</text>
-          <text class="cidade" x="520" y="56" text-anchor="end">Rio de Janeiro</text>
-          <text class="codigo" x="520" y="88" text-anchor="end">SBRJ / SBGL</text>
-          <text class="codigo" x="440" y="338" text-anchor="middle">SBSP / SBGR</text>
-          <text class="cidade" x="440" y="366" text-anchor="middle">São Paulo</text>
+          <title id="rota-hero-titulo">Rotas aéreas de Campo Grande (SBCG) para dez destinos: Rio de Janeiro (SBRJ e SBGL), São Paulo (SBSP e SBGR), Campinas (SBKP), Brasília (SBBR), Recife (SBRF), Belo Horizonte (SBCF), Porto Alegre (SBPA), Curitiba (SBCT), Salvador (SBSV), Florianópolis (SBFL). Desenho esquemático, fora de escala.</title>
+          <path class="aerovia" data-desenhar pathLength="1" d="M60 190 L275 47"/>
+          <path class="aerovia" data-desenhar pathLength="1" d="M60 190 L336 70"/>
+          <path class="aerovia" data-desenhar pathLength="1" d="M60 190 L386 99"/>
+          <path class="aerovia" data-desenhar pathLength="1" d="M60 190 L420 134"/>
+          <path class="aerovia" data-desenhar pathLength="1" d="M60 190 L438 171"/>
+          <path class="aerovia" data-desenhar pathLength="1" d="M60 190 L438 209"/>
+          <path class="aerovia" data-desenhar pathLength="1" d="M60 190 L420 246"/>
+          <path class="aerovia" data-desenhar pathLength="1" d="M60 190 L386 281"/>
+          <path class="aerovia" data-desenhar pathLength="1" d="M60 190 L336 310"/>
+          <path class="aerovia" data-desenhar pathLength="1" d="M60 190 L275 333"/>
+          <circle class="aeroporto" cx="60" cy="190" r="10"/>
+          <circle class="aeroporto" cx="275" cy="47" r="6"/>
+          <text class="codigo" x="287" y="53">RIO</text>
+          <circle class="aeroporto" cx="336" cy="70" r="6"/>
+          <text class="codigo" x="348" y="76">SAO</text>
+          <circle class="aeroporto" cx="386" cy="99" r="6"/>
+          <text class="codigo" x="398" y="105">CPQ</text>
+          <circle class="aeroporto" cx="420" cy="134" r="6"/>
+          <text class="codigo" x="432" y="140">BSB</text>
+          <circle class="aeroporto" cx="438" cy="171" r="6"/>
+          <text class="codigo" x="450" y="177">REC</text>
+          <circle class="aeroporto" cx="438" cy="209" r="6"/>
+          <text class="codigo" x="450" y="215">BHZ</text>
+          <circle class="aeroporto" cx="420" cy="246" r="6"/>
+          <text class="codigo" x="432" y="252">POA</text>
+          <circle class="aeroporto" cx="386" cy="281" r="6"/>
+          <text class="codigo" x="398" y="287">CWB</text>
+          <circle class="aeroporto" cx="336" cy="310" r="6"/>
+          <text class="codigo" x="348" y="316">SSA</text>
+          <circle class="aeroporto" cx="275" cy="333" r="6"/>
+          <text class="codigo" x="287" y="339">FLN</text>
+          <text class="codigo" x="24" y="162">SBCG</text>
+          <text class="cidade" x="8" y="266">Campo Grande</text>
         </svg>
       </div>
     </section>
@@ -79,6 +100,14 @@
           <select id="destino" name="destino">
             <option value="RIO">Rio de Janeiro (SBRJ / SBGL)</option>
             <option value="SAO">São Paulo (SBSP / SBGR)</option>
+            <option value="CPQ">Campinas (SBKP)</option>
+            <option value="BSB">Brasília (SBBR)</option>
+            <option value="REC">Recife (SBRF)</option>
+            <option value="BHZ">Belo Horizonte (SBCF)</option>
+            <option value="POA">Porto Alegre (SBPA)</option>
+            <option value="CWB">Curitiba (SBCT)</option>
+            <option value="SSA">Salvador (SBSV)</option>
+            <option value="FLN">Florianópolis (SBFL)</option>
           </select>
         </div>
         <button class="botao" type="submit">Ver a comparação</button>
@@ -90,13 +119,13 @@
       <p>Cada tela responde a uma pergunta. A ordem abaixo é a ordem da apresentação.</p>
       <ol class="telas">
         <li aria-current="page"><strong>Principal</strong><span>Esta tela: a pergunta e a escolha do destino.</span></li>
-        <li><a href="dados-busca.html">Dados da Busca</a><span>As tarifas de cada companhia, com as duas rotas lado a lado.</span></li>
+        <li><a href="dados-busca.html">Dados da Busca</a><span>As tarifas de cada companhia, com as cidades escolhidas lado a lado.</span></li>
         <li><a href="dados-precos.html">Dados e Preços</a><span>Quanto custa a passagem em cada mês, com o mais caro e o mais barato marcados.</span></li>
-        <li><a href="detalhes.html">Detalhes</a><span>A entrada para o clima, os hotéis e a alimentação do destino.</span></li>
+        <li><a href="detalhes.html">Detalhes</a><span>A entrada para o clima, os hotéis e a alimentação de cada destino.</span></li>
         <li><a href="clima.html">Clima</a><span>Temperatura e chuva de cada cidade pela climatologia do INMET.</span></li>
         <li><a href="hotel.html">Hotel</a><span>As diárias dos hotéis e o custo médio da hospedagem em cada cidade.</span></li>
         <li><a href="alimentacao.html">Alimentação</a><span>Quanto custa uma refeição e o que se come em cada cidade.</span></li>
-        <li><a href="visao-geral.html">Visão Geral</a><span>O score composto no radar, com os pesos que você ajusta.</span></li>
+        <li><a href="visao-geral.html">Visão Geral</a><span>O score composto no radar e o ranking dos dez destinos, com os pesos que você ajusta.</span></li>
       </ol>
       <a class="botao botao-contorno" href="dados-busca.html">Começar pela busca</a>
     </section>
@@ -107,7 +136,7 @@
       <p><span class="marca">Linhas Estatísticas</span></p>
       <p>Projeto Final de Estatística — TADS, IFMS Nova Andradina</p>
       <p>Equipe: Filipe Rioske, Victor Solique, Davi Casari e João Pegarare</p>
-      <p>Fontes: ANAC, INMET, Accor e Quanto Custa Viajar. <a href="fontes.html">Fontes e datas de acesso</a></p>
+      <p>Fontes: ANAC, INMET, Accor, Quanto Custa Viajar e Numbeo. <a href="fontes.html">Fontes e datas de acesso</a></p>
       <p>Dados coletados de fontes públicas, com fins acadêmicos.</p>
       <p><a href="docs/backlog.html">Plano da equipe</a></p>
     </div>

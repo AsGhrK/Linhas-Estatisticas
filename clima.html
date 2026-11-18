@@ -40,19 +40,27 @@
         <p>Climatologia é o comportamento típico do mês, não previsão. Temperatura e chuva ficam em gráficos separados, cada um com a sua escala.</p>
         <p>As médias climatológicas resumem três décadas de dados observados. Elas mostram as épocas mais quentes, frias, chuvosas e secas de cada cidade. Descrevem o mês típico, não a previsão do tempo para uma data.</p>
         <p class="nota">Fonte: <a href="https://portal.inmet.gov.br/servicos/normais-climatol%C3%B3gicas" target="_blank" rel="noopener noreferrer">INMET — Normais Climatológicas</a>.</p>
+        <div data-seletor-cidades></div>
         <section class="tela-secao" aria-labelledby="titulo-temperatura" data-revelar>
           <h2 id="titulo-temperatura">Temperatura média</h2>
           <figure class="grafico">
-            <div class="grafico-canvas" data-grafico><canvas id="grafico-temperatura" role="img" aria-label="Temperatura média mensal, Rio de Janeiro e São Paulo"></canvas></div>
-            <figcaption class="grafico-fonte">Estações: Rio de Janeiro, <span data-campo="rotas.RIO.clima.estacao"></span>; São Paulo, <span data-campo="rotas.SAO.clima.estacao"></span>. Período: <span data-campo="rotas.RIO.clima.periodo"></span>. Fonte: <span data-campo="rotas.RIO.clima.fonte"></span>.</figcaption>
+            <div class="grafico-canvas" data-grafico><canvas id="grafico-temperatura" role="img" aria-label="Temperatura média mensal das cidades escolhidas"></canvas></div>
+            <figcaption class="grafico-fonte">Período: <span data-campo="rotas.RIO.clima.periodo"></span>. Fonte: <span data-campo="rotas.RIO.clima.fonte"></span>.</figcaption>
           </figure>
         </section>
         <section class="tela-secao" aria-labelledby="titulo-precipitacao" data-revelar>
           <h2 id="titulo-precipitacao">Chuva</h2>
           <figure class="grafico">
-            <div class="grafico-canvas" data-grafico><canvas id="grafico-precipitacao" role="img" aria-label="Precipitação mensal, Rio de Janeiro e São Paulo"></canvas></div>
-            <figcaption class="grafico-fonte">Estações: Rio de Janeiro, <span data-campo="rotas.RIO.clima.estacao"></span>; São Paulo, <span data-campo="rotas.SAO.clima.estacao"></span>. Período: <span data-campo="rotas.RIO.clima.periodo"></span>. Fonte: <span data-campo="rotas.RIO.clima.fonte"></span>.</figcaption>
+            <div class="grafico-canvas" data-grafico><canvas id="grafico-precipitacao" role="img" aria-label="Precipitação mensal das cidades escolhidas"></canvas></div>
+            <figcaption class="grafico-fonte">Período: <span data-campo="rotas.RIO.clima.periodo"></span>. Fonte: <span data-campo="rotas.RIO.clima.fonte"></span>.</figcaption>
           </figure>
+        </section>
+        <section class="tela-secao" aria-labelledby="titulo-estacoes">
+          <h2 id="titulo-estacoes">Estações de cada cidade</h2>
+          <p>A série de uma cidade com mais de uma estação do INMET no município é a média, mês a mês, dessas estações.</p>
+          <ul class="lista-dados" data-por-cidade>
+            <template><li><span data-nome-cidade></span><span data-campo="rotas.{rota}.clima.estacao"></span></li></template>
+          </ul>
         </section>
       </div>
     </div>
@@ -63,7 +71,7 @@
       <p><span class="marca">Linhas Estatísticas</span></p>
       <p>Projeto Final de Estatística — TADS, IFMS Nova Andradina</p>
       <p>Equipe: Filipe Rioske, Victor Solique, Davi Casari e João Pegarare</p>
-      <p>Fontes: ANAC, INMET, Accor e Quanto Custa Viajar. <a href="fontes.html">Fontes e datas de acesso</a></p>
+      <p>Fontes: ANAC, INMET, Accor, Quanto Custa Viajar e Numbeo. <a href="fontes.html">Fontes e datas de acesso</a></p>
       <p>Dados coletados de fontes públicas, com fins acadêmicos.</p>
       <p><a href="docs/backlog.html">Plano da equipe</a></p>
     </div>
@@ -71,6 +79,7 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js" integrity="sha512-CQBWl4fJHWbryGE+Pc7UAxWMUMNMWzWxF4SQo9CgkJIN1kx6djDQZjh3Y8SZ1d+6I+1zze6Z7kHXO7q3UyZAWw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="js/normalizar.js"></script>
+  <script src="js/selecao.js"></script>
   <script src="js/reveal.js"></script>
   <script src="js/graficos.js"></script>
   <script src="js/tabelas.js"></script>

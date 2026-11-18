@@ -39,38 +39,27 @@
         <h1>Quanto custa comer em cada cidade?</h1>
         <p>O preço médio de cada refeição, o gasto de um dia inteiro e as comidas típicas de cada lugar.</p>
         <p class="nota">Com menos de três preços por refeição, a alimentação aparece nesta tela, mas fica fora do score composto da Visão Geral: com tão poucos preços, a diferença entre as cidades não se sustenta.</p>
-        <section class="tela-secao" id="rota-RIO" aria-labelledby="titulo-RIO" data-revelar>
-          <h2 id="titulo-RIO">Rio de Janeiro</h2>
+        <div data-seletor-cidades></div>
+        <div data-por-cidade>
+          <template>
+        <section class="tela-secao" id="rota-{rota}" aria-labelledby="titulo-{rota}" data-revelar>
+          <h2 id="titulo-{rota}"><span data-nome-cidade></span></h2>
           <dl class="resumo">
-            <div><dt>Café da manhã</dt><dd data-campo="rotas.RIO.alimentacao.medias.cafe" data-formato="moeda"></dd></div>
-            <div><dt>Almoço</dt><dd data-campo="rotas.RIO.alimentacao.medias.almoco" data-formato="moeda"></dd></div>
-            <div><dt>Jantar</dt><dd data-campo="rotas.RIO.alimentacao.medias.jantar" data-formato="moeda"></dd></div>
-            <div><dt>Média diária</dt><dd data-campo="rotas.RIO.alimentacao.media_diaria" data-formato="moeda"></dd></div>
-            <div><dt>Preços coletados por refeição (n)</dt><dd data-campo="rotas.RIO.alimentacao.n" data-formato="inteiro"></dd></div>
+            <div><dt>Café da manhã</dt><dd data-campo="rotas.{rota}.alimentacao.medias.cafe" data-formato="moeda"></dd></div>
+            <div><dt>Almoço</dt><dd data-campo="rotas.{rota}.alimentacao.medias.almoco" data-formato="moeda"></dd></div>
+            <div><dt>Jantar</dt><dd data-campo="rotas.{rota}.alimentacao.medias.jantar" data-formato="moeda"></dd></div>
+            <div><dt>Média diária</dt><dd data-campo="rotas.{rota}.alimentacao.media_diaria" data-formato="moeda"></dd></div>
+            <div><dt>Preços coletados por refeição (n)</dt><dd data-campo="rotas.{rota}.alimentacao.n" data-formato="inteiro"></dd></div>
           </dl>
           <h3>O que se come</h3>
-          <p>No Rio, vale provar estes pratos. O biscoito Globo com mate gelado é o lanche da praia.</p>
-          <ul class="lista-dados" data-lista="rotas.RIO.alimentacao.tipicas" data-vazio="Ainda não coletado.">
+          <p>Pratos que a fonte indica para provar na cidade.</p>
+          <ul class="lista-dados" data-lista="rotas.{rota}.alimentacao.tipicas" data-vazio="Ainda não coletado.">
             <template><li data-campo="."></li></template>
           </ul>
-          <p class="grafico-fonte">Fontes: <span data-campo="rotas.RIO.alimentacao.fonte"></span>. O que cada preço representa está em <a href="fontes.html">Fontes</a>. Coletado em: <span data-campo="rotas.RIO.alimentacao.coletado_em" data-formato="data"></span>. A média diária soma as médias de café, almoço e jantar.</p>
+          <p class="grafico-fonte">Fontes: <span data-campo="rotas.{rota}.alimentacao.fonte"></span>. O que cada preço representa está em <a href="fontes.html">Fontes</a>. Coletado em: <span data-campo="rotas.{rota}.alimentacao.coletado_em" data-formato="data"></span>. A média diária soma as médias de café, almoço e jantar.</p>
         </section>
-        <section class="tela-secao" id="rota-SAO" aria-labelledby="titulo-SAO" data-revelar>
-          <h2 id="titulo-SAO">São Paulo</h2>
-          <dl class="resumo">
-            <div><dt>Café da manhã</dt><dd data-campo="rotas.SAO.alimentacao.medias.cafe" data-formato="moeda"></dd></div>
-            <div><dt>Almoço</dt><dd data-campo="rotas.SAO.alimentacao.medias.almoco" data-formato="moeda"></dd></div>
-            <div><dt>Jantar</dt><dd data-campo="rotas.SAO.alimentacao.medias.jantar" data-formato="moeda"></dd></div>
-            <div><dt>Média diária</dt><dd data-campo="rotas.SAO.alimentacao.media_diaria" data-formato="moeda"></dd></div>
-            <div><dt>Preços coletados por refeição (n)</dt><dd data-campo="rotas.SAO.alimentacao.n" data-formato="inteiro"></dd></div>
-          </dl>
-          <h3>O que se come</h3>
-          <p>Em São Paulo, os clássicos são estes. O pastel com caldo de cana é o lanche das feiras.</p>
-          <ul class="lista-dados" data-lista="rotas.SAO.alimentacao.tipicas" data-vazio="Ainda não coletado.">
-            <template><li data-campo="."></li></template>
-          </ul>
-          <p class="grafico-fonte">Fontes: <span data-campo="rotas.SAO.alimentacao.fonte"></span>. O que cada preço representa está em <a href="fontes.html">Fontes</a>. Coletado em: <span data-campo="rotas.SAO.alimentacao.coletado_em" data-formato="data"></span>. A média diária soma as médias de café, almoço e jantar.</p>
-        </section>
+          </template>
+        </div>
       </div>
     </div>
   </main>
@@ -80,13 +69,14 @@
       <p><span class="marca">Linhas Estatísticas</span></p>
       <p>Projeto Final de Estatística — TADS, IFMS Nova Andradina</p>
       <p>Equipe: Filipe Rioske, Victor Solique, Davi Casari e João Pegarare</p>
-      <p>Fontes: ANAC, INMET, Accor e Quanto Custa Viajar. <a href="fontes.html">Fontes e datas de acesso</a></p>
+      <p>Fontes: ANAC, INMET, Accor, Quanto Custa Viajar e Numbeo. <a href="fontes.html">Fontes e datas de acesso</a></p>
       <p>Dados coletados de fontes públicas, com fins acadêmicos.</p>
       <p><a href="docs/backlog.html">Plano da equipe</a></p>
     </div>
   </footer>
 
   <script src="js/normalizar.js"></script>
+  <script src="js/selecao.js"></script>
   <script src="js/reveal.js"></script>
   <script src="js/graficos.js"></script>
   <script src="js/tabelas.js"></script>

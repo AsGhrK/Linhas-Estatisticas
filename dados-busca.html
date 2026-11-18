@@ -37,49 +37,32 @@
     <div class="tela">
       <div class="wrap">
         <h1>Quanto custa voar de Campo Grande para cada cidade?</h1>
-        <p>As tarifas de cada companhia, com as duas rotas lado a lado. O coeficiente de variação mostra o quanto o preço oscila em torno da média.</p>
+        <p>As tarifas de cada companhia, com as cidades escolhidas lado a lado. O coeficiente de variação mostra o quanto o preço oscila em torno da média.</p>
         <p>As tarifas vêm dos microdados de tarifas aéreas domésticas da ANAC. São os preços das passagens vendidas ao público, registrados todo mês pelas companhias.</p>
         <p class="nota">Fonte: <a href="https://www.gov.br/anac/pt-br/assuntos/dados-e-estatisticas" target="_blank" rel="noopener noreferrer">ANAC — Dados e Estatísticas</a>. Acesso em <span data-campo="fonte_passagens.acesso_em" data-formato="data"></span>.</p>
-        <section class="tela-secao" id="rota-RIO" aria-labelledby="titulo-RIO">
-          <h2 id="titulo-RIO">Campo Grande para o Rio de Janeiro</h2>
+        <div data-seletor-cidades></div>
+        <div data-por-cidade>
+          <template>
+        <section class="tela-secao" id="rota-{rota}" aria-labelledby="titulo-{rota}">
+          <h2 id="titulo-{rota}">Campo Grande para <span data-nome-cidade></span></h2>
           <div class="tabela-rolagem">
             <table class="tabela-dados">
-              <caption class="sr-only">Tarifas de Campo Grande para o Rio de Janeiro, por companhia</caption>
+              <caption class="sr-only">Tarifas de Campo Grande para <span data-nome-cidade></span>, por companhia</caption>
               <thead>
                 <tr><th scope="col">Companhia</th><th scope="col" data-num>Média</th><th scope="col" data-num>Mediana</th><th scope="col" data-num>Coeficiente de variação</th><th scope="col" data-num>Mínimo</th><th scope="col" data-num>Máximo</th><th scope="col" data-num>Assentos (n)</th></tr>
               </thead>
-              <tbody>
-              <tr><th scope="row">GOL</th><td data-num data-campo="rotas.RIO.passagens.companhias.0.estatisticas.media" data-formato="moeda"></td><td data-num data-campo="rotas.RIO.passagens.companhias.0.estatisticas.mediana" data-formato="moeda"></td><td data-num data-campo="rotas.RIO.passagens.companhias.0.estatisticas.coef_variacao" data-formato="porcentagem"></td><td data-num data-campo="rotas.RIO.passagens.companhias.0.estatisticas.minimo" data-formato="moeda"></td><td data-num data-campo="rotas.RIO.passagens.companhias.0.estatisticas.maximo" data-formato="moeda"></td><td data-num data-campo="rotas.RIO.passagens.companhias.0.estatisticas.n" data-formato="inteiro"></td></tr>
-              <tr><th scope="row">LATAM</th><td data-num data-campo="rotas.RIO.passagens.companhias.1.estatisticas.media" data-formato="moeda"></td><td data-num data-campo="rotas.RIO.passagens.companhias.1.estatisticas.mediana" data-formato="moeda"></td><td data-num data-campo="rotas.RIO.passagens.companhias.1.estatisticas.coef_variacao" data-formato="porcentagem"></td><td data-num data-campo="rotas.RIO.passagens.companhias.1.estatisticas.minimo" data-formato="moeda"></td><td data-num data-campo="rotas.RIO.passagens.companhias.1.estatisticas.maximo" data-formato="moeda"></td><td data-num data-campo="rotas.RIO.passagens.companhias.1.estatisticas.n" data-formato="inteiro"></td></tr>
-              <tr><th scope="row">Azul</th><td data-num data-campo="rotas.RIO.passagens.companhias.2.estatisticas.media" data-formato="moeda"></td><td data-num data-campo="rotas.RIO.passagens.companhias.2.estatisticas.mediana" data-formato="moeda"></td><td data-num data-campo="rotas.RIO.passagens.companhias.2.estatisticas.coef_variacao" data-formato="porcentagem"></td><td data-num data-campo="rotas.RIO.passagens.companhias.2.estatisticas.minimo" data-formato="moeda"></td><td data-num data-campo="rotas.RIO.passagens.companhias.2.estatisticas.maximo" data-formato="moeda"></td><td data-num data-campo="rotas.RIO.passagens.companhias.2.estatisticas.n" data-formato="inteiro"></td></tr>
+              <tbody data-lista="rotas.{rota}.passagens.companhias" data-vazio="Nenhuma companhia com assentos suficientes.">
+              <template><tr><th scope="row" data-campo=".nome"></th><td data-num data-campo=".estatisticas.media" data-formato="moeda"></td><td data-num data-campo=".estatisticas.mediana" data-formato="moeda"></td><td data-num data-campo=".estatisticas.coef_variacao" data-formato="porcentagem"></td><td data-num data-campo=".estatisticas.minimo" data-formato="moeda"></td><td data-num data-campo=".estatisticas.maximo" data-formato="moeda"></td><td data-num data-campo=".estatisticas.n" data-formato="inteiro"></td></tr></template>
               </tbody>
               <tfoot>
-              <tr><th scope="row">Todas as companhias</th><td data-num data-campo="rotas.RIO.passagens.estatisticas.media" data-formato="moeda"></td><td data-num data-campo="rotas.RIO.passagens.estatisticas.mediana" data-formato="moeda"></td><td data-num data-campo="rotas.RIO.passagens.estatisticas.coef_variacao" data-formato="porcentagem"></td><td data-num data-campo="rotas.RIO.passagens.estatisticas.minimo" data-formato="moeda"></td><td data-num data-campo="rotas.RIO.passagens.estatisticas.maximo" data-formato="moeda"></td><td data-num data-campo="rotas.RIO.passagens.estatisticas.n" data-formato="inteiro"></td></tr>
+              <tr><th scope="row">Todas as companhias</th><td data-num data-campo="rotas.{rota}.passagens.estatisticas.media" data-formato="moeda"></td><td data-num data-campo="rotas.{rota}.passagens.estatisticas.mediana" data-formato="moeda"></td><td data-num data-campo="rotas.{rota}.passagens.estatisticas.coef_variacao" data-formato="porcentagem"></td><td data-num data-campo="rotas.{rota}.passagens.estatisticas.minimo" data-formato="moeda"></td><td data-num data-campo="rotas.{rota}.passagens.estatisticas.maximo" data-formato="moeda"></td><td data-num data-campo="rotas.{rota}.passagens.estatisticas.n" data-formato="inteiro"></td></tr>
               </tfoot>
             </table>
           </div>
           <p class="grafico-fonte">Fonte: ANAC, microdados de tarifas aéreas comercializadas. Período: <span data-campo="periodo_passagens.inicio" data-formato="periodo"></span> a <span data-campo="periodo_passagens.fim" data-formato="periodo"></span>. Média ponderada por assento vendido.</p>
         </section>
-        <section class="tela-secao" id="rota-SAO" aria-labelledby="titulo-SAO">
-          <h2 id="titulo-SAO">Campo Grande para São Paulo</h2>
-          <div class="tabela-rolagem">
-            <table class="tabela-dados">
-              <caption class="sr-only">Tarifas de Campo Grande para São Paulo, por companhia</caption>
-              <thead>
-                <tr><th scope="col">Companhia</th><th scope="col" data-num>Média</th><th scope="col" data-num>Mediana</th><th scope="col" data-num>Coeficiente de variação</th><th scope="col" data-num>Mínimo</th><th scope="col" data-num>Máximo</th><th scope="col" data-num>Assentos (n)</th></tr>
-              </thead>
-              <tbody>
-              <tr><th scope="row">GOL</th><td data-num data-campo="rotas.SAO.passagens.companhias.0.estatisticas.media" data-formato="moeda"></td><td data-num data-campo="rotas.SAO.passagens.companhias.0.estatisticas.mediana" data-formato="moeda"></td><td data-num data-campo="rotas.SAO.passagens.companhias.0.estatisticas.coef_variacao" data-formato="porcentagem"></td><td data-num data-campo="rotas.SAO.passagens.companhias.0.estatisticas.minimo" data-formato="moeda"></td><td data-num data-campo="rotas.SAO.passagens.companhias.0.estatisticas.maximo" data-formato="moeda"></td><td data-num data-campo="rotas.SAO.passagens.companhias.0.estatisticas.n" data-formato="inteiro"></td></tr>
-              <tr><th scope="row">LATAM</th><td data-num data-campo="rotas.SAO.passagens.companhias.1.estatisticas.media" data-formato="moeda"></td><td data-num data-campo="rotas.SAO.passagens.companhias.1.estatisticas.mediana" data-formato="moeda"></td><td data-num data-campo="rotas.SAO.passagens.companhias.1.estatisticas.coef_variacao" data-formato="porcentagem"></td><td data-num data-campo="rotas.SAO.passagens.companhias.1.estatisticas.minimo" data-formato="moeda"></td><td data-num data-campo="rotas.SAO.passagens.companhias.1.estatisticas.maximo" data-formato="moeda"></td><td data-num data-campo="rotas.SAO.passagens.companhias.1.estatisticas.n" data-formato="inteiro"></td></tr>
-              <tr><th scope="row">Azul</th><td data-num data-campo="rotas.SAO.passagens.companhias.2.estatisticas.media" data-formato="moeda"></td><td data-num data-campo="rotas.SAO.passagens.companhias.2.estatisticas.mediana" data-formato="moeda"></td><td data-num data-campo="rotas.SAO.passagens.companhias.2.estatisticas.coef_variacao" data-formato="porcentagem"></td><td data-num data-campo="rotas.SAO.passagens.companhias.2.estatisticas.minimo" data-formato="moeda"></td><td data-num data-campo="rotas.SAO.passagens.companhias.2.estatisticas.maximo" data-formato="moeda"></td><td data-num data-campo="rotas.SAO.passagens.companhias.2.estatisticas.n" data-formato="inteiro"></td></tr>
-              </tbody>
-              <tfoot>
-              <tr><th scope="row">Todas as companhias</th><td data-num data-campo="rotas.SAO.passagens.estatisticas.media" data-formato="moeda"></td><td data-num data-campo="rotas.SAO.passagens.estatisticas.mediana" data-formato="moeda"></td><td data-num data-campo="rotas.SAO.passagens.estatisticas.coef_variacao" data-formato="porcentagem"></td><td data-num data-campo="rotas.SAO.passagens.estatisticas.minimo" data-formato="moeda"></td><td data-num data-campo="rotas.SAO.passagens.estatisticas.maximo" data-formato="moeda"></td><td data-num data-campo="rotas.SAO.passagens.estatisticas.n" data-formato="inteiro"></td></tr>
-              </tfoot>
-            </table>
-          </div>
-          <p class="grafico-fonte">Fonte: ANAC, microdados de tarifas aéreas comercializadas. Período: <span data-campo="periodo_passagens.inicio" data-formato="periodo"></span> a <span data-campo="periodo_passagens.fim" data-formato="periodo"></span>. Média ponderada por assento vendido.</p>
-        </section>
+          </template>
+        </div>
       </div>
     </div>
   </main>
@@ -89,13 +72,14 @@
       <p><span class="marca">Linhas Estatísticas</span></p>
       <p>Projeto Final de Estatística — TADS, IFMS Nova Andradina</p>
       <p>Equipe: Filipe Rioske, Victor Solique, Davi Casari e João Pegarare</p>
-      <p>Fontes: ANAC, INMET, Accor e Quanto Custa Viajar. <a href="fontes.html">Fontes e datas de acesso</a></p>
+      <p>Fontes: ANAC, INMET, Accor, Quanto Custa Viajar e Numbeo. <a href="fontes.html">Fontes e datas de acesso</a></p>
       <p>Dados coletados de fontes públicas, com fins acadêmicos.</p>
       <p><a href="docs/backlog.html">Plano da equipe</a></p>
     </div>
   </footer>
 
   <script src="js/normalizar.js"></script>
+  <script src="js/selecao.js"></script>
   <script src="js/reveal.js"></script>
   <script src="js/graficos.js"></script>
   <script src="js/tabelas.js"></script>

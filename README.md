@@ -1,8 +1,8 @@
 # Linhas Estatísticas
 
-Site comparativo de viagens entre duas rotas aéreas fixas, construído como Projeto Final da disciplina de Estatística — TADS/ADS, IFMS Nova Andradina.
+Site comparativo de viagens de Campo Grande para dez destinos, construído como Projeto Final da disciplina de Estatística — TADS/ADS, IFMS Nova Andradina.
 
-O sistema compara **Campo Grande → Rio de Janeiro** (rota `RIO`: `SBCG → SBRJ + SBGL`) e **Campo Grande → São Paulo** (rota `SAO`: `SBCG → SBSP + SBGR`) sobre cinco dimensões: preço de passagem, clima, hospedagem, alimentação e um score composto que resume as quatro anteriores num único gráfico de radar.
+O sistema compara as rotas de **Campo Grande (SBCG)** para os dez destinos com mais assentos vendidos na ANAC em 2026: Rio de Janeiro (`RIO`: SBRJ + SBGL), São Paulo (`SAO`: SBSP + SBGR), Campinas (`CPQ`: SBKP), Brasília (`BSB`: SBBR), Recife (`REC`: SBRF), Belo Horizonte (`BHZ`: SBCF), Porto Alegre (`POA`: SBPA), Curitiba (`CWB`: SBCT), Salvador (`SSA`: SBSV) e Florianópolis (`FLN`: SBFL). A comparação usa cinco dimensões: preço de passagem, clima, hospedagem, alimentação e um score composto que resume as quatro anteriores num único gráfico de radar.
 
 ---
 
@@ -24,7 +24,7 @@ O sistema compara **Campo Grande → Rio de Janeiro** (rota `RIO`: `SBCG → SBR
 
 ## O que é
 
-Um site estático de 8 telas, mais uma página de fontes, que apresenta uma análise comparativa entre duas rotas. As passagens vêm dos microdados de tarifas da ANAC, recortados e resumidos por um pipeline offline em Python. Clima, hospedagem e alimentação são digitados à mão a partir de fontes públicas. Tudo é consolidado num único `dados.json` e renderizado em tabelas e gráficos no navegador.
+Um site estático de 8 telas, mais uma página de fontes, que apresenta uma análise comparativa entre dez rotas. Cada tela mostra até quatro cidades de cada vez, escolhidas pelo visitante; a Visão Geral traz também o ranking das dez. As passagens vêm dos microdados de tarifas da ANAC, recortados e resumidos por um pipeline offline em Python. Clima, hospedagem e alimentação são digitados à mão a partir de fontes públicas. Tudo é consolidado num único `dados.json` e renderizado em tabelas e gráficos no navegador.
 
 A entrega tem duas metades:
 
@@ -48,13 +48,13 @@ Isso é decisão de escopo, não limitação acidental. Trocar dados manuais por
 | Tela | Conteúdo |
 |---|---|
 | **Principal** | Hero animado, formulário origem/destino, chamada para a comparação |
-| **Dados da Busca** | Tabela de tarifas por companhia, duas rotas lado a lado |
+| **Dados da Busca** | Tabela de tarifas por companhia, uma por cidade escolhida |
 | **Dados e Preços** | Gráficos de linha do preço mensal ao longo do ano, maior e menor preço marcados |
 | **Detalhes da Viagem** | Três cards de entrada: hotéis, clima, restaurantes |
-| **Clima da Viagem** | Dois gráficos separados, cada um com a sua escala: temperatura média mensal (linha) e precipitação (barras), com as duas cidades em cada um |
+| **Clima da Viagem** | Dois gráficos separados, cada um com a sua escala: temperatura média mensal (linha) e precipitação (barras), com as cidades escolhidas em cada um |
 | **Hotel** | Diárias por hotel, custo médio por rota, custo total estimado da hospedagem |
 | **Alimentação** | Custo médio de refeição por cidade e comidas típicas |
-| **Visão Geral** | Radar comparativo de cinco eixos normalizados e a conclusão do trabalho |
+| **Visão Geral** | Radar comparativo de cinco eixos normalizados, a conclusão e o ranking das dez cidades |
 
 Protótipo de referência no Figma: `Projeto Final - Estatisticas`, arquivo `GJBL2SA3rTrlAsppViOEQU`.
 
@@ -96,10 +96,11 @@ linhas-estatisticas/
 │
 ├── js/
 │   ├── normalizar.js          # LE.stats: min-max, inversão de eixos, conforto térmico, score
+│   ├── selecao.js             # cidades em comparação (até 4), na URL e no localStorage
 │   ├── reveal.js              # IntersectionObserver + LE.aoRevelar
 │   ├── graficos.js            # fetch do JSON, evento le:dados, instâncias Chart.js
-│   ├── tabelas.js             # preenche data-campo e as tabelas
-│   ├── busca.js               # destaca a rota escolhida na Principal (?destino=RIO|SAO)
+│   ├── tabelas.js             # preenche data-campo, as listas e os modelos por cidade (data-por-cidade)
+│   ├── busca.js               # destaca a rota escolhida na Principal (?destino=<sigla>)
 │   └── pesos.js               # pesos ajustáveis do score composto
 │
 ├── dados/
@@ -107,7 +108,7 @@ linhas-estatisticas/
 │   ├── dados-falsos.json      # números inventados, para desenvolver sem esperar a coleta
 │   ├── anac/
 │   │   ├── brutos/            # microdados da ANAC (fora do git)
-│   │   └── tarifas_sbcg.csv   # recorte SBCG → Rio e São Paulo (versionado)
+│   │   └── tarifas_sbcg.csv   # recorte SBCG → os dez destinos (versionado)
 │   └── manual/
 │       ├── clima.json         # INMET, normais 1961–1990
 │       ├── hoteis.json        # Accor, coleta manual
@@ -297,14 +298,14 @@ function normalizar(valor, minimo, maximo) {
 }
 ```
 
-O mínimo e o máximo vêm de um conjunto que junta as duas cidades, e cada eixo tem o seu:
+O mínimo e o máximo vêm de um conjunto que junta as dez cidades do estudo, e cada eixo tem o seu. Por isso a nota de uma cidade não muda conforme as outras escolhidas na tela:
 
 | Eixo | Conjunto (mínimo e máximo) | Valor da cidade |
 |---|---|---|
-| Passagem | as tarifas médias de cada companhia em cada mês, nas duas rotas | média da rota, ponderada por assento |
-| Hospedagem | as diárias de todos os hotéis pesquisados nas duas cidades | **mediana** das diárias da cidade |
+| Passagem | as tarifas médias de cada companhia em cada mês, nas dez rotas | média da rota, ponderada por assento |
+| Hospedagem | as diárias de todos os hotéis pesquisados nas dez cidades | **mediana** das diárias da cidade |
 | Alimentação | do dia mais barato possível (a refeição mais barata de cada tipo) ao mais caro (a mais cara de cada tipo) | média diária (soma das médias de café, almoço e jantar) |
-| Tempo seco | os totais mensais de precipitação das duas cidades | média mensal do ano |
+| Tempo seco | os totais mensais de precipitação das dez cidades | média mensal do ano |
 
 A hospedagem usa a mediana porque um hotel muito caro puxa a média para cima e mudaria a posição da cidade sozinho.
 
@@ -409,10 +410,10 @@ P1 está no caminho crítico: P3 e P4 dependem do `dados.json`. Por isso o schem
 
 | Dimensão | Origem |
 |---|---|
-| Preços de passagem | ANAC — microdados de tarifas aéreas comercializadas, voos domésticos, jan–set/2026 |
-| Climatologia | INMET — Normais Climatológicas do Brasil 1961–1990: média mês a mês de 8 estações no município do Rio e 2 no de São Paulo. As normais mais novas não trazem a estação central do Rio completa. |
-| Hospedagem | Accor (`all.accor.com`): 21 hotéis no Rio e 34 em São Paulo, marcas econômicas e intermediárias, check-in 12/01/2027, 5 noites |
-| Alimentação | Quanto Custa Viajar, faixa econômica |
+| Preços de passagem | ANAC — microdados de tarifas aéreas comercializadas, voos domésticos, jan–set/2026, SBCG para os dez destinos |
+| Climatologia | INMET — Normais Climatológicas do Brasil 1961–1990: média mês a mês das estações de cada município (8 no Rio, 2 em São Paulo, 1 nas outras cidades). As normais mais novas não trazem a estação central do Rio completa. |
+| Hospedagem | Accor (`all.accor.com`): de 2 hotéis (Campinas e Brasília) a 34 (São Paulo) por cidade, marcas econômicas e intermediárias, check-in 12/01/2027, 5 noites |
+| Alimentação | Quanto Custa Viajar (três faixas por refeição) e Numbeo (restaurante barato e restaurante médio) |
 | Comidas típicas | Quanto Custa Viajar |
 
 A fonte, a estação e a data de coleta de cada dado manual ficam no próprio arquivo de `dados/manual/`, seguem para o `dados.json` e são reproduzidas no relatório. As URLs e as datas de acesso estão em [`fontes.html`](fontes.html).
@@ -421,13 +422,14 @@ A fonte, a estação e a data de coleta de cada dado manual ficam no próprio ar
 
 Declaradas aqui e no relatório. Reconhecer o limite do próprio método é o que separa análise estatística de tabela colorida.
 
-- **Amostra de conveniência.** Os dados não foram sorteados. Foram os que estavam disponíveis publicamente nas fontes escolhidas, o que impede generalizar os resultados para além destas duas rotas.
+- **Amostra de conveniência.** Os dados não foram sorteados. Foram os que estavam disponíveis publicamente nas fontes escolhidas, o que impede generalizar os resultados para além destas dez rotas.
 - **Período da ANAC de 9 meses.** As passagens cobrem jan–set/2026. Não existe série de dezembro, o mês tradicionalmente mais caro.
 - **Rotas por cidade.** A média de cada rota junta aeroportos com perfis de preço diferentes: Santos Dumont e Galeão no Rio, Congonhas e Guarulhos em São Paulo.
-- **Viracopos fica fora.** `SBKP` fica em Campinas e não entra na rota de São Paulo, o que reduz o volume da Azul nessa rota.
+- **Viracopos é Campinas.** `SBKP` entra como destino próprio, Campinas, e não na rota de São Paulo. A Azul tem pouco volume na rota de São Paulo porque concentra os voos em Viracopos.
 - **Tarifa sem taxas.** O valor da ANAC é a tarifa comercializada, sem taxas de embarque. O passageiro paga mais do que o número mostrado.
 - **Recorte temporal único na hospedagem e na alimentação.** Diárias e refeições refletem uma janela de coleta de poucos dias. Uma coleta em outro período produziria outros números e possivelmente outra conclusão.
-- **Alimentação por fontes, não por restaurantes.** Cada preço de café, almoço e jantar é a estimativa de uma fonte: as três faixas do Quanto Custa Viajar, o Numbeo, a ABBT (2024) e a VR (2023). São médias publicadas, não cardápios sorteados, e misturam faixas de preço e anos diferentes, sempre iguais nas duas cidades. Com menos de três preços por refeição, o eixo sairia do radar e do score (`MIN_PRECOS_REFEICAO` em `pipeline/gerar_dados.py`).
+- **Alimentação por fontes, não por restaurantes.** Cada preço de café, almoço e jantar é a estimativa de uma fonte: as três faixas do Quanto Custa Viajar e dois valores do Numbeo. São médias publicadas, não cardápios sorteados, e misturam faixas de preço; as fontes são as mesmas em todas as cidades. A ABBT e a VR foram consultadas e ficaram fora porque não cobrem todas as cidades. As faixas do Quanto Custa Viajar de Brasília e Belo Horizonte parecem mais antigas que as das outras cidades. Com menos de três preços por refeição, o eixo sairia do radar e do score (`MIN_PRECOS_REFEICAO` em `pipeline/gerar_dados.py`).
+- **Poucos hotéis em algumas cidades.** A Accor tem 2 hotéis dentro do município em Campinas e em Brasília e 3 no Recife e em Florianópolis. Nessas cidades a mediana das diárias depende de dois ou três números.
 - **Viés de rede hoteleira.** As diárias vêm de uma só rede. O custo de hospedagem apurado representa aquele padrão de hotel, não o mercado da cidade.
-- **Climatologia não é previsão.** As séries de temperatura e chuva são as médias de 1961–1990, não o clima de 2026. É o único período em que o INMET publica temperatura e chuva da estação central do Rio; as duas cidades usam o mesmo período, mas o aquecimento desde então não aparece. Descrevem o comportamento típico do mês, não o tempo que fará numa data específica.
+- **Climatologia não é previsão.** As séries de temperatura e chuva são as médias de 1961–1990, não o clima de 2026. É o único período em que o INMET publica temperatura e chuva da estação central do Rio; todas as cidades usam o mesmo período, mas o aquecimento desde então não aparece. O Rio tem 8 estações na média e São Paulo 2; as outras cidades, 1. Descrevem o comportamento típico do mês, não o tempo que fará numa data específica.
 - **Sem validação cruzada de preço.** Os valores não foram conferidos contra uma segunda fonte independente.

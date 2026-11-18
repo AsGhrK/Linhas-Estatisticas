@@ -105,10 +105,44 @@
     });
   }
 
+  var ATRIBUTOS_ROTA = ['id', 'data-campo', 'data-lista', 'data-precos', 'aria-labelledby', 'aria-label', 'for'];
+
+  /* [data-por-cidade] repete o <template> filho uma vez por cidade: as
+     escolhidas (LE.selecao) ou, com data-por-cidade="todas", as dez. No
+     modelo, "{rota}" vira a sigla e [data-nome-cidade] recebe o nome. */
+  function expandirPorCidade(base, dados) {
+    base.querySelectorAll('[data-por-cidade]').forEach(function (el) {
+      var modelo = el.querySelector(':scope > template');
+      if (!modelo) return;
+      Array.prototype.slice.call(el.children).forEach(function (filho) {
+        if (filho.hasAttribute('data-cidade-gerado')) filho.remove();
+      });
+      var siglas = el.getAttribute('data-por-cidade') === 'todas' || !LE.selecao
+        ? Object.keys(dados.rotas) : LE.selecao.chaves(dados);
+      siglas.forEach(function (sigla) {
+        var copia = modelo.content.cloneNode(true);
+        copia.querySelectorAll('*').forEach(function (no) {
+          ATRIBUTOS_ROTA.forEach(function (a) {
+            var v = no.getAttribute(a);
+            if (v && v.indexOf('{rota}') !== -1) no.setAttribute(a, v.split('{rota}').join(sigla));
+            if (v && v.indexOf('{cidade}') !== -1) no.setAttribute(a, v.split('{cidade}').join(dados.rotas[sigla].cidade));
+          });
+          if (no.hasAttribute('data-nome-cidade')) no.textContent = dados.rotas[sigla].cidade;
+          if (no.hasAttribute('data-revelar')) no.classList.add('visivel');
+        });
+        Array.prototype.slice.call(copia.children).forEach(function (filho) {
+          filho.setAttribute('data-cidade-gerado', '');
+          el.insertBefore(filho, modelo);
+        });
+      });
+    });
+  }
+
   function preencher(raiz) {
     var dados = LE.dados;
     if (!dados) return;
     var base = raiz || document;
+    expandirPorCidade(base, dados);
     base.querySelectorAll('[data-lista]').forEach(function (el) { preencherLista(el, dados); });
     base.querySelectorAll('[data-campo]').forEach(function (el) {
       var caminho = el.getAttribute('data-campo');
@@ -123,4 +157,5 @@
     if (e.detail && !LE.dados) LE.dados = e.detail;
     preencher(document);
   });
+  document.addEventListener('le:selecao', function () { preencher(document); });
 })(window);

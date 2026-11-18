@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Hotel — Linhas Estatísticas</title>
-  <meta name="description" content="Diárias dos hotéis pesquisados em Rio de Janeiro e São Paulo, com média, mediana e custo total da hospedagem.">
+  <meta name="description" content="Diárias dos hotéis pesquisados em cada cidade, com média, mediana e custo total da hospedagem.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;600;800&family=Atkinson+Hyperlegible+Mono:wght@400;600&display=swap">
@@ -38,35 +38,26 @@
       <div class="wrap">
         <h1>Quanto custa dormir em cada cidade?</h1>
         <p>A diária de cada hotel pesquisado, com a média, a mediana e o custo da estadia inteira.</p>
-        <p>As diárias são de hotéis da <a href="https://all.accor.com" target="_blank" rel="noopener noreferrer">rede Accor</a> nas duas cidades. Elas mostram quanto a estadia pesa no orçamento.</p>
-        <section class="tela-secao" id="rota-RIO" aria-labelledby="titulo-RIO" data-revelar>
-          <h2 id="titulo-RIO">Rio de Janeiro</h2>
-          <ul class="lista-dados" data-lista="rotas.RIO.hotel.hoteis" data-vazio="Diárias ainda não coletadas.">
+        <p>As diárias são de hotéis da <a href="https://all.accor.com" target="_blank" rel="noopener noreferrer">rede Accor</a> em cada cidade. Elas mostram quanto a estadia pesa no orçamento.</p>
+        <div data-seletor-cidades></div>
+        <div data-por-cidade>
+          <template>
+        <section class="tela-secao" id="rota-{rota}" aria-labelledby="titulo-{rota}" data-revelar>
+          <h2 id="titulo-{rota}"><span data-nome-cidade></span></h2>
+          <ul class="lista-dados" data-lista="rotas.{rota}.hotel.hoteis" data-vazio="Diárias ainda não coletadas.">
             <template><li><span data-campo=".nome"></span><strong data-num data-campo=".diaria" data-formato="moeda"></strong></li></template>
           </ul>
           <dl class="resumo">
-            <div><dt>Diária média</dt><dd data-campo="rotas.RIO.hotel.diaria_media" data-formato="moeda"></dd></div>
-            <div><dt>Diária mediana</dt><dd data-campo="rotas.RIO.hotel.diaria_mediana" data-formato="moeda"></dd></div>
-            <div><dt>Hotéis pesquisados (n)</dt><dd data-campo="rotas.RIO.hotel.n" data-formato="inteiro"></dd></div>
-            <div><dt>Noites</dt><dd data-campo="rotas.RIO.hotel.noites" data-formato="inteiro"></dd></div>
-            <div><dt>Custo total da hospedagem</dt><dd data-campo="rotas.RIO.hotel.custo_total" data-formato="moeda"></dd></div>
+            <div><dt>Diária média</dt><dd data-campo="rotas.{rota}.hotel.diaria_media" data-formato="moeda"></dd></div>
+            <div><dt>Diária mediana</dt><dd data-campo="rotas.{rota}.hotel.diaria_mediana" data-formato="moeda"></dd></div>
+            <div><dt>Hotéis pesquisados (n)</dt><dd data-campo="rotas.{rota}.hotel.n" data-formato="inteiro"></dd></div>
+            <div><dt>Noites</dt><dd data-campo="rotas.{rota}.hotel.noites" data-formato="inteiro"></dd></div>
+            <div><dt>Custo total da hospedagem</dt><dd data-campo="rotas.{rota}.hotel.custo_total" data-formato="moeda"></dd></div>
           </dl>
-          <p class="grafico-fonte">Fonte: <span data-campo="rotas.RIO.hotel.fonte"></span>. Coletado em: <span data-campo="rotas.RIO.hotel.coletado_em" data-formato="data"></span>. Check-in: <span data-campo="rotas.RIO.hotel.checkin" data-formato="data"></span>. O custo total é a diária média multiplicada pelas noites.</p>
+          <p class="grafico-fonte">Fonte: <span data-campo="rotas.{rota}.hotel.fonte"></span>. Coletado em: <span data-campo="rotas.{rota}.hotel.coletado_em" data-formato="data"></span>. Check-in: <span data-campo="rotas.{rota}.hotel.checkin" data-formato="data"></span>. O custo total é a diária média multiplicada pelas noites.</p>
         </section>
-        <section class="tela-secao" id="rota-SAO" aria-labelledby="titulo-SAO" data-revelar>
-          <h2 id="titulo-SAO">São Paulo</h2>
-          <ul class="lista-dados" data-lista="rotas.SAO.hotel.hoteis" data-vazio="Diárias ainda não coletadas.">
-            <template><li><span data-campo=".nome"></span><strong data-num data-campo=".diaria" data-formato="moeda"></strong></li></template>
-          </ul>
-          <dl class="resumo">
-            <div><dt>Diária média</dt><dd data-campo="rotas.SAO.hotel.diaria_media" data-formato="moeda"></dd></div>
-            <div><dt>Diária mediana</dt><dd data-campo="rotas.SAO.hotel.diaria_mediana" data-formato="moeda"></dd></div>
-            <div><dt>Hotéis pesquisados (n)</dt><dd data-campo="rotas.SAO.hotel.n" data-formato="inteiro"></dd></div>
-            <div><dt>Noites</dt><dd data-campo="rotas.SAO.hotel.noites" data-formato="inteiro"></dd></div>
-            <div><dt>Custo total da hospedagem</dt><dd data-campo="rotas.SAO.hotel.custo_total" data-formato="moeda"></dd></div>
-          </dl>
-          <p class="grafico-fonte">Fonte: <span data-campo="rotas.SAO.hotel.fonte"></span>. Coletado em: <span data-campo="rotas.SAO.hotel.coletado_em" data-formato="data"></span>. Check-in: <span data-campo="rotas.SAO.hotel.checkin" data-formato="data"></span>. O custo total é a diária média multiplicada pelas noites.</p>
-        </section>
+          </template>
+        </div>
       </div>
     </div>
   </main>
@@ -76,13 +67,14 @@
       <p><span class="marca">Linhas Estatísticas</span></p>
       <p>Projeto Final de Estatística — TADS, IFMS Nova Andradina</p>
       <p>Equipe: Filipe Rioske, Victor Solique, Davi Casari e João Pegarare</p>
-      <p>Fontes: ANAC, INMET, Accor e Quanto Custa Viajar. <a href="fontes.html">Fontes e datas de acesso</a></p>
+      <p>Fontes: ANAC, INMET, Accor, Quanto Custa Viajar e Numbeo. <a href="fontes.html">Fontes e datas de acesso</a></p>
       <p>Dados coletados de fontes públicas, com fins acadêmicos.</p>
       <p><a href="docs/backlog.html">Plano da equipe</a></p>
     </div>
   </footer>
 
   <script src="js/normalizar.js"></script>
+  <script src="js/selecao.js"></script>
   <script src="js/reveal.js"></script>
   <script src="js/graficos.js"></script>
   <script src="js/tabelas.js"></script>
