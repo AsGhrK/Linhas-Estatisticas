@@ -6,7 +6,8 @@
  *
  * A escolha é uma lista de MAX posições; cada posição tem a sua cor
  * (--serie-1..3). Tirar uma cidade esvazia a posição dela e não repinta as
- * outras; a cidade nova ocupa a primeira posição livre. A escolha vale para
+ * outras; a cidade nova ocupa a primeira posição livre. Com as MAX posições
+ * cheias, marcar outra cidade troca a última escolhida e mostra um aviso. A escolha vale para
  * todas as telas: fica na URL (?cidades=RIO,,BSB) e, quando o navegador
  * deixa, no localStorage. ?destino=XXX, vindo da busca da página inicial,
  * entra numa posição livre. Exposto em window.LE.selecao; dispara
@@ -61,6 +62,8 @@
   if (!doc || !doc.querySelector) return;
 
   var atual = null;   // as MAX posições
+  var ultima = null;  // posição da última cidade escolhida: a que sai na troca
+  var aviso = '';
 
   function lerLocal() {
     try { return (global.localStorage.getItem(CHAVE_LOCAL) || '').split(','); } catch (e) { return []; }
@@ -123,7 +126,6 @@
     grupo.appendChild(titulo);
     var lista = doc.createElement('div');
     lista.className = 'seletor-opcoes';
-    var cheio = siglas(atual).length >= MAX;
     Object.keys(dados.rotas).forEach(function (k) {
       var rotulo = doc.createElement('label');
       rotulo.className = 'seletor-opcao';
@@ -131,7 +133,6 @@
       caixa.type = 'checkbox';
       caixa.value = k;
       caixa.checked = atual.indexOf(k) !== -1;
-      caixa.disabled = !caixa.checked && cheio;
       var cor = doc.createElement('span');
       cor.className = 'seletor-cor';
       cor.setAttribute('aria-hidden', 'true');
@@ -142,6 +143,11 @@
       lista.appendChild(rotulo);
     });
     grupo.appendChild(lista);
+    var nota = doc.createElement('p');
+    nota.className = 'seletor-aviso';
+    nota.setAttribute('role', 'status');
+    nota.textContent = aviso;
+    grupo.appendChild(nota);
     el.appendChild(grupo);
   }
 
@@ -153,10 +159,17 @@
     var caixa = e.target;
     if (!caixa.closest || !caixa.closest('[data-seletor-cidades]') || !LE.dados) return;
     var pos = atual.slice();
+    var rotas = LE.dados.rotas;
+    aviso = '';
     if (caixa.checked) {
       var livre = pos.indexOf(null);
-      if (livre === -1) { caixa.checked = false; return; }
+      if (livre === -1) {
+        livre = ultima !== null && pos[ultima] ? ultima : MAX - 1;
+        aviso = 'A comparação vai até ' + MAX + ' cidades: ' + rotas[pos[livre]].cidade
+          + ' saiu e ' + rotas[caixa.value].cidade + ' entrou.';
+      }
       pos[livre] = caixa.value;
+      ultima = livre;
     } else {
       pos[pos.indexOf(caixa.value)] = null;
       if (!siglas(pos).length) { caixa.checked = true; return; }   // ao menos uma cidade
