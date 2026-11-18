@@ -98,8 +98,22 @@ def _passagens(linhas_rota):
             "mes_mais_barato": _extremo(mensal, min)}
 
 
+def _media_estacoes(estacoes):
+    # Média mês a mês das estações da cidade; mês sem valor em nenhuma estação fica null.
+    c = {"estacao": f"média de {len(estacoes)} estações do INMET no município",
+         "estacoes": [e["nome"] for e in estacoes], "n_estacoes": len(estacoes)}
+    for campo in ("temp_max", "temp_min", "precipitacao"):
+        c[campo] = []
+        for mes in range(12):
+            vals = [e[campo][mes] for e in estacoes if e[campo][mes] is not None]
+            c[campo].append(round(statistics.mean(vals), 1) if vals else None)
+    return c
+
+
 def _clima(manual, chave, pendencias):
     c = manual[chave]
+    if c.get("estacoes"):
+        c = _media_estacoes(c["estacoes"])
     if c.get("estacao") is None:
         pendencias.append(f"clima.{chave}.estacao")
     for campo in ("temp_max", "temp_min", "precipitacao"):
@@ -207,6 +221,7 @@ def gerar(recorte: Path, pasta_manual: Path, coletado_em: str) -> dict:
             "clima": {
                 "temp_max": c["temp_max"], "temp_min": c["temp_min"],
                 "precipitacao": c["precipitacao"], "estacao": c["estacao"],
+                "estacoes": c.get("estacoes", [c["estacao"]]), "n_estacoes": c.get("n_estacoes", 1),
                 "periodo": clima.get("periodo"), "fonte": clima.get("fonte"),
             },
             "hotel": _hotel(hoteis, chave, pendencias),

@@ -1,23 +1,26 @@
 {
-  "fonte": "Quanto Custa Viajar (faixas baixo custo, econômico e conforto) e Numbeo (refeição em restaurante barato, no almoço e no jantar)",
+  "fonte": "Quanto Custa Viajar, Numbeo, ABBT e VR",
   "coletado_em": "2026-11-18",
   "RIO": {
     "cafe": [
       15,
       24,
-      37
+      37,
+      33.22
     ],
     "almoco": [
       38,
       50,
       64,
-      45
+      45,
+      60.46
     ],
     "jantar": [
       44,
       63,
       73,
-      45
+      45,
+      102.5
     ],
     "tipicas": [
       "Feijoada carioca",
@@ -30,19 +33,22 @@
     "cafe": [
       18,
       26,
-      40
+      40,
+      28.37
     ],
     "almoco": [
       40,
       52,
       68,
-      45
+      45,
+      59.67
     ],
     "jantar": [
       51,
       63,
       76,
-      45
+      45,
+      125
     ],
     "tipicas": [
       "Virado à paulista",
@@ -50,5 +56,27 @@
       "Pastel com caldo de cana"
     ],
     "fonte_tipicas": "Quanto Custa Viajar"
+  },
+  "origem_dos_precos": {
+    "cafe": [
+      "Quanto Custa Viajar, baixo custo",
+      "Quanto Custa Viajar, econômico",
+      "Quanto Custa Viajar, conforto",
+      "VR (2023), gasto médio por visita a padarias e cafeterias, cerca de 12 mil estabelecimentos"
+    ],
+    "almoco": [
+      "Quanto Custa Viajar, baixo custo",
+      "Quanto Custa Viajar, econômico",
+      "Quanto Custa Viajar, conforto",
+      "Numbeo, refeição em restaurante barato",
+      "ABBT (2024), refeição completa (prato, bebida, sobremesa e café)"
+    ],
+    "jantar": [
+      "Quanto Custa Viajar, baixo custo",
+      "Quanto Custa Viajar, econômico",
+      "Quanto Custa Viajar, conforto",
+      "Numbeo, refeição em restaurante barato",
+      "Numbeo, jantar para dois em restaurante médio, dividido por dois"
+    ]
   }
 }

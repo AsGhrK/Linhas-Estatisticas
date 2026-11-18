@@ -37,15 +37,15 @@
     },
     "custo_alimentacao": {
       "min": 97,
-      "max": 184
+      "max": 233
     },
     "temperatura_media": {
-      "min": 16.75,
-      "max": 26.85
+      "min": 16.299999999999997,
+      "max": 27.1
     },
     "precipitacao": {
-      "min": 39.6,
-      "max": 237.4
+      "min": 39.8,
+      "max": 241.5
     }
   },
   "rotas": {
@@ -223,48 +223,59 @@
       },
       "clima": {
         "temp_max": [
-          30.1,
-          30.2,
-          29.4,
-          27.8,
-          26.4,
-          25.2,
-          25.0,
-          25.5,
+          31.5,
+          31.7,
+          30.8,
+          28.4,
+          26.8,
+          25.9,
           25.4,
-          26.0,
-          27.4,
-          28.6
+          26.4,
+          26.6,
+          27.1,
+          28.3,
+          30.0
         ],
         "temp_min": [
-          23.3,
-          23.5,
-          23.3,
-          21.9,
-          20.4,
-          18.7,
-          18.4,
-          18.9,
-          19.2,
+          22.3,
+          22.5,
+          22.0,
           20.2,
-          21.4,
-          22.4
+          18.2,
+          17.0,
+          16.3,
+          17.0,
+          17.9,
+          19.0,
+          20.0,
+          21.3
         ],
         "precipitacao": [
-          137.1,
-          130.4,
-          135.8,
-          94.9,
-          69.8,
-          42.7,
-          41.9,
-          44.5,
-          53.6,
-          86.5,
-          97.8,
-          134.2
+          179.5,
+          164.2,
+          155.7,
+          126.6,
+          99.4,
+          55.0,
+          68.1,
+          67.2,
+          74.6,
+          114.2,
+          135.6,
+          178.4
         ],
-        "estacao": "Rio de Janeiro (83743)",
+        "estacao": "média de 8 estações do INMET no município",
+        "estacoes": [
+          "Rio de Janeiro",
+          "Alto da Boa Vista",
+          "Bangu",
+          "Engenho de Dentro",
+          "Jacarepaguá",
+          "Jardim Botânico",
+          "Penha",
+          "Santa Teresa"
+        ],
+        "n_estacoes": 8,
         "periodo": "1961-1990",
         "fonte": "INMET — Normais Climatológicas do Brasil 1961–1990"
       },
@@ -412,33 +423,36 @@
         "cafe": [
           15,
           24,
-          37
+          37,
+          33.22
         ],
         "almoco": [
           38,
           50,
           64,
-          45
+          45,
+          60.46
         ],
         "jantar": [
           44,
           63,
           73,
-          45
+          45,
+          102.5
         ],
         "medias": {
-          "cafe": 25.33,
-          "almoco": 49.25,
-          "jantar": 56.25
+          "cafe": 27.3,
+          "almoco": 51.49,
+          "jantar": 65.5
         },
-        "n": 3,
-        "media_diaria": 130.83,
+        "n": 4,
+        "media_diaria": 144.29,
         "tipicas": [
           "Feijoada carioca",
           "Filé à Oswaldo Aranha",
           "Biscoito Globo e mate"
         ],
-        "fonte": "Quanto Custa Viajar (faixas baixo custo, econômico e conforto) e Numbeo (refeição em restaurante barato, no almoço e no jantar)",
+        "fonte": "Quanto Custa Viajar, Numbeo, ABBT e VR",
         "coletado_em": "2026-11-18"
       }
     },
@@ -616,48 +630,53 @@
       },
       "clima": {
         "temp_max": [
-          27.3,
-          28.0,
+          27.1,
+          27.9,
           27.2,
-          25.1,
+          25.0,
           23.0,
-          21.8,
-          21.8,
-          23.3,
-          23.9,
+          21.9,
+          21.9,
+          23.5,
+          24.2,
           24.8,
-          25.9,
+          25.8,
           26.3
         ],
         "temp_min": [
-          18.7,
-          18.8,
-          18.2,
-          16.3,
-          13.8,
-          12.4,
-          11.7,
+          17.6,
+          17.9,
+          17.2,
+          15.2,
           12.8,
-          13.9,
-          15.3,
-          16.6,
-          17.7
+          11.4,
+          10.7,
+          11.9,
+          13.2,
+          14.5,
+          15.6,
+          16.9
         ],
         "precipitacao": [
-          237.4,
-          221.5,
-          160.5,
-          72.6,
-          71.4,
-          50.1,
-          43.9,
-          39.6,
-          70.7,
-          126.9,
-          145.8,
-          200.7
+          241.5,
+          232.7,
+          159.8,
+          74.3,
+          65.6,
+          54.4,
+          48.5,
+          39.8,
+          73.5,
+          144.8,
+          170.8,
+          210.6
         ],
-        "estacao": "Mirante de Santana (83781)",
+        "estacao": "média de 2 estações do INMET no município",
+        "estacoes": [
+          "São Paulo (Mir. de Santana)",
+          "São Paulo - Horto Florestal"
+        ],
+        "n_estacoes": 2,
         "periodo": "1961-1990",
         "fonte": "INMET — Normais Climatológicas do Brasil 1961–1990"
       },
@@ -883,33 +902,36 @@
         "cafe": [
           18,
           26,
-          40
+          40,
+          28.37
         ],
         "almoco": [
           40,
           52,
           68,
-          45
+          45,
+          59.67
         ],
         "jantar": [
           51,
           63,
           76,
-          45
+          45,
+          125
         ],
         "medias": {
-          "cafe": 28,
-          "almoco": 51.25,
-          "jantar": 58.75
+          "cafe": 28.09,
+          "almoco": 52.93,
+          "jantar": 72
         },
-        "n": 3,
-        "media_diaria": 138.0,
+        "n": 4,
+        "media_diaria": 153.02,
         "tipicas": [
           "Virado à paulista",
           "Sanduíche de mortadela",
           "Pastel com caldo de cana"
         ],
-        "fonte": "Quanto Custa Viajar (faixas baixo custo, econômico e conforto) e Numbeo (refeição em restaurante barato, no almoço e no jantar)",
+        "fonte": "Quanto Custa Viajar, Numbeo, ABBT e VR",
         "coletado_em": "2026-11-18"
       }
     }

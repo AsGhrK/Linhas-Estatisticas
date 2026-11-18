@@ -77,6 +77,19 @@ class TestGerar(unittest.TestCase):
         self.manual = raiz / "incompleto"
         escrever(self.manual, incompleto)
 
+    def test_varias_estacoes_viram_media_mes_a_mes(self):
+        manual = copy.deepcopy(MANUAL)
+        outra = {**CLIMA_BASE, "nome": "Y", "temp_max": [x + 2 for x in CLIMA_BASE["temp_max"]],
+                 "precipitacao": [None] + CLIMA_BASE["precipitacao"][1:]}
+        manual["clima.json"]["RIO"] = {"estacoes": [{**CLIMA_BASE, "nome": "X"}, outra]}
+        pasta = Path(self.tmp.name) / "estacoes"
+        escrever(pasta, manual)
+        c = gerar(self.recorte, pasta, "2026-11-17")["rotas"]["RIO"]["clima"]
+        self.assertEqual(c["n_estacoes"], 2)
+        self.assertEqual(c["estacoes"], ["X", "Y"])
+        self.assertEqual(c["temp_max"][0], 31.0)        # média de 30 e 32
+        self.assertEqual(c["precipitacao"][0], 100)     # estação sem valor no mês fica de fora
+
     def gol(self, d):
         return next(c for c in d["rotas"]["RIO"]["passagens"]["companhias"] if c["icao"] == "GLO")
 

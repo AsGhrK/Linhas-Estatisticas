@@ -195,7 +195,9 @@ O `dados.json` é gerado por `pipeline/gerar_dados.py`; não se edita à mão. O
                          18.6, 19.0, 19.7, 20.8, 21.7, 22.6],
         "precipitacao": [137, 130, 135, 95, 70, 55,
                          41, 44, 53, 86, 98, 134],
-        "estacao": "código da estação INMET",
+        "estacao": "média de 8 estações do INMET no município",
+        "estacoes": ["Rio de Janeiro", "..."],
+        "n_estacoes": 8,
         "periodo": "1961-1990",
         "fonte": "INMET — Normais Climatológicas 1961–1990"
       },
@@ -366,7 +368,7 @@ O recorte `tarifas_sbcg.csv` é versionado, então só o segundo comando é nece
 
 Cada arquivo de `dados/manual/` é JSON. Número usa ponto como separador decimal (`24.5`, não `24,5`) e campo ainda não coletado fica `null`, nunca `0`. Datas no formato `aaaa-mm-dd`.
 
-- `clima.json`: para cada cidade, a `estacao` do INMET e as séries `temp_max`, `temp_min` e `precipitacao`, com 12 valores cada, de janeiro a dezembro.
+- `clima.json`: para cada cidade, uma lista `estacoes` do INMET, cada uma com `codigo`, `nome` e as séries `temp_max`, `temp_min` e `precipitacao`, com 12 valores cada, de janeiro a dezembro. O pipeline tira a média mês a mês das estações. Uma cidade com uma estação só pode usar `estacao` e as séries direto.
 - `hoteis.json`: `coletado_em`, `checkin` e `noites` no topo; em cada cidade, uma entrada por hotel com `nome`, `url` e `diaria`. O arquivo vem com modelos de hotel todos em `null`: apague os que não usar. Modelo todo nulo é ignorado, mas um hotel com nome e sem diária deixa a cidade pendente.
 - `alimentacao.json`: `coletado_em` no topo; em cada cidade, listas de preços de `cafe`, `almoco` e `jantar` e as comidas `tipicas`. Com menos de três preços por refeição, a alimentação aparece na tela, mas fica fora do radar e do score.
 - `anac.json`: `acesso_em`, a data em que os microdados foram baixados, e a `fonte`.
@@ -408,7 +410,7 @@ P1 está no caminho crítico: P3 e P4 dependem do `dados.json`. Por isso o schem
 | Dimensão | Origem |
 |---|---|
 | Preços de passagem | ANAC — microdados de tarifas aéreas comercializadas, voos domésticos, jan–set/2026 |
-| Climatologia | INMET — Normais Climatológicas do Brasil 1961–1990 (Rio de Janeiro, 83743; São Paulo, Mirante de Santana, 83781). As normais de 1991–2020 não trazem a estação central do Rio e as de 1981–2010 não trazem a chuva dela. |
+| Climatologia | INMET — Normais Climatológicas do Brasil 1961–1990: média mês a mês de 8 estações no município do Rio e 2 no de São Paulo. As normais mais novas não trazem a estação central do Rio completa. |
 | Hospedagem | Accor (`all.accor.com`): 21 hotéis no Rio e 34 em São Paulo, marcas econômicas e intermediárias, check-in 12/01/2027, 5 noites |
 | Alimentação | Quanto Custa Viajar, faixa econômica |
 | Comidas típicas | Quanto Custa Viajar |
@@ -425,7 +427,7 @@ Declaradas aqui e no relatório. Reconhecer o limite do próprio método é o qu
 - **Viracopos fica fora.** `SBKP` fica em Campinas e não entra na rota de São Paulo, o que reduz o volume da Azul nessa rota.
 - **Tarifa sem taxas.** O valor da ANAC é a tarifa comercializada, sem taxas de embarque. O passageiro paga mais do que o número mostrado.
 - **Recorte temporal único na hospedagem e na alimentação.** Diárias e refeições refletem uma janela de coleta de poucos dias. Uma coleta em outro período produziria outros números e possivelmente outra conclusão.
-- **Alimentação por faixas, não por restaurantes.** Os preços de café, almoço e jantar são as três faixas do Quanto Custa Viajar (baixo custo, econômico e conforto), mais a refeição em restaurante barato do Numbeo no almoço e no jantar. São estimativas de fonte, não cardápios sorteados. Com menos de três preços por refeição, o eixo sairia do radar e do score (`MIN_PRECOS_REFEICAO` em `pipeline/gerar_dados.py`).
+- **Alimentação por fontes, não por restaurantes.** Cada preço de café, almoço e jantar é a estimativa de uma fonte: as três faixas do Quanto Custa Viajar, o Numbeo, a ABBT (2024) e a VR (2023). São médias publicadas, não cardápios sorteados, e misturam faixas de preço e anos diferentes, sempre iguais nas duas cidades. Com menos de três preços por refeição, o eixo sairia do radar e do score (`MIN_PRECOS_REFEICAO` em `pipeline/gerar_dados.py`).
 - **Viés de rede hoteleira.** As diárias vêm de uma só rede. O custo de hospedagem apurado representa aquele padrão de hotel, não o mercado da cidade.
 - **Climatologia não é previsão.** As séries de temperatura e chuva são as médias de 1961–1990, não o clima de 2026. É o único período em que o INMET publica temperatura e chuva da estação central do Rio; as duas cidades usam o mesmo período, mas o aquecimento desde então não aparece. Descrevem o comportamento típico do mês, não o tempo que fará numa data específica.
 - **Sem validação cruzada de preço.** Os valores não foram conferidos contra uma segunda fonte independente.

@@ -266,6 +266,10 @@
           134
         ],
         "estacao": "Estação fictícia",
+        "estacoes": [
+          "Estação fictícia"
+        ],
+        "n_estacoes": 1,
         "periodo": "1991-2020",
         "fonte": "INMET — Normais Climatológicas 1991–2020"
       },
@@ -570,6 +574,10 @@
           158
         ],
         "estacao": "Estação fictícia",
+        "estacoes": [
+          "Estação fictícia"
+        ],
+        "n_estacoes": 1,
         "periodo": "1991-2020",
         "fonte": "INMET — Normais Climatológicas 1991–2020"
       },
