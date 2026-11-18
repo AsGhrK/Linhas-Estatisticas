@@ -28,24 +28,24 @@
   ],
   "faixas": {
     "preco_passagem": {
-      "min": 431.79,
-      "max": 944.58
+      "min": 325.0,
+      "max": 1735.33
     },
     "custo_hotel": {
       "min": 219.4,
       "max": 1010.6
     },
     "custo_alimentacao": {
-      "min": 97,
-      "max": 233
+      "min": 47.4,
+      "max": 233.0
     },
     "temperatura_media": {
-      "min": 16.299999999999997,
+      "min": 13.75,
       "max": 27.1
     },
     "precipitacao": {
-      "min": 39.8,
-      "max": 241.5
+      "min": 8.7,
+      "max": 388.1
     }
   },
   "rotas": {
@@ -423,15 +423,13 @@
         "cafe": [
           15,
           24,
-          37,
-          33.22
+          37
         ],
         "almoco": [
           38,
           50,
           64,
-          45,
-          60.46
+          45
         ],
         "jantar": [
           44,
@@ -441,18 +439,18 @@
           102.5
         ],
         "medias": {
-          "cafe": 27.3,
-          "almoco": 51.49,
+          "cafe": 25.33,
+          "almoco": 49.25,
           "jantar": 65.5
         },
-        "n": 4,
-        "media_diaria": 144.29,
+        "n": 3,
+        "media_diaria": 140.08,
         "tipicas": [
           "Feijoada carioca",
           "Filé à Oswaldo Aranha",
           "Biscoito Globo e mate"
         ],
-        "fonte": "Quanto Custa Viajar, Numbeo, ABBT e VR",
+        "fonte": "Quanto Custa Viajar e Numbeo",
         "coletado_em": "2026-11-18"
       }
     },
@@ -902,36 +900,2404 @@
         "cafe": [
           18,
           26,
-          40,
-          28.37
+          40
         ],
         "almoco": [
           40,
           52,
           68,
-          45,
-          59.67
+          45
         ],
         "jantar": [
           51,
           63,
           76,
           45,
-          125
+          125.0
         ],
         "medias": {
-          "cafe": 28.09,
-          "almoco": 52.93,
-          "jantar": 72
+          "cafe": 28,
+          "almoco": 51.25,
+          "jantar": 72.0
         },
-        "n": 4,
-        "media_diaria": 153.02,
+        "n": 3,
+        "media_diaria": 151.25,
         "tipicas": [
           "Virado à paulista",
           "Sanduíche de mortadela",
           "Pastel com caldo de cana"
         ],
-        "fonte": "Quanto Custa Viajar, Numbeo, ABBT e VR",
+        "fonte": "Quanto Custa Viajar e Numbeo",
+        "coletado_em": "2026-11-18"
+      }
+    },
+    "CPQ": {
+      "cidade": "Campinas",
+      "aeroportos": [
+        "SBKP"
+      ],
+      "passagens": {
+        "companhias": [
+          {
+            "nome": "LATAM",
+            "icao": "TAM",
+            "precos": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ],
+            "assentos": [
+              20,
+              16,
+              23,
+              21,
+              21,
+              9,
+              11,
+              8,
+              11,
+              0,
+              0,
+              0
+            ],
+            "estatisticas": {
+              "n": 140,
+              "linhas": 105,
+              "media": 994.08,
+              "mediana": 740.9,
+              "desvio_padrao": 820.64,
+              "coef_variacao": 0.8255,
+              "minimo": 200.0,
+              "maximo": 3799.0,
+              "ponderado_por": "assentos"
+            }
+          },
+          {
+            "nome": "Azul",
+            "icao": "AZU",
+            "precos": [
+              571.12,
+              498.95,
+              744.33,
+              713.61,
+              725.83,
+              591.72,
+              624.13,
+              640.73,
+              783.41,
+              null,
+              null,
+              null
+            ],
+            "assentos": [
+              1421,
+              1829,
+              1716,
+              1628,
+              1205,
+              1451,
+              1714,
+              1803,
+              1282,
+              0,
+              0,
+              0
+            ],
+            "estatisticas": {
+              "n": 14049,
+              "linhas": 6259,
+              "media": 649.56,
+              "mediana": 477.75,
+              "desvio_padrao": 509.9,
+              "coef_variacao": 0.785,
+              "minimo": 137.69,
+              "maximo": 4879.88,
+              "ponderado_por": "assentos"
+            }
+          }
+        ],
+        "estatisticas": {
+          "n": 14189,
+          "linhas": 6364,
+          "media": 652.96,
+          "mediana": 479.65,
+          "desvio_padrao": 514.97,
+          "coef_variacao": 0.7887,
+          "minimo": 137.69,
+          "maximo": 4879.88,
+          "ponderado_por": "assentos"
+        },
+        "mensal": [
+          578.26,
+          501.26,
+          754.25,
+          713.94,
+          726.71,
+          593.75,
+          629.4,
+          640.01,
+          785.21,
+          null,
+          null,
+          null
+        ],
+        "mes_mais_caro": {
+          "mes": "set",
+          "media": 785.21
+        },
+        "mes_mais_barato": {
+          "mes": "fev",
+          "media": 501.26
+        }
+      },
+      "clima": {
+        "temp_max": [
+          29.3,
+          29.9,
+          29.6,
+          27.9,
+          25.6,
+          24.8,
+          25.0,
+          27.2,
+          28.0,
+          28.3,
+          28.7,
+          28.5
+        ],
+        "temp_min": [
+          18.8,
+          19.0,
+          18.4,
+          16.3,
+          13.7,
+          12.2,
+          11.8,
+          13.3,
+          15.0,
+          16.2,
+          17.0,
+          18.3
+        ],
+        "precipitacao": [
+          226.5,
+          211.5,
+          126.4,
+          54.8,
+          45.8,
+          50.9,
+          50.8,
+          30.7,
+          62.8,
+          148.6,
+          143.3,
+          205.4
+        ],
+        "estacao": "Campinas (83729)",
+        "estacoes": [
+          "Campinas"
+        ],
+        "n_estacoes": 1,
+        "periodo": "1961-1990",
+        "fonte": "INMET — Normais Climatológicas do Brasil 1961–1990"
+      },
+      "hotel": {
+        "n": 2,
+        "hoteis": [
+          {
+            "nome": "ibis budget Campinas Aquidaban",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/9452",
+            "diaria": 219.4
+          },
+          {
+            "nome": "ibis Styles Campinas Alphaville",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/C0V8",
+            "diaria": 325.8
+          }
+        ],
+        "diarias": [
+          219.4,
+          325.8
+        ],
+        "diaria_media": 272.6,
+        "diaria_mediana": 272.6,
+        "noites": 5,
+        "custo_total": 1363.0,
+        "fonte": "Accor (all.accor.com)",
+        "coletado_em": "2026-11-18",
+        "checkin": "2027-01-12"
+      },
+      "alimentacao": {
+        "cafe": [
+          10.8,
+          18,
+          24
+        ],
+        "almoco": [
+          18,
+          30,
+          52.8,
+          47
+        ],
+        "jantar": [
+          24,
+          42,
+          76.8,
+          47,
+          90.0
+        ],
+        "medias": {
+          "cafe": 17.6,
+          "almoco": 36.95,
+          "jantar": 55.96
+        },
+        "n": 3,
+        "media_diaria": 110.51,
+        "tipicas": [
+          "Leitão à pururuca",
+          "Bolinho caipira"
+        ],
+        "fonte": "Quanto Custa Viajar e Numbeo",
+        "coletado_em": "2026-11-18"
+      }
+    },
+    "BSB": {
+      "cidade": "Brasília",
+      "aeroportos": [
+        "SBBR"
+      ],
+      "passagens": {
+        "companhias": [
+          {
+            "nome": "GOL",
+            "icao": "GLO",
+            "precos": [
+              513.8,
+              656.44,
+              679.69,
+              839.03,
+              956.47,
+              867.53,
+              811.28,
+              906.66,
+              896.64,
+              null,
+              null,
+              null
+            ],
+            "assentos": [
+              102,
+              127,
+              119,
+              83,
+              41,
+              83,
+              70,
+              54,
+              37,
+              0,
+              0,
+              0
+            ],
+            "estatisticas": {
+              "n": 716,
+              "linhas": 387,
+              "media": 749.22,
+              "mediana": 602.9,
+              "desvio_padrao": 449.09,
+              "coef_variacao": 0.5994,
+              "minimo": 248.26,
+              "maximo": 3554.9,
+              "ponderado_por": "assentos"
+            }
+          },
+          {
+            "nome": "LATAM",
+            "icao": "TAM",
+            "precos": [
+              756.78,
+              777.52,
+              956.73,
+              1001.27,
+              759.88,
+              947.33,
+              904.09,
+              828.2,
+              851.91,
+              null,
+              null,
+              null
+            ],
+            "assentos": [
+              1184,
+              1022,
+              1032,
+              917,
+              1340,
+              1124,
+              996,
+              1077,
+              859,
+              0,
+              0,
+              0
+            ],
+            "estatisticas": {
+              "n": 9551,
+              "linhas": 3425,
+              "media": 858.91,
+              "mediana": 629.9,
+              "desvio_padrao": 631.15,
+              "coef_variacao": 0.7348,
+              "minimo": 168.4,
+              "maximo": 3994.0,
+              "ponderado_por": "assentos"
+            }
+          },
+          {
+            "nome": "Azul",
+            "icao": "AZU",
+            "precos": [
+              804.61,
+              808.58,
+              1573.48,
+              1410.57,
+              902.44,
+              1072.75,
+              854.04,
+              1006.36,
+              895.82,
+              null,
+              null,
+              null
+            ],
+            "assentos": [
+              106,
+              175,
+              91,
+              153,
+              214,
+              168,
+              136,
+              248,
+              160,
+              0,
+              0,
+              0
+            ],
+            "estatisticas": {
+              "n": 1451,
+              "linhas": 1053,
+              "media": 1011.85,
+              "mediana": 845.9,
+              "desvio_padrao": 641.65,
+              "coef_variacao": 0.6341,
+              "minimo": 252.0,
+              "maximo": 4634.98,
+              "ponderado_por": "assentos"
+            }
+          }
+        ],
+        "estatisticas": {
+          "n": 11718,
+          "linhas": 4865,
+          "media": 871.14,
+          "mediana": 645.9,
+          "desvio_padrao": 625.63,
+          "coef_variacao": 0.7182,
+          "minimo": 168.4,
+          "maximo": 4634.98,
+          "ponderado_por": "assentos"
+        },
+        "mensal": [
+          742.62,
+          770.01,
+          975.38,
+          1043.91,
+          784.06,
+          957.84,
+          893.02,
+          863.31,
+          860.13,
+          null,
+          null,
+          null
+        ],
+        "mes_mais_caro": {
+          "mes": "abr",
+          "media": 1043.91
+        },
+        "mes_mais_barato": {
+          "mes": "jan",
+          "media": 742.62
+        }
+      },
+      "clima": {
+        "temp_max": [
+          26.9,
+          26.7,
+          27.1,
+          26.6,
+          25.7,
+          25.2,
+          25.1,
+          27.3,
+          28.3,
+          27.5,
+          26.6,
+          26.2
+        ],
+        "temp_min": [
+          17.4,
+          17.4,
+          17.5,
+          16.8,
+          15.0,
+          13.3,
+          12.9,
+          14.6,
+          16.0,
+          17.4,
+          17.5,
+          17.5
+        ],
+        "precipitacao": [
+          247.4,
+          217.5,
+          180.6,
+          123.8,
+          38.6,
+          8.7,
+          11.1,
+          13.9,
+          55.2,
+          166.6,
+          231.1,
+          246.0
+        ],
+        "estacao": "Brasília (83377)",
+        "estacoes": [
+          "Brasília"
+        ],
+        "n_estacoes": 1,
+        "periodo": "1961-1990",
+        "fonte": "INMET — Normais Climatológicas do Brasil 1961–1990"
+      },
+      "hotel": {
+        "n": 2,
+        "hoteis": [
+          {
+            "nome": "Mercure Brasilia Lider",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/3627",
+            "diaria": 326.2
+          },
+          {
+            "nome": "ibis Styles Brasilia Aeroporto",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/B0I3",
+            "diaria": 456.8
+          }
+        ],
+        "diarias": [
+          326.2,
+          456.8
+        ],
+        "diaria_media": 391.5,
+        "diaria_mediana": 391.5,
+        "noites": 5,
+        "custo_total": 1957.5,
+        "fonte": "Accor (all.accor.com)",
+        "coletado_em": "2026-11-18",
+        "checkin": "2027-01-12"
+      },
+      "alimentacao": {
+        "cafe": [
+          14.4,
+          18,
+          20.4
+        ],
+        "almoco": [
+          20.4,
+          25.2,
+          28.8,
+          45
+        ],
+        "jantar": [
+          23.76,
+          27.84,
+          31.98,
+          45,
+          100.0
+        ],
+        "medias": {
+          "cafe": 17.6,
+          "almoco": 29.85,
+          "jantar": 45.72
+        },
+        "n": 3,
+        "media_diaria": 93.17,
+        "tipicas": [
+          "Galinhada com pequi",
+          "Arroz com pequi",
+          "Buchada de bode"
+        ],
+        "fonte": "Quanto Custa Viajar e Numbeo",
+        "coletado_em": "2026-11-18"
+      }
+    },
+    "REC": {
+      "cidade": "Recife",
+      "aeroportos": [
+        "SBRF"
+      ],
+      "passagens": {
+        "companhias": [
+          {
+            "nome": "GOL",
+            "icao": "GLO",
+            "precos": [
+              1011.19,
+              765.61,
+              1033.13,
+              882.68,
+              1175.23,
+              890.81,
+              557.91,
+              1138.22,
+              1246.51,
+              null,
+              null,
+              null
+            ],
+            "assentos": [
+              198,
+              186,
+              79,
+              66,
+              52,
+              130,
+              360,
+              115,
+              75,
+              0,
+              0,
+              0
+            ],
+            "estatisticas": {
+              "n": 1261,
+              "linhas": 414,
+              "media": 860.14,
+              "mediana": 654.9,
+              "desvio_padrao": 545.65,
+              "coef_variacao": 0.6344,
+              "minimo": 282.97,
+              "maximo": 3999.0,
+              "ponderado_por": "assentos"
+            }
+          },
+          {
+            "nome": "LATAM",
+            "icao": "TAM",
+            "precos": [
+              652.11,
+              779.63,
+              932.61,
+              803.65,
+              779.77,
+              866.6,
+              783.01,
+              914.21,
+              976.6,
+              null,
+              null,
+              null
+            ],
+            "assentos": [
+              986,
+              505,
+              538,
+              770,
+              540,
+              510,
+              690,
+              756,
+              677,
+              0,
+              0,
+              0
+            ],
+            "estatisticas": {
+              "n": 5972,
+              "linhas": 2016,
+              "media": 822.65,
+              "mediana": 706.9,
+              "desvio_padrao": 462.23,
+              "coef_variacao": 0.5619,
+              "minimo": 291.9,
+              "maximo": 3888.99,
+              "ponderado_por": "assentos"
+            }
+          },
+          {
+            "nome": "Azul",
+            "icao": "AZU",
+            "precos": [
+              570.73,
+              574.65,
+              879.5,
+              779.22,
+              791.88,
+              746.93,
+              664.15,
+              802.95,
+              908.61,
+              null,
+              null,
+              null
+            ],
+            "assentos": [
+              373,
+              364,
+              350,
+              420,
+              429,
+              328,
+              215,
+              260,
+              381,
+              0,
+              0,
+              0
+            ],
+            "estatisticas": {
+              "n": 3120,
+              "linhas": 1585,
+              "media": 749.87,
+              "mediana": 634.87,
+              "desvio_padrao": 395.18,
+              "coef_variacao": 0.527,
+              "minimo": 252.0,
+              "maximo": 4012.54,
+              "ponderado_por": "assentos"
+            }
+          }
+        ],
+        "estatisticas": {
+          "n": 10353,
+          "linhas": 4015,
+          "media": 805.28,
+          "mediana": 672.9,
+          "desvio_padrao": 456.06,
+          "coef_variacao": 0.5663,
+          "minimo": 252.0,
+          "maximo": 4012.54,
+          "ponderado_por": "assentos"
+        },
+        "mensal": [
+          678.28,
+          706.43,
+          921.6,
+          799.63,
+          805.0,
+          829.3,
+          698.75,
+          911.41,
+          971.61,
+          null,
+          null,
+          null
+        ],
+        "mes_mais_caro": {
+          "mes": "set",
+          "media": 971.61
+        },
+        "mes_mais_barato": {
+          "mes": "jan",
+          "media": 678.28
+        }
+      },
+      "clima": {
+        "temp_max": [
+          30.2,
+          30.2,
+          30.0,
+          29.7,
+          28.9,
+          27.9,
+          27.3,
+          27.5,
+          28.1,
+          29.0,
+          30.1,
+          30.2
+        ],
+        "temp_min": [
+          22.4,
+          22.6,
+          22.7,
+          22.6,
+          21.9,
+          21.6,
+          21.1,
+          20.6,
+          20.7,
+          21.4,
+          21.9,
+          22.2
+        ],
+        "precipitacao": [
+          108.2,
+          148.2,
+          256.9,
+          337.6,
+          318.5,
+          377.9,
+          388.1,
+          204.8,
+          122.0,
+          63.0,
+          35.7,
+          56.8
+        ],
+        "estacao": "Recife (Curado) (82900)",
+        "estacoes": [
+          "Recife (Curado)"
+        ],
+        "n_estacoes": 1,
+        "periodo": "1961-1990",
+        "fonte": "INMET — Normais Climatológicas do Brasil 1961–1990"
+      },
+      "hotel": {
+        "n": 3,
+        "hoteis": [
+          {
+            "nome": "Novotel Recife Marina",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/B8N0",
+            "diaria": 733.0
+          },
+          {
+            "nome": "ibis Recife Boa Viagem",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/6000",
+            "diaria": 458.4
+          },
+          {
+            "nome": "ibis Recife Aeroporto",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/8842",
+            "diaria": 572.8
+          }
+        ],
+        "diarias": [
+          733.0,
+          458.4,
+          572.8
+        ],
+        "diaria_media": 588.07,
+        "diaria_mediana": 572.8,
+        "noites": 5,
+        "custo_total": 2940.35,
+        "fonte": "Accor (all.accor.com)",
+        "coletado_em": "2026-11-18",
+        "checkin": "2027-01-12"
+      },
+      "alimentacao": {
+        "cafe": [
+          15,
+          24,
+          37
+        ],
+        "almoco": [
+          35,
+          44,
+          58,
+          29
+        ],
+        "jantar": [
+          43,
+          54,
+          71,
+          29,
+          90.0
+        ],
+        "medias": {
+          "cafe": 25.33,
+          "almoco": 41.5,
+          "jantar": 57.4
+        },
+        "n": 3,
+        "media_diaria": 124.23,
+        "tipicas": [
+          "Carne de sol com macaxeira",
+          "Peixada pernambucana",
+          "Tapioca recheada"
+        ],
+        "fonte": "Quanto Custa Viajar e Numbeo",
+        "coletado_em": "2026-11-18"
+      }
+    },
+    "BHZ": {
+      "cidade": "Belo Horizonte",
+      "aeroportos": [
+        "SBCF"
+      ],
+      "passagens": {
+        "companhias": [
+          {
+            "nome": "GOL",
+            "icao": "GLO",
+            "precos": [
+              663.39,
+              643.74,
+              958.81,
+              1032.59,
+              757.46,
+              772.56,
+              715.19,
+              823.63,
+              804.5,
+              null,
+              null,
+              null
+            ],
+            "assentos": [
+              238,
+              158,
+              66,
+              83,
+              81,
+              97,
+              103,
+              81,
+              101,
+              0,
+              0,
+              0
+            ],
+            "estatisticas": {
+              "n": 1008,
+              "linhas": 549,
+              "media": 760.43,
+              "mediana": 559.97,
+              "desvio_padrao": 526.09,
+              "coef_variacao": 0.6918,
+              "minimo": 180.14,
+              "maximo": 3643.9,
+              "ponderado_por": "assentos"
+            }
+          },
+          {
+            "nome": "LATAM",
+            "icao": "TAM",
+            "precos": [
+              635.58,
+              764.81,
+              1008.05,
+              786.74,
+              785.5,
+              777.15,
+              880.7,
+              908.47,
+              858.61,
+              null,
+              null,
+              null
+            ],
+            "assentos": [
+              598,
+              311,
+              274,
+              209,
+              273,
+              214,
+              396,
+              211,
+              155,
+              0,
+              0,
+              0
+            ],
+            "estatisticas": {
+              "n": 2641,
+              "linhas": 1529,
+              "media": 800.02,
+              "mediana": 617.31,
+              "desvio_padrao": 552.15,
+              "coef_variacao": 0.6902,
+              "minimo": 185.9,
+              "maximo": 3972.96,
+              "ponderado_por": "assentos"
+            }
+          },
+          {
+            "nome": "Azul",
+            "icao": "AZU",
+            "precos": [
+              519.39,
+              325.0,
+              452.35,
+              656.01,
+              756.04,
+              611.84,
+              663.57,
+              671.0,
+              782.07,
+              null,
+              null,
+              null
+            ],
+            "assentos": [
+              289,
+              538,
+              913,
+              798,
+              730,
+              854,
+              576,
+              797,
+              546,
+              0,
+              0,
+              0
+            ],
+            "estatisticas": {
+              "n": 6041,
+              "linhas": 2669,
+              "media": 609.15,
+              "mediana": 477.98,
+              "desvio_padrao": 432.39,
+              "coef_variacao": 0.7098,
+              "minimo": 201.0,
+              "maximo": 4052.63,
+              "ponderado_por": "assentos"
+            }
+          }
+        ],
+        "estatisticas": {
+          "n": 9690,
+          "linhas": 4747,
+          "media": 676.91,
+          "mediana": 520.72,
+          "desvio_padrao": 485.91,
+          "coef_variacao": 0.7178,
+          "minimo": 180.14,
+          "maximo": 4052.63,
+          "ponderado_por": "assentos"
+        },
+        "mensal": [
+          611.62,
+          510.84,
+          600.55,
+          709.75,
+          763.56,
+          655.59,
+          748.5,
+          728.36,
+          799.69,
+          null,
+          null,
+          null
+        ],
+        "mes_mais_caro": {
+          "mes": "set",
+          "media": 799.69
+        },
+        "mes_mais_barato": {
+          "mes": "fev",
+          "media": 510.84
+        }
+      },
+      "clima": {
+        "temp_max": [
+          28.2,
+          28.8,
+          28.6,
+          27.5,
+          26.0,
+          25.0,
+          24.6,
+          26.5,
+          27.2,
+          27.7,
+          27.5,
+          27.3
+        ],
+        "temp_min": [
+          18.8,
+          19.0,
+          18.8,
+          17.3,
+          15.0,
+          13.4,
+          13.1,
+          14.4,
+          16.2,
+          17.5,
+          18.2,
+          18.4
+        ],
+        "precipitacao": [
+          274.1,
+          206.3,
+          142.7,
+          55.8,
+          28.8,
+          11.5,
+          15.3,
+          14.8,
+          39.2,
+          141.7,
+          241.6,
+          292.0
+        ],
+        "estacao": "Belo Horizonte (83587)",
+        "estacoes": [
+          "Belo Horizonte"
+        ],
+        "n_estacoes": 1,
+        "periodo": "1961-1990",
+        "fonte": "INMET — Normais Climatológicas do Brasil 1961–1990"
+      },
+      "hotel": {
+        "n": 9,
+        "hoteis": [
+          {
+            "nome": "ibis budget Belo Horizonte Minascentro",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/5625",
+            "diaria": 309.2
+          },
+          {
+            "nome": "ibis Belo Horizonte Liberdade",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/5298",
+            "diaria": 392.2
+          },
+          {
+            "nome": "ibis budget BH Afonso Pena Savassi",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/8527",
+            "diaria": 291.2
+          },
+          {
+            "nome": "ibis BH Afonso Pena Savassi",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/8498",
+            "diaria": 372.4
+          },
+          {
+            "nome": "Mercure Belo Horizonte Lourdes",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/3575",
+            "diaria": 387.6
+          },
+          {
+            "nome": "Mercure Belo Horizonte Savassi",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/3050",
+            "diaria": 591.6
+          },
+          {
+            "nome": "ibis Belo Horizonte Savassi",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/7021",
+            "diaria": 381.8
+          },
+          {
+            "nome": "Novotel BH Savassi",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/8754",
+            "diaria": 544.4
+          },
+          {
+            "nome": "ibis budget BH Savassi",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/8750",
+            "diaria": 344.0
+          }
+        ],
+        "diarias": [
+          309.2,
+          392.2,
+          291.2,
+          372.4,
+          387.6,
+          591.6,
+          381.8,
+          544.4,
+          344.0
+        ],
+        "diaria_media": 401.6,
+        "diaria_mediana": 381.8,
+        "noites": 5,
+        "custo_total": 2008.0,
+        "fonte": "Accor (all.accor.com)",
+        "coletado_em": "2026-11-18",
+        "checkin": "2027-01-12"
+      },
+      "alimentacao": {
+        "cafe": [
+          13.8,
+          16.76,
+          20.52
+        ],
+        "almoco": [
+          18.83,
+          23.5,
+          30.34,
+          30
+        ],
+        "jantar": [
+          23.4,
+          27.16,
+          42.64,
+          30,
+          100.0
+        ],
+        "medias": {
+          "cafe": 17.03,
+          "almoco": 25.67,
+          "jantar": 44.64
+        },
+        "n": 3,
+        "media_diaria": 87.34,
+        "tipicas": [
+          "Feijão tropeiro",
+          "Frango com quiabo",
+          "Pão de queijo"
+        ],
+        "fonte": "Quanto Custa Viajar e Numbeo",
+        "coletado_em": "2026-11-18"
+      }
+    },
+    "POA": {
+      "cidade": "Porto Alegre",
+      "aeroportos": [
+        "SBPA"
+      ],
+      "passagens": {
+        "companhias": [
+          {
+            "nome": "GOL",
+            "icao": "GLO",
+            "precos": [
+              826.83,
+              894.13,
+              997.69,
+              935.61,
+              960.14,
+              743.12,
+              680.18,
+              765.59,
+              815.68,
+              null,
+              null,
+              null
+            ],
+            "assentos": [
+              137,
+              208,
+              254,
+              199,
+              150,
+              157,
+              254,
+              272,
+              241,
+              0,
+              0,
+              0
+            ],
+            "estatisticas": {
+              "n": 1872,
+              "linhas": 924,
+              "media": 842.48,
+              "mediana": 677.9,
+              "desvio_padrao": 479.4,
+              "coef_variacao": 0.569,
+              "minimo": 239.07,
+              "maximo": 3599.1,
+              "ponderado_por": "assentos"
+            }
+          },
+          {
+            "nome": "LATAM",
+            "icao": "TAM",
+            "precos": [
+              768.37,
+              771.49,
+              923.96,
+              724.47,
+              752.17,
+              735.91,
+              770.51,
+              879.14,
+              1002.57,
+              null,
+              null,
+              null
+            ],
+            "assentos": [
+              477,
+              321,
+              353,
+              483,
+              480,
+              364,
+              434,
+              393,
+              254,
+              0,
+              0,
+              0
+            ],
+            "estatisticas": {
+              "n": 3559,
+              "linhas": 1725,
+              "media": 801.83,
+              "mediana": 646.12,
+              "desvio_padrao": 490.19,
+              "coef_variacao": 0.6113,
+              "minimo": 111.9,
+              "maximo": 3994.0,
+              "ponderado_por": "assentos"
+            }
+          },
+          {
+            "nome": "Azul",
+            "icao": "AZU",
+            "precos": [
+              725.25,
+              975.13,
+              1263.16,
+              927.83,
+              796.89,
+              685.63,
+              733.67,
+              842.96,
+              902.07,
+              null,
+              null,
+              null
+            ],
+            "assentos": [
+              162,
+              73,
+              103,
+              351,
+              378,
+              440,
+              277,
+              274,
+              305,
+              0,
+              0,
+              0
+            ],
+            "estatisticas": {
+              "n": 2363,
+              "linhas": 1574,
+              "media": 828.05,
+              "mediana": 680.26,
+              "desvio_padrao": 469.21,
+              "coef_variacao": 0.5666,
+              "minimo": 298.14,
+              "maximo": 4174.9,
+              "ponderado_por": "assentos"
+            }
+          }
+        ],
+        "estatisticas": {
+          "n": 7794,
+          "linhas": 4223,
+          "media": 819.54,
+          "mediana": 668.07,
+          "desvio_padrao": 481.56,
+          "coef_variacao": 0.5876,
+          "minimo": 111.9,
+          "maximo": 4174.9,
+          "ponderado_por": "assentos"
+        },
+        "mensal": [
+          769.69,
+          838.56,
+          999.55,
+          834.24,
+          799.88,
+          714.07,
+          736.15,
+          835.69,
+          907.95,
+          null,
+          null,
+          null
+        ],
+        "mes_mais_caro": {
+          "mes": "mar",
+          "media": 999.55
+        },
+        "mes_mais_barato": {
+          "mes": "jun",
+          "media": 714.07
+        }
+      },
+      "clima": {
+        "temp_max": [
+          30.2,
+          30.1,
+          28.3,
+          25.2,
+          22.1,
+          19.4,
+          20.3,
+          20.4,
+          21.8,
+          24.4,
+          26.7,
+          29.0
+        ],
+        "temp_min": [
+          20.5,
+          20.8,
+          19.3,
+          16.3,
+          13.0,
+          10.7,
+          10.7,
+          11.5,
+          13.1,
+          15.0,
+          17.0,
+          18.9
+        ],
+        "precipitacao": [
+          105.9,
+          99.2,
+          104.7,
+          77.3,
+          90.0,
+          138.4,
+          118.5,
+          137.1,
+          142.2,
+          121.3,
+          92.4,
+          93.4
+        ],
+        "estacao": "Porto Alegre (83967)",
+        "estacoes": [
+          "Porto Alegre"
+        ],
+        "n_estacoes": 1,
+        "periodo": "1961-1990",
+        "fonte": "INMET — Normais Climatológicas do Brasil 1961–1990"
+      },
+      "hotel": {
+        "n": 9,
+        "hoteis": [
+          {
+            "nome": "ibis budget Porto Alegre",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/7202",
+            "diaria": 219.6
+          },
+          {
+            "nome": "ibis Styles Porto Alegre Centro",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/9089",
+            "diaria": 240.6
+          },
+          {
+            "nome": "Manhattan Porto Alegre By Mercure",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/B9Y0",
+            "diaria": 420.6
+          },
+          {
+            "nome": "ibis Porto Alegre Moinhos de Vento",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/6664",
+            "diaria": 359.2
+          },
+          {
+            "nome": "ibis Styles Porto Alegre Moinhos de Vento",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/B609",
+            "diaria": 407.4
+          },
+          {
+            "nome": "Novotel Porto Alegre Tres Figueiras",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/3258",
+            "diaria": 336.8
+          },
+          {
+            "nome": "Novotel Porto Alegre Airport",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/6665",
+            "diaria": 495.6
+          },
+          {
+            "nome": "ibis Porto Alegre Aeroporto",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/5670",
+            "diaria": 362.0
+          },
+          {
+            "nome": "ibis Porto Alegre Assis Brasil",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/9087",
+            "diaria": 310.8
+          }
+        ],
+        "diarias": [
+          219.6,
+          240.6,
+          420.6,
+          359.2,
+          407.4,
+          336.8,
+          495.6,
+          362.0,
+          310.8
+        ],
+        "diaria_media": 350.29,
+        "diaria_mediana": 359.2,
+        "noites": 5,
+        "custo_total": 1751.45,
+        "fonte": "Accor (all.accor.com)",
+        "coletado_em": "2026-11-18",
+        "checkin": "2027-01-12"
+      },
+      "alimentacao": {
+        "cafe": [
+          16,
+          24,
+          35
+        ],
+        "almoco": [
+          38,
+          49,
+          60,
+          40
+        ],
+        "jantar": [
+          46,
+          59,
+          73,
+          40,
+          100.0
+        ],
+        "medias": {
+          "cafe": 25,
+          "almoco": 46.75,
+          "jantar": 63.6
+        },
+        "n": 3,
+        "media_diaria": 135.35,
+        "tipicas": [
+          "Churrasco gaúcho",
+          "Arroz de carreteiro",
+          "Chimarrão"
+        ],
+        "fonte": "Quanto Custa Viajar e Numbeo",
+        "coletado_em": "2026-11-18"
+      }
+    },
+    "CWB": {
+      "cidade": "Curitiba",
+      "aeroportos": [
+        "SBCT"
+      ],
+      "passagens": {
+        "companhias": [
+          {
+            "nome": "GOL",
+            "icao": "GLO",
+            "precos": [
+              516.34,
+              544.5,
+              923.84,
+              1026.2,
+              826.97,
+              804.68,
+              673.56,
+              853.92,
+              769.1,
+              null,
+              null,
+              null
+            ],
+            "assentos": [
+              262,
+              223,
+              118,
+              160,
+              149,
+              171,
+              265,
+              230,
+              217,
+              0,
+              0,
+              0
+            ],
+            "estatisticas": {
+              "n": 1795,
+              "linhas": 928,
+              "media": 742.35,
+              "mediana": 595.14,
+              "desvio_padrao": 484.02,
+              "coef_variacao": 0.652,
+              "minimo": 233.9,
+              "maximo": 3999.0,
+              "ponderado_por": "assentos"
+            }
+          },
+          {
+            "nome": "LATAM",
+            "icao": "TAM",
+            "precos": [
+              645.68,
+              728.01,
+              899.47,
+              845.26,
+              896.09,
+              844.61,
+              836.18,
+              849.45,
+              904.68,
+              null,
+              null,
+              null
+            ],
+            "assentos": [
+              614,
+              422,
+              544,
+              468,
+              278,
+              294,
+              400,
+              297,
+              240,
+              0,
+              0,
+              0
+            ],
+            "estatisticas": {
+              "n": 3557,
+              "linhas": 1983,
+              "media": 812.45,
+              "mediana": 639.7,
+              "desvio_padrao": 495.08,
+              "coef_variacao": 0.6094,
+              "minimo": 251.9,
+              "maximo": 3994.0,
+              "ponderado_por": "assentos"
+            }
+          },
+          {
+            "nome": "Azul",
+            "icao": "AZU",
+            "precos": [
+              575.77,
+              728.98,
+              1093.49,
+              1735.33,
+              1015.51,
+              785.68,
+              703.76,
+              789.14,
+              833.33,
+              null,
+              null,
+              null
+            ],
+            "assentos": [
+              260,
+              155,
+              138,
+              54,
+              177,
+              293,
+              252,
+              260,
+              361,
+              0,
+              0,
+              0
+            ],
+            "estatisticas": {
+              "n": 1950,
+              "linhas": 1369,
+              "media": 820.82,
+              "mediana": 641.71,
+              "desvio_padrao": 522.03,
+              "coef_variacao": 0.636,
+              "minimo": 267.75,
+              "maximo": 4360.68,
+              "ponderado_por": "assentos"
+            }
+          }
+        ],
+        "estatisticas": {
+          "n": 7302,
+          "linhas": 4280,
+          "media": 797.45,
+          "mediana": 627.64,
+          "desvio_padrao": 500.69,
+          "coef_variacao": 0.6279,
+          "minimo": 233.9,
+          "maximo": 4360.68,
+          "ponderado_por": "assentos"
+        },
+        "mensal": [
+          599.85,
+          677.05,
+          936.54,
+          958.18,
+          914.03,
+          812.82,
+          752.79,
+          830.83,
+          837.22,
+          null,
+          null,
+          null
+        ],
+        "mes_mais_caro": {
+          "mes": "abr",
+          "media": 958.18
+        },
+        "mes_mais_barato": {
+          "mes": "jan",
+          "media": 599.85
+        }
+      },
+      "clima": {
+        "temp_max": [
+          26.6,
+          26.7,
+          25.7,
+          23.1,
+          21.1,
+          19.6,
+          19.4,
+          20.9,
+          21.3,
+          22.6,
+          24.5,
+          25.4
+        ],
+        "temp_min": [
+          16.4,
+          16.3,
+          15.4,
+          12.8,
+          10.2,
+          8.4,
+          8.1,
+          9.2,
+          10.8,
+          12.5,
+          14.0,
+          15.4
+        ],
+        "precipitacao": [
+          171.8,
+          157.6,
+          138.8,
+          94.8,
+          101.0,
+          115.6,
+          98.8,
+          73.4,
+          119.2,
+          133.3,
+          126.9,
+          152.3
+        ],
+        "estacao": "Curitiba (83842)",
+        "estacoes": [
+          "Curitiba"
+        ],
+        "n_estacoes": 1,
+        "periodo": "1961-1990",
+        "fonte": "INMET — Normais Climatológicas do Brasil 1961–1990"
+      },
+      "hotel": {
+        "n": 7,
+        "hoteis": [
+          {
+            "nome": "ibis Styles Curitiba Centro Civico",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/3205",
+            "diaria": 248.6
+          },
+          {
+            "nome": "Novotel Curitiba Batel",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/9088",
+            "diaria": 485.0
+          },
+          {
+            "nome": "Mercure Curitiba Golden",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/0653",
+            "diaria": 357.4
+          },
+          {
+            "nome": "ibis Curitiba Shopping",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/7827",
+            "diaria": 275.0
+          },
+          {
+            "nome": "ibis Curitiba Batel",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/5461",
+            "diaria": 317.6
+          },
+          {
+            "nome": "ibis budget Curitiba Centro",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/5519",
+            "diaria": 252.4
+          },
+          {
+            "nome": "Mercure Curitiba Batel",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/2127",
+            "diaria": 444.2
+          }
+        ],
+        "diarias": [
+          248.6,
+          485.0,
+          357.4,
+          275.0,
+          317.6,
+          252.4,
+          444.2
+        ],
+        "diaria_media": 340.03,
+        "diaria_mediana": 317.6,
+        "noites": 5,
+        "custo_total": 1700.15,
+        "fonte": "Accor (all.accor.com)",
+        "coletado_em": "2026-11-18",
+        "checkin": "2027-01-12"
+      },
+      "alimentacao": {
+        "cafe": [
+          15,
+          23,
+          39
+        ],
+        "almoco": [
+          35,
+          49,
+          68,
+          40
+        ],
+        "jantar": [
+          40,
+          53,
+          76,
+          40,
+          100.0
+        ],
+        "medias": {
+          "cafe": 25.67,
+          "almoco": 48,
+          "jantar": 61.8
+        },
+        "n": 3,
+        "media_diaria": 135.47,
+        "tipicas": [
+          "Barreado",
+          "Carne de onça",
+          "Pinhão"
+        ],
+        "fonte": "Quanto Custa Viajar e Numbeo",
+        "coletado_em": "2026-11-18"
+      }
+    },
+    "SSA": {
+      "cidade": "Salvador",
+      "aeroportos": [
+        "SBSV"
+      ],
+      "passagens": {
+        "companhias": [
+          {
+            "nome": "GOL",
+            "icao": "GLO",
+            "precos": [
+              535.93,
+              523.66,
+              682.75,
+              844.85,
+              712.58,
+              717.3,
+              736.67,
+              956.53,
+              1025.74,
+              null,
+              null,
+              null
+            ],
+            "assentos": [
+              542,
+              313,
+              169,
+              108,
+              186,
+              157,
+              114,
+              83,
+              153,
+              0,
+              0,
+              0
+            ],
+            "estatisticas": {
+              "n": 1825,
+              "linhas": 719,
+              "media": 672.04,
+              "mediana": 547.14,
+              "desvio_padrao": 424.92,
+              "coef_variacao": 0.6323,
+              "minimo": 239.14,
+              "maximo": 3797.97,
+              "ponderado_por": "assentos"
+            }
+          },
+          {
+            "nome": "LATAM",
+            "icao": "TAM",
+            "precos": [
+              602.67,
+              763.57,
+              842.81,
+              948.5,
+              881.05,
+              896.12,
+              808.1,
+              809.83,
+              943.6,
+              null,
+              null,
+              null
+            ],
+            "assentos": [
+              440,
+              326,
+              393,
+              332,
+              367,
+              344,
+              548,
+              403,
+              409,
+              0,
+              0,
+              0
+            ],
+            "estatisticas": {
+              "n": 3562,
+              "linhas": 1774,
+              "media": 827.34,
+              "mediana": 697.41,
+              "desvio_padrao": 513.24,
+              "coef_variacao": 0.6204,
+              "minimo": 229.6,
+              "maximo": 3994.0,
+              "ponderado_por": "assentos"
+            }
+          },
+          {
+            "nome": "Azul",
+            "icao": "AZU",
+            "precos": [
+              559.74,
+              545.43,
+              981.7,
+              992.9,
+              727.0,
+              721.91,
+              640.96,
+              749.99,
+              961.06,
+              null,
+              null,
+              null
+            ],
+            "assentos": [
+              112,
+              162,
+              187,
+              145,
+              222,
+              231,
+              206,
+              435,
+              161,
+              0,
+              0,
+              0
+            ],
+            "estatisticas": {
+              "n": 1861,
+              "linhas": 1127,
+              "media": 762.91,
+              "mediana": 646.47,
+              "desvio_padrao": 427.57,
+              "coef_variacao": 0.5604,
+              "minimo": 268.8,
+              "maximo": 4159.46,
+              "ponderado_por": "assentos"
+            }
+          }
+        ],
+        "estatisticas": {
+          "n": 7248,
+          "linhas": 3620,
+          "media": 771.69,
+          "mediana": 648.74,
+          "desvio_padrao": 475.23,
+          "coef_variacao": 0.6158,
+          "minimo": 229.6,
+          "maximo": 4159.46,
+          "ponderado_por": "assentos"
+        },
+        "mensal": [
+          565.21,
+          625.71,
+          841.37,
+          940.37,
+          796.49,
+          802.79,
+          759.05,
+          794.79,
+          964.87,
+          null,
+          null,
+          null
+        ],
+        "mes_mais_caro": {
+          "mes": "set",
+          "media": 964.87
+        },
+        "mes_mais_barato": {
+          "mes": "jan",
+          "media": 565.21
+        }
+      },
+      "clima": {
+        "temp_max": [
+          29.9,
+          30.0,
+          30.0,
+          28.6,
+          27.7,
+          26.5,
+          26.2,
+          26.4,
+          27.2,
+          28.1,
+          28.9,
+          29.0
+        ],
+        "temp_min": [
+          23.6,
+          23.7,
+          23.9,
+          23.7,
+          22.9,
+          22.0,
+          21.4,
+          21.2,
+          21.7,
+          22.5,
+          22.9,
+          23.2
+        ],
+        "precipitacao": [
+          138.0,
+          142.0,
+          151.6,
+          309.7,
+          359.9,
+          243.7,
+          175.0,
+          127.4,
+          102.0,
+          114.9,
+          137.1,
+          142.8
+        ],
+        "estacao": "Salvador (Ondina) (83229)",
+        "estacoes": [
+          "Salvador (Ondina)"
+        ],
+        "n_estacoes": 1,
+        "periodo": "1961-1990",
+        "fonte": "INMET — Normais Climatológicas do Brasil 1961–1990"
+      },
+      "hotel": {
+        "n": 6,
+        "hoteis": [
+          {
+            "nome": "ibis budget Salvador",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/B8G4",
+            "diaria": 279.8
+          },
+          {
+            "nome": "Novotel Salvador Rio Vermelho",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/B275",
+            "diaria": 633.2
+          },
+          {
+            "nome": "ibis Salvador Rio Vermelho",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/5173",
+            "diaria": 454.8
+          },
+          {
+            "nome": "Mercure Salvador Rio Vermelho",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/5182",
+            "diaria": 908.8
+          },
+          {
+            "nome": "Mercure Salvador Boulevard",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/7361",
+            "diaria": 320.4
+          },
+          {
+            "nome": "Mercure Salvador Pituba",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/8930",
+            "diaria": 351.6
+          }
+        ],
+        "diarias": [
+          279.8,
+          633.2,
+          454.8,
+          908.8,
+          320.4,
+          351.6
+        ],
+        "diaria_media": 491.43,
+        "diaria_mediana": 403.2,
+        "noites": 5,
+        "custo_total": 2457.15,
+        "fonte": "Accor (all.accor.com)",
+        "coletado_em": "2026-11-18",
+        "checkin": "2027-01-12"
+      },
+      "alimentacao": {
+        "cafe": [
+          14.6,
+          20.1,
+          24
+        ],
+        "almoco": [
+          25,
+          45,
+          62.6,
+          42.5
+        ],
+        "jantar": [
+          36.2,
+          53.2,
+          70,
+          42.5,
+          90.0
+        ],
+        "medias": {
+          "cafe": 19.57,
+          "almoco": 43.77,
+          "jantar": 58.38
+        },
+        "n": 3,
+        "media_diaria": 121.72,
+        "tipicas": [
+          "Acarajé",
+          "Moqueca baiana",
+          "Vatapá"
+        ],
+        "fonte": "Quanto Custa Viajar e Numbeo",
+        "coletado_em": "2026-11-18"
+      }
+    },
+    "FLN": {
+      "cidade": "Florianópolis",
+      "aeroportos": [
+        "SBFL"
+      ],
+      "passagens": {
+        "companhias": [
+          {
+            "nome": "GOL",
+            "icao": "GLO",
+            "precos": [
+              433.31,
+              453.04,
+              743.34,
+              764.28,
+              733.23,
+              777.22,
+              804.77,
+              818.05,
+              766.24,
+              null,
+              null,
+              null
+            ],
+            "assentos": [
+              680,
+              348,
+              139,
+              146,
+              189,
+              114,
+              112,
+              202,
+              260,
+              0,
+              0,
+              0
+            ],
+            "estatisticas": {
+              "n": 2190,
+              "linhas": 843,
+              "media": 615.98,
+              "mediana": 508.97,
+              "desvio_padrao": 397.99,
+              "coef_variacao": 0.6461,
+              "minimo": 195.9,
+              "maximo": 4298.0,
+              "ponderado_por": "assentos"
+            }
+          },
+          {
+            "nome": "LATAM",
+            "icao": "TAM",
+            "precos": [
+              677.72,
+              728.17,
+              854.62,
+              766.62,
+              759.9,
+              748.38,
+              677.16,
+              900.01,
+              1002.76,
+              null,
+              null,
+              null
+            ],
+            "assentos": [
+              631,
+              379,
+              368,
+              468,
+              318,
+              338,
+              543,
+              396,
+              197,
+              0,
+              0,
+              0
+            ],
+            "estatisticas": {
+              "n": 3638,
+              "linhas": 1883,
+              "media": 767.77,
+              "mediana": 618.91,
+              "desvio_padrao": 476.5,
+              "coef_variacao": 0.6206,
+              "minimo": 75.13,
+              "maximo": 4118.86,
+              "ponderado_por": "assentos"
+            }
+          },
+          {
+            "nome": "Azul",
+            "icao": "AZU",
+            "precos": [
+              652.68,
+              913.44,
+              1005.6,
+              923.39,
+              767.75,
+              872.77,
+              747.45,
+              663.09,
+              847.96,
+              null,
+              null,
+              null
+            ],
+            "assentos": [
+              165,
+              75,
+              112,
+              91,
+              145,
+              131,
+              86,
+              153,
+              120,
+              0,
+              0,
+              0
+            ],
+            "estatisticas": {
+              "n": 1078,
+              "linhas": 717,
+              "media": 803.34,
+              "mediana": 601.9,
+              "desvio_padrao": 544.77,
+              "coef_variacao": 0.6781,
+              "minimo": 275.52,
+              "maximo": 4732.51,
+              "ponderado_por": "assentos"
+            }
+          }
+        ],
+        "estatisticas": {
+          "n": 6906,
+          "linhas": 3443,
+          "media": 725.19,
+          "mediana": 580.93,
+          "desvio_padrao": 470.94,
+          "coef_variacao": 0.6494,
+          "minimo": 75.13,
+          "maximo": 4732.51,
+          "ponderado_por": "assentos"
+        },
+        "mensal": [
+          562.32,
+          626.11,
+          856.95,
+          786.37,
+          753.92,
+          781.97,
+          704.6,
+          829.7,
+          863.99,
+          null,
+          null,
+          null
+        ],
+        "mes_mais_caro": {
+          "mes": "set",
+          "media": 863.99
+        },
+        "mes_mais_barato": {
+          "mes": "jan",
+          "media": 562.32
+        }
+      },
+      "clima": {
+        "temp_max": [
+          28.0,
+          28.4,
+          27.5,
+          25.4,
+          23.0,
+          20.9,
+          20.4,
+          20.7,
+          21.2,
+          22.9,
+          24.8,
+          26.6
+        ],
+        "temp_min": [
+          21.4,
+          21.8,
+          20.7,
+          18.3,
+          15.6,
+          13.4,
+          13.3,
+          14.0,
+          15.1,
+          16.9,
+          18.6,
+          20.3
+        ],
+        "precipitacao": [
+          162.7,
+          196.9,
+          173.0,
+          92.8,
+          96.9,
+          89.5,
+          99.5,
+          95.3,
+          134.2,
+          109.8,
+          130.2,
+          137.0
+        ],
+        "estacao": "Florianópolis (83897)",
+        "estacoes": [
+          "Florianópolis"
+        ],
+        "n_estacoes": 1,
+        "periodo": "1961-1990",
+        "fonte": "INMET — Normais Climatológicas do Brasil 1961–1990"
+      },
+      "hotel": {
+        "n": 3,
+        "hoteis": [
+          {
+            "nome": "ibis Florianopolis",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/5224",
+            "diaria": 518.0
+          },
+          {
+            "nome": "Novotel Florianopolis",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/5947",
+            "diaria": 744.8
+          },
+          {
+            "nome": "Mercure Florianópolis",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/5693",
+            "diaria": 633.0
+          }
+        ],
+        "diarias": [
+          518.0,
+          744.8,
+          633.0
+        ],
+        "diaria_media": 631.93,
+        "diaria_mediana": 633.0,
+        "noites": 5,
+        "custo_total": 3159.65,
+        "fonte": "Accor (all.accor.com)",
+        "coletado_em": "2026-11-18",
+        "checkin": "2027-01-12"
+      },
+      "alimentacao": {
+        "cafe": [
+          9.6,
+          18,
+          22.8
+        ],
+        "almoco": [
+          15.6,
+          32.13,
+          41.88,
+          45
+        ],
+        "jantar": [
+          22.2,
+          41.4,
+          57,
+          45,
+          120.0
+        ],
+        "medias": {
+          "cafe": 16.8,
+          "almoco": 33.65,
+          "jantar": 57.12
+        },
+        "n": 3,
+        "media_diaria": 107.57,
+        "tipicas": [
+          "Ostras",
+          "Tainha",
+          "Berbigão"
+        ],
+        "fonte": "Quanto Custa Viajar e Numbeo",
         "coletado_em": "2026-11-18"
       }
     }

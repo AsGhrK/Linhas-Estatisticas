@@ -9,7 +9,7 @@ CAB = "nr_ano_referencia;nr_mes_referencia;sg_empresa_icao;sg_icao_origem;sg_ica
 LINHAS_01 = [
     "2026;1;GLO;SBCG;SBRJ;446,28;3",
     "2026;1;AZU;SBCG;SBGL;1.234,56;1",
-    "2026;1;AZU;SBCG;SBKP;500,00;4",
+    "2026;1;AZU;SBCG;SBMO;500,00;4",
     "2026;1;GLO;SBGL;SBCG;500,00;4",
     "2026;1;PTB;SBCG;SBSP;500,00;4",
     "2026;1;GLO;SBCG;SBSP;0,00;4",

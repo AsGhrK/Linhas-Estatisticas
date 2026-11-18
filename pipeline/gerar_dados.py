@@ -9,9 +9,19 @@ from pipeline.estatistica import media_ponderada, resumo_ponderado
 
 MESES = ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"]
 MIN_ASSENTOS_MES = 30
+# Destinos com mais assentos vendidos saindo de SBCG (ANAC, 2026). Uma cidade
+# entra no estudo quando tem bloco no dados/manual/clima.json.
 ROTAS = {
     "RIO": {"cidade": "Rio de Janeiro", "aeroportos": ["SBRJ", "SBGL"]},
     "SAO": {"cidade": "São Paulo", "aeroportos": ["SBSP", "SBGR"]},
+    "CPQ": {"cidade": "Campinas", "aeroportos": ["SBKP"]},
+    "BSB": {"cidade": "Brasília", "aeroportos": ["SBBR"]},
+    "REC": {"cidade": "Recife", "aeroportos": ["SBRF"]},
+    "BHZ": {"cidade": "Belo Horizonte", "aeroportos": ["SBCF"]},
+    "POA": {"cidade": "Porto Alegre", "aeroportos": ["SBPA"]},
+    "CWB": {"cidade": "Curitiba", "aeroportos": ["SBCT"]},
+    "SSA": {"cidade": "Salvador", "aeroportos": ["SBSV"]},
+    "FLN": {"cidade": "Florianópolis", "aeroportos": ["SBFL"]},
 }
 COMPANHIAS = [("GOL", "GLO"), ("LATAM", "TAM"), ("Azul", "AZU")]
 REFEICOES = ("cafe", "almoco", "jantar")
@@ -100,7 +110,10 @@ def _passagens(linhas_rota):
 
 def _media_estacoes(estacoes):
     # Média mês a mês das estações da cidade; mês sem valor em nenhuma estação fica null.
-    c = {"estacao": f"média de {len(estacoes)} estações do INMET no município",
+    unica = estacoes[0]
+    c = {"estacao": f"{unica['nome']} ({unica['codigo']})" if len(estacoes) == 1 and unica.get("codigo")
+         else unica["nome"] if len(estacoes) == 1
+         else f"média de {len(estacoes)} estações do INMET no município",
          "estacoes": [e["nome"] for e in estacoes], "n_estacoes": len(estacoes)}
     for campo in ("temp_max", "temp_min", "precipitacao"):
         c[campo] = []
@@ -124,7 +137,7 @@ def _clima(manual, chave, pendencias):
 
 def _hotel(manual, chave, pendencias):
     # Entrada com todos os campos nulos é modelo do arquivo, não hotel pesquisado.
-    itens = [i for i in manual[chave] if any(v is not None for v in i.values())]
+    itens = [i for i in manual.get(chave, []) if any(v is not None for v in i.values())]
     pendente = not itens or any(i["diaria"] is None for i in itens)
     if pendente:
         pendencias.append(f"hoteis.{chave}")
@@ -146,7 +159,7 @@ def _hotel(manual, chave, pendencias):
 
 
 def _alimentacao(manual, chave, pendencias):
-    a = manual[chave]
+    a = {"cafe": [], "almoco": [], "jantar": [], "tipicas": [], **manual.get(chave, {})}
     for campo in REFEICOES + ("tipicas",):
         if not a[campo]:
             pendencias.append(f"alimentacao.{chave}.{campo}")
@@ -211,7 +224,7 @@ def gerar(recorte: Path, pasta_manual: Path, coletado_em: str) -> dict:
 
     pendencias = []
     rotas = {}
-    for chave, info in ROTAS.items():
+    for chave, info in ((k, v) for k, v in ROTAS.items() if k in clima):
         da_rota = [l for l in linhas if l["destino"] in info["aeroportos"]]
         c = _clima(clima, chave, pendencias)
         rotas[chave] = {

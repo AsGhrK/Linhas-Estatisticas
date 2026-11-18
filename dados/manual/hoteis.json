@@ -3,7 +3,7 @@
   "coletado_em": "2026-11-18",
   "checkin": "2027-01-12",
   "noites": 5,
-  "criterio": "Todos os hotéis Accor com preço para 12 a 17/01/2027, 1 adulto e 1 quarto, dentro do município, das marcas econômicas e intermediárias (ibis budget, ibis, ibis Styles, Novotel, Mercure). Preço público em reais, com impostos, sem tarifa de associado, dividido por 5 noites. Ficam fora: marcas de luxo (Sofitel, Fairmont, MGallery, Pullman, Grand Mercure), JO&JOE (preço de cama em quarto compartilhado), hotéis de outros municípios e hotéis sem vaga.",
+  "criterio": "Todos os hotéis Accor com preço para 12 a 17/01/2027, 1 adulto e 1 quarto, dentro do município, das marcas econômicas e intermediárias (ibis budget, ibis, ibis Styles, Novotel, Mercure; o Manhattan Porto Alegre é da marca Mercure). Preço público em reais, com impostos, sem tarifa de associado, dividido por 5 noites. Ficam fora: marcas de luxo (Sofitel, Fairmont, MGallery, Pullman, Grand Mercure), JO&JOE (preço de cama em quarto compartilhado), hotéis de outros municípios (como Jaboatão, Nova Lima, Contagem, Canoas, São José dos Pinhais e Balneário Camboriú), marcas fora da lista (TRIBE, Caesar Business) e hotéis sem vaga.",
   "RIO": [
     {
       "nome": "ibis Rio de Janeiro Centro",
@@ -336,6 +336,268 @@
       "url": "https://all.accor.com/booking/pt-br/accor/hotel/5471",
       "total_5_noites": 2103,
       "diaria": 420.6
+    }
+  ],
+  "CPQ": [
+    {
+      "nome": "ibis budget Campinas Aquidaban",
+      "url": "https://all.accor.com/booking/pt-br/accor/hotel/9452",
+      "total_5_noites": 1097,
+      "diaria": 219.4
+    },
+    {
+      "nome": "ibis Styles Campinas Alphaville",
+      "url": "https://all.accor.com/booking/pt-br/accor/hotel/C0V8",
+      "total_5_noites": 1629,
+      "diaria": 325.8
+    }
+  ],
+  "BSB": [
+    {
+      "nome": "Mercure Brasilia Lider",
+      "url": "https://all.accor.com/booking/pt-br/accor/hotel/3627",
+      "total_5_noites": 1631,
+      "diaria": 326.2
+    },
+    {
+      "nome": "ibis Styles Brasilia Aeroporto",
+      "url": "https://all.accor.com/booking/pt-br/accor/hotel/B0I3",
+      "total_5_noites": 2284,
+      "diaria": 456.8
+    }
+  ],
+  "REC": [
+    {
+      "nome": "Novotel Recife Marina",
+      "url": "https://all.accor.com/booking/pt-br/accor/hotel/B8N0",
+      "total_5_noites": 3665,
+      "diaria": 733.0
+    },
+    {
+      "nome": "ibis Recife Boa Viagem",
+      "url": "https://all.accor.com/booking/pt-br/accor/hotel/6000",
+      "total_5_noites": 2292,
+      "diaria": 458.4
+    },
+    {
+      "nome": "ibis Recife Aeroporto",
+      "url": "https://all.accor.com/booking/pt-br/accor/hotel/8842",
+      "total_5_noites": 2864,
+      "diaria": 572.8
+    }
+  ],
+  "BHZ": [
+    {
+      "nome": "ibis budget Belo Horizonte Minascentro",
+      "url": "https://all.accor.com/booking/pt-br/accor/hotel/5625",
+      "total_5_noites": 1546,
+      "diaria": 309.2
+    },
+    {
+      "nome": "ibis Belo Horizonte Liberdade",
+      "url": "https://all.accor.com/booking/pt-br/accor/hotel/5298",
+      "total_5_noites": 1961,
+      "diaria": 392.2
+    },
+    {
+      "nome": "ibis budget BH Afonso Pena Savassi",
+      "url": "https://all.accor.com/booking/pt-br/accor/hotel/8527",
+      "total_5_noites": 1456,
+      "diaria": 291.2
+    },
+    {
+      "nome": "ibis BH Afonso Pena Savassi",
+      "url": "https://all.accor.com/booking/pt-br/accor/hotel/8498",
+      "total_5_noites": 1862,
+      "diaria": 372.4
+    },
+    {
+      "nome": "Mercure Belo Horizonte Lourdes",
+      "url": "https://all.accor.com/booking/pt-br/accor/hotel/3575",
+      "total_5_noites": 1938,
+      "diaria": 387.6
+    },
+    {
+      "nome": "Mercure Belo Horizonte Savassi",
+      "url": "https://all.accor.com/booking/pt-br/accor/hotel/3050",
+      "total_5_noites": 2958,
+      "diaria": 591.6
+    },
+    {
+      "nome": "ibis Belo Horizonte Savassi",
+      "url": "https://all.accor.com/booking/pt-br/accor/hotel/7021",
+      "total_5_noites": 1909,
+      "diaria": 381.8
+    },
+    {
+      "nome": "Novotel BH Savassi",
+      "url": "https://all.accor.com/booking/pt-br/accor/hotel/8754",
+      "total_5_noites": 2722,
+      "diaria": 544.4
+    },
+    {
+      "nome": "ibis budget BH Savassi",
+      "url": "https://all.accor.com/booking/pt-br/accor/hotel/8750",
+      "total_5_noites": 1720,
+      "diaria": 344.0
+    }
+  ],
+  "POA": [
+    {
+      "nome": "ibis budget Porto Alegre",
+      "url": "https://all.accor.com/booking/pt-br/accor/hotel/7202",
+      "total_5_noites": 1098,
+      "diaria": 219.6
+    },
+    {
+      "nome": "ibis Styles Porto Alegre Centro",
+      "url": "https://all.accor.com/booking/pt-br/accor/hotel/9089",
+      "total_5_noites": 1203,
+      "diaria": 240.6
+    },
+    {
+      "nome": "Manhattan Porto Alegre By Mercure",
+      "url": "https://all.accor.com/booking/pt-br/accor/hotel/B9Y0",
+      "total_5_noites": 2103,
+      "diaria": 420.6
+    },
+    {
+      "nome": "ibis Porto Alegre Moinhos de Vento",
+      "url": "https://all.accor.com/booking/pt-br/accor/hotel/6664",
+      "total_5_noites": 1796,
+      "diaria": 359.2
+    },
+    {
+      "nome": "ibis Styles Porto Alegre Moinhos de Vento",
+      "url": "https://all.accor.com/booking/pt-br/accor/hotel/B609",
+      "total_5_noites": 2037,
+      "diaria": 407.4
+    },
+    {
+      "nome": "Novotel Porto Alegre Tres Figueiras",
+      "url": "https://all.accor.com/booking/pt-br/accor/hotel/3258",
+      "total_5_noites": 1684,
+      "diaria": 336.8
+    },
+    {
+      "nome": "Novotel Porto Alegre Airport",
+      "url": "https://all.accor.com/booking/pt-br/accor/hotel/6665",
+      "total_5_noites": 2478,
+      "diaria": 495.6
+    },
+    {
+      "nome": "ibis Porto Alegre Aeroporto",
+      "url": "https://all.accor.com/booking/pt-br/accor/hotel/5670",
+      "total_5_noites": 1810,
+      "diaria": 362.0
+    },
+    {
+      "nome": "ibis Porto Alegre Assis Brasil",
+      "url": "https://all.accor.com/booking/pt-br/accor/hotel/9087",
+      "total_5_noites": 1554,
+      "diaria": 310.8
+    }
+  ],
+  "CWB": [
+    {
+      "nome": "ibis Styles Curitiba Centro Civico",
+      "url": "https://all.accor.com/booking/pt-br/accor/hotel/3205",
+      "total_5_noites": 1243,
+      "diaria": 248.6
+    },
+    {
+      "nome": "Novotel Curitiba Batel",
+      "url": "https://all.accor.com/booking/pt-br/accor/hotel/9088",
+      "total_5_noites": 2425,
+      "diaria": 485.0
+    },
+    {
+      "nome": "Mercure Curitiba Golden",
+      "url": "https://all.accor.com/booking/pt-br/accor/hotel/0653",
+      "total_5_noites": 1787,
+      "diaria": 357.4
+    },
+    {
+      "nome": "ibis Curitiba Shopping",
+      "url": "https://all.accor.com/booking/pt-br/accor/hotel/7827",
+      "total_5_noites": 1375,
+      "diaria": 275.0
+    },
+    {
+      "nome": "ibis Curitiba Batel",
+      "url": "https://all.accor.com/booking/pt-br/accor/hotel/5461",
+      "total_5_noites": 1588,
+      "diaria": 317.6
+    },
+    {
+      "nome": "ibis budget Curitiba Centro",
+      "url": "https://all.accor.com/booking/pt-br/accor/hotel/5519",
+      "total_5_noites": 1262,
+      "diaria": 252.4
+    },
+    {
+      "nome": "Mercure Curitiba Batel",
+      "url": "https://all.accor.com/booking/pt-br/accor/hotel/2127",
+      "total_5_noites": 2221,
+      "diaria": 444.2
+    }
+  ],
+  "SSA": [
+    {
+      "nome": "ibis budget Salvador",
+      "url": "https://all.accor.com/booking/pt-br/accor/hotel/B8G4",
+      "total_5_noites": 1399,
+      "diaria": 279.8
+    },
+    {
+      "nome": "Novotel Salvador Rio Vermelho",
+      "url": "https://all.accor.com/booking/pt-br/accor/hotel/B275",
+      "total_5_noites": 3166,
+      "diaria": 633.2
+    },
+    {
+      "nome": "ibis Salvador Rio Vermelho",
+      "url": "https://all.accor.com/booking/pt-br/accor/hotel/5173",
+      "total_5_noites": 2274,
+      "diaria": 454.8
+    },
+    {
+      "nome": "Mercure Salvador Rio Vermelho",
+      "url": "https://all.accor.com/booking/pt-br/accor/hotel/5182",
+      "total_5_noites": 4544,
+      "diaria": 908.8
+    },
+    {
+      "nome": "Mercure Salvador Boulevard",
+      "url": "https://all.accor.com/booking/pt-br/accor/hotel/7361",
+      "total_5_noites": 1602,
+      "diaria": 320.4
+    },
+    {
+      "nome": "Mercure Salvador Pituba",
+      "url": "https://all.accor.com/booking/pt-br/accor/hotel/8930",
+      "total_5_noites": 1758,
+      "diaria": 351.6
+    }
+  ],
+  "FLN": [
+    {
+      "nome": "ibis Florianopolis",
+      "url": "https://all.accor.com/booking/pt-br/accor/hotel/5224",
+      "total_5_noites": 2590,
+      "diaria": 518.0
+    },
+    {
+      "nome": "Novotel Florianopolis",
+      "url": "https://all.accor.com/booking/pt-br/accor/hotel/5947",
+      "total_5_noites": 3724,
+      "diaria": 744.8
+    },
+    {
+      "nome": "Mercure Florianópolis",
+      "url": "https://all.accor.com/booking/pt-br/accor/hotel/5693",
+      "total_5_noites": 3165,
+      "diaria": 633.0
     }
   ]
 }

@@ -1,4 +1,4 @@
-"""Recorte dos microdados de tarifas da ANAC: SBCG -> Rio e Sao Paulo.
+"""Recorte dos microdados de tarifas da ANAC: SBCG -> destinos de pipeline.gerar_dados.ROTAS.
 
 Base da leitura dos CSVs: Filipe Rioske (branch Dados-e-Estatistica).
 """
@@ -6,8 +6,10 @@ import csv
 import re
 from pathlib import Path
 
+from pipeline.gerar_dados import ROTAS
+
 ORIGEM = "SBCG"
-DESTINOS = {"SBRJ", "SBGL", "SBSP", "SBGR"}
+DESTINOS = {a for r in ROTAS.values() for a in r["aeroportos"]}
 EMPRESAS = {"GLO", "TAM", "AZU"}
 CABECALHO = ["ano", "mes", "empresa", "origem", "destino", "tarifa", "assentos"]
 

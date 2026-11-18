@@ -1,19 +1,17 @@
 {
-  "fonte": "Quanto Custa Viajar, Numbeo, ABBT e VR",
+  "fonte": "Quanto Custa Viajar e Numbeo",
   "coletado_em": "2026-11-18",
   "RIO": {
     "cafe": [
       15,
       24,
-      37,
-      33.22
+      37
     ],
     "almoco": [
       38,
       50,
       64,
-      45,
-      60.46
+      45
     ],
     "jantar": [
       44,
@@ -33,22 +31,20 @@
     "cafe": [
       18,
       26,
-      40,
-      28.37
+      40
     ],
     "almoco": [
       40,
       52,
       68,
-      45,
-      59.67
+      45
     ],
     "jantar": [
       51,
       63,
       76,
       45,
-      125
+      125.0
     ],
     "tipicas": [
       "Virado à paulista",
@@ -61,15 +57,13 @@
     "cafe": [
       "Quanto Custa Viajar, baixo custo",
       "Quanto Custa Viajar, econômico",
-      "Quanto Custa Viajar, conforto",
-      "VR (2023), gasto médio por visita a padarias e cafeterias, cerca de 12 mil estabelecimentos"
+      "Quanto Custa Viajar, conforto"
     ],
     "almoco": [
       "Quanto Custa Viajar, baixo custo",
       "Quanto Custa Viajar, econômico",
       "Quanto Custa Viajar, conforto",
-      "Numbeo, refeição em restaurante barato",
-      "ABBT (2024), refeição completa (prato, bebida, sobremesa e café)"
+      "Numbeo, refeição em restaurante barato"
     ],
     "jantar": [
       "Quanto Custa Viajar, baixo custo",
@@ -78,5 +72,212 @@
       "Numbeo, refeição em restaurante barato",
       "Numbeo, jantar para dois em restaurante médio, dividido por dois"
     ]
+  },
+  "CPQ": {
+    "cafe": [
+      10.8,
+      18,
+      24
+    ],
+    "almoco": [
+      18,
+      30,
+      52.8,
+      47
+    ],
+    "jantar": [
+      24,
+      42,
+      76.8,
+      47,
+      90.0
+    ],
+    "tipicas": [
+      "Leitão à pururuca",
+      "Bolinho caipira"
+    ],
+    "fonte_tipicas": "guias de turismo de Campinas"
+  },
+  "BSB": {
+    "cafe": [
+      14.4,
+      18,
+      20.4
+    ],
+    "almoco": [
+      20.4,
+      25.2,
+      28.8,
+      45
+    ],
+    "jantar": [
+      23.76,
+      27.84,
+      31.98,
+      45,
+      100.0
+    ],
+    "tipicas": [
+      "Galinhada com pequi",
+      "Arroz com pequi",
+      "Buchada de bode"
+    ],
+    "fonte_tipicas": "Quanto Custa Viajar"
+  },
+  "REC": {
+    "cafe": [
+      15,
+      24,
+      37
+    ],
+    "almoco": [
+      35,
+      44,
+      58,
+      29
+    ],
+    "jantar": [
+      43,
+      54,
+      71,
+      29,
+      90.0
+    ],
+    "tipicas": [
+      "Carne de sol com macaxeira",
+      "Peixada pernambucana",
+      "Tapioca recheada"
+    ],
+    "fonte_tipicas": "Quanto Custa Viajar"
+  },
+  "BHZ": {
+    "cafe": [
+      13.8,
+      16.76,
+      20.52
+    ],
+    "almoco": [
+      18.83,
+      23.5,
+      30.34,
+      30
+    ],
+    "jantar": [
+      23.4,
+      27.16,
+      42.64,
+      30,
+      100.0
+    ],
+    "tipicas": [
+      "Feijão tropeiro",
+      "Frango com quiabo",
+      "Pão de queijo"
+    ],
+    "fonte_tipicas": "Quanto Custa Viajar"
+  },
+  "POA": {
+    "cafe": [
+      16,
+      24,
+      35
+    ],
+    "almoco": [
+      38,
+      49,
+      60,
+      40
+    ],
+    "jantar": [
+      46,
+      59,
+      73,
+      40,
+      100.0
+    ],
+    "tipicas": [
+      "Churrasco gaúcho",
+      "Arroz de carreteiro",
+      "Chimarrão"
+    ],
+    "fonte_tipicas": "Quanto Custa Viajar"
+  },
+  "CWB": {
+    "cafe": [
+      15,
+      23,
+      39
+    ],
+    "almoco": [
+      35,
+      49,
+      68,
+      40
+    ],
+    "jantar": [
+      40,
+      53,
+      76,
+      40,
+      100.0
+    ],
+    "tipicas": [
+      "Barreado",
+      "Carne de onça",
+      "Pinhão"
+    ],
+    "fonte_tipicas": "Quanto Custa Viajar"
+  },
+  "SSA": {
+    "cafe": [
+      14.6,
+      20.1,
+      24
+    ],
+    "almoco": [
+      25,
+      45,
+      62.6,
+      42.5
+    ],
+    "jantar": [
+      36.2,
+      53.2,
+      70,
+      42.5,
+      90.0
+    ],
+    "tipicas": [
+      "Acarajé",
+      "Moqueca baiana",
+      "Vatapá"
+    ],
+    "fonte_tipicas": "Quanto Custa Viajar"
+  },
+  "FLN": {
+    "cafe": [
+      9.6,
+      18,
+      22.8
+    ],
+    "almoco": [
+      15.6,
+      32.13,
+      41.88,
+      45
+    ],
+    "jantar": [
+      22.2,
+      41.4,
+      57,
+      45,
+      120.0
+    ],
+    "tipicas": [
+      "Ostras",
+      "Tainha",
+      "Berbigão"
+    ],
+    "fonte_tipicas": "Quanto Custa Viajar"
   }
 }
