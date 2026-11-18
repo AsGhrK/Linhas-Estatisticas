@@ -1,18 +1,54 @@
 {
-  "fonte": "Quanto Custa Viajar, faixa econômica",
-  "coletado_em": "2026-11-17",
+  "fonte": "Quanto Custa Viajar (faixas baixo custo, econômico e conforto) e Numbeo (refeição em restaurante barato, no almoço e no jantar)",
+  "coletado_em": "2026-11-18",
   "RIO": {
-    "cafe": [24],
-    "almoco": [50],
-    "jantar": [63],
-    "tipicas": ["Feijoada carioca", "Filé à Oswaldo Aranha", "Biscoito Globo e mate"],
+    "cafe": [
+      15,
+      24,
+      37
+    ],
+    "almoco": [
+      38,
+      50,
+      64,
+      45
+    ],
+    "jantar": [
+      44,
+      63,
+      73,
+      45
+    ],
+    "tipicas": [
+      "Feijoada carioca",
+      "Filé à Oswaldo Aranha",
+      "Biscoito Globo e mate"
+    ],
     "fonte_tipicas": "Quanto Custa Viajar"
   },
   "SAO": {
-    "cafe": [26],
-    "almoco": [52],
-    "jantar": [63],
-    "tipicas": ["Virado à paulista", "Sanduíche de mortadela", "Pastel com caldo de cana"],
+    "cafe": [
+      18,
+      26,
+      40
+    ],
+    "almoco": [
+      40,
+      52,
+      68,
+      45
+    ],
+    "jantar": [
+      51,
+      63,
+      76,
+      45
+    ],
+    "tipicas": [
+      "Virado à paulista",
+      "Sanduíche de mortadela",
+      "Pastel com caldo de cana"
+    ],
     "fonte_tipicas": "Quanto Custa Viajar"
   }
 }

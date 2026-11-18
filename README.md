@@ -109,7 +109,7 @@ linhas-estatisticas/
 │   │   ├── brutos/            # microdados da ANAC (fora do git)
 │   │   └── tarifas_sbcg.csv   # recorte SBCG → Rio e São Paulo (versionado)
 │   └── manual/
-│       ├── clima.json         # INMET, normais 1991–2020
+│       ├── clima.json         # INMET, normais 1961–1990
 │       ├── hoteis.json        # Accor, coleta manual
 │       ├── alimentacao.json   # custo de refeição e comidas típicas
 │       └── anac.json          # data de acesso aos microdados da ANAC
@@ -196,8 +196,8 @@ O `dados.json` é gerado por `pipeline/gerar_dados.py`; não se edita à mão. O
         "precipitacao": [137, 130, 135, 95, 70, 55,
                          41, 44, 53, 86, 98, 134],
         "estacao": "código da estação INMET",
-        "periodo": "1991-2020",
-        "fonte": "INMET — Normais Climatológicas 1991–2020"
+        "periodo": "1961-1990",
+        "fonte": "INMET — Normais Climatológicas 1961–1990"
       },
 
       "hotel": {
@@ -408,8 +408,8 @@ P1 está no caminho crítico: P3 e P4 dependem do `dados.json`. Por isso o schem
 | Dimensão | Origem |
 |---|---|
 | Preços de passagem | ANAC — microdados de tarifas aéreas comercializadas, voos domésticos, jan–set/2026 |
-| Climatologia | INMET — Normais Climatológicas do Brasil 1991–2020 (Rio de Janeiro; São Paulo, Mirante de Santana) |
-| Hospedagem | Accor (`all.accor.com`) |
+| Climatologia | INMET — Normais Climatológicas do Brasil 1961–1990 (Rio de Janeiro, 83743; São Paulo, Mirante de Santana, 83781). As normais de 1991–2020 não trazem a estação central do Rio e as de 1981–2010 não trazem a chuva dela. |
+| Hospedagem | Accor (`all.accor.com`): 21 hotéis no Rio e 34 em São Paulo, marcas econômicas e intermediárias, check-in 12/01/2027, 5 noites |
 | Alimentação | Quanto Custa Viajar, faixa econômica |
 | Comidas típicas | Quanto Custa Viajar |
 
@@ -425,7 +425,7 @@ Declaradas aqui e no relatório. Reconhecer o limite do próprio método é o qu
 - **Viracopos fica fora.** `SBKP` fica em Campinas e não entra na rota de São Paulo, o que reduz o volume da Azul nessa rota.
 - **Tarifa sem taxas.** O valor da ANAC é a tarifa comercializada, sem taxas de embarque. O passageiro paga mais do que o número mostrado.
 - **Recorte temporal único na hospedagem e na alimentação.** Diárias e refeições refletem uma janela de coleta de poucos dias. Uma coleta em outro período produziria outros números e possivelmente outra conclusão.
-- **Alimentação com um valor por refeição, fora do score.** Café, almoço e jantar têm um só preço por cidade (n = 1), da faixa econômica de uma só fonte, o Quanto Custa Viajar. As telas mostram os valores, mas o eixo de alimentação fica fora do radar e do score composto enquanto alguma refeição tiver menos de três preços por cidade (`MIN_PRECOS_REFEICAO` em `pipeline/gerar_dados.py`). Com dois números só, a normalização por mínimo e máximo transformaria uma diferença de poucos reais em 0 contra 1.
+- **Alimentação por faixas, não por restaurantes.** Os preços de café, almoço e jantar são as três faixas do Quanto Custa Viajar (baixo custo, econômico e conforto), mais a refeição em restaurante barato do Numbeo no almoço e no jantar. São estimativas de fonte, não cardápios sorteados. Com menos de três preços por refeição, o eixo sairia do radar e do score (`MIN_PRECOS_REFEICAO` em `pipeline/gerar_dados.py`).
 - **Viés de rede hoteleira.** As diárias vêm de uma só rede. O custo de hospedagem apurado representa aquele padrão de hotel, não o mercado da cidade.
-- **Climatologia não é previsão.** As séries de temperatura e chuva são as médias de 1991–2020, não o clima de 2026. Descrevem o comportamento típico do mês, não o tempo que fará numa data específica.
+- **Climatologia não é previsão.** As séries de temperatura e chuva são as médias de 1961–1990, não o clima de 2026. É o único período em que o INMET publica temperatura e chuva da estação central do Rio; as duas cidades usam o mesmo período, mas o aquecimento desde então não aparece. Descrevem o comportamento típico do mês, não o tempo que fará numa data específica.
 - **Sem validação cruzada de preço.** Os valores não foram conferidos contra uma segunda fonte independente.

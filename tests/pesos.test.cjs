@@ -4,7 +4,14 @@ require('../js/pesos.js');
 const { test } = require('node:test');
 const assert = require('node:assert');
 const falsos = require('../dados/dados-falsos.json');
-const reais = require('../dados/dados.json');
+// Coleta parcial: só a passagem tem faixa; hotel e clima faltam e a alimentação tem amostra pequena.
+const parcial = structuredClone(falsos);
+for (const eixo of ['custo_hotel', 'temperatura_media', 'precipitacao', 'custo_alimentacao']) {
+  parcial.faixas[eixo] = null;
+}
+for (const rota of Object.values(parcial.rotas)) {
+  for (const serie of ['temp_max', 'temp_min', 'precipitacao']) rota.clima[serie] = rota.clima[serie].map(() => null);
+}
 
 const P = window.LE.pesos;
 const S = window.LE.stats;
@@ -62,8 +69,8 @@ test('com tudo coletado não há frase de eixo de fora', () => {
   assert.ok(!P.conclusao(falsos, IGUAIS).includes('Fora do cálculo'));
 });
 
-test('dados reais: eixos sem dado e alimentação com amostra pequena saem em frases separadas', () => {
-  const texto = P.conclusao(reais, IGUAIS);
+test('coleta parcial: eixos sem dado e alimentação com amostra pequena saem em frases separadas', () => {
+  const texto = P.conclusao(parcial, IGUAIS);
   assert.ok(texto.startsWith('Com estes pesos, '), texto);
   assert.ok(texto.endsWith(' Fora do cálculo por falta de dados: Hospedagem, Conforto térmico e Tempo seco.'
     + ' Fora do cálculo por amostra pequena: Alimentação.'), texto);
@@ -101,8 +108,8 @@ test('pesos exibidos somam cem também quando a divisão não é exata', () => {
   }
 });
 
-test('dados reais: só a passagem entra, o resto fica fora do cálculo', () => {
-  assert.deepStrictEqual(P.efetivos(reais, IGUAIS), {
+test('coleta parcial: só a passagem entra, o resto fica fora do cálculo', () => {
+  assert.deepStrictEqual(P.efetivos(parcial, IGUAIS), {
     passagem: '100%', hospedagem: 'fora do cálculo', alimentacao: 'fora do cálculo', clima: 'fora do cálculo'
   });
 });
@@ -110,7 +117,7 @@ test('dados reais: só a passagem entra, o resto fica fora do cálculo', () => {
 test('soma zero mostra traço', () => {
   const t = P.efetivos(falsos, { passagem: 0, hospedagem: 0, alimentacao: 0, clima: 0 });
   assert.deepStrictEqual(Object.values(t), ['—', '—', '—', '—']);
-  assert.strictEqual(P.efetivos(reais, { passagem: 0, hospedagem: 50, alimentacao: 0, clima: 0 }).passagem, '—');
+  assert.strictEqual(P.efetivos(parcial, { passagem: 0, hospedagem: 50, alimentacao: 0, clima: 0 }).passagem, '—');
 });
 
 test('clima com um eixo só entra com metade do peso', () => {
@@ -121,7 +128,7 @@ test('clima com um eixo só entra com metade do peso', () => {
 });
 
 test('peso só em eixos sem dado: faltam dados, não peso zero', () => {
-  const texto = P.conclusao(reais, { passagem: 0, hospedagem: 50, alimentacao: 0, clima: 0 });
+  const texto = P.conclusao(parcial, { passagem: 0, hospedagem: 50, alimentacao: 0, clima: 0 });
   assert.ok(texto.startsWith('Ainda faltam dados para calcular o score com estes pesos.'), texto);
   assert.ok(texto.includes('Fora do cálculo por falta de dados: '), texto);
 });
@@ -143,9 +150,9 @@ test('só uma cidade com score', () => {
 });
 
 test('partes separa a frase do score da frase dos eixos de fora', () => {
-  const p = P.partes(reais, IGUAIS);
+  const p = P.partes(parcial, IGUAIS);
   assert.ok(p.principal.startsWith('Com estes pesos, '), p.principal);
   assert.ok(p.fora.startsWith('Fora do cálculo por falta de dados: '), p.fora);
-  assert.strictEqual(P.conclusao(reais, IGUAIS), p.principal + ' ' + p.fora);
+  assert.strictEqual(P.conclusao(parcial, IGUAIS), p.principal + ' ' + p.fora);
   assert.strictEqual(P.partes(falsos, IGUAIS).fora, '');
 });

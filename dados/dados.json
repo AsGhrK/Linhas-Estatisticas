@@ -31,10 +31,22 @@
       "min": 431.79,
       "max": 944.58
     },
-    "custo_hotel": null,
-    "custo_alimentacao": null,
-    "temperatura_media": null,
-    "precipitacao": null
+    "custo_hotel": {
+      "min": 219.4,
+      "max": 1010.6
+    },
+    "custo_alimentacao": {
+      "min": 97,
+      "max": 184
+    },
+    "temperatura_media": {
+      "min": 16.75,
+      "max": 26.85
+    },
+    "precipitacao": {
+      "min": 39.6,
+      "max": 237.4
+    }
   },
   "rotas": {
     "RIO": {
@@ -211,87 +223,223 @@
       },
       "clima": {
         "temp_max": [
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null
+          30.1,
+          30.2,
+          29.4,
+          27.8,
+          26.4,
+          25.2,
+          25.0,
+          25.5,
+          25.4,
+          26.0,
+          27.4,
+          28.6
         ],
         "temp_min": [
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null
+          23.3,
+          23.5,
+          23.3,
+          21.9,
+          20.4,
+          18.7,
+          18.4,
+          18.9,
+          19.2,
+          20.2,
+          21.4,
+          22.4
         ],
         "precipitacao": [
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null
+          137.1,
+          130.4,
+          135.8,
+          94.9,
+          69.8,
+          42.7,
+          41.9,
+          44.5,
+          53.6,
+          86.5,
+          97.8,
+          134.2
         ],
-        "estacao": null,
-        "periodo": "1991-2020",
-        "fonte": "INMET — Normais Climatológicas 1991–2020"
+        "estacao": "Rio de Janeiro (83743)",
+        "periodo": "1961-1990",
+        "fonte": "INMET — Normais Climatológicas do Brasil 1961–1990"
       },
       "hotel": {
-        "n": 0,
-        "hoteis": [],
-        "diarias": [],
-        "diaria_media": null,
-        "diaria_mediana": null,
+        "n": 21,
+        "hoteis": [
+          {
+            "nome": "ibis Rio de Janeiro Centro",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/5534",
+            "diaria": 414.8
+          },
+          {
+            "nome": "ibis budget Rio de Janeiro Centro",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/5521",
+            "diaria": 347.6
+          },
+          {
+            "nome": "Novotel RJ Porto Atlantico",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/9438",
+            "diaria": 622.8
+          },
+          {
+            "nome": "ibis Rio Porto Atlantico",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/9371",
+            "diaria": 394.2
+          },
+          {
+            "nome": "ibis Rio de Janeiro Santos Dumont",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/5691",
+            "diaria": 390.4
+          },
+          {
+            "nome": "Novotel RJ Santos Dumont",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/6522",
+            "diaria": 607.6
+          },
+          {
+            "nome": "ibis budget RJ Praia de Botafogo",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/9600",
+            "diaria": 615.4
+          },
+          {
+            "nome": "Novotel RJ Praia de Botafogo",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/9631",
+            "diaria": 864.8
+          },
+          {
+            "nome": "Ibis Styles RJ Botafogo",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/B2Z6",
+            "diaria": 674.6
+          },
+          {
+            "nome": "ibis Rio de Janeiro Botafogo",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/7547",
+            "diaria": 621.6
+          },
+          {
+            "nome": "Novotel Rio de Janeiro Leme",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/B205",
+            "diaria": 1010.6
+          },
+          {
+            "nome": "ibis Copacabana Posto 2",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/6497",
+            "diaria": 646.8
+          },
+          {
+            "nome": "Mercure Rio Boutique Copacabana",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/B215",
+            "diaria": 933.4
+          },
+          {
+            "nome": "ibis budget RJ Copacabana",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/9327",
+            "diaria": 655.2
+          },
+          {
+            "nome": "ibis Copacabana Posto 5",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/9361",
+            "diaria": 653.0
+          },
+          {
+            "nome": "ibis Rio de Janeiro Shopping Nova America",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/9449",
+            "diaria": 404.4
+          },
+          {
+            "nome": "ibis budget Rio de Janeiro Shopping Nova America",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/9558",
+            "diaria": 425.4
+          },
+          {
+            "nome": "ibis Rio De Janeiro Barra Da Tijuca",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/8182",
+            "diaria": 503.8
+          },
+          {
+            "nome": "Mercure Rio de Janeiro Barra da Tijuca",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/8180",
+            "diaria": 631.6
+          },
+          {
+            "nome": "ibis Rio de Janeiro Parque Olimpico",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/8176",
+            "diaria": 427.0
+          },
+          {
+            "nome": "Novotel Rio de Janeiro Parque Olimpico",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/8177",
+            "diaria": 540.4
+          }
+        ],
+        "diarias": [
+          414.8,
+          347.6,
+          622.8,
+          394.2,
+          390.4,
+          607.6,
+          615.4,
+          864.8,
+          674.6,
+          621.6,
+          1010.6,
+          646.8,
+          933.4,
+          655.2,
+          653.0,
+          404.4,
+          425.4,
+          503.8,
+          631.6,
+          427.0,
+          540.4
+        ],
+        "diaria_media": 589.78,
+        "diaria_mediana": 615.4,
         "noites": 5,
-        "custo_total": null,
+        "custo_total": 2948.9,
         "fonte": "Accor (all.accor.com)",
-        "coletado_em": null,
-        "checkin": null
+        "coletado_em": "2026-11-18",
+        "checkin": "2027-01-12"
       },
       "alimentacao": {
         "cafe": [
-          24
+          15,
+          24,
+          37
         ],
         "almoco": [
-          50
+          38,
+          50,
+          64,
+          45
         ],
         "jantar": [
-          63
+          44,
+          63,
+          73,
+          45
         ],
         "medias": {
-          "cafe": 24,
-          "almoco": 50,
-          "jantar": 63
+          "cafe": 25.33,
+          "almoco": 49.25,
+          "jantar": 56.25
         },
-        "n": 1,
-        "media_diaria": 137,
+        "n": 3,
+        "media_diaria": 130.83,
         "tipicas": [
           "Feijoada carioca",
           "Filé à Oswaldo Aranha",
           "Biscoito Globo e mate"
         ],
-        "fonte": "Quanto Custa Viajar, faixa econômica",
-        "coletado_em": "2026-11-17"
+        "fonte": "Quanto Custa Viajar (faixas baixo custo, econômico e conforto) e Numbeo (refeição em restaurante barato, no almoço e no jantar)",
+        "coletado_em": "2026-11-18"
       }
     },
     "SAO": {
@@ -468,101 +616,303 @@
       },
       "clima": {
         "temp_max": [
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null
+          27.3,
+          28.0,
+          27.2,
+          25.1,
+          23.0,
+          21.8,
+          21.8,
+          23.3,
+          23.9,
+          24.8,
+          25.9,
+          26.3
         ],
         "temp_min": [
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null
+          18.7,
+          18.8,
+          18.2,
+          16.3,
+          13.8,
+          12.4,
+          11.7,
+          12.8,
+          13.9,
+          15.3,
+          16.6,
+          17.7
         ],
         "precipitacao": [
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null
+          237.4,
+          221.5,
+          160.5,
+          72.6,
+          71.4,
+          50.1,
+          43.9,
+          39.6,
+          70.7,
+          126.9,
+          145.8,
+          200.7
         ],
-        "estacao": "Mirante de Santana",
-        "periodo": "1991-2020",
-        "fonte": "INMET — Normais Climatológicas 1991–2020"
+        "estacao": "Mirante de Santana (83781)",
+        "periodo": "1961-1990",
+        "fonte": "INMET — Normais Climatológicas do Brasil 1961–1990"
       },
       "hotel": {
-        "n": 0,
-        "hoteis": [],
-        "diarias": [],
-        "diaria_media": null,
-        "diaria_mediana": null,
+        "n": 34,
+        "hoteis": [
+          {
+            "nome": "ibis Styles SP Centro",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/B5N9",
+            "diaria": 319.6
+          },
+          {
+            "nome": "ibis budget SP Centro São João",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/5524",
+            "diaria": 219.4
+          },
+          {
+            "nome": "Mercure Sao Paulo Bela Vista",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/3626",
+            "diaria": 450.0
+          },
+          {
+            "nome": "Mercure Sao Paulo Paulista",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/5176",
+            "diaria": 467.6
+          },
+          {
+            "nome": "ibis budget São Paulo Paulista",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/5323",
+            "diaria": 239.2
+          },
+          {
+            "nome": "Mercure São Paulo Grand Plaza Paulista",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/B2J4",
+            "diaria": 489.6
+          },
+          {
+            "nome": "ibis Sao Paulo Paulista",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/3735",
+            "diaria": 399.8
+          },
+          {
+            "nome": "Mercure Sao Paulo Alamedas",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/0674",
+            "diaria": 554.8
+          },
+          {
+            "nome": "ibis budget São Paulo Paraiso",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/3531",
+            "diaria": 245.8
+          },
+          {
+            "nome": "Mercure Sao Paulo Jardins",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/3467",
+            "diaria": 675.8
+          },
+          {
+            "nome": "Mercure Sao Paulo Pamplona",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/6284",
+            "diaria": 453.6
+          },
+          {
+            "nome": "Mercure São Paulo Barra Funda",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/9352",
+            "diaria": 501.8
+          },
+          {
+            "nome": "ibis Sao Paulo Barra Funda",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/2211",
+            "diaria": 356.4
+          },
+          {
+            "nome": "Novotel São Paulo Jardins",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/B8P3",
+            "diaria": 612.0
+          },
+          {
+            "nome": "ibis budget São Paulo Jardins",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/5525",
+            "diaria": 226.8
+          },
+          {
+            "nome": "Novotel São Paulo Center Norte",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/2992",
+            "diaria": 493.0
+          },
+          {
+            "nome": "Mercure Sao Paulo Pinheiros",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/3147",
+            "diaria": 492.6
+          },
+          {
+            "nome": "ibis Styles São Paulo Barra Funda",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/8990",
+            "diaria": 377.2
+          },
+          {
+            "nome": "ibis São Paulo Tatuapé",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/9759",
+            "diaria": 307.6
+          },
+          {
+            "nome": "ibis Styles SP Faria Lima",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/A1B6",
+            "diaria": 398.0
+          },
+          {
+            "nome": "Mercure Sao Paulo Vila Olimpia",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/3206",
+            "diaria": 561.4
+          },
+          {
+            "nome": "ibis São Paulo Ibirapuera",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/9760",
+            "diaria": 355.4
+          },
+          {
+            "nome": "Mercure Sao Paulo Moema",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/3538",
+            "diaria": 525.6
+          },
+          {
+            "nome": "Mercure Sao Paulo Moema Times Square",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/3454",
+            "diaria": 460.8
+          },
+          {
+            "nome": "Mercure Sao Paulo Ibirapuera Privilege",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/3124",
+            "diaria": 580.4
+          },
+          {
+            "nome": "Mercure São Paulo JK",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/2128",
+            "diaria": 530.2
+          },
+          {
+            "nome": "Mercure São Paulo Berrini",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/3114",
+            "diaria": 1001.0
+          },
+          {
+            "nome": "ibis Sao Paulo Congonhas",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/3718",
+            "diaria": 441.8
+          },
+          {
+            "nome": "Novotel São Paulo Morumbi",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/0473",
+            "diaria": 622.4
+          },
+          {
+            "nome": "ibis Sao Paulo Morumbi",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/5532",
+            "diaria": 400.6
+          },
+          {
+            "nome": "ibis budget São Paulo Morumbi",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/5526",
+            "diaria": 359.6
+          },
+          {
+            "nome": "Novotel São Paulo Berrini",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/9037",
+            "diaria": 747.6
+          },
+          {
+            "nome": "Mercure Sao Paulo Nacoes Unidas",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/3135",
+            "diaria": 454.6
+          },
+          {
+            "nome": "ibis Sao Paulo Interlagos",
+            "url": "https://all.accor.com/booking/pt-br/accor/hotel/5471",
+            "diaria": 420.6
+          }
+        ],
+        "diarias": [
+          319.6,
+          219.4,
+          450.0,
+          467.6,
+          239.2,
+          489.6,
+          399.8,
+          554.8,
+          245.8,
+          675.8,
+          453.6,
+          501.8,
+          356.4,
+          612.0,
+          226.8,
+          493.0,
+          492.6,
+          377.2,
+          307.6,
+          398.0,
+          561.4,
+          355.4,
+          525.6,
+          460.8,
+          580.4,
+          530.2,
+          1001.0,
+          441.8,
+          622.4,
+          400.6,
+          359.6,
+          747.6,
+          454.6,
+          420.6
+        ],
+        "diaria_media": 463.02,
+        "diaria_mediana": 454.1,
         "noites": 5,
-        "custo_total": null,
+        "custo_total": 2315.1,
         "fonte": "Accor (all.accor.com)",
-        "coletado_em": null,
-        "checkin": null
+        "coletado_em": "2026-11-18",
+        "checkin": "2027-01-12"
       },
       "alimentacao": {
         "cafe": [
-          26
+          18,
+          26,
+          40
         ],
         "almoco": [
-          52
+          40,
+          52,
+          68,
+          45
         ],
         "jantar": [
-          63
+          51,
+          63,
+          76,
+          45
         ],
         "medias": {
-          "cafe": 26,
-          "almoco": 52,
-          "jantar": 63
+          "cafe": 28,
+          "almoco": 51.25,
+          "jantar": 58.75
         },
-        "n": 1,
-        "media_diaria": 141,
+        "n": 3,
+        "media_diaria": 138.0,
         "tipicas": [
           "Virado à paulista",
           "Sanduíche de mortadela",
           "Pastel com caldo de cana"
         ],
-        "fonte": "Quanto Custa Viajar, faixa econômica",
-        "coletado_em": "2026-11-17"
+        "fonte": "Quanto Custa Viajar (faixas baixo custo, econômico e conforto) e Numbeo (refeição em restaurante barato, no almoço e no jantar)",
+        "coletado_em": "2026-11-18"
       }
     }
   },
-  "pendencias": [
-    "clima.RIO.estacao",
-    "clima.RIO.precipitacao",
-    "clima.RIO.temp_max",
-    "clima.RIO.temp_min",
-    "clima.SAO.precipitacao",
-    "clima.SAO.temp_max",
-    "clima.SAO.temp_min",
-    "hoteis.RIO",
-    "hoteis.SAO",
-    "hoteis.checkin",
-    "hoteis.coletado_em"
-  ]
+  "pendencias": []
 }
