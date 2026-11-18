@@ -36,12 +36,12 @@ export const hotels: Hotel[] = [
 ];
 
 export const mealStats: StatItem[] = [
-  { value: 'R$ 24', label: 'Café da manhã' },
-  { value: 'R$ 50', label: 'Almoço' },
-  { value: 'R$ 60', label: 'Jantar' },
+  { value: 'R$ 26 / 24', label: 'Café da manhã — SP / RJ' },
+  { value: 'R$ 52 / 50', label: 'Almoço — SP / RJ' },
+  { value: 'R$ 63 / 63', label: 'Jantar — SP / RJ' },
 ];
 
 export const typicalFoods = [
-  'Feijoada', 'Cachorro-quente', 'Filé mignon grelhado',
-  'Cuscuz Paulista', 'Pastel de feira', 'Virado à Paulista',
+  'Feijoada carioca', 'Filé à Oswaldo Aranha', 'Biscoito Globo e mate',
+  'Virado à paulista', 'Sanduíche de mortadela', 'Pastel com caldo de cana',
 ];

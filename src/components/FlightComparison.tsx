@@ -7,7 +7,9 @@ export default function FlightComparison() {
   return (
     <section id="voos" className="content-section">
       <div className="wrap">
-        <SectionHeading tag="Seção 01 — Voos" title="Duas rotas, lado a lado, sem abas escondidas" description="Compare as tarifas da GOL, da LATAM e da Azul saindo de Campo Grande para o Rio de Janeiro e para São Paulo. Os preços vêm de dados públicos da ANAC." />
+        <SectionHeading tag="Seção 01 — Voos" title="Duas rotas, lado a lado, sem abas escondidas" description="As tarifas vêm dos microdados de tarifas aéreas domésticas da ANAC, que reúnem os preços das passagens vendidas ao público e registrados todo mês pelas companhias aéreas."
+          source={<><a href="https://www.gov.br/anac/pt-br/assuntos/dados-e-estatisticas" target="_blank" rel="noopener noreferrer">ANAC — Dados e Estatísticas</a> (acesso em 17/11/2026)</>}
+        />
         <div className="route-tabs" aria-label="Rotas demonstradas">
           <span className="route-tab route-tab--active">SBCG → SBRJ</span>
           <span className="route-tab">SBCG → SBSP</span>

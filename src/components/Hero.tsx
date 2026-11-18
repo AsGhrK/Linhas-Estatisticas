@@ -7,7 +7,7 @@ export default function Hero() {
         <div className="hero-copy">
           <div className="eyebrow">Planejamento de viagens orientado a dados</div>
           <h1 id="hero-title">Compare voos, clima e custos antes de decidir para onde ir</h1>
-          <p>Reunimos tarifas aéreas, clima típico de cada mês, hospedagem e alimentação em um único painel para comparar as duas rotas</p>
+          <p>Reunimos tarifas aéreas, clima típico de cada mês, hospedagem e alimentação em um único painel para comparar as duas rotas.</p>
           <div className="route-line" aria-label="Rota ilustrativa de Campo Grande a um destino">
             <span>SBCG</span><span className="rule" /><span className="dot" /><span className="rule" /><span>Destino</span>
           </div>
