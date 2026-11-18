@@ -24,7 +24,7 @@ O sistema compara **Campo Grande → Rio de Janeiro** (rota `RIO`: `SBCG → SBR
 
 ## O que é
 
-Um site estático de 8 páginas que apresenta uma análise comparativa entre duas rotas. As passagens vêm dos microdados de tarifas da ANAC, recortados e resumidos por um pipeline offline em Python. Clima, hospedagem e alimentação são digitados à mão a partir de fontes públicas. Tudo é consolidado num único `dados.json` e renderizado em tabelas e gráficos no navegador.
+Um site estático de 8 telas, mais uma página de fontes, que apresenta uma análise comparativa entre duas rotas. As passagens vêm dos microdados de tarifas da ANAC, recortados e resumidos por um pipeline offline em Python. Clima, hospedagem e alimentação são digitados à mão a partir de fontes públicas. Tudo é consolidado num único `dados.json` e renderizado em tabelas e gráficos no navegador.
 
 A entrega tem duas metades:
 
@@ -48,10 +48,10 @@ Isso é decisão de escopo, não limitação acidental. Trocar dados manuais por
 | Tela | Conteúdo |
 |---|---|
 | **Principal** | Hero animado, formulário origem/destino, chamada para a comparação |
-| **Dados da Busca** | Tabela de tarifas por companhia e classe, duas rotas lado a lado |
+| **Dados da Busca** | Tabela de tarifas por companhia, duas rotas lado a lado |
 | **Dados e Preços** | Gráficos de linha do preço mensal ao longo do ano, maior e menor preço marcados |
 | **Detalhes da Viagem** | Três cards de entrada: hotéis, clima, restaurantes |
-| **Clima da Viagem** | Gráfico combinado por cidade — barras de precipitação, linha de temperatura |
+| **Clima da Viagem** | Dois gráficos separados, cada um com a sua escala: temperatura média mensal (linha) e precipitação (barras), com as duas cidades em cada um |
 | **Hotel** | Diárias por hotel, custo médio por rota, custo total estimado da hospedagem |
 | **Alimentação** | Custo médio de refeição por cidade e comidas típicas |
 | **Visão Geral** | Radar comparativo de cinco eixos normalizados e a conclusão do trabalho |
@@ -66,7 +66,7 @@ Sem build step, sem gerenciador de pacotes, sem framework.
 |---|---|---|
 | Marcação | HTML5 estático | 8 páginas, nenhuma rota dinâmica |
 | Estilo | CSS puro com variáveis | Tokens extraídos do Figma, um só arquivo de origem para cores e tipografia |
-| Gráficos | Chart.js 4.4.1 (UMD, via cdnjs com `integrity`) | Linha, barra, combo e radar num só pacote |
+| Gráficos | Chart.js 4.4.1 (UMD, via cdnjs com `integrity`) | Linha, barra e radar num só pacote |
 | Animação | CSS + `IntersectionObserver` | Zero dependência |
 | Dados | `dados.json` estático, lido com `fetch` | Separa coleta de apresentação |
 | Pipeline | Python, só biblioteca padrão (`csv`, `json`, `statistics`) | Roda offline, sem `pip install` |
@@ -87,6 +87,7 @@ linhas-estatisticas/
 ├── hotel.html
 ├── alimentacao.html
 ├── visao-geral.html
+├── fontes.html                # URL e data de acesso de cada fonte
 │
 ├── css/
 │   ├── tokens.css             # variáveis: cores, fontes, espaçamento
@@ -104,14 +105,14 @@ linhas-estatisticas/
 ├── dados/
 │   ├── dados.json             # gerado pelo pipeline; é o que o site lê
 │   ├── dados-falsos.json      # números inventados, para desenvolver sem esperar a coleta
-│   ├── fontes.md              # URL e data de acesso de cada fonte
 │   ├── anac/
 │   │   ├── brutos/            # microdados da ANAC (fora do git)
 │   │   └── tarifas_sbcg.csv   # recorte SBCG → Rio e São Paulo (versionado)
 │   └── manual/
 │       ├── clima.json         # INMET, normais 1991–2020
 │       ├── hoteis.json        # Accor, coleta manual
-│       └── alimentacao.json   # custo de refeição e comidas típicas
+│       ├── alimentacao.json   # custo de refeição e comidas típicas
+│       └── anac.json          # data de acesso aos microdados da ANAC
 │
 ├── pipeline/
 │   ├── extrair_anac.py        # brutos → tarifas_sbcg.csv
@@ -131,7 +132,7 @@ O fluxo dos dados:
 ```
 dados/anac/brutos/*.CSV
   └─ pipeline/extrair_anac.py ──► dados/anac/tarifas_sbcg.csv
-dados/manual/{clima,hoteis,alimentacao}.json
+dados/manual/{clima,hoteis,alimentacao,anac}.json
   └─ pipeline/gerar_dados.py ──► dados/dados.json ──fetch──► *.html + js/
 ```
 
@@ -144,6 +145,10 @@ O `dados.json` é gerado por `pipeline/gerar_dados.py`; não se edita à mão. O
 ```json
 {
   "coletado_em": "2026-11-17",
+  "fonte_passagens": {
+    "acesso_em": "2026-11-17",
+    "fonte": "ANAC, microdados de tarifas aéreas comercializadas"
+  },
   "periodo_passagens": { "inicio": "2026-01", "fim": "2026-09" },
   "origem": { "icao": "SBCG", "cidade": "Campo Grande" },
   "meses": ["jan","fev","mar","abr","mai","jun",
@@ -204,7 +209,8 @@ O `dados.json` é gerado por `pipeline/gerar_dados.py`; não se edita à mão. O
         "noites": 5,
         "custo_total": 3103.30,
         "fonte": "Accor (all.accor.com)",
-        "coletado_em": "2026-11-17"
+        "coletado_em": "2026-11-17",
+        "checkin": "2026-12-01"
       },
 
       "alimentacao": {
@@ -245,9 +251,9 @@ Zero é um preço. `null` é ausência de dado. Confundir os dois arrasta a méd
 
 **Toda média carrega seu `n`.** Média de 3 hotéis e média de 30 hotéis não têm o mesmo peso. O campo `n` existe para que a tela possa mostrar o tamanho da amostra junto do valor. Nas passagens, `n` é a soma de assentos vendidos e `linhas` é o número de linhas do CSV.
 
-**`coletado_em` é obrigatório.** Preço de hotel muda diariamente. Sem a data, o número não significa nada seis meses depois.
+**`coletado_em` é obrigatório.** Preço de hotel muda diariamente. Sem a data, o número não significa nada seis meses depois. O `coletado_em` do topo do JSON é a data em que o pipeline rodou; a data de acesso aos microdados da ANAC fica em `fonte_passagens.acesso_em`, copiada de `dados/manual/anac.json`, e é ela que as telas de passagem mostram.
 
-**Dado faltando vai para `pendencias`.** Quando um arquivo de `dados/manual/` ainda tem campos vazios, o pipeline lista o caminho em `pendencias`, e o site mostra uma faixa de aviso no topo de cada tela. Dado falso também nunca aparece sem essa faixa.
+**Dado faltando vai para `pendencias`.** Quando um arquivo de `dados/manual/` ainda tem campos vazios, o pipeline lista o caminho em `pendencias`, e o site mostra uma faixa de aviso no topo de cada tela de dados. A Principal e a página de fontes não leem o JSON e não têm a faixa. Dado falso também nunca aparece sem essa faixa.
 
 ## Camada estatística
 
@@ -289,6 +295,17 @@ function normalizar(valor, minimo, maximo) {
 }
 ```
 
+O mínimo e o máximo vêm de um conjunto que junta as duas cidades, e cada eixo tem o seu:
+
+| Eixo | Conjunto (mínimo e máximo) | Valor da cidade |
+|---|---|---|
+| Passagem | as tarifas médias de cada companhia em cada mês, nas duas rotas | média da rota, ponderada por assento |
+| Hospedagem | as diárias de todos os hotéis pesquisados nas duas cidades | **mediana** das diárias da cidade |
+| Alimentação | do dia mais barato possível (a refeição mais barata de cada tipo) ao mais caro (a mais cara de cada tipo) | média diária (soma das médias de café, almoço e jantar) |
+| Tempo seco | os totais mensais de precipitação das duas cidades | média mensal do ano |
+
+A hospedagem usa a mediana porque um hotel muito caro puxa a média para cima e mudaria a posição da cidade sozinho.
+
 ### Inversão dos eixos onde menor é melhor
 
 Este é o ponto crítico do projeto.
@@ -312,11 +329,11 @@ Temperatura não é min-max, porque nem a mais alta nem a mais baixa é "melhor"
 score = w₁·preço + w₂·clima + w₃·hotel + w₄·alimentação
 ```
 
-Com os pesos somando 1: na tela, cada controle vai de 0 a 100, e o peso efetivo é o valor dividido pela soma dos quatro. O peso do clima se divide igualmente entre conforto térmico e tempo seco. Deixar os pesos visíveis na interface é o que torna o resultado honesto: "melhor viagem" é função da preferência declarada de quem viaja, não fato objetivo. Quem prioriza preço e quem prioriza clima chegam a conclusões diferentes a partir dos mesmos dados — e o site mostra isso em vez de esconder.
+Na tela, cada controle vai de 0 a 100. Os pesos são renormalizados sobre os eixos com dado: eixo sem nota numa das cidades sai da conta, e o peso dele sai da soma. O peso do clima se divide igualmente entre conforto térmico e tempo seco; se só um dos dois tiver dado, só a metade do peso do clima entra. A porcentagem ao lado de cada controle é esse peso efetivo, arredondada pelo maior resto para somar exatamente 100%; parte sem dado nas duas cidades aparece como "fora do cálculo". Deixar os pesos visíveis na interface é o que torna o resultado honesto: "melhor viagem" é função da preferência declarada de quem viaja, não fato objetivo. Quem prioriza preço e quem prioriza clima chegam a conclusões diferentes a partir dos mesmos dados — e o site mostra isso em vez de esconder.
 
 ## Como rodar
 
-O site lê `dados/dados.json` via `fetch`, e o navegador bloqueia `fetch` sobre `file://`. Abrir o `index.html` com duplo clique carrega a página mas deixa todos os gráficos vazios.
+O site lê `dados/dados.json` via `fetch`, e o navegador bloqueia `fetch` sobre `file://`. Abrir o `index.html` com duplo clique carrega a página, mas as telas de dados mostram, no lugar dos gráficos e no topo da tela, a mensagem para abrir o site por um servidor local.
 
 Suba um servidor local:
 
@@ -345,6 +362,17 @@ python -m pipeline.gerar_dados    # recorte + dados/manual/*.json → dados/dado
 
 O recorte `tarifas_sbcg.csv` é versionado, então só o segundo comando é necessário depois de editar um arquivo de `dados/manual/`. Nenhum dos dois precisa de `pip install`.
 
+### Como preencher os dados manuais
+
+Cada arquivo de `dados/manual/` é JSON. Número usa ponto como separador decimal (`24.5`, não `24,5`) e campo ainda não coletado fica `null`, nunca `0`. Datas no formato `aaaa-mm-dd`.
+
+- `clima.json`: para cada cidade, a `estacao` do INMET e as séries `temp_max`, `temp_min` e `precipitacao`, com 12 valores cada, de janeiro a dezembro.
+- `hoteis.json`: `coletado_em`, `checkin` e `noites` no topo; em cada cidade, uma entrada por hotel com `nome`, `url` e `diaria`. O arquivo vem com modelos de hotel todos em `null`: apague os que não usar. Modelo todo nulo é ignorado, mas um hotel com nome e sem diária deixa a cidade pendente.
+- `alimentacao.json`: `coletado_em` no topo; em cada cidade, listas de preços de `cafe`, `almoco` e `jantar` e as comidas `tipicas`. Com menos de três preços por refeição, a alimentação aparece na tela, mas fica fora do radar e do score.
+- `anac.json`: `acesso_em`, a data em que os microdados foram baixados, e a `fonte`.
+
+Depois de editar, rode `python -m pipeline.gerar_dados`. Ele imprime a lista de `pendencias`; confira se sumiu o que você acabou de preencher.
+
 ### Testes
 
 ```bash
@@ -354,7 +382,7 @@ node --test tests/*.test.cjs                   # normalizar.js, pesos.js, tabela
 
 No Node 22, `node --test tests/` sem o padrão falha; use `tests/*.test.cjs`.
 
-O teste de fumaça abre as 8 telas num navegador de verdade. Ele precisa do Playwright, que é a única dependência externa do projeto e só existe nos testes:
+O teste de fumaça abre as 8 telas e a página de fontes num navegador de verdade. Ele precisa do Playwright, que é a única dependência externa do projeto e só existe nos testes:
 
 ```bash
 pip install -r tests/requirements.txt
@@ -385,7 +413,7 @@ P1 está no caminho crítico: P3 e P4 dependem do `dados.json`. Por isso o schem
 | Alimentação | Quanto Custa Viajar, faixa econômica |
 | Comidas típicas | Quanto Custa Viajar |
 
-A fonte, a estação e a data de coleta de cada dado manual ficam no próprio arquivo de `dados/manual/`, seguem para o `dados.json` e são reproduzidas no relatório. As URLs e as datas de acesso estão em [`dados/fontes.md`](dados/fontes.md).
+A fonte, a estação e a data de coleta de cada dado manual ficam no próprio arquivo de `dados/manual/`, seguem para o `dados.json` e são reproduzidas no relatório. As URLs e as datas de acesso estão em [`fontes.html`](fontes.html).
 
 ## Limitações
 
