@@ -1,0 +1,273 @@
+[
+ {
+  "tipo": "capa",
+  "titulo": "Para onde voar saindo de Campo Grande?",
+  "sub": "Linhas Estatísticas — dez destinos comparados em passagem, hospedagem, alimentação e clima",
+  "rodape": "Davi Casari · Filipe Rioske · João Pegarare · Victor Solique — Estatística, TADS, IFMS Nova Andradina"
+ },
+ {
+  "tipo": "texto",
+  "titulo": "A pergunta",
+  "itens": [
+   "A passagem sozinha esconde o resto da viagem: dormir, comer e o clima.",
+   "Comparamos as dez rotas com mais assentos vendidos a partir de SBCG.",
+   "O score junta as quatro partes com pesos que quem lê escolhe.",
+   "Objetivo: mostrar como a resposta muda com a preferência, não eleger uma cidade."
+  ]
+ },
+ {
+  "tipo": "tabela",
+  "titulo": "Os dados",
+  "cab": [
+   "Dimensão",
+   "Fonte",
+   "Recorte"
+  ],
+  "linhas": [
+   [
+    "Passagens",
+    "ANAC, microdados de tarifas",
+    "jan–set/2026, 155.373 assentos"
+   ],
+   [
+    "Clima",
+    "INMET, normais 1961–1990",
+    "estações de cada município"
+   ],
+   [
+    "Hospedagem",
+    "Accor",
+    "check-in 12/01/2027, 5 noites"
+   ],
+   [
+    "Alimentação",
+    "Quanto Custa Viajar e Numbeo",
+    "3 a 5 preços por refeição"
+   ]
+  ]
+ },
+ {
+  "tipo": "texto",
+  "titulo": "Método: tarifa ponderada por assento",
+  "itens": [
+   "Cada linha da ANAC é uma tarifa vendida a vários assentos: o peso é o número de assentos.",
+   "Média, mediana, desvio padrão e CV ponderados; n = soma de assentos.",
+   "Desvio padrão com divisor Σ assentos − 1.",
+   "Mês com menos de 30 assentos fica sem valor (nulo, nunca zero)."
+  ]
+ },
+ {
+  "tipo": "texto",
+  "titulo": "Método: radar e score",
+  "itens": [
+   "Cada eixo vai de 0 a 1 pelo mínimo e máximo das dez cidades.",
+   "Passagem, hotel, alimentação e chuva: menor é melhor, então o eixo é invertido (1 − z).",
+   "Conforto térmico: 1 em 24 °C, caindo até 0 a 12 °C de distância.",
+   "Score = média ponderada dos eixos com os pesos escolhidos."
+  ]
+ },
+ {
+  "tipo": "imagem",
+  "titulo": "Passagens",
+  "imagem": "passagens.png",
+  "nota": "Mediana abaixo da média em todas as rotas e CV acima de 50%: poucas tarifas altas puxam a média. Fonte: ANAC, jan–set/2026."
+ },
+ {
+  "tipo": "tabela",
+  "titulo": "Clima",
+  "cab": [
+   "Cidade",
+   "Temp. média",
+   "Chuva no ano"
+  ],
+  "linhas": [
+   [
+    "Salvador",
+    "25,5 °C",
+    "2.144 mm"
+   ],
+   [
+    "Recife",
+    "25,4 °C",
+    "2.418 mm"
+   ],
+   [
+    "Rio de Janeiro",
+    "23,9 °C",
+    "1.418 mm"
+   ],
+   [
+    "Belo Horizonte",
+    "21,9 °C",
+    "1.464 mm"
+   ],
+   [
+    "Campinas",
+    "21,8 °C",
+    "1.358 mm"
+   ],
+   [
+    "Brasília",
+    "21,4 °C",
+    "1.540 mm"
+   ],
+   [
+    "Florianópolis",
+    "20,8 °C",
+    "1.518 mm"
+   ],
+   [
+    "Porto Alegre",
+    "20,2 °C",
+    "1.320 mm"
+   ],
+   [
+    "São Paulo",
+    "19,7 °C",
+    "1.516 mm"
+   ],
+   [
+    "Curitiba",
+    "17,8 °C",
+    "1.484 mm"
+   ]
+  ]
+ },
+ {
+  "tipo": "imagem",
+  "titulo": "Hospedagem",
+  "imagem": "hoteis.png",
+  "nota": "Campinas e Brasília têm só 2 hotéis Accor no município: a mediana dessas cidades é frágil."
+ },
+ {
+  "tipo": "tabela",
+  "titulo": "Alimentação por dia",
+  "cab": [
+   "Cidade",
+   "Café",
+   "Almoço",
+   "Jantar",
+   "Por dia"
+  ],
+  "linhas": [
+   [
+    "Belo Horizonte",
+    "R$ 17,03",
+    "R$ 25,67",
+    "R$ 44,64",
+    "R$ 87,34"
+   ],
+   [
+    "Brasília",
+    "R$ 17,60",
+    "R$ 29,85",
+    "R$ 45,72",
+    "R$ 93,17"
+   ],
+   [
+    "Florianópolis",
+    "R$ 16,80",
+    "R$ 33,65",
+    "R$ 57,12",
+    "R$ 107,57"
+   ],
+   [
+    "Campinas",
+    "R$ 17,60",
+    "R$ 36,95",
+    "R$ 55,96",
+    "R$ 110,51"
+   ],
+   [
+    "Salvador",
+    "R$ 19,57",
+    "R$ 43,77",
+    "R$ 58,38",
+    "R$ 121,72"
+   ],
+   [
+    "Recife",
+    "R$ 25,33",
+    "R$ 41,50",
+    "R$ 57,40",
+    "R$ 124,23"
+   ],
+   [
+    "Porto Alegre",
+    "R$ 25,00",
+    "R$ 46,75",
+    "R$ 63,60",
+    "R$ 135,35"
+   ],
+   [
+    "Curitiba",
+    "R$ 25,67",
+    "R$ 48,00",
+    "R$ 61,80",
+    "R$ 135,47"
+   ],
+   [
+    "Rio de Janeiro",
+    "R$ 25,33",
+    "R$ 49,25",
+    "R$ 65,50",
+    "R$ 140,08"
+   ],
+   [
+    "São Paulo",
+    "R$ 28,00",
+    "R$ 51,25",
+    "R$ 72,00",
+    "R$ 151,25"
+   ]
+  ]
+ },
+ {
+  "tipo": "imagem",
+  "titulo": "Score com pesos iguais",
+  "imagem": "score.png",
+  "nota": "25% para cada parte. A liderança de Campinas se apoia na diária mais baixa, com 2 hotéis."
+ },
+ {
+  "tipo": "tabela",
+  "titulo": "A resposta depende dos pesos",
+  "cab": [
+   "Cenário",
+   "Três primeiras"
+  ],
+  "linhas": [
+   [
+    "Pesos iguais",
+    "Campinas, Belo Horizonte, Brasília"
+   ],
+   [
+    "Só passagem",
+    "São Paulo, Campinas, Belo Horizonte"
+   ],
+   [
+    "Só custos",
+    "Campinas, Belo Horizonte, Brasília"
+   ],
+   [
+    "Só clima",
+    "Rio de Janeiro, Campinas, Belo Horizonte"
+   ]
+  ]
+ },
+ {
+  "tipo": "texto",
+  "titulo": "Limitações",
+  "itens": [
+   "Amostra de conveniência: os resultados valem para estas dez rotas.",
+   "Passagens de nove meses e sem taxa de embarque.",
+   "Poucos hotéis em algumas cidades, todos de uma só rede.",
+   "Alimentação por estimativas de fonte; clima de 1961–1990."
+  ]
+ },
+ {
+  "tipo": "capa",
+  "titulo": "Melhor viagem é função dos pesos",
+  "sub": "Passagem favorece São Paulo, Campinas e BH; clima favorece o Rio; custos de estadia favorecem Campinas e BH.",
+  "rodape": "Site: asghrk.github.io/Linhas-Estatisticas — cada número com fonte, período e n"
+ }
+]

@@ -393,6 +393,23 @@ python -m playwright install chromium
 python tests/site.smoke.py
 ```
 
+## Relatório e apresentação
+
+- Relatório: [`docs/relatorio/relatorio.pdf`](docs/relatorio/relatorio.pdf), gerado de `dados/dados.json` com as mesmas contas do site.
+- Slides: [`docs/apresentacao/linhas-estatisticas.pptx`](docs/apresentacao/linhas-estatisticas.pptx) e a versão em PDF ao lado.
+
+Para gerar de novo depois de mudar os dados (Windows, com Microsoft Edge e PowerPoint instalados):
+
+```bash
+node docs/relatorio/scores.cjs
+python docs/relatorio/gerar.py
+python docs/relatorio/pdf.py
+python docs/apresentacao/conteudo.py
+powershell -ExecutionPolicy Bypass -File docs/apresentacao/montar.ps1
+```
+
+`pdf.py` usa `pypdf` e `conteudo.py` usa `matplotlib`; nenhum dos dois faz parte do pipeline.
+
 ## Equipe
 
 Quatro integrantes, quatro frentes. A divisão detalhada, com tarefas numeradas e critérios de conclusão, está em [`docs/plano-de-equipe.html`](docs/plano-de-equipe.html).

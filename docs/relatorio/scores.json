@@ -1,0 +1,193 @@
+{
+ "eixos": [
+  "Passagem",
+  "Hospedagem",
+  "Alimentação",
+  "Conforto térmico",
+  "Tempo seco"
+ ],
+ "cidades": {
+  "RIO": {
+   "cidade": "Rio de Janeiro",
+   "perfil": [
+    0.711,
+    0.499,
+    0.501,
+    0.988,
+    0.711
+   ]
+  },
+  "SAO": {
+   "cidade": "São Paulo",
+   "perfil": [
+    0.784,
+    0.703,
+    0.44,
+    0.644,
+    0.69
+   ]
+  },
+  "CPQ": {
+   "cidade": "Campinas",
+   "perfil": [
+    0.767,
+    0.933,
+    0.66,
+    0.815,
+    0.725
+   ]
+  },
+  "BSB": {
+   "cidade": "Brasília",
+   "perfil": [
+    0.613,
+    0.782,
+    0.753,
+    0.78,
+    0.685
+   ]
+  },
+  "REC": {
+   "cidade": "Recife",
+   "perfil": [
+    0.659,
+    0.553,
+    0.586,
+    0.879,
+    0.492
+   ]
+  },
+  "BHZ": {
+   "cidade": "Belo Horizonte",
+   "perfil": [
+    0.75,
+    0.795,
+    0.785,
+    0.823,
+    0.701
+   ]
+  },
+  "POA": {
+   "cidade": "Porto Alegre",
+   "perfil": [
+    0.649,
+    0.823,
+    0.526,
+    0.683,
+    0.733
+   ]
+  },
+  "CWB": {
+   "cidade": "Curitiba",
+   "perfil": [
+    0.665,
+    0.876,
+    0.525,
+    0.481,
+    0.697
+   ]
+  },
+  "SSA": {
+   "cidade": "Salvador",
+   "perfil": [
+    0.683,
+    0.768,
+    0.6,
+    0.878,
+    0.552
+   ]
+  },
+  "FLN": {
+   "cidade": "Florianópolis",
+   "perfil": [
+    0.716,
+    0.477,
+    0.676,
+    0.733,
+    0.69
+   ]
+  }
+ },
+ "cenarios": {
+  "iguais": {
+   "pesos": {
+    "passagem": 25,
+    "hospedagem": 25,
+    "alimentacao": 25,
+    "clima": 25
+   },
+   "score": {
+    "RIO": 0.64,
+    "SAO": 0.649,
+    "CPQ": 0.783,
+    "BSB": 0.72,
+    "REC": 0.621,
+    "BHZ": 0.773,
+    "POA": 0.677,
+    "CWB": 0.664,
+    "SSA": 0.691,
+    "FLN": 0.645
+   }
+  },
+  "so_passagem": {
+   "pesos": {
+    "passagem": 100,
+    "hospedagem": 0,
+    "alimentacao": 0,
+    "clima": 0
+   },
+   "score": {
+    "RIO": 0.711,
+    "SAO": 0.784,
+    "CPQ": 0.767,
+    "BSB": 0.613,
+    "REC": 0.659,
+    "BHZ": 0.75,
+    "POA": 0.649,
+    "CWB": 0.665,
+    "SSA": 0.683,
+    "FLN": 0.716
+   }
+  },
+  "custo": {
+   "pesos": {
+    "passagem": 34,
+    "hospedagem": 33,
+    "alimentacao": 33,
+    "clima": 0
+   },
+   "score": {
+    "RIO": 0.572,
+    "SAO": 0.644,
+    "CPQ": 0.787,
+    "BSB": 0.715,
+    "REC": 0.6,
+    "BHZ": 0.776,
+    "POA": 0.666,
+    "CWB": 0.689,
+    "SSA": 0.684,
+    "FLN": 0.624
+   }
+  },
+  "so_clima": {
+   "pesos": {
+    "passagem": 0,
+    "hospedagem": 0,
+    "alimentacao": 0,
+    "clima": 100
+   },
+   "score": {
+    "RIO": 0.85,
+    "SAO": 0.667,
+    "CPQ": 0.77,
+    "BSB": 0.732,
+    "REC": 0.686,
+    "BHZ": 0.762,
+    "POA": 0.708,
+    "CWB": 0.589,
+    "SSA": 0.715,
+    "FLN": 0.711
+   }
+  }
+ }
+}
