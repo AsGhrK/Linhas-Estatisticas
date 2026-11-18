@@ -109,20 +109,23 @@ def _clima(manual, chave, pendencias):
 
 
 def _hotel(manual, chave, pendencias):
-    itens = manual[chave]
-    diarias = [i["diaria"] for i in itens if i["diaria"] is not None]
-    pendente = not itens or len(diarias) != len(itens)
+    # Entrada com todos os campos nulos é modelo do arquivo, não hotel pesquisado.
+    itens = [i for i in manual[chave] if any(v is not None for v in i.values())]
+    pendente = not itens or any(i["diaria"] is None for i in itens)
     if pendente:
         pendencias.append(f"hoteis.{chave}")
     hoteis = [] if pendente else [
         {"nome": i["nome"], "url": i["url"], "diaria": i["diaria"]} for i in itens]
+    diarias = [h["diaria"] for h in hoteis]
     bloco = {"n": 0, "hoteis": hoteis, "diarias": diarias, "diaria_media": None, "diaria_mediana": None,
              "noites": manual.get("noites"), "custo_total": None,
-             "fonte": manual.get("fonte"), "coletado_em": manual.get("coletado_em")}
+             "fonte": manual.get("fonte"), "coletado_em": manual.get("coletado_em"),
+             "checkin": manual.get("checkin")}
     if not pendente:
-        media = statistics.mean(diarias)
-        bloco.update(n=len(diarias), diaria_media=round(media, 2),
+        media = round(statistics.mean(diarias), 2)
+        bloco.update(n=len(diarias), diaria_media=media,
                      diaria_mediana=round(statistics.median(diarias), 2))
+        # Com a média já arredondada, a conta mostrada na tela fecha.
         if bloco["noites"] is not None:
             bloco["custo_total"] = round(media * bloco["noites"], 2)
     return bloco
@@ -133,12 +136,14 @@ def _alimentacao(manual, chave, pendencias):
     for campo in REFEICOES + ("tipicas",):
         if not a[campo]:
             pendencias.append(f"alimentacao.{chave}.{campo}")
+    medias = {r: round(statistics.mean(a[r]), 2) if a[r] else None for r in REFEICOES}
     completa = all(a[r] for r in REFEICOES)
     return {
         "cafe": a["cafe"], "almoco": a["almoco"], "jantar": a["jantar"],
-        "medias": {r: round(statistics.mean(a[r]), 2) if a[r] else None for r in REFEICOES},
+        "medias": medias,
         "n": min(len(a[r]) for r in REFEICOES),
-        "media_diaria": round(sum(statistics.mean(a[r]) for r in REFEICOES), 2) if completa else None,
+        # Soma das médias arredondadas: a mesma conta que a tela mostra.
+        "media_diaria": round(sum(medias.values()), 2) if completa else None,
         "tipicas": a["tipicas"], "fonte": manual.get("fonte"),
         "coletado_em": manual.get("coletado_em"),
     }
@@ -188,6 +193,7 @@ def gerar(recorte: Path, pasta_manual: Path, coletado_em: str) -> dict:
     clima = _ler_json(pasta / "clima.json")
     hoteis = _ler_json(pasta / "hoteis.json")
     comida = _ler_json(pasta / "alimentacao.json")
+    anac = _ler_json(pasta / "anac.json")
 
     pendencias = []
     rotas = {}
@@ -211,9 +217,12 @@ def gerar(recorte: Path, pasta_manual: Path, coletado_em: str) -> dict:
             pendencias.append(f"hoteis.{campo}")
     if comida.get("coletado_em") is None:
         pendencias.append("alimentacao.coletado_em")
+    if anac.get("acesso_em") is None:
+        pendencias.append("anac.acesso_em")
 
     return {
         "coletado_em": coletado_em,
+        "fonte_passagens": anac,
         "periodo_passagens": _periodo(linhas),
         "origem": {"icao": "SBCG", "cidade": "Campo Grande"},
         "meses": MESES,

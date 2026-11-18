@@ -41,6 +41,7 @@ MANUAL = {
         "SAO": {"cafe": [18, 18, 18], "almoco": [35, 45, 55], "jantar": [45, 55, 65],
                 "tipicas": ["Pastel"], "fonte_tipicas": "x"},
     },
+    "anac.json": {"acesso_em": "2026-11-17", "fonte": "ANAC, microdados"},
 }
 
 
@@ -237,6 +238,61 @@ class TestGerar(unittest.TestCase):
         d = gerar(self.recorte, self.manual_completo, "2026-11-17")
         self.assertEqual(min(d["rotas"][k]["alimentacao"]["n"] for k in ("RIO", "SAO")), 3)
         self.assertIsNotNone(d["faixas"]["custo_alimentacao"])
+
+    def test_custo_total_usa_a_media_arredondada(self):
+        m = copy.deepcopy(MANUAL)
+        m["hoteis.json"]["RIO"][2]["diaria"] = 601   # média 500,333...
+        pasta = Path(self.tmp.name) / "arred_hotel"
+        escrever(pasta, m)
+        h = gerar(self.recorte, pasta, "2026-11-17")["rotas"]["RIO"]["hotel"]
+        self.assertEqual(h["diaria_media"], 500.33)
+        self.assertEqual(h["custo_total"], round(500.33 * 5, 2))   # 2501,65 e não 2501,67
+
+    def test_media_diaria_soma_as_medias_arredondadas(self):
+        m = copy.deepcopy(MANUAL)
+        for r in ("cafe", "almoco", "jantar"):
+            m["alimentacao.json"]["RIO"][r] = [10, 10, 11]   # 10,333... cada
+        pasta = Path(self.tmp.name) / "arred_comida"
+        escrever(pasta, m)
+        a = gerar(self.recorte, pasta, "2026-11-17")["rotas"]["RIO"]["alimentacao"]
+        self.assertEqual(a["media_diaria"], 30.99)   # 10,33 × 3, e não 31,00
+
+    def test_acesso_da_anac_vem_do_arquivo_manual(self):
+        d = gerar(self.recorte, self.manual_completo, "2030-01-01")
+        self.assertEqual(d["fonte_passagens"], {"acesso_em": "2026-11-17", "fonte": "ANAC, microdados"})
+        self.assertEqual(d["coletado_em"], "2030-01-01")
+
+    def test_acesso_da_anac_faltando_e_pendencia(self):
+        m = copy.deepcopy(MANUAL)
+        m["anac.json"]["acesso_em"] = None
+        pasta = Path(self.tmp.name) / "sem_acesso"
+        escrever(pasta, m)
+        self.assertIn("anac.acesso_em", gerar(self.recorte, pasta, "2026-11-17")["pendencias"])
+
+    def test_checkin_no_bloco_de_hotel(self):
+        d = gerar(self.recorte, self.manual_completo, "2026-11-17")
+        for k in ("RIO", "SAO"):
+            self.assertEqual(d["rotas"][k]["hotel"]["checkin"], "2026-12-01")
+
+    def test_modelos_de_hotel_vazios_sao_ignorados(self):
+        m = copy.deepcopy(MANUAL)
+        m["hoteis.json"]["RIO"].append({"nome": None, "url": None, "diaria": None})
+        pasta = Path(self.tmp.name) / "modelos"
+        escrever(pasta, m)
+        d = gerar(self.recorte, pasta, "2026-11-17")
+        self.assertEqual(d["rotas"]["RIO"]["hotel"]["n"], 3)
+        self.assertNotIn("hoteis.RIO", d["pendencias"])
+
+    def test_hotel_com_diaria_faltando_fica_pendente_sem_lista_parcial(self):
+        m = copy.deepcopy(MANUAL)
+        m["hoteis.json"]["RIO"].append({"nome": "H9", "url": "u", "diaria": None})
+        pasta = Path(self.tmp.name) / "parcial"
+        escrever(pasta, m)
+        d = gerar(self.recorte, pasta, "2026-11-17")
+        h = d["rotas"]["RIO"]["hotel"]
+        self.assertIn("hoteis.RIO", d["pendencias"])
+        self.assertEqual((h["n"], h["hoteis"], h["diarias"]), (0, [], []))
+        self.assertIsNone(h["diaria_mediana"])
 
     def test_pendencias(self):
         d = gerar(self.recorte, self.manual, "2026-11-17")

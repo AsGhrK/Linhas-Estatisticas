@@ -1,5 +1,9 @@
 {
-  "coletado_em": "2026-11-17",
+  "coletado_em": "2026-11-18",
+  "fonte_passagens": {
+    "acesso_em": "2026-11-17",
+    "fonte": "ANAC, microdados de tarifas aéreas comercializadas"
+  },
   "periodo_passagens": {
     "inicio": "2026-01",
     "fim": "2026-09"
@@ -261,7 +265,8 @@
         "noites": 5,
         "custo_total": null,
         "fonte": "Accor (all.accor.com)",
-        "coletado_em": null
+        "coletado_em": null,
+        "checkin": null
       },
       "alimentacao": {
         "cafe": [
@@ -517,7 +522,8 @@
         "noites": 5,
         "custo_total": null,
         "fonte": "Accor (all.accor.com)",
-        "coletado_em": null
+        "coletado_em": null,
+        "checkin": null
       },
       "alimentacao": {
         "cafe": [

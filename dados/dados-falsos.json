@@ -1,6 +1,10 @@
 {
   "_aviso": "DADOS INVENTADOS. Estrutura real, números falsos. Serve para desenvolver os gráficos antes da coleta de P1 terminar. Nunca usar na apresentação.",
   "coletado_em": "2026-09-20",
+  "fonte_passagens": {
+    "acesso_em": "2026-09-20",
+    "fonte": "ANAC, microdados de tarifas aéreas comercializadas"
+  },
   "periodo_passagens": {
     "inicio": "2026-01",
     "fim": "2026-09"
@@ -310,9 +314,10 @@
         "diaria_media": 657.63,
         "diaria_mediana": 587.75,
         "noites": 5,
-        "custo_total": 3288.17,
+        "custo_total": 3288.15,
         "fonte": "Accor (all.accor.com)",
-        "coletado_em": "2026-09-20"
+        "coletado_em": "2026-09-20",
+        "checkin": "2026-10-15"
       },
       "alimentacao": {
         "cafe": [
@@ -615,7 +620,8 @@
         "noites": 5,
         "custo_total": 2346.25,
         "fonte": "Accor (all.accor.com)",
-        "coletado_em": "2026-09-20"
+        "coletado_em": "2026-09-20",
+        "checkin": "2026-10-15"
       },
       "alimentacao": {
         "cafe": [
@@ -639,7 +645,7 @@
           "jantar": 56.33
         },
         "n": 3,
-        "media_diaria": 119.67,
+        "media_diaria": 119.66,
         "tipicas": [
           "Pastel de feira",
           "Sanduíche de mortadela",
