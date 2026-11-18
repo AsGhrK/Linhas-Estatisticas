@@ -51,7 +51,7 @@
 
         <section class="tela-secao" aria-labelledby="titulo-pesos">
           <h2 id="titulo-pesos">Quanto pesa cada parte</h2>
-          <p>Arraste o controle ou use as setas do teclado. A porcentagem é o peso efetivo: o peso dividido pela soma dos quatro. O peso do clima se divide igualmente entre conforto térmico e tempo seco.</p>
+          <p>Arraste o controle ou use as setas do teclado. A porcentagem é o peso efetivo: a parte do peso que entra no score, contando só as partes com dado nas duas cidades. Parte sem dado aparece como fora do cálculo. O peso do clima se divide igualmente entre conforto térmico e tempo seco; se só um dos dois tiver dado, só a metade do peso do clima entra.</p>
           <div class="pesos" data-pesos role="group" aria-labelledby="titulo-pesos">
             <div class="peso">
               <label for="peso-passagem">Passagem</label>
@@ -85,9 +85,10 @@
           <h2 id="titulo-metodo">Como o radar é calculado</h2>
           <ul class="metodo">
             <li>Cada eixo é normalizado pelo mínimo e pelo máximo do conjunto: o pior valor vira zero e o melhor vira um. A passagem entra pela tarifa média ponderada pelos assentos vendidos.</li>
+            <li>O conjunto de cada eixo junta as duas cidades. Passagem: as tarifas médias de cada companhia em cada mês, e a cidade entra pela média ponderada da rota. Hospedagem: as diárias de todos os hotéis pesquisados, e a cidade entra pela diária mediana, que um hotel muito caro não arrasta. Alimentação: vai do dia mais barato possível, com a refeição mais barata de cada tipo, ao dia mais caro, e a cidade entra pela média diária. Chuva: os totais de cada mês, e a cidade entra pela média mensal do ano.</li>
             <li>Em passagem, hospedagem, alimentação e chuva, menor é melhor, então a escala é invertida: a cidade mais barata ou mais seca fica mais longe do centro.</li>
             <li>Conforto térmico não usa mínimo e máximo. Ele mede a distância da temperatura média até uma temperatura ideal declarada no relatório, e tanto o calor quanto o frio demais pontuam pouco.</li>
-            <li>O score composto é a média ponderada dos eixos com os pesos acima. Eixo sem dado coletado, ou com amostra pequena demais para comparar as cidades, fica de fora do score, e o peso dele sai da soma; a conclusão diz quais eixos ficaram de fora.</li>
+            <li>O score composto é a média ponderada dos eixos com os pesos acima. Eixo sem dado coletado, ou com amostra pequena demais para comparar as cidades, fica de fora do score, e o peso dele sai da soma: as porcentagens acima já contam só os eixos que entram. A conclusão diz quais eixos ficaram de fora e por quê.</li>
           </ul>
         </section>
       </div>

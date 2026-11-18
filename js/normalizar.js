@@ -148,6 +148,17 @@
     ];
   }
 
+  /* Eixos com valor nas duas cidades, mas sem faixa: o pipeline anulou a faixa
+     por amostra pequena. Hoje só acontece com a alimentação, quando alguma
+     refeição tem menos de MIN_PRECOS_REFEICAO preços (pipeline/gerar_dados.py). */
+  function eixosAmostraPequena(dados) {
+    var comValor = Object.keys(dados.rotas).every(function (k) {
+      var v = dados.rotas[k].alimentacao.media_diaria;
+      return v !== null && v !== undefined;
+    });
+    return comValor && !dados.faixas.custo_alimentacao ? ['Alimentação'] : [];
+  }
+
   /* Pesos por dimensão (4) viram pesos por eixo (5): o clima vale um eixo
      de conforto térmico e um de tempo seco, metade para cada. */
   function expandirPesos(p) {
@@ -206,6 +217,7 @@
     perfilRadar: perfilRadar,
     scoreComposto: scoreComposto,
     expandirPesos: expandirPesos,
+    eixosAmostraPequena: eixosAmostraPequena,
     MENOR_E_MELHOR: MENOR_E_MELHOR,
     EIXOS_RADAR: EIXOS_RADAR,
     moeda: moeda,

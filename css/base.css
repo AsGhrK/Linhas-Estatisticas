@@ -266,7 +266,7 @@ a.cartao:hover { border-color: var(--aerovia); }
 .grafico-canvas-radar { height: 460px; }
 .pesos { margin-top: 16px; padding: 4px 20px 20px; max-width: 760px; background: var(--surface); border: 1px solid var(--rule); border-radius: var(--raio-painel); }
 .peso {
-  display: grid; grid-template-columns: 11rem minmax(0, 1fr) 4.5rem; grid-template-areas: "rotulo barra saida";
+  display: grid; grid-template-columns: 11rem minmax(0, 1fr) 8.5rem; grid-template-areas: "rotulo barra saida";
   align-items: center; gap: 16px; min-height: 64px; border-bottom: 1px solid var(--rule);
 }
 .peso label { grid-area: rotulo; font-weight: 600; }

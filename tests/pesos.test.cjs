@@ -62,10 +62,62 @@ test('com tudo coletado não há frase de eixo de fora', () => {
   assert.ok(!P.conclusao(falsos, IGUAIS).includes('Fora do cálculo'));
 });
 
-test('dados reais: alimentação coletada com poucos preços fica de fora junto com os eixos sem dado', () => {
+test('dados reais: eixos sem dado e alimentação com amostra pequena saem em frases separadas', () => {
   const texto = P.conclusao(reais, IGUAIS);
   assert.ok(texto.startsWith('Com estes pesos, '), texto);
-  assert.ok(texto.endsWith(' Fora do cálculo por falta de dados: Hospedagem, Alimentação, Conforto térmico e Tempo seco.'), texto);
+  assert.ok(texto.endsWith(' Fora do cálculo por falta de dados: Hospedagem, Conforto térmico e Tempo seco.'
+    + ' Fora do cálculo por amostra pequena: Alimentação.'), texto);
+});
+
+test('alimentação com valor nas duas cidades e sem faixa é amostra pequena, não falta de dados', () => {
+  const d = structuredClone(falsos);
+  d.faixas.custo_alimentacao = null;
+  assert.strictEqual(P.partes(d, IGUAIS).fora, 'Fora do cálculo por amostra pequena: Alimentação.');
+});
+
+test('alimentação sem valor numa cidade é falta de dados', () => {
+  const d = structuredClone(falsos);
+  d.faixas.custo_alimentacao = null;
+  d.rotas.RIO.alimentacao.media_diaria = null;
+  assert.ok(P.partes(d, IGUAIS).fora.startsWith('Fora do cálculo por falta de dados: '), P.partes(d, IGUAIS).fora);
+  assert.ok(!P.partes(d, IGUAIS).fora.includes('amostra pequena'));
+});
+
+function somaExibida(textos) {
+  return Object.values(textos).filter((t) => t.endsWith('%')).reduce((a, t) => a + Number(t.slice(0, -1)), 0);
+}
+
+test('pesos exibidos somam exatamente cem (maior resto)', () => {
+  const t = P.efetivos(falsos, { passagem: 5, hospedagem: 5, alimentacao: 5, clima: 0 });
+  assert.strictEqual(somaExibida(t), 100);
+  assert.strictEqual(t.clima, '0%');
+  assert.deepStrictEqual(Object.values(t).filter((x) => x !== '0%').sort(), ['33%', '33%', '34%']);
+});
+
+test('pesos exibidos somam cem também quando a divisão não é exata', () => {
+  for (const p of [{ passagem: 35, hospedagem: 30, alimentacao: 20, clima: 5 },
+    { passagem: 10, hospedagem: 10, alimentacao: 10, clima: 5 }]) {
+    assert.strictEqual(somaExibida(P.efetivos(falsos, p)), 100, JSON.stringify(p));
+  }
+});
+
+test('dados reais: só a passagem entra, o resto fica fora do cálculo', () => {
+  assert.deepStrictEqual(P.efetivos(reais, IGUAIS), {
+    passagem: '100%', hospedagem: 'fora do cálculo', alimentacao: 'fora do cálculo', clima: 'fora do cálculo'
+  });
+});
+
+test('soma zero mostra traço', () => {
+  const t = P.efetivos(falsos, { passagem: 0, hospedagem: 0, alimentacao: 0, clima: 0 });
+  assert.deepStrictEqual(Object.values(t), ['—', '—', '—', '—']);
+  assert.strictEqual(P.efetivos(reais, { passagem: 0, hospedagem: 50, alimentacao: 0, clima: 0 }).passagem, '—');
+});
+
+test('clima com um eixo só entra com metade do peso', () => {
+  const d = structuredClone(falsos);
+  d.rotas.RIO.clima.precipitacao[0] = null;   // tempo seco fora, conforto térmico dentro
+  assert.deepStrictEqual(P.efetivos(d, { passagem: 50, hospedagem: 0, alimentacao: 0, clima: 100 }),
+    { passagem: '50%', hospedagem: '0%', alimentacao: '0%', clima: '50%' });
 });
 
 test('peso só em eixos sem dado: faltam dados, não peso zero', () => {

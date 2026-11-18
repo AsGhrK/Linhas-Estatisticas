@@ -17,18 +17,21 @@
   var PESO_MAX = 100;
   var PASSO = 5;
   var CASAS_SCORE = 2;
-  var CASAS_PESO = 0;
 
   /* Abaixo disso a diferença some no arredondamento de duas casas e não
      sustenta dizer que uma cidade venceu. */
   var EMPATE = 0.01;
 
   var DIMENSOES = ['passagem', 'hospedagem', 'alimentacao', 'clima'];
+  /* Dimensão de cada eixo do radar, na ordem de EIXOS_RADAR: o clima tem dois. */
+  var DIMENSAO_DO_EIXO = ['passagem', 'hospedagem', 'alimentacao', 'clima', 'clima'];
 
   var MSG_SEM_PESO = 'Defina ao menos um peso maior que zero.';
   var MSG_EMPATE = 'As duas cidades ficam praticamente empatadas com estes pesos.';
   var MSG_SEM_DADOS = 'Ainda faltam dados para calcular o score com estes pesos.';
   var MSG_FORA = 'Fora do cálculo por falta de dados: ';
+  var MSG_PEQUENA = 'Fora do cálculo por amostra pequena: ';
+  var TEXTO_FORA = 'fora do cálculo';
 
   function somaPesos(pesos) {
     return DIMENSOES.reduce(function (a, k) { return a + (Number(pesos[k]) || 0); }, 0);
@@ -44,13 +47,57 @@
     return S.EIXOS_RADAR.filter(function (_, i) { return pontos[i] === null || pontos[i] === undefined; });
   }
 
-  /* Uma lista só quando as duas cidades perdem os mesmos eixos; senão, por cidade. */
-  function fraseFora(cidades) {
-    var comFalta = cidades.filter(function (c) { return c.fora.length; });
-    if (!comFalta.length) return '';
-    var iguais = cidades.every(function (c) { return c.fora.join('|') === cidades[0].fora.join('|'); });
-    if (iguais) return MSG_FORA + juntar(cidades[0].fora) + '.';
-    return MSG_FORA + comFalta.map(function (c) { return c.nome + ', ' + juntar(c.fora); }).join('; ') + '.';
+  /* Falta de dados: uma lista só quando as duas cidades perdem os mesmos eixos;
+     senão, por cidade. Amostra pequena vale para as duas cidades e sai à parte. */
+  function fraseFora(cidades, pequena) {
+    var falta = cidades.map(function (c) {
+      return { nome: c.nome, fora: c.fora.filter(function (e) { return pequena.indexOf(e) === -1; }) };
+    });
+    var comFalta = falta.filter(function (c) { return c.fora.length; });
+    var frases = [];
+    if (comFalta.length) {
+      var iguais = falta.every(function (c) { return c.fora.join('|') === falta[0].fora.join('|'); });
+      frases.push(MSG_FORA + (iguais ? juntar(falta[0].fora)
+        : comFalta.map(function (c) { return c.nome + ', ' + juntar(c.fora); }).join('; ')) + '.');
+    }
+    if (pequena.length) frases.push(MSG_PEQUENA + juntar(pequena) + '.');
+    return frases.join(' ');
+  }
+
+  /* Inteiros proporcionais a `valores` que somam `total`, pelo maior resto:
+     sem isso, três terços arredondados somam 99. Soma zero devolve null. */
+  function maiorResto(valores, total) {
+    var soma = valores.reduce(function (a, v) { return a + v; }, 0);
+    if (soma === 0) return null;
+    var exatos = valores.map(function (v) { return v * total / soma; });
+    var inteiros = exatos.map(Math.floor);
+    var falta = total - inteiros.reduce(function (a, v) { return a + v; }, 0);
+    exatos.map(function (_, i) { return i; })
+      .sort(function (a, b) { return (exatos[b] - inteiros[b]) - (exatos[a] - inteiros[a]); })
+      .slice(0, falta)
+      .forEach(function (i) { inteiros[i] += 1; });
+    return inteiros;
+  }
+
+  /* Texto de cada controle: a parte do peso que entra no score, em porcentagem
+     inteira, contando só os eixos com nota nas duas cidades. Com um eixo só, o
+     clima entra com metade do peso, como no scoreComposto. Sem dados, conta tudo. */
+  function efetivos(dados, pesos) {
+    var perfis = dados ? Object.keys(dados.rotas).map(function (k) { return S.perfilRadar(dados, k); }) : [];
+    var pesos5 = S.expandirPesos(pesos);
+    var peso = {};
+    DIMENSAO_DO_EIXO.forEach(function (dim, i) {
+      var comNota = perfis.every(function (p) { return p[i] !== null && p[i] !== undefined; });
+      if (comNota) peso[dim] = (peso[dim] || 0) + (Number(pesos5[i]) || 0);
+    });
+    var dentro = DIMENSOES.filter(function (k) { return k in peso; });
+    var inteiros = maiorResto(dentro.map(function (k) { return peso[k]; }), 100);
+    var textos = {};
+    DIMENSOES.forEach(function (k) {
+      var i = dentro.indexOf(k);
+      textos[k] = i === -1 ? TEXTO_FORA : inteiros ? inteiros[i] + '%' : '—';
+    });
+    return textos;
   }
 
   /* Conclusão para os 4 pesos (passagem, hospedagem, alimentacao, clima), em
@@ -90,7 +137,7 @@
           + ' e ' + b.nome + ' soma ' + S.numero(b.score, CASAS_SCORE) + '.';
     }
 
-    return { principal: principal, fora: fraseFora(cidades) };
+    return { principal: principal, fora: fraseFora(cidades, S.eixosAmostraPequena(dados)) };
   }
 
   function conclusao(dados, pesos) {
@@ -101,6 +148,7 @@
   LE.pesos = {
     conclusao: conclusao,
     partes: partes,
+    efetivos: efetivos,
     PESO_INICIAL: PESO_INICIAL,
     EMPATE: EMPATE
   };
@@ -126,14 +174,14 @@
 
   function atualizar() {
     var pesos = lerPesos();
-    var soma = somaPesos(pesos);
+    var textos = efetivos(dadosAtuais, pesos);
 
     DIMENSOES.forEach(function (k) {
       var saida = doc.getElementById('efetivo-' + k);
-      if (saida) saida.textContent = soma === 0 ? '—' : S.porcentagem(pesos[k] / soma, CASAS_PESO);
+      if (saida) saida.textContent = textos[k];
     });
     var campoSoma = doc.getElementById('pesos-soma');
-    if (campoSoma) campoSoma.textContent = soma.toLocaleString('pt-BR');
+    if (campoSoma) campoSoma.textContent = somaPesos(pesos).toLocaleString('pt-BR');
 
     var alvo = doc.getElementById('conclusao');
     if (!alvo || !dadosAtuais) return;
