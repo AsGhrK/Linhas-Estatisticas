@@ -105,7 +105,7 @@
     });
   }
 
-  var ATRIBUTOS_ROTA = ['id', 'data-campo', 'data-lista', 'data-precos', 'aria-labelledby', 'aria-label', 'for'];
+  var ATRIBUTOS_ROTA = ['id', 'data-campo', 'data-lista', 'data-precos', 'aria-labelledby', 'aria-label', 'for', 'style'];
 
   /* [data-por-cidade] repete o <template> filho uma vez por cidade: as
      escolhidas (LE.selecao) ou, com data-por-cidade="todas", as dez. No
@@ -124,6 +124,8 @@
         copia.querySelectorAll('*').forEach(function (no) {
           ATRIBUTOS_ROTA.forEach(function (a) {
             var v = no.getAttribute(a);
+            // {serie}: a posição da cidade na comparação, para o token --serie-N.
+            if (v && v.indexOf('{serie}') !== -1) { v = v.split('{serie}').join(LE.selecao ? LE.selecao.serie(sigla) : 0); no.setAttribute(a, v); }
             if (v && v.indexOf('{rota}') !== -1) no.setAttribute(a, v.split('{rota}').join(sigla));
             if (v && v.indexOf('{cidade}') !== -1) no.setAttribute(a, v.split('{cidade}').join(dados.rotas[sigla].cidade));
           });

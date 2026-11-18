@@ -4,7 +4,9 @@
   https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;600;800&family=Atkinson+Hyperlegible+Mono:wght@400;600&display=swap
   Tema: claro por padrão; escuro por prefers-color-scheme ou [data-theme="dark"].
   [data-theme="light"] força o claro mesmo com o sistema em escuro.
-  Os valores de série foram validados com validate_palette.js (ver direção de arte).
+  Companhias: validadas com validate_palette.js (ver direção de arte). Cidades: --serie-1..3 são as
+  três primeiras cores da paleta de referência da skill dataviz, as únicas que passam em todos os pares
+  (--pairs all) nos dois temas; a cor segue a posição da cidade na comparação (js/selecao.js).
   js/graficos.js lê --cor-* com getComputedStyle.
 */
 :root {
@@ -21,16 +23,9 @@
   --cor-azul: #1D5FA8;
   --cor-latam: #B0306E;
   --cor-gol: #A86A00;
-  --cor-rio: #007E68;
-  --cor-sao: #6150B8;
-  --cor-cpq: #C25100;
-  --cor-bsb: #B3261E;
-  --cor-rec: #0B6BC2;
-  --cor-bhz: #8A6A00;
-  --cor-poa: #3D7A1A;
-  --cor-cwb: #8E3B8E;
-  --cor-ssa: #C2185B;
-  --cor-fln: #00718F;
+  --serie-1: #2A78D6;
+  --serie-2: #EB6834;
+  --serie-3: #1BAF7A;
 
   --sombra-busca: 0 6px 24px rgba(20, 33, 43, .18);
 
@@ -58,16 +53,9 @@
     --cor-azul: #5B93D4;
     --cor-latam: #D0679A;
     --cor-gol: #BF8A28;
-    --cor-rio: #2FA88F;
-    --cor-sao: #8F7FE0;
-    --cor-cpq: #F08A4B;
-    --cor-bsb: #EF6F63;
-    --cor-rec: #5AA4E6;
-    --cor-bhz: #CFAE3A;
-    --cor-poa: #7FBF5A;
-    --cor-cwb: #C47AC4;
-    --cor-ssa: #EE6A9A;
-    --cor-fln: #3FB3D1;
+    --serie-1: #3987E5;
+    --serie-2: #D95926;
+    --serie-3: #199E70;
     --sombra-busca: 0 6px 24px rgba(0, 0, 0, .5);
     color-scheme: dark;
   }
@@ -86,16 +74,9 @@
   --cor-azul: #5B93D4;
   --cor-latam: #D0679A;
   --cor-gol: #BF8A28;
-  --cor-rio: #2FA88F;
-  --cor-sao: #8F7FE0;
-  --cor-cpq: #F08A4B;
-  --cor-bsb: #EF6F63;
-  --cor-rec: #5AA4E6;
-  --cor-bhz: #CFAE3A;
-  --cor-poa: #7FBF5A;
-  --cor-cwb: #C47AC4;
-  --cor-ssa: #EE6A9A;
-  --cor-fln: #3FB3D1;
+  --serie-1: #3987E5;
+  --serie-2: #D95926;
+  --serie-3: #199E70;
   --sombra-busca: 0 6px 24px rgba(0, 0, 0, .5);
   color-scheme: dark;
 }

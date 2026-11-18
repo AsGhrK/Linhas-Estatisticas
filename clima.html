@@ -36,11 +36,17 @@
   <main id="conteudo" tabindex="-1">
     <div class="tela">
       <div class="wrap">
-        <h1>Qual cidade é mais quente e mais chuvosa em cada mês?</h1>
-        <p>Climatologia é o comportamento típico do mês, não previsão. Temperatura e chuva ficam em gráficos separados, cada um com a sua escala.</p>
-        <p>As médias climatológicas resumem três décadas de dados observados. Elas mostram as épocas mais quentes, frias, chuvosas e secas de cada cidade. Descrevem o mês típico, não a previsão do tempo para uma data.</p>
-        <p class="nota">Fonte: <a href="https://portal.inmet.gov.br/servicos/normais-climatol%C3%B3gicas" target="_blank" rel="noopener noreferrer">INMET — Normais Climatológicas</a>.</p>
-        <div data-seletor-cidades></div>
+        <div class="cabeca-tela">
+          <div class="cabeca-principal">
+          <h1>Qual cidade é mais quente e mais chuvosa em cada mês?</h1>
+          <p>Climatologia é o comportamento típico do mês, não previsão. Temperatura e chuva ficam em gráficos separados, cada um com a sua escala.</p>
+          </div>
+        <div class="contexto-dados">
+          <p>As médias climatológicas resumem três décadas de dados observados. Elas mostram as épocas mais quentes, frias, chuvosas e secas de cada cidade. Descrevem o mês típico, não a previsão do tempo para uma data.</p>
+          <p class="nota">Fonte: <a href="https://portal.inmet.gov.br/servicos/normais-climatol%C3%B3gicas" target="_blank" rel="noopener noreferrer">INMET — Normais Climatológicas</a>.</p>
+        </div>
+          <div class="cabeca-controle" data-seletor-cidades></div>
+        </div>
         <section class="tela-secao" aria-labelledby="titulo-temperatura" data-revelar>
           <h2 id="titulo-temperatura">Temperatura média</h2>
           <figure class="grafico">

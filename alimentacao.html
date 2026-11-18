@@ -36,27 +36,38 @@
   <main id="conteudo" tabindex="-1">
     <div class="tela">
       <div class="wrap">
-        <h1>Quanto custa comer em cada cidade?</h1>
-        <p>O preço médio de cada refeição, o gasto de um dia inteiro e as comidas típicas de cada lugar.</p>
-        <p class="nota">Com menos de três preços por refeição, a alimentação aparece nesta tela, mas fica fora do score composto da Visão Geral: com tão poucos preços, a diferença entre as cidades não se sustenta.</p>
-        <div data-seletor-cidades></div>
-        <div data-por-cidade>
+        <div class="cabeca-tela">
+          <div class="cabeca-principal">
+          <h1>Quanto custa comer em cada cidade?</h1>
+          <p>O preço médio de cada refeição, o gasto de um dia inteiro e as comidas típicas de cada lugar.</p>
+          </div>
+          <div class="cabeca-controle" data-seletor-cidades></div>
+        </div>
+        <section class="tela-secao comparativo" aria-labelledby="titulo-comparativo">
+          <h2 id="titulo-comparativo">Quanto custa comer por dia</h2>
+          <div class="tabela-rolagem">
+            <table class="tabela-dados">
+              <caption class="sr-only">Média de café, almoço e jantar e média diária em cada cidade escolhida</caption>
+              <thead><tr><th scope="col">Cidade</th><th scope="col" data-num>Café da manhã</th><th scope="col" data-num>Almoço</th><th scope="col" data-num>Jantar</th><th scope="col" data-num>Média diária</th><th scope="col" data-num>Preços por refeição (n)</th></tr></thead>
+              <tbody data-por-cidade>
+              <template><tr><th scope="row"><span class="ponto-cidade" style="background: var(--serie-{serie})" aria-hidden="true"></span><span data-nome-cidade></span></th><td data-num data-campo="rotas.{rota}.alimentacao.medias.cafe" data-formato="moeda"></td><td data-num data-campo="rotas.{rota}.alimentacao.medias.almoco" data-formato="moeda"></td><td data-num data-campo="rotas.{rota}.alimentacao.medias.jantar" data-formato="moeda"></td><td data-num data-campo="rotas.{rota}.alimentacao.media_diaria" data-formato="moeda"></td><td data-num data-campo="rotas.{rota}.alimentacao.n" data-formato="inteiro"></td></tr></template>
+              </tbody>
+            </table>
+          </div>
+          <p class="grafico-fonte">Fontes: <span data-campo="rotas.RIO.alimentacao.fonte"></span>. Coletado em: <span data-campo="rotas.RIO.alimentacao.coletado_em" data-formato="data"></span>. A média diária soma as médias de café, almoço e jantar; o n é o menor número de preços entre as três refeições. O que cada preço representa está em <a href="fontes.html">Fontes</a>.</p>
+        </section>
+        <div class="contexto-dados">
+          <p class="nota">Com menos de três preços por refeição, a alimentação aparece nesta tela, mas fica fora do score composto da Visão Geral: com tão poucos preços, a diferença entre as cidades não se sustenta.</p>
+        </div>
+        <h2 class="titulo-grupo">O que se come em cada cidade</h2>
+        <p class="nota">Pratos típicos que a fonte indica para provar em cada cidade.</p>
+        <div class="grade-cidades" data-por-cidade>
           <template>
         <section class="tela-secao" id="rota-{rota}" aria-labelledby="titulo-{rota}" data-revelar>
-          <h2 id="titulo-{rota}"><span data-nome-cidade></span></h2>
-          <dl class="resumo">
-            <div><dt>Café da manhã</dt><dd data-campo="rotas.{rota}.alimentacao.medias.cafe" data-formato="moeda"></dd></div>
-            <div><dt>Almoço</dt><dd data-campo="rotas.{rota}.alimentacao.medias.almoco" data-formato="moeda"></dd></div>
-            <div><dt>Jantar</dt><dd data-campo="rotas.{rota}.alimentacao.medias.jantar" data-formato="moeda"></dd></div>
-            <div><dt>Média diária</dt><dd data-campo="rotas.{rota}.alimentacao.media_diaria" data-formato="moeda"></dd></div>
-            <div><dt>Preços coletados por refeição (n)</dt><dd data-campo="rotas.{rota}.alimentacao.n" data-formato="inteiro"></dd></div>
-          </dl>
-          <h3>O que se come</h3>
-          <p>Pratos que a fonte indica para provar na cidade.</p>
+          <h3 id="titulo-{rota}"><span data-nome-cidade></span></h3>
           <ul class="lista-dados" data-lista="rotas.{rota}.alimentacao.tipicas" data-vazio="Ainda não coletado.">
             <template><li data-campo="."></li></template>
           </ul>
-          <p class="grafico-fonte">Fontes: <span data-campo="rotas.{rota}.alimentacao.fonte"></span>. O que cada preço representa está em <a href="fontes.html">Fontes</a>. Coletado em: <span data-campo="rotas.{rota}.alimentacao.coletado_em" data-formato="data"></span>. A média diária soma as médias de café, almoço e jantar.</p>
         </section>
           </template>
         </div>

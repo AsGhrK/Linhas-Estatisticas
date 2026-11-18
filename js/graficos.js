@@ -34,8 +34,9 @@
   }
 
   function corCompanhia(icao) { return corDe(COR_COMPANHIA[icao]); }
-  /* Cada cidade tem um token próprio em css/tokens.css: --cor-<sigla>. */
-  function corRota(sigla) { return corDe('--cor-' + sigla.toLowerCase()); }
+  /* A cor da cidade é a da posição dela na comparação (js/selecao.js):
+     --serie-1..3. Tirar uma cidade não repinta as outras. */
+  function corRota(sigla) { return corDe('--serie-' + (LE.selecao ? LE.selecao.serie(sigla) : 0)); }
 
   function tinta() {
     return {

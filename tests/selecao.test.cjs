@@ -13,18 +13,25 @@ const VALIDAS = ['RIO', 'SAO', 'CPQ', 'BSB', 'REC', 'BHZ'];
 const IGUAIS = { passagem: 25, hospedagem: 25, alimentacao: 25, clima: 25 };
 
 test('escolha vazia ou inválida cai em Rio e São Paulo', () => {
-  assert.deepStrictEqual(Sel.normalizar([], VALIDAS), ['RIO', 'SAO']);
-  assert.deepStrictEqual(Sel.normalizar(['XXX'], VALIDAS), ['RIO', 'SAO']);
+  assert.deepStrictEqual(Sel.normalizar([], VALIDAS), ['RIO', 'SAO', null]);
+  assert.deepStrictEqual(Sel.normalizar(['XXX'], VALIDAS), ['RIO', 'SAO', null]);
 });
 
-test('escolha tira repetidas e para no máximo', () => {
-  assert.deepStrictEqual(Sel.normalizar(['BSB', 'BSB', 'REC', 'RIO', 'SAO', 'CPQ'], VALIDAS),
-    ['BSB', 'REC', 'RIO', 'SAO'].slice(0, Sel.MAX));
+test('cada cidade guarda a sua posição; repetida e inválida viram vazio', () => {
+  assert.deepStrictEqual(Sel.normalizar(['BSB', '', 'REC'], VALIDAS), ['BSB', null, 'REC']);
+  assert.deepStrictEqual(Sel.normalizar(['BSB', 'BSB', 'XXX', 'RIO'], VALIDAS), ['BSB', null, null]);
+  assert.strictEqual(Sel.normalizar(['RIO', 'SAO', 'CPQ', 'BSB'], VALIDAS).length, Sel.MAX);
 });
 
-test('destino da busca entra primeiro', () => {
-  assert.deepStrictEqual(Sel.normalizar(['RIO', 'SAO'], VALIDAS, 'REC'), ['REC', 'RIO', 'SAO']);
-  assert.deepStrictEqual(Sel.normalizar(['RIO', 'SAO'], VALIDAS, 'RIO'), ['RIO', 'SAO']);
+test('destino da busca ocupa a primeira posição livre', () => {
+  assert.deepStrictEqual(Sel.normalizar(['RIO', 'SAO'], VALIDAS, 'REC'), ['RIO', 'SAO', 'REC']);
+  assert.deepStrictEqual(Sel.normalizar(['RIO', '', 'SAO'], VALIDAS, 'REC'), ['RIO', 'REC', 'SAO']);
+  assert.deepStrictEqual(Sel.normalizar(['RIO', 'SAO', 'CPQ'], VALIDAS, 'REC'), ['RIO', 'SAO', 'REC']);
+  assert.deepStrictEqual(Sel.normalizar(['RIO', 'SAO'], VALIDAS, 'RIO'), ['RIO', 'SAO', null]);
+});
+
+test('siglas tira os vazios e mantém a ordem das posições', () => {
+  assert.deepStrictEqual(Sel.siglas(['BSB', null, 'REC']), ['BSB', 'REC']);
 });
 
 test('filtrar mantém as faixas do estudo inteiro e a ordem da escolha', () => {

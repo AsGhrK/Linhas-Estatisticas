@@ -36,23 +36,38 @@
   <main id="conteudo" tabindex="-1">
     <div class="tela">
       <div class="wrap">
-        <h1>Quanto custa a passagem em cada mês?</h1>
-        <p>A tarifa média de cada companhia, mês a mês, para cada cidade escolhida. O mês mais caro e o mais barato aparecem junto de cada gráfico e usam a média ponderada de todas as companhias juntas.</p>
-        <p>As tarifas vêm dos microdados de tarifas aéreas domésticas da ANAC. São os preços das passagens vendidas ao público, registrados todo mês pelas companhias.</p>
-        <p class="nota">Fonte: <a href="https://www.gov.br/anac/pt-br/assuntos/dados-e-estatisticas" target="_blank" rel="noopener noreferrer">ANAC — Dados e Estatísticas</a>. Acesso em <span data-campo="fonte_passagens.acesso_em" data-formato="data"></span>.</p>
-        <div data-seletor-cidades></div>
+        <div class="cabeca-tela">
+          <div class="cabeca-principal">
+          <h1>Quanto custa a passagem em cada mês?</h1>
+          <p>A tarifa média de cada companhia, mês a mês, para cada cidade escolhida. O mês mais caro e o mais barato aparecem junto de cada gráfico e usam a média ponderada de todas as companhias juntas.</p>
+          </div>
+          <div class="cabeca-controle" data-seletor-cidades></div>
+        </div>
+        <section class="tela-secao comparativo" aria-labelledby="titulo-comparativo">
+          <h2 id="titulo-comparativo">Média do período e meses extremos</h2>
+          <div class="tabela-rolagem">
+            <table class="tabela-dados">
+              <caption class="sr-only">Tarifa média, mês mais caro e mês mais barato de cada cidade escolhida</caption>
+              <thead><tr><th scope="col">Cidade</th><th scope="col" data-num>Tarifa média</th><th scope="col">Mês mais caro</th><th scope="col" data-num>Média no mês</th><th scope="col">Mês mais barato</th><th scope="col" data-num>Média no mês</th><th scope="col" data-num>Assentos (n)</th></tr></thead>
+              <tbody data-por-cidade>
+              <template><tr><th scope="row"><span class="ponto-cidade" style="background: var(--serie-{serie})" aria-hidden="true"></span><span data-nome-cidade></span></th><td data-num data-campo="rotas.{rota}.passagens.estatisticas.media" data-formato="moeda"></td><td data-campo="rotas.{rota}.passagens.mes_mais_caro.mes" data-formato="mes"></td><td data-num data-campo="rotas.{rota}.passagens.mes_mais_caro.media" data-formato="moeda"></td><td data-campo="rotas.{rota}.passagens.mes_mais_barato.mes" data-formato="mes"></td><td data-num data-campo="rotas.{rota}.passagens.mes_mais_barato.media" data-formato="moeda"></td><td data-num data-campo="rotas.{rota}.passagens.estatisticas.n" data-formato="inteiro"></td></tr></template>
+              </tbody>
+            </table>
+          </div>
+        </section>
+        <div class="contexto-dados">
+          <p>As tarifas vêm dos microdados de tarifas aéreas domésticas da ANAC. São os preços das passagens vendidas ao público, registrados todo mês pelas companhias.</p>
+          <p class="nota">Fonte: <a href="https://www.gov.br/anac/pt-br/assuntos/dados-e-estatisticas" target="_blank" rel="noopener noreferrer">ANAC — Dados e Estatísticas</a>. Acesso em <span data-campo="fonte_passagens.acesso_em" data-formato="data"></span>.</p>
+        </div>
+        <h2 class="titulo-grupo">Mês a mês, por companhia</h2>
         <div data-por-cidade>
           <template>
         <section class="tela-secao" id="rota-{rota}" aria-labelledby="titulo-{rota}" data-revelar>
-          <h2 id="titulo-{rota}"><span data-nome-cidade></span></h2>
+          <h3 id="titulo-{rota}"><span data-nome-cidade></span></h3>
           <figure class="grafico">
             <div class="grafico-canvas" data-grafico><canvas id="grafico-precos-{rota}" data-precos="{rota}" role="img" aria-label="Tarifa média por mês e por companhia, Campo Grande para {cidade}"></canvas></div>
             <figcaption class="grafico-fonte">Fonte: ANAC, microdados de tarifas aéreas comercializadas. Período: <span data-campo="periodo_passagens.inicio" data-formato="periodo"></span> a <span data-campo="periodo_passagens.fim" data-formato="periodo"></span>. Média ponderada por assento vendido, n = <span data-campo="rotas.{rota}.passagens.estatisticas.n" data-formato="inteiro"></span> assentos.</figcaption>
           </figure>
-          <div class="resumo-preco">
-            <p>Mês mais caro: <strong data-campo="rotas.{rota}.passagens.mes_mais_caro.mes" data-formato="mes"></strong>, com média de <strong data-campo="rotas.{rota}.passagens.mes_mais_caro.media" data-formato="moeda"></strong>.</p>
-            <p>Mês mais barato: <strong data-campo="rotas.{rota}.passagens.mes_mais_barato.mes" data-formato="mes"></strong>, com média de <strong data-campo="rotas.{rota}.passagens.mes_mais_barato.media" data-formato="moeda"></strong>.</p>
-          </div>
         </section>
           </template>
         </div>

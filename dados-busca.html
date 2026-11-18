@@ -36,15 +36,35 @@
   <main id="conteudo" tabindex="-1">
     <div class="tela">
       <div class="wrap">
-        <h1>Quanto custa voar de Campo Grande para cada cidade?</h1>
-        <p>As tarifas de cada companhia, com as cidades escolhidas lado a lado. O coeficiente de variação mostra o quanto o preço oscila em torno da média.</p>
-        <p>As tarifas vêm dos microdados de tarifas aéreas domésticas da ANAC. São os preços das passagens vendidas ao público, registrados todo mês pelas companhias.</p>
-        <p class="nota">Fonte: <a href="https://www.gov.br/anac/pt-br/assuntos/dados-e-estatisticas" target="_blank" rel="noopener noreferrer">ANAC — Dados e Estatísticas</a>. Acesso em <span data-campo="fonte_passagens.acesso_em" data-formato="data"></span>.</p>
-        <div data-seletor-cidades></div>
+        <div class="cabeca-tela">
+          <div class="cabeca-principal">
+          <h1>Quanto custa voar de Campo Grande para cada cidade?</h1>
+          <p>As tarifas de cada companhia, com as cidades escolhidas lado a lado. O coeficiente de variação mostra o quanto o preço oscila em torno da média.</p>
+          </div>
+          <div class="cabeca-controle" data-seletor-cidades></div>
+        </div>
+        <section class="tela-secao comparativo" aria-labelledby="titulo-comparativo">
+          <h2 id="titulo-comparativo">Todas as companhias juntas</h2>
+          <div class="tabela-rolagem">
+            <table class="tabela-dados">
+              <caption class="sr-only">Tarifas de Campo Grande para cada cidade escolhida, todas as companhias</caption>
+              <thead><tr><th scope="col">Cidade</th><th scope="col" data-num>Média</th><th scope="col" data-num>Mediana</th><th scope="col" data-num>Coeficiente de variação</th><th scope="col" data-num>Mínimo</th><th scope="col" data-num>Máximo</th><th scope="col" data-num>Assentos (n)</th></tr></thead>
+              <tbody data-por-cidade>
+              <template><tr><th scope="row"><span class="ponto-cidade" style="background: var(--serie-{serie})" aria-hidden="true"></span><span data-nome-cidade></span></th><td data-num data-campo="rotas.{rota}.passagens.estatisticas.media" data-formato="moeda"></td><td data-num data-campo="rotas.{rota}.passagens.estatisticas.mediana" data-formato="moeda"></td><td data-num data-campo="rotas.{rota}.passagens.estatisticas.coef_variacao" data-formato="porcentagem"></td><td data-num data-campo="rotas.{rota}.passagens.estatisticas.minimo" data-formato="moeda"></td><td data-num data-campo="rotas.{rota}.passagens.estatisticas.maximo" data-formato="moeda"></td><td data-num data-campo="rotas.{rota}.passagens.estatisticas.n" data-formato="inteiro"></td></tr></template>
+              </tbody>
+            </table>
+          </div>
+          <p class="grafico-fonte">Fonte: ANAC, microdados de tarifas aéreas comercializadas. Período: <span data-campo="periodo_passagens.inicio" data-formato="periodo"></span> a <span data-campo="periodo_passagens.fim" data-formato="periodo"></span>. Média ponderada por assento vendido.</p>
+        </section>
+        <div class="contexto-dados">
+          <p>As tarifas vêm dos microdados de tarifas aéreas domésticas da ANAC. São os preços das passagens vendidas ao público, registrados todo mês pelas companhias.</p>
+          <p class="nota">Fonte: <a href="https://www.gov.br/anac/pt-br/assuntos/dados-e-estatisticas" target="_blank" rel="noopener noreferrer">ANAC — Dados e Estatísticas</a>. Acesso em <span data-campo="fonte_passagens.acesso_em" data-formato="data"></span>.</p>
+        </div>
+        <h2 class="titulo-grupo">Por companhia</h2>
         <div data-por-cidade>
           <template>
         <section class="tela-secao" id="rota-{rota}" aria-labelledby="titulo-{rota}">
-          <h2 id="titulo-{rota}">Campo Grande para <span data-nome-cidade></span></h2>
+          <h3 id="titulo-{rota}">Campo Grande para <span data-nome-cidade></span></h3>
           <div class="tabela-rolagem">
             <table class="tabela-dados">
               <caption class="sr-only">Tarifas de Campo Grande para <span data-nome-cidade></span>, por companhia</caption>
