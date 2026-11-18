@@ -2,7 +2,7 @@
 
 Site comparativo de viagens entre duas rotas aéreas fixas, construído como Projeto Final da disciplina de Estatística — TADS/ADS, IFMS Nova Andradina.
 
-O sistema compara **Campo Grande → Rio de Janeiro** (`SBCG → SBRJ`) e **Campo Grande → São Paulo** (`SBCG → SBSP`) sobre cinco dimensões: preço de passagem, clima, hospedagem, alimentação e um score composto que resume as quatro anteriores num único gráfico de radar.
+O sistema compara **Campo Grande → Rio de Janeiro** (rota `RIO`: `SBCG → SBRJ + SBGL`) e **Campo Grande → São Paulo** (rota `SAO`: `SBCG → SBSP + SBGR`) sobre cinco dimensões: preço de passagem, clima, hospedagem, alimentação e um score composto que resume as quatro anteriores num único gráfico de radar.
 
 ---
 
@@ -24,7 +24,7 @@ O sistema compara **Campo Grande → Rio de Janeiro** (`SBCG → SBRJ`) e **Camp
 
 ## O que é
 
-Um site estático de 7 páginas que apresenta uma análise comparativa entre duas rotas. Os dados são coletados manualmente de fontes públicas, consolidados num único `dados.json`, e renderizados em tabelas e gráficos no navegador.
+Um site estático de 8 páginas que apresenta uma análise comparativa entre duas rotas. As passagens vêm dos microdados de tarifas da ANAC, recortados e resumidos por um pipeline offline em Python. Clima, hospedagem e alimentação são digitados à mão a partir de fontes públicas. Tudo é consolidado num único `dados.json` e renderizado em tabelas e gráficos no navegador.
 
 A entrega tem duas metades:
 
@@ -39,7 +39,7 @@ O diferencial perante a banca não é o site. É a camada estatística. Um compa
 
 Não é metabuscador. Não consome API de companhia aérea em tempo real, não tem backend, não tem banco de dados, não tem autenticação.
 
-As rotas são fixas e os dados são um recorte coletado à mão. O formulário da página inicial é navegação com aparência de busca — ele leva da tela Principal para a tela de Dados da Busca, e nada mais.
+As rotas são fixas e os dados são um recorte gerado antes da apresentação. O pipeline Python roda uma vez na máquina de quem coleta; nenhum servidor roda no dia. O formulário da página inicial é navegação com aparência de busca — ele leva da tela Principal para a tela de Dados da Busca, e nada mais.
 
 Isso é decisão de escopo, não limitação acidental. Trocar dados manuais por API ao vivo triplicaria o trabalho de engenharia sem acrescentar nada à análise estatística, que é o que a disciplina avalia.
 
@@ -64,11 +64,12 @@ Sem build step, sem gerenciador de pacotes, sem framework.
 
 | Camada | Escolha | Razão |
 |---|---|---|
-| Marcação | HTML5 estático | 7 páginas, nenhuma rota dinâmica |
+| Marcação | HTML5 estático | 8 páginas, nenhuma rota dinâmica |
 | Estilo | CSS puro com variáveis | Tokens extraídos do Figma, um só arquivo de origem para cores e tipografia |
-| Gráficos | Chart.js (UMD, versão fixada via CDN) | Linha, barra, combo e radar num só pacote |
+| Gráficos | Chart.js 4.4.1 (UMD, via cdnjs com `integrity`) | Linha, barra, combo e radar num só pacote |
 | Animação | CSS + `IntersectionObserver` | Zero dependência |
 | Dados | `dados.json` estático, lido com `fetch` | Separa coleta de apresentação |
+| Pipeline | Python, só biblioteca padrão (`csv`, `json`, `statistics`) | Roda offline, sem `pip install` |
 
 **Por que não GSAP**: 70 KB e uma curva de aprendizado que a equipe não tem prazo para subir. `transition` em CSS com observador de rolagem entrega o mesmo efeito de entrada, roda em qualquer máquina do laboratório e é mais simples de defender na apresentação.
 
@@ -93,56 +94,92 @@ linhas-estatisticas/
 │   └── animacoes.css          # transições e estados de revelação
 │
 ├── js/
-│   ├── reveal.js              # IntersectionObserver + API window.LE
-│   ├── normalizar.js          # min-max e inversão de eixos
-│   └── graficos.js            # instâncias Chart.js
+│   ├── normalizar.js          # LE.stats: min-max, inversão de eixos, conforto térmico, score
+│   ├── reveal.js              # IntersectionObserver + LE.aoRevelar
+│   ├── graficos.js            # fetch do JSON, evento le:dados, instâncias Chart.js
+│   ├── tabelas.js             # preenche data-campo e as tabelas
+│   ├── busca.js               # destaca a rota escolhida na Principal (?destino=RIO|SAO)
+│   └── pesos.js               # pesos ajustáveis do score composto
 │
 ├── dados/
-│   ├── dados.json             # dados reais coletados
+│   ├── dados.json             # gerado pelo pipeline; é o que o site lê
 │   ├── dados-falsos.json      # números inventados, para desenvolver sem esperar a coleta
-│   └── fontes.md              # URLs de origem com data de acesso
+│   ├── anac/
+│   │   ├── brutos/            # microdados da ANAC (fora do git)
+│   │   └── tarifas_sbcg.csv   # recorte SBCG → Rio e São Paulo (versionado)
+│   └── manual/
+│       ├── clima.json         # INMET, normais 1991–2020
+│       ├── hoteis.json        # Accor, coleta manual
+│       └── alimentacao.json   # custo de refeição e comidas típicas
+│
+├── pipeline/
+│   ├── extrair_anac.py        # brutos → tarifas_sbcg.csv
+│   ├── estatistica.py         # média, mediana e desvio padrão ponderados
+│   └── gerar_dados.py         # recorte + manuais → dados.json
+│
+├── tests/                     # unittest do pipeline, node --test do JS, fumaça com Playwright
 │
 ├── docs/
-│   ├── relatorio.pdf
-│   └── slides.pdf
-│
-├── plano-de-equipe.html       # divisão de trabalho entre os 4 integrantes
+│   ├── backlog.html
+│   └── plano-de-equipe.html   # divisão de trabalho entre os 4 integrantes
 └── README.md
+```
+
+O fluxo dos dados:
+
+```
+dados/anac/brutos/*.CSV
+  └─ pipeline/extrair_anac.py ──► dados/anac/tarifas_sbcg.csv
+dados/manual/{clima,hoteis,alimentacao}.json
+  └─ pipeline/gerar_dados.py ──► dados/dados.json ──fetch──► *.html + js/
 ```
 
 ## Contrato de dados
 
 Todo número exibido no site vem de `dados/dados.json`. **Nenhum valor é digitado direto no HTML.** Se um número aparece na tela e não está no JSON, é bug.
 
+O `dados.json` é gerado por `pipeline/gerar_dados.py`; não se edita à mão. Os números abaixo são ilustrativos.
+
 ```json
 {
-  "coletado_em": "2026-09-20",
+  "coletado_em": "2026-11-17",
+  "periodo_passagens": { "inicio": "2026-01", "fim": "2026-09" },
   "origem": { "icao": "SBCG", "cidade": "Campo Grande" },
+  "meses": ["jan","fev","mar","abr","mai","jun",
+            "jul","ago","set","out","nov","dez"],
 
   "rotas": {
-    "SBRJ": {
+    "RIO": {
       "cidade": "Rio de Janeiro",
+      "aeroportos": ["SBRJ", "SBGL"],
 
       "passagens": {
-        "meses": ["jan","fev","mar","abr","mai","jun",
-                  "jul","ago","set","out","nov","dez"],
         "companhias": [
           {
             "nome": "GOL",
-            "classe": "economica",
-            "precos": [742.10, 698.00, null, 815.40, 779.90, 690.00,
-                       905.30, 880.00, 712.50, 733.20, 851.00, 1120.40]
+            "icao": "GLO",
+            "precos":   [742.10, 698.00, null, 815.40, 779.90, 690.00,
+                         905.30, 880.00, 712.50, null, null, null],
+            "assentos": [506, 522, 12, 258, 434, 905,
+                         1019, 712, 574, 0, 0, 0],
+            "estatisticas": { "...": "mesmos campos de baixo, só da GOL" }
           }
         ],
         "estatisticas": {
-          "n": 34,
-          "media": 812.45,
-          "mediana": 779.90,
-          "desvio_padrao": 118.72,
-          "coef_variacao": 0.146,
-          "minimo": 690.00,
-          "maximo": 1120.40
-        }
+          "n": 20847,
+          "linhas": 9527,
+          "media": 732.32,
+          "mediana": 607.90,
+          "desvio_padrao": 442.44,
+          "coef_variacao": 0.6042,
+          "minimo": 123.70,
+          "maximo": 4634.98,
+          "ponderado_por": "assentos"
+        },
+        "mensal": [619.12, 690.71, 856.38, 795.32, 770.48, 654.11,
+                   621.20, 797.91, 874.27, null, null, null],
+        "mes_mais_caro":   { "mes": "set", "media": 874.27 },
+        "mes_mais_barato": { "mes": "jan", "media": 619.12 }
       },
 
       "clima": {
@@ -152,51 +189,81 @@ Todo número exibido no site vem de `dados/dados.json`. **Nenhum valor é digita
                          18.6, 19.0, 19.7, 20.8, 21.7, 22.6],
         "precipitacao": [137, 130, 135, 95, 70, 55,
                          41, 44, 53, 86, 98, 134],
-        "fonte": "ClimaTempo — climatologia"
+        "estacao": "código da estação INMET",
+        "periodo": "1991-2020",
+        "fonte": "INMET — Normais Climatológicas 1991–2020"
       },
 
       "hotel": {
         "n": 6,
+        "hoteis": [{ "nome": "...", "url": "...", "diaria": 574.00 }],
+        "diarias": [574.00, "..."],
         "diaria_media": 620.66,
         "diaria_mediana": 574.00,
         "noites": 5,
-        "custo_total": 3103.30
+        "custo_total": 3103.30,
+        "fonte": "Accor (all.accor.com)",
+        "coletado_em": "2026-11-17"
       },
 
       "alimentacao": {
-        "cafe": 24.00,
-        "almoco": 48.00,
-        "jantar": 62.00,
+        "medias": { "cafe": 24.00, "almoco": 48.00, "jantar": 62.00 },
         "media_diaria": 134.00,
-        "tipicas": ["Feijoada", "Pão de queijo", "Açaí"]
+        "tipicas": ["Feijoada", "Pão de queijo", "Açaí"],
+        "fonte": "quantocustaviajar.com",
+        "coletado_em": "2026-11-17"
       }
     },
 
-    "SBSP": { "...": "mesma estrutura, São Paulo" }
-  }
+    "SAO": { "...": "mesma estrutura, São Paulo (SBSP + SBGR)" }
+  },
+
+  "faixas": {
+    "preco_passagem": { "min": 431.79, "max": 944.58 },
+    "...": "mínimo e máximo observados de cada eixo, calculados pelo pipeline"
+  },
+
+  "pendencias": ["clima.RIO.temp_max", "hoteis.RIO", "..."]
 }
 ```
 
 ### Regras do JSON
 
-**Mês sem operação é `null`, nunca `0`.**
+**Mês sem dado é `null`, nunca `0`.** Out, nov e dez/2026 ainda não existem na ANAC e ficam `null` em todas as séries. Um mês com menos de 30 assentos vendidos para uma companhia também fica `null`.
 
 ```js
-// ERRADO — zero entra na conta como se fosse passagem de graça
-const media = precos.reduce((a, b) => a + b, 0) / precos.length;
+// ERRADO — o zero de outubro entra na conta como se fosse passagem de graça
+const precos = [742.10, 698.00, 0, 0, 0];
 
-// CERTO — ausência é removida antes do cálculo
+// CERTO — mês sem dado fica de fora do cálculo e do gráfico
+const precos = [742.10, 698.00, null, null, null];
 const validos = precos.filter(p => p !== null);
-const media = validos.reduce((a, b) => a + b, 0) / validos.length;
 ```
 
 Zero é um preço. `null` é ausência de dado. Confundir os dois arrasta a média para baixo e inventa uma companhia barata que não existe. Chart.js também trata `null` corretamente — desenha um buraco na linha em vez de um mergulho até o eixo.
 
-**Toda média carrega seu `n`.** Média de 3 hotéis e média de 30 hotéis não têm o mesmo peso. O campo `n` existe para que a tela possa mostrar o tamanho da amostra junto do valor.
+**Toda média carrega seu `n`.** Média de 3 hotéis e média de 30 hotéis não têm o mesmo peso. O campo `n` existe para que a tela possa mostrar o tamanho da amostra junto do valor. Nas passagens, `n` é a soma de assentos vendidos e `linhas` é o número de linhas do CSV.
 
-**`coletado_em` é obrigatório.** Preço de passagem muda diariamente. Sem a data, o número não significa nada seis meses depois.
+**`coletado_em` é obrigatório.** Preço de hotel muda diariamente. Sem a data, o número não significa nada seis meses depois.
+
+**Dado faltando vai para `pendencias`.** Quando um arquivo de `dados/manual/` ainda tem campos vazios, o pipeline lista o caminho em `pendencias`, e o site mostra uma faixa de aviso no topo de cada tela. Dado falso também nunca aparece sem essa faixa.
 
 ## Camada estatística
+
+### Ponderação por assento
+
+Cada linha dos microdados da ANAC é um valor de tarifa e o número de assentos vendidos a esse valor (`nr_assentos`). A unidade estatística é o **assento vendido**, não a linha. Uma tarifa vendida a 300 assentos pesa 300 vezes mais que uma vendida a 1:
+
+```
+média         = Σ(tarifa × assentos) / Σ assentos
+mediana       = tarifa onde a soma acumulada de assentos, em ordem de preço, passa de metade do total
+desvio padrão = √( Σ assentos × (tarifa − média)² / (Σ assentos − 1) )
+n             = Σ assentos
+```
+
+A média por linha do CSV não é usada: ela trataria uma tarifa promocional vendida a um assento igual à tarifa de um voo lotado. Tarifa zero ou negativa é descartada e contada.
+
+As rotas são por cidade: `RIO` junta `SBRJ` (Santos Dumont) e `SBGL` (Galeão); `SAO` junta `SBSP` (Congonhas) e `SBGR` (Guarulhos). A origem é só `SBCG`, só o sentido de ida. As companhias vêm do código ICAO: `GLO` = GOL, `TAM` = LATAM, `AZU` = Azul.
 
 ### Dispersão por companhia
 
@@ -208,7 +275,7 @@ O **coeficiente de variação** responde qual companhia tem preço mais imprevis
 CV = desvio_padrão / média
 ```
 
-Por ser adimensional, compara dispersões entre rotas de preço médio diferente — o que o desvio padrão bruto não faz.
+Por ser adimensional, compara dispersões entre rotas de preço médio diferente — o que o desvio padrão bruto não faz. O JSON guarda o CV como fração (`0.6042`); a tela mostra em porcentagem.
 
 ### Normalização min-max
 
@@ -225,10 +292,10 @@ function normalizar(valor, minimo, maximo) {
 
 Este é o ponto crítico do projeto.
 
-Depois de normalizar, um valor alto significa "muito". Mas em preço, custo de hotel e custo de alimentação, "muito" é **ruim**. Sem inverter, o radar desenha a cidade mais cara como a melhor opção e o gráfico inteiro mente:
+Depois de normalizar, um valor alto significa "muito". Mas em preço, custo de hotel, custo de alimentação e precipitação, "muito" é **ruim**. Sem inverter, o radar desenha a cidade mais cara como a melhor opção e o gráfico inteiro mente:
 
 ```js
-const MENOR_E_MELHOR = ['preco_passagem', 'custo_hotel', 'custo_alimentacao'];
+const MENOR_E_MELHOR = ['preco_passagem', 'custo_hotel', 'custo_alimentacao', 'precipitacao'];
 
 function pontuarEixo(eixo, valor, minimo, maximo) {
   const z = normalizar(valor, minimo, maximo);
@@ -236,13 +303,15 @@ function pontuarEixo(eixo, valor, minimo, maximo) {
 }
 ```
 
+Temperatura não é min-max, porque nem a mais alta nem a mais baixa é "melhor". O eixo é **conforto térmico**: 1 a 24 °C, caindo até 0 a 12 °C de distância para qualquer lado. O radar tem cinco eixos: passagem, hospedagem, alimentação, conforto térmico e tempo seco.
+
 ### Score composto
 
 ```
 score = w₁·preço + w₂·clima + w₃·hotel + w₄·alimentação
 ```
 
-Com os pesos somando 1. Deixar os pesos visíveis na interface é o que torna o resultado honesto: "melhor viagem" é função da preferência declarada de quem viaja, não fato objetivo. Quem prioriza preço e quem prioriza clima chegam a conclusões diferentes a partir dos mesmos dados — e o site mostra isso em vez de esconder.
+Com os pesos somando 1: na tela, cada controle vai de 0 a 100, e o peso efetivo é o valor dividido pela soma dos quatro. O peso do clima se divide igualmente entre conforto térmico e tempo seco. Deixar os pesos visíveis na interface é o que torna o resultado honesto: "melhor viagem" é função da preferência declarada de quem viaja, não fato objetivo. Quem prioriza preço e quem prioriza clima chegam a conclusões diferentes a partir dos mesmos dados — e o site mostra isso em vez de esconder.
 
 ## Como rodar
 
@@ -262,11 +331,39 @@ Alternativa sem Python:
 npx serve .
 ```
 
-Durante o desenvolvimento, antes da coleta terminar, aponte o `fetch` para `dados/dados-falsos.json` — mesma estrutura, números inventados. Isso permite construir os gráficos sem esperar a planilha ficar pronta.
+Durante o desenvolvimento, antes da coleta terminar, troque a fonte no `<html>` da página: `<html lang="pt-BR" data-fonte="dados/dados-falsos.json">`. Sem o atributo, o site lê `dados/dados.json`. O arquivo falso tem a mesma estrutura e números inventados, e o site mostra a faixa de aviso enquanto ele estiver em uso. Não faça commit com o `data-fonte` trocado.
+
+### Gerar os dados
+
+Os CSVs brutos da ANAC (~250 MB) não vêm no clone. Baixe os microdados de tarifas aéreas comercializadas, voos domésticos, de jan a set/2026, e coloque-os em `dados/anac/brutos/` (a pasta está no `.gitignore`). Os mesmos arquivos estão na branch `Dados-e-Estatística`, em `dados/dados_anac/`. Depois:
+
+```bash
+python -m pipeline.extrair_anac   # brutos → dados/anac/tarifas_sbcg.csv
+python -m pipeline.gerar_dados    # recorte + dados/manual/*.json → dados/dados.json
+```
+
+O recorte `tarifas_sbcg.csv` é versionado, então só o segundo comando é necessário depois de editar um arquivo de `dados/manual/`. Nenhum dos dois precisa de `pip install`.
+
+### Testes
+
+```bash
+python -m unittest discover -s tests -t . -v   # pipeline
+node --test tests/*.test.cjs                   # normalizar.js, pesos.js, tabelas.js e "sem números no HTML"
+```
+
+No Node 22, `node --test tests/` sem o padrão falha; use `tests/*.test.cjs`.
+
+O teste de fumaça abre as 8 telas num navegador de verdade. Ele precisa do Playwright, que é a única dependência externa do projeto e só existe nos testes:
+
+```bash
+pip install -r tests/requirements.txt
+python -m playwright install chromium
+python tests/site.smoke.py
+```
 
 ## Equipe
 
-Quatro integrantes, quatro frentes. A divisão detalhada, com tarefas numeradas e critérios de conclusão, está em [`plano-de-equipe.html`](plano-de-equipe.html).
+Quatro integrantes, quatro frentes. A divisão detalhada, com tarefas numeradas e critérios de conclusão, está em [`docs/plano-de-equipe.html`](docs/plano-de-equipe.html).
 
 | Posto | Responsabilidade | Entregável |
 |---|---|---|
@@ -281,20 +378,24 @@ P1 está no caminho crítico: P3 e P4 dependem do `dados.json`. Por isso o schem
 
 | Dimensão | Origem |
 |---|---|
-| Preços de passagem | Painel ANAC no Power BI |
-| Climatologia | ClimaTempo — página de climatologia por cidade |
+| Preços de passagem | ANAC — microdados de tarifas aéreas comercializadas, voos domésticos, jan–set/2026 |
+| Climatologia | INMET — Normais Climatológicas do Brasil 1991–2020 (Rio de Janeiro; São Paulo, Mirante de Santana) |
 | Hospedagem | Accor (`all.accor.com`) |
 | Alimentação | `quantocustaviajar.com` |
 | Comidas típicas | Food To Save, Terra |
 
-As URLs completas, com data de acesso, ficam em `dados/fontes.md` e são reproduzidas no relatório.
+A fonte, a estação e a data de coleta de cada dado manual ficam no próprio arquivo de `dados/manual/`, seguem para o `dados.json` e são reproduzidas no relatório.
 
 ## Limitações
 
 Declaradas aqui e no relatório. Reconhecer o limite do próprio método é o que separa análise estatística de tabela colorida.
 
 - **Amostra de conveniência.** Os dados não foram sorteados. Foram os que estavam disponíveis publicamente nas fontes escolhidas, o que impede generalizar os resultados para além destas duas rotas.
-- **Recorte temporal único.** Preços refletem uma janela de coleta de poucos dias. Uma coleta em outro período produziria outros números e possivelmente outra conclusão.
+- **Período da ANAC de 9 meses.** As passagens cobrem jan–set/2026. Não existe série de dezembro, o mês tradicionalmente mais caro.
+- **Rotas por cidade.** A média de cada rota junta aeroportos com perfis de preço diferentes: Santos Dumont e Galeão no Rio, Congonhas e Guarulhos em São Paulo.
+- **Viracopos fica fora.** `SBKP` fica em Campinas e não entra na rota de São Paulo, o que reduz o volume da Azul nessa rota.
+- **Tarifa sem taxas.** O valor da ANAC é a tarifa comercializada, sem taxas de embarque. O passageiro paga mais do que o número mostrado.
+- **Recorte temporal único na hospedagem e na alimentação.** Diárias e refeições refletem uma janela de coleta de poucos dias. Uma coleta em outro período produziria outros números e possivelmente outra conclusão.
 - **Viés de rede hoteleira.** As diárias vêm de uma só rede. O custo de hospedagem apurado representa aquele padrão de hotel, não o mercado da cidade.
-- **Climatologia não é previsão.** As séries de temperatura e chuva são médias históricas mensais. Descrevem o comportamento típico do mês, não o tempo que fará numa data específica.
+- **Climatologia não é previsão.** As séries de temperatura e chuva são as médias de 1991–2020, não o clima de 2026. Descrevem o comportamento típico do mês, não o tempo que fará numa data específica.
 - **Sem validação cruzada de preço.** Os valores não foram conferidos contra uma segunda fonte independente.
