@@ -28,10 +28,7 @@
       "max": 944.58
     },
     "custo_hotel": null,
-    "custo_alimentacao": {
-      "min": 137,
-      "max": 141
-    },
+    "custo_alimentacao": null,
     "temperatura_media": null,
     "precipitacao": null
   },

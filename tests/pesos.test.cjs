@@ -62,10 +62,10 @@ test('com tudo coletado não há frase de eixo de fora', () => {
   assert.ok(!P.conclusao(falsos, IGUAIS).includes('Fora do cálculo'));
 });
 
-test('dados reais: passagem e alimentação coletadas, os outros eixos ficam listados', () => {
+test('dados reais: alimentação coletada com poucos preços fica de fora junto com os eixos sem dado', () => {
   const texto = P.conclusao(reais, IGUAIS);
   assert.ok(texto.startsWith('Com estes pesos, '), texto);
-  assert.ok(texto.endsWith(' Fora do cálculo por falta de dados: Hospedagem, Conforto térmico e Tempo seco.'), texto);
+  assert.ok(texto.endsWith(' Fora do cálculo por falta de dados: Hospedagem, Alimentação, Conforto térmico e Tempo seco.'), texto);
 });
 
 test('peso só em eixos sem dado: faltam dados, não peso zero', () => {

@@ -15,6 +15,8 @@ ROTAS = {
 }
 COMPANHIAS = [("GOL", "GLO"), ("LATAM", "TAM"), ("Azul", "AZU")]
 REFEICOES = ("cafe", "almoco", "jantar")
+# Com menos preços por refeição, o min-max transforma diferenças de poucos reais em 0 contra 1.
+MIN_PRECOS_REFEICAO = 3
 
 
 def _ler_recorte(recorte):
@@ -157,7 +159,7 @@ def _faixas(rotas):
         return all(v is not None for c in clima for campo in campos for v in c[campo])
 
     hotel_ok = all(h["n"] > 0 for h in hoteis)
-    comida_ok = all(a["media_diaria"] is not None for a in refeicoes)
+    comida_ok = all(a["n"] >= MIN_PRECOS_REFEICAO for a in refeicoes)
     temp = precip = None
     if clima_ok("temp_max", "temp_min"):
         temp = _faixa([(mx + mn) / 2 for c in clima

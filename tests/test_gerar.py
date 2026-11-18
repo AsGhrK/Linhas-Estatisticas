@@ -36,9 +36,9 @@ MANUAL = {
     },
     "alimentacao.json": {
         "fonte": "qcv", "coletado_em": "2026-11-10",
-        "RIO": {"cafe": [20, 30], "almoco": [40, 60], "jantar": [50, 70],
+        "RIO": {"cafe": [20, 25, 30], "almoco": [40, 50, 60], "jantar": [50, 60, 70],
                 "tipicas": ["Feijoada"], "fonte_tipicas": "x"},
-        "SAO": {"cafe": [18], "almoco": [35, 45, 55], "jantar": [45, 65],
+        "SAO": {"cafe": [18, 18, 18], "almoco": [35, 45, 55], "jantar": [45, 55, 65],
                 "tipicas": ["Pastel"], "fonte_tipicas": "x"},
     },
 }
@@ -161,7 +161,7 @@ class TestGerar(unittest.TestCase):
         d = gerar(self.recorte, self.manual_completo, "2026-11-17")
         a = d["rotas"]["RIO"]["alimentacao"]
         self.assertEqual(a["media_diaria"], 25 + 50 + 60)
-        self.assertEqual(a["n"], 2)
+        self.assertEqual(a["n"], 3)
 
     def test_hotel_lista_hoteis_na_ordem_do_arquivo(self):
         d = gerar(self.recorte, self.manual_completo, "2026-11-17")
@@ -219,6 +219,24 @@ class TestGerar(unittest.TestCase):
                                                   "max": max(30 + 60 + 70, 18 + 55 + 65)})
         self.assertEqual(f["temperatura_media"], {"min": 17.5, "max": 26})
         self.assertEqual(f["precipitacao"], {"min": 30, "max": 120})
+
+    def test_alimentacao_com_menos_de_tres_precos_fica_fora_da_faixa(self):
+        m = copy.deepcopy(MANUAL)
+        m["alimentacao.json"]["SAO"]["cafe"] = [18, 20]
+        pasta = Path(self.tmp.name) / "poucos"
+        escrever(pasta, m)
+        d = gerar(self.recorte, pasta, "2026-11-17")
+        self.assertIsNone(d["faixas"]["custo_alimentacao"])
+        a = d["rotas"]["SAO"]["alimentacao"]
+        self.assertEqual(a["n"], 2)
+        self.assertEqual(a["medias"]["cafe"], 19)
+        self.assertEqual(a["media_diaria"], 19 + 45 + 55)
+        self.assertFalse([p for p in d["pendencias"] if p.startswith("alimentacao")])
+
+    def test_alimentacao_com_tres_precos_tem_faixa(self):
+        d = gerar(self.recorte, self.manual_completo, "2026-11-17")
+        self.assertEqual(min(d["rotas"][k]["alimentacao"]["n"] for k in ("RIO", "SAO")), 3)
+        self.assertIsNotNone(d["faixas"]["custo_alimentacao"])
 
     def test_pendencias(self):
         d = gerar(self.recorte, self.manual, "2026-11-17")
