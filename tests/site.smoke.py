@@ -1,5 +1,5 @@
 # shortcut: não executado nesta máquina (Playwright não instalado); rodar com pip install -r tests/requirements.txt && python -m playwright install chromium
-"""Teste de fumaça das 8 telas no navegador.
+"""Teste de fumaça das 8 telas e da página de fontes no navegador.
 
 Sobe `python -m http.server` numa porta livre, abre cada tela no Chromium
 (Playwright) e derruba o servidor no fim. Rodar: python tests/site.smoke.py
@@ -19,7 +19,7 @@ from playwright.sync_api import sync_playwright
 RAIZ = Path(__file__).resolve().parent.parent
 PAGINAS = [
     'index.html', 'dados-busca.html', 'dados-precos.html', 'detalhes.html',
-    'clima.html', 'hotel.html', 'alimentacao.html', 'visao-geral.html',
+    'clima.html', 'hotel.html', 'alimentacao.html', 'visao-geral.html', 'fontes.html',
 ]
 CANVAS = {
     'dados-precos.html': ['grafico-precos-rio', 'grafico-precos-sao'],

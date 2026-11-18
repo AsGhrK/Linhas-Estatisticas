@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fontes — Linhas Estatísticas</title>
+  <meta name="description" content="De onde vem cada dado do Linhas Estatísticas, com o endereço e a data de acesso de cada fonte.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;600;800&family=Atkinson+Hyperlegible+Mono:wght@400;600&display=swap">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/animacoes.css">
+</head>
+<body>
+  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="cabecalho-site">
+    <div class="wrap cabecalho-linha">
+      <a class="marca" href="index.html">Linhas Estatísticas</a>
+      <nav class="rota" aria-label="Telas da apresentação">
+        <ol>
+          <li><a href="index.html">Principal</a></li>
+          <li><a href="dados-busca.html">Dados da Busca</a></li>
+          <li><a href="dados-precos.html">Dados e Preços</a></li>
+          <li><a href="detalhes.html">Detalhes</a></li>
+          <li><a href="clima.html">Clima</a></li>
+          <li><a href="hotel.html">Hotel</a></li>
+          <li><a href="alimentacao.html">Alimentação</a></li>
+          <li><a href="visao-geral.html">Visão Geral</a></li>
+        </ol>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo" tabindex="-1">
+    <div class="tela">
+      <div class="wrap">
+        <h1>De onde vem cada dado?</h1>
+        <p>Dados coletados de fontes públicas, com fins acadêmicos. Uma linha por fonte, com o endereço e a data de acesso.</p>
+        <div class="tabela-rolagem">
+          <table class="tabela-dados">
+            <caption class="sr-only">Fontes dos dados e datas de acesso</caption>
+            <thead>
+              <tr><th scope="col">Fonte</th><th scope="col">O que vem dela</th><th scope="col">Acesso</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row"><a href="https://www.gov.br/anac/pt-br/assuntos/dados-e-estatisticas" target="_blank" rel="noopener noreferrer">ANAC — Dados e Estatísticas</a></th><td>Microdados de tarifas aéreas comercializadas, voos domésticos, de janeiro a setembro de 2026.</td><td>17/11/2026</td></tr>
+              <tr><th scope="row"><a href="https://quantocustaviajar.com/brasil/rio-de-janeiro/alimentacao" target="_blank" rel="noopener noreferrer">Quanto Custa Viajar — Rio de Janeiro</a></th><td>Café, almoço e jantar na faixa econômica e comidas típicas.</td><td>17/11/2026</td></tr>
+              <tr><th scope="row"><a href="https://quantocustaviajar.com/brasil/sao-paulo/alimentacao" target="_blank" rel="noopener noreferrer">Quanto Custa Viajar — São Paulo</a></th><td>Café, almoço e jantar na faixa econômica e comidas típicas.</td><td>17/11/2026</td></tr>
+              <tr><th scope="row"><a href="https://all.accor.com" target="_blank" rel="noopener noreferrer">Accor</a></th><td>Diárias de hotéis da rede nas duas cidades. Coleta das diárias pendente.</td><td>17/11/2026</td></tr>
+              <tr><th scope="row"><a href="https://portal.inmet.gov.br/servicos/normais-climatol%C3%B3gicas" target="_blank" rel="noopener noreferrer">INMET — Normais Climatológicas</a></th><td>Fonte de clima adotada, com as normais de 1991 a 2020. Coleta pendente.</td><td>17/11/2026</td></tr>
+              <tr><th scope="row">ClimaTempo — Climatologia (<a href="https://www.climatempo.com.br/climatologia/321/riodejaneiro-rj" target="_blank" rel="noopener noreferrer">Rio de Janeiro</a> e <a href="https://www.climatempo.com.br/climatologia/558/saopaulo-sp" target="_blank" rel="noopener noreferrer">São Paulo</a>)</th><td>Consultada na coleta, mas não usada nos gráficos: a fonte de clima adotada é o INMET.</td><td>17/11/2026</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="rodape-site">
+    <div class="wrap">
+      <p><span class="marca">Linhas Estatísticas</span></p>
+      <p>Projeto Final de Estatística — TADS, IFMS Nova Andradina</p>
+      <p>Equipe: Filipe Rioske, Victor Solique, Davi Casari e João Pegarare</p>
+      <p>Fontes: ANAC, INMET, Accor e Quanto Custa Viajar. <a href="fontes.html">Fontes e datas de acesso</a></p>
+      <p>Dados coletados de fontes públicas, com fins acadêmicos.</p>
+      <p><a href="docs/backlog.html">Plano da equipe</a></p>
+    </div>
+  </footer>
+
+  <script src="js/reveal.js"></script>
+</body>
+</html>
